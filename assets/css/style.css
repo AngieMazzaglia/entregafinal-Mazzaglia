@@ -1,4 +1,4 @@
-/* ========== 1) Tokens & Reset ========== */
+/* base */
 :root {
     --c-text: #2e2e2e;
     --c-brand: #2e7d32;
@@ -47,7 +47,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ========== 2) Utilidades ========== */
+/* utilidades */
 .container {
     max-width: var(--maxw);
     margin-inline: auto;
@@ -77,16 +77,14 @@ a:hover {
     border: 0;
 }
 
-/* Centrar un botón como bloque */
+
 .btn-block-center {
     display: block;
     width: fit-content;
     margin-inline: auto;
 }
 
-/* =========================================================
-   3) HEADER + NAV (base sin media queries)
-========================================================= */
+/*  HEADER + NAV  */
 .site-header {
     background: #fff;
     border-bottom: 1px solid #eee;
@@ -160,7 +158,7 @@ nav a[aria-current="page"] {
     background: var(--c-bg-soft);
 }
 
-/* ========== 4) Hero (Index) ========== */
+/*  Hero (Index) */
 .hero {
     position: relative;
     color: #fff;
@@ -189,7 +187,7 @@ nav a[aria-current="page"] {
     margin: 0;
 }
 
-/* ========== 5) Secciones (bloques) ========== */
+/* Secciones (bloques)  */
 .bloque {
     padding-block: var(--space-6);
     background: #fff;
@@ -204,7 +202,7 @@ nav a[aria-current="page"] {
     margin-top: 0;
 }
 
-/* ========== 6) Botones (unificados + compat Bootstrap) ========== */
+/* Botones (unificados + compat Bootstrap) */
 a.btn,
 .btn,
 .btn-verde {
@@ -242,7 +240,7 @@ a.btn:focus-visible,
     outline-offset: 2px;
 }
 
-/* Botón/enlace subrayado */
+/* Botón subrayado */
 .btn-link {
     background: none;
     border: none;
@@ -265,7 +263,7 @@ a.btn:focus-visible,
     outline-offset: 2px;
 }
 
-/* ========== 7) Grillas reutilizables (base) ========== */
+/*  Grillas reutilizables (base) */
 .grid-3,
 .grid-4 {
     display: grid;
@@ -273,7 +271,7 @@ a.btn:focus-visible,
     gap: var(--space-4);
 }
 
-/* ========== 8) Cards (Index/Productos) ========== */
+/*  Cards (Index/Productos)  */
 .cards {
     display: grid;
     gap: 20px;
@@ -319,7 +317,7 @@ a.btn:focus-visible,
     flex-grow: 1;
 }
 
-/* ========== 9) Features (Nosotros – valores) ========== */
+/*  Features (Nosotros – valores)  */
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -351,7 +349,7 @@ a.btn:focus-visible,
     object-fit: contain;
 }
 
-/* ========== 10) Marcas que nos eligen ========== */
+/*  Marcas que nos eligen  */
 .franja-marcas {
     background: var(--c-brand);
     color: #fff;
@@ -389,7 +387,7 @@ a.btn:focus-visible,
     transform: scale(1.05);
 }
 
-/* ========== 11) Nosotros – dos columnas (base) ========== */
+/*  Nosotros – dos columnas (base)  */
 .cols {
     display: grid;
     grid-template-columns: 1fr;
@@ -403,7 +401,7 @@ a.btn:focus-visible,
     display: block;
 }
 
-/* ========== 12) Contacto – formularios (Bootstrap friendly) ========== */
+/* Contacto – formularios (Bootstrap)  */
 .form-card,
 form.needs-validation {
     background: #fff;
@@ -431,7 +429,7 @@ form.needs-validation {
     box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.25);
 }
 
-/* ========== 13) Cómo comprar – pasos numerados ========== */
+/*  Cómo comprar – pasos numerados */
 .steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -486,7 +484,7 @@ form.needs-validation {
     margin-top: 14px;
 }
 
-/* ========== 14) Footer (unificado) ========== */
+/*  Footer  */
 footer {
     background: var(--c-bg-soft);
     color: var(--c-brand);
@@ -520,7 +518,7 @@ address {
     text-align: center;
 }
 
-/* ========== 15) Refuerzos de contenedor + skip link ========== */
+/*  Refuerzos de contenedor + skip link  */
 main .container,
 .bloque>.container {
     max-width: var(--maxw);
@@ -544,9 +542,7 @@ main .container,
     z-index: 999;
 }
 
-/* =========================================================
-   16) RESPONSIVE — TODAS LAS MEDIA QUERIES AGRUPADAS
-========================================================= */
+/* TODAS LAS MEDIA QUERIES  */
 
 /* ≤360px — móviles pequeños */
 @media (max-width: 360px) {
