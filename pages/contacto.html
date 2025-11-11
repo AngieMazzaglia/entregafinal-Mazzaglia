@@ -47,31 +47,30 @@
                     </div>
 
                     <div class="col-md-6">
-                        <form class="row g-3 needs-validation" novalidate>
+                        <form class="row g-3 needs-validation" novalidate method="post" action="#"> <!-- formulario -->
                             <h3 class="tituloform text-center">Completá el formulario</h3>
                             <p class="subtform text-center mb-4">y un asesor se contactará a la brevedad</p>
 
                             <div class="col-md-6">
-                                <label for="email" class="form-label">Email</label>
-                                <input id="email" type="email" class="form-control" placeholder="nombre@correo.com"
-                                    required>
+                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input id="email" name="email" type="email" class="form-control" placeholder="nombre@correo.com" required autocomplete="email">
                                 <div class="invalid-feedback">Ingresá un correo válido.</div>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="tel" class="form-label">Teléfono</label>
-                                <input id="tel" type="tel" class="form-control" placeholder="+54 11 0000-0000">
+                                <label for="tel" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                <input id="tel" name="telefono" type="tel" class="form-control" placeholder="+54 11 0000-0000" required autocomplete="tel">
                             </div>
 
                             <div class="col-12">
-                                <label for="prov" class="form-label">Provincia</label>
-                                <input id="prov" type="text" class="form-control" placeholder="Ej: Buenos Aires">
+                                <label for="prov" class="form-label">Provincia <span class="text-danger">*</span></label>
+                                <input id="prov" name="provincia" type="text" class="form-control" placeholder="Ej: Buenos Aires" required autocomplete="address-level1">
                             </div>
 
                             <div class="col-12">
-                                <label for="msg" class="form-label">Mensaje</label>
-                                <textarea id="msg" rows="4" class="form-control"
-                                    placeholder="Contanos en qué podemos ayudarte"></textarea>
+                                <label for="msg" class="form-label">Mensaje <span class="text-danger">*</span></label>
+                                <textarea id="msg" name="mensaje" rows="4" class="form-control" placeholder="Contanos en qué podemos ayudarte" required></textarea>
+                                <div class="invalid-feedback">Por favor, escribí un mensaje.</div>
                             </div>
 
                             <div class="col-12 text-center">
@@ -82,7 +81,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- footer -->
