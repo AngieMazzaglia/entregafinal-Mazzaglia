@@ -9,20 +9,20 @@ a.btn,
     @include btn-base;
 }
 
-.btn-verde {
-    @extend %btn-filled;
-}
-
+.btn-verde,
 .btn-success {
     @extend %btn-filled;
+    background-color: var(--c-brand);
+    color: #ffffff;
+    border-color: var(--c-brand);
 }
 
 .btn-verde:hover,
 .btn-success:hover {
-    background-color: #93cc96;
-    color: var(--c-brand-dark);
+    background-color: var(--c-brand-dark);
+    color: #ffffff;
+    border-color: var(--c-brand-dark);
     text-decoration: none !important;
-    animation: greenGlow .4s ease forwards;
 }
 
 .btn:focus-visible,

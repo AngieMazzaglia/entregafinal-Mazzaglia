@@ -12,7 +12,7 @@
     counter-reset: paso;
 
     .step {
-        background: $bg-soft;
+        background: #fff;
         border: 1px solid #dfe9d9;
         @include panel-rounded-lg($space-6 $space-4 $space-4);
         text-align: center;

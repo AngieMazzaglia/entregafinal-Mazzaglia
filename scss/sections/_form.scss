@@ -2,7 +2,6 @@
 @use "../abstracts/mixins" as *;
 
 /* Contacto – formularios (Bootstrap)  */
-.form-card,
 form.needs-validation {
     background: #fff;
     border: 1px solid #e0e0e0;
@@ -26,4 +25,21 @@ form.needs-validation {
 .form-control:focus {
     border-color: var(--c-brand);
     box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.25);
+}
+
+/* Accordion overrides */
+.accordion-button {
+    color: var(--c-brand);
+    font-weight: 600;
+
+    &:not(.collapsed) {
+        color: var(--c-brand);
+        background-color: #fff;
+        box-shadow: none;
+    }
+
+    &:focus {
+        border-color: var(--c-brand);
+        box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+    }
 }

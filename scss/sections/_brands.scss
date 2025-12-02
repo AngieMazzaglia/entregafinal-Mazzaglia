@@ -3,9 +3,9 @@
 
 /*  Marcas que nos eligen  */
 .franja-marcas {
-    background: $brand;
+    background: #fff;
     padding-block: $space-5;
-    color: #fff;
+    color: $text-color;
     text-align: center;
     justify-items: center;
     align-items: center;
@@ -13,7 +13,6 @@
     h3 {
         margin-top: 0;
         margin-bottom: $space-4;
-        font-size: 1.4rem;
     }
 }
 
