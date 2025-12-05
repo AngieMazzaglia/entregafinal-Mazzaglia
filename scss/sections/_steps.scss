@@ -9,37 +9,35 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: $space-4;
     margin-top: $space-3;
-    counter-reset: paso;
 
     .step {
-        background: #fff;
-        border: 1px solid #dfe9d9;
-        @include panel-rounded-lg($space-6 $space-4 $space-4);
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: $space-2;
-        min-height: 150px;
         position: relative;
+        padding: $space-4;
 
-        &::before {
-            counter-increment: paso;
-            content: counter(paso);
+        /* Flechas */
+        &::after {
+            content: "\2B07\FE0E";
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: var(--c-brand);
-            color: #fff;
-            @include flex-center;
-            font-weight: bold;
-            font-size: .9rem;
-            z-index: 1;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: $brand;
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
         }
 
+        /* Ocultar flecha en el último elemento */
+        &:last-child::after {
+            content: none;
+        }
+
+        /* Icono */
         .ico {
             width: 64px;
             height: 64px;
@@ -49,6 +47,18 @@
 
         &:hover .ico {
             animation: softPulse .6s ease-in-out;
+        }
+
+        /* Desktop: Flecha a la derecha */
+        @include respond(md) {
+            &::after {
+                content: "\27A1\FE0E";
+                bottom: auto;
+                left: auto;
+                top: 50%;
+                right: -30px;
+                transform: translateY(-50%);
+            }
         }
     }
 }

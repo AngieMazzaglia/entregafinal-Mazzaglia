@@ -1,6 +1,33 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
+/* Contacto – Resetear estilos de Bootstrap que pueda afectar */
+.contact-text {
+    h3 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        line-height: 1.4 !important;
+        margin-bottom: $space-3;
+    }
+
+    p {
+        margin-bottom: $space-3;
+    }
+}
+
+/* Contacto */
+.bloque[aria-label="Contacto"] {
+    h1 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        margin-top: 1rem;
+        margin-bottom: $space-6;
+    }
+}
+
 /* Contacto – formularios (Bootstrap)  */
 form.needs-validation {
     background: #fff;
@@ -27,7 +54,7 @@ form.needs-validation {
     box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.25);
 }
 
-/* Accordion overrides */
+/* Acordeón */
 .accordion-button {
     color: var(--c-brand);
     font-weight: 600;

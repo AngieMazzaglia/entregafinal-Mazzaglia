@@ -2,7 +2,7 @@
 @use "../abstracts/mixins" as *;
 @use "../base/animations" as *;
 
-/*  Features (Nosotros – valores)  */
+/*  Nosotros valores  */
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

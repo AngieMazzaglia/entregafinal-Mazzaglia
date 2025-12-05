@@ -55,14 +55,12 @@ nav a[aria-current="page"] {
     color: var(--c-brand-dark);
     font-weight: bold;
     text-decoration: none;
-    /* Quitamos el subrayado */
     border-bottom: 2px solid var(--c-brand);
-    /* Borde fino de 2px */
     padding-bottom: 2px;
 }
 
 
-/* Botón hamburguesa (se muestra en mobile vía media query) */
+/* Botón hamburguesa (mobile) */
 .nav-toggle-btn {
     display: none;
     @include flex-center;

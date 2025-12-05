@@ -1,5 +1,6 @@
 @use "./variables" as *;
 @use "./maps" as *;
+@use "sass:map";
 
 /* MIXINS */
 @mixin panel-base {
@@ -50,7 +51,7 @@
 
 // Mixin para media queries basadas en el mapa de breakpoints
 @mixin respond($size) {
-    @media (min-width: map-get($breakpoints, $size)) {
+    @media (min-width: map.get($breakpoints, $size)) {
         @content;
     }
 }

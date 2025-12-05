@@ -16,6 +16,32 @@ body {
     background: var(--c-bg);
 }
 
+/* Tipografía de encabezados */
+h1,
+.h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+}
+
+h2,
+.h2 {
+    font-size: 1.35rem !important;
+    line-height: 1.3;
+}
+
+h3,
+.h3,
+.h4 {
+    font-size: 1.2rem !important;
+    line-height: 1.4;
+}
+
+h4,
+.h4 {
+    font-size: 1.1rem !important;
+    line-height: 1.4;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -42,7 +68,7 @@ select:focus-visible {
     border-radius: 2px;
 }
 
-/* utilidades */
+/* Utilidades */
 .container {
     max-width: var(--maxw);
     margin-inline: auto;
@@ -95,7 +121,7 @@ select:focus-visible {
     gap: var(--space-4);
 }
 
-/*  dos columnas (ej: nosotros)  */
+/*  Dos columnas (ej: nosotros)  */
 .cols {
     display: grid;
     grid-template-columns: 1fr;
