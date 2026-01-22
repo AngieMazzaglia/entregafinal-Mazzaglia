@@ -12,14 +12,14 @@
     text-align: center;
 
     .feature {
-        background: #fff;
-        border: 1px solid #eee;
+        background: transparent;
+        border: none;
         @include panel-base;
 
         .ico {
             width: 64px;
             height: 64px;
-            margin: 0 auto 10px;
+            margin: 0 auto $space-3 auto;
             @include flex-center;
 
             img {
@@ -27,6 +27,18 @@
                 max-height: 100%;
                 object-fit: contain;
             }
+        }
+
+        h4 {
+            color: $brand;
+            font-weight: 500; // Reducido a medium
+            font-size: 1.45rem; // Ajustado a pedido
+            margin-bottom: $space-2;
+        }
+
+        p {
+            font-size: 0.95rem; // Un poco más chico que el texto base (1rem)
+            line-height: 1.4;
         }
 
         &:hover .ico {

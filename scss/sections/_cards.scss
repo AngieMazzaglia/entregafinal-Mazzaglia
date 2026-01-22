@@ -45,3 +45,10 @@
         flex-grow: 1;
     }
 }
+
+/* Botón full width dentro de cards */
+.card-btn-full {
+    display: block;
+    width: 100%;
+    text-align: center;
+}

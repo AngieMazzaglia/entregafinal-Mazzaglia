@@ -11,12 +11,14 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, .35);
+        // Gradiente: negro oscuro a la izquierda, transparente a la derecha
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.1) 100%);
+        z-index: 1;
     }
 
     h1 {
-        font-size: clamp(24px, 3vw, 36px) !important;
-        margin: 0 0 var(--space-2) 0;
+        font-size: clamp(24px, 3vw, 36px);
+        margin: 0 0 $space-5 0;
     }
 
     p {
@@ -47,4 +49,5 @@
     position: relative;
     max-width: 600px;
     animation: fadeInUp 1s ease-out forwards;
+    z-index: 2; // Asegura que el texto esté por encima del gradiente
 }

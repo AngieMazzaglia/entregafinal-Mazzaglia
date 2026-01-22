@@ -9,6 +9,9 @@
     <meta name="keywords"
         content="comprar bolsas ecológicas, pedidos personalizados, envíos Argentina, métodos de pago, plazos de entrega, stock, bolsas sustentables, proceso de compra, cotización, delivery" />
     <title>¿Cómo comprar? - Revida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
@@ -33,7 +36,6 @@
                     <li><a href="./comocomprar.html" aria-current="page">¿Cómo comprar?</a></li>
                     <li><a href="./nosotros.html">Nosotros</a></li>
                     <li><a href="./contacto.html">Contacto</a></li>
-
                 </ul>
             </nav>
         </div>
@@ -41,82 +43,119 @@
 
     <main id="contenido" tabindex="-1"> <!-- Accesibilidad -->
         <!-- Intro -->
-        <section class="bloque">
-            <div class="container flow">
+        <section class="bloque pb-0">
+            <div class="container flow centrado">
                 <h1>¿Cómo comprar?</h1>
-                <p>En Revida comprar tus bolsas ecológicas es fácil y rápido. Podés elegir entre nuestros productos en
+                <p>Comprar tus bolsas ecológicas es fácil y rápido. Podés elegir entre nuestros productos en
                     stock o solicitar un pedido personalizado.</p>
-            </div>
-        </section>
-
-        <!-- Info general -->
-        <section class="bloque">
-            <div class="container flow">
-                <h3>Mínimo de compra</h3>
-                <p>En ambos casos, el pedido mínimo de compra es de <strong>$10.000</strong>. Si no alcanzás ese monto,
-                    igual podés consultar por opciones combinadas.</p>
-
-                <h3>Métodos de pago</h3>
-                <p>Podés abonar con tarjeta de crédito, débito o transferencia bancaria. También aceptamos pagos
-                    mediante Mercado Pago y otras billeteras virtuales.</p>
-
-                <h3>Envíos</h3>
-                <p>Realizamos envíos a todo el país.</p>
-                <ul>
-                    <li>En CABA y GBA: envíos por motomensajería o correo.</li>
-                    <li>Interior del país: envíos por transporte y correo.</li>
-                </ul>
-
-                <h3>Plazos de entrega</h3>
-                <ul>
-                    <li>Pedidos en stock: entre 3 y 5 días hábiles.</li>
-                    <li>Pedidos personalizados: entre 10 y 25 días hábiles, dependiendo del proceso de producción.</li>
-                </ul>
+                <p class="min-compra-highlight"><strong>Mínimo de compra:</strong> En ambos casos, el pedido mínimo de
+                    compra es de <strong>$10.000</strong>.</p>
             </div>
         </section>
 
         <!-- Instructivos -->
         <section class="bloque">
             <div class="container">
-                <h3>Instructivos para realizar compras</h3>
-
-                <h4>Cómo comprar bolsas en stock</h4>
-                <div class="steps">
-                    <article class="step">
-                        <img class="ico" src="../assets/img/comocomprar1.webp" alt="Carrito de compra">
-                        <p>Ingresá a la sección Productos, seleccioná el que te interese, revisá sus características y
-                            agregalo al carrito.</p>
-                    </article>
-                    <article class="step">
-                        <img class="ico" src="../assets/img/comocomprar2.webp" alt="Caja de envío">
-                        <p>Elegí la cantidad y calculá el envío.</p>
-                    </article>
-                    <article class="step">
-                        <img class="ico" src="../assets/img/comocomprar3.webp" alt="Tarjeta de crédito/débito">
-                        <p>Completá los datos solicitados para concretar la compra, realizá el pago y ¡listo!</p>
-                    </article>
+                <div class="instruction-box">
+                    <h4 class="instruction-title"><span>Cómo comprar</span> bolsas en stock
+                    </h4>
+                    <div class="steps">
+                        <article class="step">
+                            <span class="step-number">1</span>
+                            <img class="ico" src="../assets/img/comocomprar1.webp" alt="Carrito de compra">
+                            <p>Ingresá a Productos, revisá las opciones y agregá al carrito.</p>
+                        </article>
+                        <article class="step">
+                            <span class="step-number">2</span>
+                            <img class="ico" src="../assets/img/comocomprar2.webp" alt="Caja de envío">
+                            <p>Elegí la cantidad y calculá el envío.</p>
+                        </article>
+                        <article class="step">
+                            <span class="step-number">3</span>
+                            <img class="ico" src="../assets/img/comocomprar3.webp" alt="Tarjeta de crédito/débito">
+                            <p>Completá los datos para concretar la compra, realizá el pago y ¡listo!</p>
+                        </article>
+                    </div>
+                    <p class="steps-cta"><a href="./productos.html" class="btn btn-outline">Ver todos los
+                            productos</a>
+                    </p>
                 </div>
-                <p class="derecha steps-cta"><a href="./productos.html" class="btn-link">Ver todos los productos</a></p>
 
-                <h4>Cómo comprar bolsas personalizadas</h4>
-                <div class="steps">
-                    <article class="step">
-                        <img class="ico" src="../assets/img/comocomprar4.webp" alt="Bolsas personalizadas">
-                        <p>Ingresá a la sección Productos y seleccioná "Bolsas personalizadas".</p>
-                    </article>
-                    <article class="step">
-                        <img class="ico" src="../assets/img/comocomprar5.webp" alt="Lápiz">
-                        <p>Completá el formulario con tus datos y la información para tu pedido.</p>
-                    </article>
-                    <article class="step">
-                        <img class="ico" src="../assets/img/comocomprar6.webp" alt="Hoja cotización">
-                        <p>Recibí tu cotización, aprobá el diseño, realizá el pago y ¡listo!</p>
-                    </article>
+                <div class="instruction-box">
+                    <h4 class="instruction-title"><span>Cómo comprar</span> bolsas
+                        personalizadas</h4>
+                    <div class="steps">
+                        <article class="step">
+                            <span class="step-number">1</span>
+                            <img class="ico" src="../assets/img/comocomprar4_fixed.png" alt="Bolsas personalizadas">
+                            <p>Ingresá a Productos y seleccioná "Bolsas personalizadas".</p>
+                        </article>
+                        <article class="step">
+                            <span class="step-number">2</span>
+                            <img class="ico" src="../assets/img/comocomprar5.png" alt="Lápiz">
+                            <p>Completá el formulario con tus datos y la información para tu pedido.</p>
+                        </article>
+                        <article class="step">
+                            <span class="step-number">3</span>
+                            <img class="ico" src="../assets/img/comocomprar6.png" alt="Hoja cotización">
+                            <p>Recibí tu cotización, aprobá el diseño, realizá el pago y ¡listo!</p>
+                        </article>
+                    </div>
+                    <p class="steps-cta"><a href="./contacto.html?form=quote" class="btn btn-outline">Hacer mi pedido
+                            personalizado</a></p>
                 </div>
-                <p class="derecha steps-cta"><a href="./contacto.html" class="btn-link">Hacer mi pedido
-                        personalizado</a></p>
             </div>
         </section>
+
+        <!-- Info general -->
+        <section class="bloque">
+            <div class="container flow centrado info-general">
+
+
+                <h3>Métodos de pago</h3>
+                <ul class="payment-list">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="currentColor" class="ico-payment">
+                            <path
+                                d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                        </svg>
+                        Tarjeta de crédito o débito
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="currentColor" class="ico-payment">
+                            <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z" />
+                        </svg>
+                        Transferencia bancaria
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 640 512" width="24px"
+                            fill="currentColor" class="ico-payment">
+                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M428.3 361.6c11.3 7 13.9 22.1 5.8 32.5c-43.7 56.4-106.6 97.4-187 112.5V173.8c7.4-9 12.3-19.8 13.9-31.7l6.6-49.8c1.6-11.7-6.5-22.6-18.1-24.2s-22.6 6.5-24.2 18.1l-6.6 49.8c-.8 6.3-4.9 11.6-10.4 14.2l-37.4 17.5c-5.7 2.7-12.4 2-17.5-1.9L108 131.5c-11.2-8.5-27-6.6-35.9 4.2s-6.9 26.2 3.8 35.5l56.8 49.2c12.2 11.8 19.3 28.2 19.3 45.3v26.4l-49.8-19.3C40.6 250.7 0 286.9 0 328v20.3C0 373.1 20.3 393.4 45.3 393.4H98c35.4 0 65.6-21.2 78.4-51.5c11.6-27.6 15.5-63.5 13.6-101.4c36.2-14.8 77-22.5 120-22.5s83.8 7.7 120 22.5c-1.9 37.9 2 73.8 13.6 101.4c12.8 30.3 43 51.5 78.4 51.5h52.7c25 0 45.3-20.3 45.3-45.3V328c0-41.1-40.6-77.2-102.3-56.2l-49.8 19.3v-26.4c0-17.2 7.1-33.5 19.3-45.3l56.8-49.2c10.7-9.3 12.7-24.7 3.8-35.5s-24.7-12.7-35.9-4.2L328 165.7c-5.1 3.9-11.8 4.6-17.5 1.9l-37.4-17.5c-5.5-2.6-9.6-7.9-10.4-14.2l-6.6-49.8c-1.6-11.7-12.6-19.7-24.2-18.1s-19.7 12.6-18.1 24.2l6.6 49.8c1.6 11.9 6.5 22.7 13.9 31.7v332.8c-80.4-15.2-143.3-56.1-187-112.5c-8.1-10.4-5.5-25.5 5.8-32.5s26.8-2.6 35.8 9c34.7 44.7 85.3 76.5 145.4 87.5V173.8c-7.9-8.4-12.8-19.6-12.8-31.9V136.6c0-22.1 15-41.5 36.3-46.9l20.4-5.1c9.3-2.3 19-3.5 28.6-3.5c11.7 0 23.4 1.8 34.6 5.3l37.2 11.6c4.6 1.4 8.7 4.3 11.6 8.2l35.8 48.3c8.1 11 11.5 25 9.3 38.5s-10.1 25.4-21.7 33L401 270.2c-5.6 3.7-14.9 7.2-22.9 8.2c-15.6 1.9-32.9 2-50.1 2s-34.5-.1-50.1-2c-8-1-17.3-4.5-22.9-8.2L179.3 225.9c-11.6-7.6-19.6-19.5-21.7-33s1.2-27.5 9.3-38.5l35.8-48.3c2.9-3.9 7.1-6.8 11.6-8.2l37.2-11.6c11.2-3.5 22.9-5.3 34.6-5.3c9.7 0 19.3 1.2 28.6 3.5l20.4 5.1c21.3 5.3 36.3 24.8 36.3 46.9v5.2c0 12.4-4.9 23.5-12.8 31.9v296.8c60.1-11 110.7-42.8 145.4-87.5c9.1-11.6 24.5-16 35.8-9z" />
+                        </svg>
+                        Mercado Pago y otras billeteras virtuales
+                    </li>
+                </ul>
+
+                <h3>Envíos</h3>
+                <p>Realizamos envíos a todo el país:</p>
+                <ul>
+                    <li>- En CABA y GBA: envíos por motomensajería o correo.</li>
+                    <li>- Interior del país: envíos por correo.</li>
+                </ul>
+
+                <h3>Plazos de entrega</h3>
+                <ul>
+                    <li>- Pedidos en stock: entre 3 y 5 días hábiles.</li>
+                    <li>- Pedidos personalizados: entre 10 y 25 días hábiles.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -141,6 +180,8 @@
         </div>
         <p class="copy">© 2025 Revida — Todos los derechos reservados.</p>
     </footer>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

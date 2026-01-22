@@ -8,12 +8,24 @@
 
 .galeria-nosotros {
     display: grid;
-    grid-template-columns: 1fr; // Mobile en 1 columna
+    grid-template-columns: 1fr; // Mobile: 1 columna
     gap: $space-5;
 
-    // En tablet y desktop 3 columnas
+    // Desktop: 2 columnas
     @include respond(md) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.galeria-item {
+    position: relative;
+    border-radius: $radius-sm;
+    overflow: hidden; // Recorta la imagen si se escala
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 350px; // Reducido de 400px
+
+    @include respond(md) {
+        height: 420px; // Reducido de 500px, un poco más chico
     }
 
     img {
@@ -21,7 +33,41 @@
         height: 100%;
         object-fit: cover;
         display: block;
-        border-radius: $radius-sm;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    // Efecto zoom sutil al hover del item
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.overlay-box {
+    position: absolute;
+    bottom: $space-5;
+    left: $space-5;
+    right: $space-5;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(4px);
+    padding: $space-4;
+    border-radius: $radius-sm;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: $space-1;
+        color: #1a1a1a;
+        font-size: 1.05rem !important; // Intermedio (antes 0.85rem, original 1.2rem)
+        font-weight: 700;
+        letter-spacing: -0.2px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #4a4a4a;
     }
 }

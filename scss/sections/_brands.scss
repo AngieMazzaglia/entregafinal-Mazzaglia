@@ -3,36 +3,37 @@
 
 /*  Marcas que nos eligen  */
 .franja-marcas {
-    background: #fff;
+    background: $bg-footer; // Verde oscuro (footer)
     padding-block: $space-5;
-    color: $text-color;
+    color: #fff; // Texto blanco para contraste
     text-align: center;
-    justify-items: center;
-    align-items: center;
 
-    h3 {
+    h2 {
         margin-top: 0;
         margin-bottom: $space-4;
+        color: #fff;
     }
 }
 
 .marcas {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: $space-5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; // Distribuye el espacio uniformemente
     align-items: center;
-    justify-items: center;
+    gap: $space-5;
 
     img {
         width: auto;
-        max-width: 180px;
+        max-width: 160px; // Tamaño estándar general
         height: auto;
         max-height: 70px;
         object-fit: contain;
         display: block;
         transition: transform .2s ease;
         animation: fadeInDelayed .5s ease-out forwards;
+        opacity: 0;
 
+        // Animaciones escalonadas (manteniendo orden visual actual por índice)
         &:nth-child(1) {
             animation-delay: .1s;
         }
@@ -47,6 +48,46 @@
 
         &:nth-child(4) {
             animation-delay: .4s;
+        }
+
+        &:nth-child(5) {
+            animation-delay: .5s;
+        }
+
+        &:nth-child(6) {
+            animation-delay: .6s;
+        }
+
+        // AJUSTES INDIVIDUALES (ROBUSTOS POR CLASE)
+        &.marca-carrefour {
+            max-width: 210px;
+            max-height: 95px; // Compensar whitespace
+        }
+
+        &.marca-dia {
+            max-width: 120px;
+            max-height: 55px; // Achicar Dia
+        }
+
+        &.marca-jumbo {
+            max-width: 210px;
+            max-height: 105px; // Agrandar más Jumbo
+        }
+
+        &.marca-libertad {
+            max-width: 200px;
+            max-height: 95px; // Agrandar Libertad
+        }
+
+        &.marca-vea {
+            max-width: 190px;
+            max-height: 90px; // Agrandar Vea
+        }
+
+        // Walmart no necesita ajuste específico, hereda el default
+
+        &:hover {
+            transform: scale(1.05);
         }
     }
 }

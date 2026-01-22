@@ -1,5 +1,6 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
+@use "../abstracts/extend" as *;
 @use "../base/animations" as *;
 
 
@@ -65,4 +66,87 @@
 
 .steps-cta {
     margin-top: $space-3;
+}
+
+.instruction-box {
+    @extend %panel;
+    padding: $space-4;
+    margin-bottom: $space-5;
+
+    // Reset margin for the last box
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Títulos de instructivos */
+.instruction-title {
+    text-align: center;
+
+    span {
+        font-weight: 400;
+    }
+}
+
+/* Nums pasos */
+.step-number {
+    background-color: $brand;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.min-compra-highlight {
+    font-size: 1.25rem;
+    margin-top: 24px;
+}
+
+/* Lista de métodos de pago con íconos */
+.payment-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.1rem;
+        text-align: left;
+    }
+}
+
+.ico-payment {
+    color: $brand;
+    flex-shrink: 0;
+}
+
+/* Ajustes de espaciado Info General */
+.info-general {
+    h3 {
+        margin-top: 32px;
+        margin-bottom: 8px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    p,
+    ul {
+        margin: 0;
+    }
 }

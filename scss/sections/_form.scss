@@ -17,16 +17,8 @@
 }
 
 /* Contacto */
-.bloque[aria-label="Contacto"] {
-    h1 {
-        font-family: Verdana, Geneva, Tahoma, sans-serif !important;
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        line-height: 1.2 !important;
-        margin-top: 1rem;
-        margin-bottom: $space-6;
-    }
-}
+// Bloque eliminado para heredar estilos globales de H1
+
 
 /* Contacto – formularios (Bootstrap)  */
 form.needs-validation {
