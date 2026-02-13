@@ -1,0 +1,120 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.tienda-header {
+    text-align: left;
+    /* Alineado a la izquierda */
+    padding: $space-6 0 $space-2;
+    /* Sacamos padding lateral porque lo da el container */
+
+    h1 {
+        margin-bottom: $space-2;
+        color: $brand;
+        margin-top: $space-2;
+        text-align: center;
+        /* Título centrado */
+    }
+
+    /* Subtítulo (el párrafo que no es la alerta) */
+    p:not(.min-purchase-alert) {
+        text-align: center;
+        color: #666;
+        /* Un gris suave para el subtítulo queda bien */
+    }
+
+    /* Navegación de filtros */
+    .filters-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-top: $space-4;
+        margin-bottom: $space-4;
+    }
+
+    .filter-btn {
+        display: inline-block;
+        padding: 6px 16px;
+        border: 1px solid $brand;
+        border-radius: 50px; // Pill shape
+        color: $brand;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        background: transparent;
+
+        &:hover,
+        &.active {
+            background-color: $brand;
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}
+
+.productos-header-info {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.tienda-grid {
+    padding: $space-5 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $space-5;
+}
+
+.producto-vacio {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: $space-6;
+}
+
+/* Tarjeta de producto optimizada */
+.card-img-container {
+    width: 100%;
+    height: 280px;
+    /* Un poco más alto para dar aire */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    /* Fondo blanco para coincidir con imagenes */
+    border-radius: $radius-sm;
+    overflow: hidden;
+    margin-bottom: $space-2;
+    padding: $space-2;
+    /* Padding interno para que la foto no toque los bordes */
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        /* CLAVE: Muestra toda la foto sin cortar */
+        transition: transform 0.3s ease;
+    }
+}
+
+.card:hover .card-img-container img {
+    transform: scale(1.05);
+}
+
+.card-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $brand;
+    margin: $space-2 0;
+}
+
+/* Controles de tarjeta */
+.card-controls {
+    margin-top: auto;
+    padding-top: $space-2;
+    /* Ajustado a 8px */
+    width: 100%;
+
+    .btn {
+        width: 100%;
+        display: block;
+    }
+}

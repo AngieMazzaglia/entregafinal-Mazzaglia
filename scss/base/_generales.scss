@@ -12,7 +12,7 @@ body {
 
 body {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.1rem; // Aumento ligero para compensar el tamaño de Outfit
+    font-size: $font-size-base; // Aumento ligero para compensar el tamaño de Outfit
     color: $text-color;
     background: var(--c-bg);
 }
@@ -23,6 +23,12 @@ h1,
     font-size: 2rem;
     line-height: 1.2;
     font-weight: 600; // Semi-bold para un look más moderno
+    color: $brand; // Verde principal
+}
+
+// Override for hero section (white text on dark background)
+.hero h1 {
+    color: #fff;
 }
 
 h2,
@@ -59,6 +65,7 @@ a {
     text-decoration: none;
 }
 
+// Hover genérico para enlaces (se sobrescribe en botones y navs por especificidad)
 a:hover {
     text-decoration: underline;
 }
@@ -114,6 +121,10 @@ select:focus-visible {
     background: var(--c-bg-soft);
 }
 
+.pt-small {
+    padding-top: $space-4 !important;
+}
+
 .bloque h2,
 .bloque h3 {
     margin-top: 0;
@@ -163,4 +174,19 @@ main .container,
     left: 8px;
     top: 8px;
     z-index: 999;
+}
+
+// Grupos de botones
+.cta-group {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .btn {
+        flex: 0 1 225px;
+        width: 225px; // Forzar ancho explícito
+        text-align: center;
+        justify-content: center;
+    }
 }

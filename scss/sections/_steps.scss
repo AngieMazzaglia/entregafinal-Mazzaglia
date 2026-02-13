@@ -12,17 +12,18 @@
     margin-top: $space-3;
 
     .step {
+        border-radius: $radius;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: $space-2;
         position: relative;
-        padding: $space-4;
+        padding: 10px;
 
         /* Flechas */
         &::after {
-            content: "\2B07\FE0E";
+            content: none;
             position: absolute;
             bottom: -25px;
             left: 50%;
@@ -42,7 +43,7 @@
         .ico {
             width: 64px;
             height: 64px;
-            margin: 0 auto 10px;
+            margin: 0 auto 4px;
             @include flex-center;
         }
 
@@ -53,7 +54,7 @@
         /* Desktop: Flecha a la derecha */
         @include respond(md) {
             &::after {
-                content: "\27A1\FE0E";
+                content: none;
                 bottom: auto;
                 left: auto;
                 top: 50%;
@@ -65,13 +66,19 @@
 }
 
 .steps-cta {
-    margin-top: $space-3;
+    margin-top: 8px;
+    text-align: center;
 }
 
 .instruction-box {
-    @extend %panel;
-    padding: $space-4;
+    padding: 12px;
     margin-bottom: $space-5;
+    background-color: $bg-beige-transparent;
+    /* Color beige con transparencia */
+    backdrop-filter: blur(8px);
+    /* Efecto de desenfoque */
+    border: 1px solid #e0dfd5;
+    border-radius: $radius;
 
     // Reset margin for the last box
     &:last-child {
@@ -82,6 +89,8 @@
 /* Títulos de instructivos */
 .instruction-title {
     text-align: center;
+    color: var(--c-text);
+    /* Restaurar color oscuro */
 
     span {
         font-weight: 400;
@@ -107,7 +116,8 @@
 
 .min-compra-highlight {
     font-size: 1.25rem;
-    margin-top: 24px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 /* Lista de métodos de pago con íconos */
@@ -136,7 +146,9 @@
 
 /* Ajustes de espaciado Info General */
 .info-general {
-    h3 {
+
+    h3,
+    h2 {
         margin-top: 32px;
         margin-bottom: 8px;
 
@@ -148,5 +160,7 @@
     p,
     ul {
         margin: 0;
+        list-style: none;
+        padding-left: 0;
     }
 }

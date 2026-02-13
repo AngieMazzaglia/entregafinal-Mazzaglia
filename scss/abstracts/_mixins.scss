@@ -25,6 +25,8 @@
     border: 1px solid transparent;
     cursor: pointer;
     text-decoration: none !important;
+    font-family: inherit; // Heredar fuente del body (Outfit)
+    font-size: $font-size-base; // Asegurar tamaño base consistente
 }
 
 @mixin flex-center {

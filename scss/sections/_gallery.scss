@@ -47,19 +47,21 @@
     bottom: $space-5;
     left: $space-5;
     right: $space-5;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(4px);
+    background: $bg-beige-transparent;
+    backdrop-filter: blur(8px);
     padding: $space-4;
     border-radius: $radius-sm;
     text-align: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid #e0dfd5; // Borde igual a instruction-box
 
-    h3 {
+    // Aumentamos especificidad para sobrescribir estilos globales de h3
+    .galeria-nosotros & h3,
+    .galeria-nosotros & h2 {
         margin-top: 0;
         margin-bottom: $space-1;
         color: #1a1a1a;
-        font-size: 1.05rem !important; // Intermedio (antes 0.85rem, original 1.2rem)
+        font-size: 1.05rem;
         font-weight: 700;
         letter-spacing: -0.2px;
     }

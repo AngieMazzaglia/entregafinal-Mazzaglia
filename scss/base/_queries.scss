@@ -195,7 +195,8 @@
     }
 
     .site-nav {
-        display: block;
+        display: flex;
+        align-items: center;
         width: auto;
         max-height: none;
     }

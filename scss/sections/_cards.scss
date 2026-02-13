@@ -33,13 +33,17 @@
         margin-bottom: $space-2;
     }
 
-    h4 {
-        font-size: 1rem;
+    h4,
+    h2 {
+        font-size: $font-size-base;
+        font-weight: 700; // Aseguramos bold para diferenciar del texto normal
         margin: 0 0 6px 0;
+        color: var(--c-text);
+        /* Force text color to override global H2 green */
     }
 
     p {
-        font-size: .95rem;
+        font-size: $font-size-sm;
         line-height: 1.45;
         margin: 0;
         flex-grow: 1;
@@ -48,7 +52,39 @@
 
 /* Botón full width dentro de cards */
 .card-btn-full {
-    display: block;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    text-align: center;
+}
+
+/* Espaciado extra específico para section productos */
+.card-actions-products {
+    margin-top: auto;
+    padding-top: $space-4;
+    /* 16px para más aire */
+    width: 100%;
+}
+
+/* Wrapper to clip the zoomed image */
+.img-zoom-wrapper {
+    overflow: hidden;
+    border-radius: $radius-sm;
+    margin-bottom: $space-2;
+
+    /* Maintain original image spacing */
+    img {
+        margin-bottom: 0 !important;
+        /* Remove margin from img as wrapper handles it */
+    }
+}
+
+/* Specific zoom for product image */
+.img-zoom-medium {
+    transform: scale(1.3);
+    transform-origin: center;
+}
+
+.img-zoom-large {
+    transform: scale(1.25);
+    transform-origin: center;
 }

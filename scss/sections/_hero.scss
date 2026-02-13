@@ -4,8 +4,8 @@
 .hero {
     position: relative;
     color: #fff;
-    background: url("../img/hero.webp") center/cover no-repeat;
-    padding: 160px 12px;
+    background: url("../img/hero.webp") center 35%/cover no-repeat;
+    padding: 200px 12px;
 
     &::before {
         content: "";
@@ -38,9 +38,9 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
         &:hover {
-            background-color: #f1f8e9;
+            background-color: var(--c-bg-beige);
             color: $brand-dark;
-            border-color: #f1f8e9;
+            border-color: var(--c-bg-beige);
         }
     }
 }

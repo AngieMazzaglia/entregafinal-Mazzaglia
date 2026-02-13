@@ -2,7 +2,7 @@
 @use "../abstracts/maps" as *; // Ensure all maps/variables are available
 
 .bg-bosque-contacto {
-    background: url("../img/drone-vista-de-un-bosque-verde-con-un-camino-de-tierra.jpg") center/cover no-repeat;
+    background: url("../img/bosque2.webp") center/cover no-repeat;
     position: relative;
     padding-bottom: $space-6; // Un poco más de espacio abajo
 
@@ -18,12 +18,12 @@
     .container {
         position: relative;
         z-index: 2;
-    }
 
-    // Título principal h1
-    h1 {
-        color: #fff !important;
-        margin-bottom: $space-5;
+        // Título principal h1 - selector más específico
+        h1 {
+            color: #fff;
+            margin-bottom: $space-5;
+        }
     }
 
     // Textos de intro de cada columna ("Solicitá tu presupuesto", etc)
@@ -31,9 +31,10 @@
         color: #fff;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 
+        // Selectores más específicos para h2 y h3
         h2,
         h3 {
-            color: #fff !important;
+            color: #fff;
         }
     }
 
@@ -49,9 +50,10 @@
                 background-color: rgba(255, 255, 255, 0.5);
             }
 
+            // Selector más específico para estado activo
             &.active {
                 background-color: $brand; // Fondo verde activo
-                color: #fff !important;
+                color: #fff;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
         }
@@ -60,21 +62,23 @@
     // Contenedor del formulario dentro del tab
     .contact-form-container {
         border-radius: $radius;
-
+        color: $text-color;
+        /* Restaurar color de texto oscuro */
 
         .contact-intro-text {
 
             // Ajustar el texto descriptivo dentro del formulario (que ahora está sobre fondo blanco)
+            // Selectores más específicos para sobrescribir estilos globales
             h2 {
-                color: $brand !important; // Volver a verde porque ahora está sobre fondo blanco
-                text-shadow: none !important;
+                color: $brand; // Volver a verde porque ahora está sobre fondo blanco
+                text-shadow: none;
                 font-size: 1.5rem;
                 margin-bottom: 0.5rem;
             }
 
             p {
-                color: #555 !important; // Texto gris oscuro
-                text-shadow: none !important;
+                color: #555; // Texto gris oscuro
+                text-shadow: none;
             }
         }
     }

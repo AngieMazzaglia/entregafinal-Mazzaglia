@@ -5,13 +5,13 @@
 /* Botones (unificados + compat Bootstrap) */
 a.btn,
 .btn,
-.btn-verde {
+.btn-verde,
+.btn-outline {
     @include btn-base;
 }
 
 .btn-verde,
 .btn-success {
-    @extend %btn-filled;
     background-color: var(--c-brand);
     color: #ffffff;
     border-color: var(--c-brand);
@@ -22,7 +22,7 @@ a.btn,
     background-color: var(--c-brand-dark);
     color: #ffffff;
     border-color: var(--c-brand-dark);
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 .btn:focus-visible,
@@ -53,21 +53,22 @@ a.btn:focus-visible,
     @include focus-ring(rgba(46, 125, 50, 0.3), 2px, 2px);
 }
 
-.btn-block-center {
-    display: block;
-    width: fit-content;
-    margin-inline: auto;
-}
-
 /* Botón Secundario (Outline) */
 .btn-outline {
     background-color: #fff;
     color: var(--c-brand);
-    border: 2px solid var(--c-brand);
+    border: 1px solid var(--c-brand) !important;
 
     &:hover {
         background-color: var(--c-brand);
         color: #fff;
         text-decoration: none;
     }
+}
+
+/* Botón ancho completo */
+.btn-block {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

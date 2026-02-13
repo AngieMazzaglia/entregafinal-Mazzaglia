@@ -1,12 +1,13 @@
 /* base */
 :root {
     --c-text: #2e2e2e;
-    --c-brand: #2e7d32;
+    --c-brand: #19753A;
     --c-brand-dark: #1b5e20;
     --c-brand-soft: #a5d6a7;
     --c-bg: #ffffff;
     --c-bg-soft: #d2f8c4;
     --c-bg-footer: #1b5e20;
+    --c-bg-beige: #ede9d0;
 
     --radius: 12px;
     --space-1: 4px;
@@ -33,9 +34,18 @@ $radius-sm: 8px;
 $radius-lg: 10px;
 
 // Colores
-$brand: #2e7d32;
+$brand: #19753A;
 $brand-dark: #1b5e20;
 $brand-soft: #a5d6a7;
 $text-color: #2e2e2e;
 $bg-soft: #d2f8c4;
 $bg-footer: #1b5e20;
+$bg-beige: #ede9d0;
+$bg-beige: #ede9d0;
+$bg-beige-transparent: rgba(237, 233, 208, 0.75);
+
+// Tipografía
+$font-size-base: 1.1rem;
+$font-size-sm: 0.875rem; // Unificado a 14px
+$font-size-xs: 0.875rem; // Unificado a 14px (alias kept for compatibility)
+$font-size-xxs: 0.7rem;

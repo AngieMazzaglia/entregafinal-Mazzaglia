@@ -13,6 +13,7 @@
     justify-content: space-between;
     gap: $space-4;
     padding-block: 12px;
+    max-width: 1250px !important; // Override del container global para dar más aire
 }
 
 .logo {
@@ -36,7 +37,10 @@
     gap: var(--space-3);
     align-items: center;
 
-    a {
+    // Aumentamos especificidad para ganar al selector global a:hover
+    // Selector original: 0-3-2
+    // Nuevo selector: 0-4-2 (agregando .site-header & o similar)
+    .site-header &>li>a:not(.btn-cart) {
         padding: 4px 6px;
         color: var(--c-brand);
         text-decoration: none;
@@ -44,7 +48,7 @@
 
         &:hover {
             color: var(--c-brand-dark);
-            text-decoration: none;
+            text-decoration: none; // Ahora sí debería aplicar
             border-bottom: 2px solid var(--c-brand);
             padding-bottom: 2px;
         }
@@ -76,5 +80,184 @@ nav a[aria-current="page"] {
 
     &:hover {
         background: $bg-soft;
+    }
+}
+
+/* Botón Carrito en Nav */
+.btn-cart {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-appearance: none;
+    appearance: none;
+    /* Reset para móviles */
+    color: var(--c-brand);
+
+    &:hover {
+        background: transparent;
+        text-decoration: none;
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+
+    /* Mantener focus visible para accesibilidad pero personalizado si se desea */
+    &:focus-visible {
+        outline: 2px solid var(--c-brand);
+        border-radius: 4px;
+    }
+
+    #cart-count {
+        position: absolute;
+        top: -5px;
+        right: -8px;
+        background: var(--c-brand);
+        color: white;
+        border-radius: 50%;
+        padding: 0.15rem 0.45rem;
+        font-size: $font-size-xxs;
+        font-weight: 700;
+        display: none; // Se activa con JS
+    }
+}
+
+/* Dropdown Menu */
+.nav-list li {
+    position: relative;
+
+    &:hover .dropdown-menu,
+    &:focus-within .dropdown-menu {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    min-width: 220px;
+    list-style: none;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    border: 1px solid #eee;
+
+    li {
+        display: block;
+        margin: 0;
+    }
+
+    a {
+        display: block;
+        padding: 0.75rem 1.5rem;
+        color: #333;
+        font-weight: 500;
+        white-space: nowrap;
+        font-size: $font-size-sm;
+
+        &:hover {
+            background: #f4fdf0;
+            color: var(--c-brand);
+            // No necesitamos border-bottom aquí porque el selector padre ya es específico
+        }
+    }
+}
+
+/* SEARCH BAR */
+/* SEARCH BAR */
+.search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    /* Fondo blanco */
+    border-radius: 99px;
+    padding: 0 0 0 8px;
+    /* Ajuste padding */
+    border: 1px solid var(--c-brand);
+    /* Borde fino color principal */
+    transition: all 0.3s ease;
+    margin-block: 10px;
+
+    &:focus-within {
+        background: #fff;
+        border-color: var(--c-brand-dark);
+        /* Borde más oscuro al foco */
+        box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+    }
+
+    input[type="search"] {
+        border: none;
+        background: transparent;
+        padding: 4px 0; // Revertido a original
+        font-size: $font-size-xs;
+        width: 100%;
+        outline: none;
+        color: var(--c-text);
+        font-family: inherit;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 28px; // Revertido a original
+
+        &::placeholder {
+            color: #666;
+            /* Oscurecido para mejor contraste */
+        }
+    }
+
+    button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 4px 8px; // Revertido a original
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+        color: var(--c-brand);
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centrado en mobile */
+    gap: 8px; // Separación explícita para que no se peguen
+}
+
+/* Ajustes Desktop para Search y Actions se hacen en _queries.scss o via media query aqui */
+@include respond(lg) {
+    .search-form {
+        margin-block: 0;
+        margin-inline: var(--space-3);
+
+        input[type="search"] {
+            width: 180px;
+        }
     }
 }

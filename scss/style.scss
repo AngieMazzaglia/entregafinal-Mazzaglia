@@ -14,6 +14,9 @@
 @use "components/header";
 @use "components/footer";
 @use "components/buttons";
+@use "components/ui-elements";
+@use "components/cart";
+/* Agregado: Breadcrumbs y Alertas */
 
 // Secciones
 @use "sections/hero";
@@ -25,6 +28,9 @@
 @use "sections/steps";
 @use "sections/gallery";
 @use "sections/cta";
+
+// Paginas
+@use "pages/tienda";
 
 // Media queries
 @use "base/queries";

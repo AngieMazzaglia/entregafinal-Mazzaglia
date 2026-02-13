@@ -1,7 +1,7 @@
 @use "../abstracts/variables" as *;
 
 .cta-compra {
-    background: url("../img/bosque-de-montana-de-los-carpatos-ucranianos-desde-arriba-vista-aerea.jpg") center/cover no-repeat;
+    background: url("../img/bosque1.webp") center/cover no-repeat;
     position: relative;
     color: #fff;
     text-align: center;
@@ -18,15 +18,16 @@
     .container {
         position: relative;
         z-index: 2; // Texto por encima del overlay
-    }
 
-    h2 {
-        color: #fff !important; // Forzamos blanco sobre la imagen
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        // Selector más específico para sobrescribir estilos globales
+        h2 {
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
     }
 
     p {
-        font-size: 1.1rem;
+        font-size: $font-size-base;
         font-weight: 500;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
@@ -35,5 +36,6 @@
     .btn {
         border: 1px solid #fff;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-shadow: none; // Evitar que herede la sombra del texto general
     }
 }
