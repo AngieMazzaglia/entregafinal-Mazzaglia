@@ -1,0 +1,198 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.page-checkout {
+    /* Fieldset as natural container (Legend sits on top border) */
+    fieldset.checkout-step {
+        border: 1px solid #ddd; /* Borde gris base */
+        margin: 0 0 $space-5;
+        padding: 0 0 $space-3; /* Agregamos aire en la base para que no quede pegado al estar cerrado */
+        border-radius: $radius;
+        transition: all 0.3s ease;
+        min-width: 0;
+        /* NOTA: NO usar overflow: hidden o el legend no 'cortará' la línea */
+    }
+
+    /* Legend tradicional (Sobre la línea) */
+    legend.step-header {
+        width: auto; /* Ancho automático para que ocupe solo el texto */
+        padding: 0 10px; /* Crea el espacio en la línea */
+        margin-left: 20px; /* Separación desde la izquierda */
+        font-weight: 700;
+        font-size: 1.1rem;
+        background-color: #fff; /* Asegura que el fondo sea blanco y tape la línea */
+        color: #ccc; /* Gris para estado inactivo */
+        display: block;
+        float: none;
+        border-bottom: none;
+    }
+
+    .checkout-form-container {
+        padding: 0 !important;
+
+        .form-control,
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: $radius-sm;
+            font-family: inherit;
+            transition: all 0.3s ease;
+
+            /* Aire y flecha personalizada para selectores */
+            &[name="prov"], 
+            &.form-select,
+            select {
+                padding-right: 40px;
+                cursor: pointer;
+                appearance: none; // Quitar flecha nativa
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 15px center;
+                background-size: 18px;
+            }
+
+            &:focus {
+                outline: none;
+                border-color: $brand;
+                box-shadow: 0 0 0 3px rgba(25, 117, 58, 0.1);
+            }
+
+            &.is-invalid {
+                border-color: #d9534f;
+                border-width: 1px !important;
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23d9534f'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23d9534f' stroke='none'/%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right calc(.375em + .1875rem) center;
+                background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+
+                &:focus {
+                    box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.2);
+                }
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: $text-color;
+            font-size: 0.95rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 0; /* Sin bordes, solo un poco de aire vertical */
+            transition: all 0.2s;
+        }
+
+        .step-helper-text {
+            margin-left: 32px;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: -8px;
+            margin-bottom: $space-3;
+        }
+    }
+
+    .checkout-step {
+        &.active {
+            border-color: $brand !important;
+            border-width: 1px;
+
+            legend.step-header {
+                color: $brand;
+            }
+
+            .step-content {
+                display: block;
+            }
+        }
+
+        &.completed {
+            legend.step-header {
+                color: $brand;
+                cursor: pointer;
+            }
+        }
+        
+        &.disabled {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    }
+
+    .step-content {
+        padding: $space-5;
+        display: none; /* Acordeón */
+    }
+
+
+
+    /* Columna de Resumen Lateral */
+    .checkout-summary-side {
+        .checkout-summary-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: $radius;
+            padding: $space-5;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 24px;
+
+            h3 {
+                color: $brand;
+                border-bottom: 2px solid #f4fdf0;
+                padding-bottom: $space-2;
+                margin-bottom: $space-4;
+                font-weight: 700;
+            }
+        }
+
+        .summary-item-list {
+            margin-bottom: $space-4;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: $text-color;
+            border-top: 1px solid #eee;
+            padding-top: $space-3;
+            margin-top: $space-3;
+        }
+    }
+}
+
+
+/* --- Página de Compra Exitosa (Clean Code) --- */
+.page-confirmation {
+    text-align: center;
+    padding: $space-6 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .confirmation-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.success-icon {
+    margin-bottom: $space-4;
+    path:last-child {
+        fill: $brand; /* Tic verde de marca */
+    }
+}

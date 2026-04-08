@@ -83,3 +83,115 @@
         /* Color verde principal */
     }
 }
+
+/* --- Estados de Validación (Clean Code) --- */
+.is-invalid {
+    border-color: #e74c3c !important;
+    background-color: #fff8f8 !important;
+}
+
+/* --- Pantalla de Procesamiento (Glassmorphism) --- */
+.processing-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    
+    .processing-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: $space-2;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba($brand, 0.1);
+        border-top: 4px solid $brand;
+        border-radius: 50%;
+        margin-bottom: $space-3;
+        animation: spin 1s linear infinite;
+    }
+
+    h3 {
+        color: $brand;
+        margin-bottom: $space-1;
+    }
+
+    p {
+        color: #666;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+}
+
+/* --- NOTIFICACIONES TOAST (Refined) --- */
+.toast-container {
+    position: fixed;
+    top: 100px; /* Debajo del header */
+    right: 24px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast-notification {
+    background: #ffffff;
+    color: $brand; 
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    border-left: 5px solid $brand; /* Borde lateral verde */
+    animation: slideInToast 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+               fadeOutToast 0.5s ease-in 2.5s forwards;
+    pointer-events: none;
+
+    svg {
+        flex-shrink: 0;
+        color: $brand;
+    }
+}
+
+@keyframes slideInToast {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutToast {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

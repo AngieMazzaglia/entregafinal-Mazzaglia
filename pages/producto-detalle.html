@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda - Revida</title>
+    <meta name="description"
+        content="Detalles técnicos, materiales y especificaciones de nuestros productos sustentables. Consultá plazos de entrega y precios mayoristas." />
+    <meta name="keywords"
+        content="detalles de producto eco, bolsas técnicas, materiales sustentables, especificaciones ecológicas, Revida productos" />
+    <title>Producto - Revida</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- Estilos específicos para la tienda -->
-
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <header class="site-header">
         <div class="container header-inner">
             <a href="../index.html">
@@ -27,7 +30,7 @@
                 <ul class="nav-list">
                     <li><a href="../index.html">Inicio</a></li>
                     <li class="nav-item">
-                        <a href="./productos.html">Productos</a>
+                        <a href="./productos.html" aria-current="page">Productos</a>
                         <ul class="dropdown-menu">
                             <li><a href="./tienda.html?categoria=disenos">Bolsas con diseños</a></li>
                             <li><a href="./tienda.html?categoria=composteras">Composteras</a></li>
@@ -35,7 +38,7 @@
                             <li><a href="./tienda.html?categoria=papel">Bolsas de papel</a></li>
                             <li><a href="./tienda.html?categoria=biodegradables">Bolsas biodegradables</a></li>
                             <li><a href="./contacto.html?form=quote">Bolsas personalizadas</a></li>
-                            <li><a href="./tienda.html" style="font-weight: 700;">Ver todos los productos</a></li>
+                            <li><a href="./tienda.html" class="fw-700">Ver todos los productos</a></li>
                         </ul>
                     </li>
                     <li><a href="./comocomprar.html">¿Cómo comprar?</a></li>
@@ -57,8 +60,7 @@
                 <div class="nav-actions">
                     <button id="cart-btn" class="btn-cart" aria-label="Abrir carrito">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-shopping-cart">
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -70,45 +72,19 @@
         </div>
     </header>
 
-    <main>
-        <div class="tienda-header">
-            <div class="container">
-                <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                    <a href="../index.html">Inicio</a> <span class="separator">/</span>
-                    <a href="./productos.html">Productos</a> <span class="separator">/</span>
-                    <span class="current" id="breadcrumb-category">Tienda</span>
-                </nav>
+    <main id="main-content" tabindex="-1">
+        <div class="container bloque section-padding">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-4">
+                <a href="../index.html">Inicio</a> <span class="separator">/</span>
+                <a href="./tienda.html">Tienda</a> <span class="separator">/</span>
+                <span class="current" id="breadcrumb-product-name">Producto</span>
+            </nav>
 
-                <p class="min-purchase-alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon-info">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <strong>Venta Mayorista</strong> - Compra mínima: $15.000
-                </p>
+            <div id="wholesale-notice-placeholder"></div>
 
-                <h1 id="titulo-categoria">Productos</h1>
-
-                <p>Elegí la opción que mejor se adapte a vos</p>
-
-                <nav class="filters-nav">
-                    <a href="tienda.html" class="filter-btn">Todos</a>
-                    <a href="tienda.html?categoria=ecologicas" class="filter-btn">De tela</a>
-                    <a href="tienda.html?categoria=disenos" class="filter-btn">Con Diseños</a>
-                    <a href="tienda.html?categoria=papel" class="filter-btn">Papel</a>
-                    <a href="tienda.html?categoria=biodegradables" class="filter-btn">Biodegradables</a>
-                    <a href="tienda.html?categoria=composteras" class="filter-btn">Composteras</a>
-                    <a href="tienda.html?categoria=personalizadas" class="filter-btn">Personalizadas</a>
-                </nav>
-            </div>
-        </div>
-
-        <div class="container">
-            <div id="contenedor-productos" class="tienda-grid">
-                <!-- Aquí se cargarán los productos vía JS -->
+            <div id="product-detail-container">
+                <!-- Se cargará mediante JS -->
+                <div class="loading-state">Cargando producto...</div>
             </div>
         </div>
     </main>
@@ -132,7 +108,6 @@
                 <a href="#" aria-label="Seguinos en Facebook">Facebook</a>
             </nav>
         </div>
-
         <p class="copy">© 2025 Revida — Todos los derechos reservados.</p>
     </footer>
 
@@ -141,6 +116,7 @@
     <script src="../js/a11y-helpers.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/producto-detalle.js"></script>
 </body>
 
 </html>

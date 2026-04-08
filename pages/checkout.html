@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Finalizá tu pedido de forma segura en Revida. Ingresá tus datos de envío y pago para recibir tus productos ecológicos en todo el país." />
+    <meta name="keywords" content="completar pedido, pago seguro, checkout Revida, datos de envío" />
+    <title>Checkout - Revida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css?v=3.9">
+</head>
+
+<body class="page-checkout">
+    <header class="site-header site-header-minimal">
+        <div class="container header-inner">
+            <a href="../index.html">
+                <img class="logo" src="../assets/img/logo1.webp" alt="Logo Revida">
+            </a>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container mt-5">
+            <div class="checkout-header-info mb-5">
+                <h2>Completar el pago</h2>
+                <p>Ingresá tus datos para completar el pedido.</p>
+            </div>
+
+            <div class="flex-resp gap-xl align-start">
+                <!-- Columna Izquierda: Formulario de Pasos -->
+                <section class="checkout-form-container">
+                    <form id="checkout-form" novalidate>
+                        
+                        <!-- PASO 1: DATOS PERSONALES -->
+                        <fieldset class="checkout-step active" id="step-1">
+                            <legend class="step-header">Paso 1: Datos personales</legend>
+                            <div class="step-content">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="fname">Nombre <span class="required-mark">*</span></label>
+                                        <input type="text" id="fname" name="fname" class="form-control" placeholder="Ej: Jorge" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lname">Apellido <span class="required-mark">*</span></label>
+                                        <input type="text" id="lname" name="lname" class="form-control" placeholder="Ej: Lopez" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">E-mail <span class="required-mark">*</span></label>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="Ej: jorgelopez@gmail.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Teléfono / Whatsapp <span class="required-mark">*</span></label>
+                                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Ej: 1112345678" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-center mt-4">
+                                    <button type="button" id="btn-step-1" class="btn btn-verde" style="min-width: 200px;">Continuar</button>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- PASO 2: DATOS DE ENVÍO -->
+                        <fieldset class="checkout-step disabled" id="step-2">
+                            <legend class="step-header">Paso 2: Datos de envío</legend>
+                            <div class="step-content">
+                                <div class="form-group mb-4">
+                                    <label class="radio-label">
+                                        <input type="radio" name="deliveryMethod" value="pickup"> 
+                                        <strong>Retiro por sucursal</strong> 
+                                        <span class="text-muted" style="font-weight: 400; margin-left: 5px;">(gratis)</span>
+                                    </label>
+                                    <div class="step-helper-text">
+                                        Av. Rivadavia 123, CABA. Horarios: Lun a Vie 9 a 18hs.
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label class="radio-label">
+                                        <input type="radio" name="deliveryMethod" value="shipping"> 
+                                        <strong>Envío a domicilio</strong>
+                                    </label>
+                                </div>
+                                
+                                <!-- GRILLA DE DIRECCIÓN (Se muestra si elige Envío) -->
+                                <div id="shipping-address-form" style="display: none; margin-top: var(--space-5);">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="address">Calle <span class="required-mark">*</span></label>
+                                            <input type="text" id="address" name="address" class="form-control" placeholder="Ej: Tinogasta">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="num">Altura <span class="required-mark">*</span></label>
+                                            <input type="text" id="num" name="num" class="form-control" placeholder="Ej: 1234">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="floor">Piso / Depto</label>
+                                            <input type="text" id="floor" name="floor" class="form-control" placeholder="Ej: 1a">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="zip">Código postal <span class="required-mark">*</span></label>
+                                            <input type="text" id="zip" name="zip" class="form-control" placeholder="Ej: 1417">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group" style="flex: 1;">
+                                            <label for="prov">Provincia <span class="required-mark">*</span></label>
+                                            <select id="prov" name="prov" class="form-control">
+                                                <option value="" disabled selected>Seleccioná...</option>
+                                                <option value="Buenos Aires">Buenos Aires</option>
+                                                <option value="Catamarca">Catamarca</option>
+                                                <option value="Chaco">Chaco</option>
+                                                <option value="Chubut">Chubut</option>
+                                                <option value="CABA">Ciudad Autónoma de Buenos Aires (CABA)</option>
+                                                <option value="Córdoba">Córdoba</option>
+                                                <option value="Corrientes">Corrientes</option>
+                                                <option value="Entre Ríos">Entre Ríos</option>
+                                                <option value="Formosa">Formosa</option>
+                                                <option value="Jujuy">Jujuy</option>
+                                                <option value="La Pampa">La Pampa</option>
+                                                <option value="La Rioja">La Rioja</option>
+                                                <option value="Mendoza">Mendoza</option>
+                                                <option value="Misiones">Misiones</option>
+                                                <option value="Neuquén">Neuquén</option>
+                                                <option value="Río Negro">Río Negro</option>
+                                                <option value="Salta">Salta</option>
+                                                <option value="San Juan">San Juan</option>
+                                                <option value="San Luis">San Luis</option>
+                                                <option value="Santa Cruz">Santa Cruz</option>
+                                                <option value="Santa Fe">Santa Fe</option>
+                                                <option value="Santiago del Estero">Santiago del Estero</option>
+                                                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                                <option value="Tucumán">Tucumán</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" style="flex: 1;">
+                                            <label for="city">Localidad <span class="required-mark">*</span></label>
+                                            <input type="text" id="city" name="city" class="form-control" placeholder="Ej: Olivos">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-center mt-5">
+                                    <button type="button" id="btn-step-2" class="btn btn-verde" style="min-width: 200px;" disabled>Continuar</button>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- PASO 3: MEDIO DE PAGO -->
+                        <fieldset class="checkout-step disabled" id="step-3">
+                            <legend class="step-header">Paso 3: Medio de pago</legend>
+                            <div class="step-content">
+                                <div class="form-group mb-4">
+                                    <label class="radio-label">
+                                        <input type="radio" name="paymentMethod" value="transfer"> 
+                                        <strong>Transferencia bancaria</strong>
+                                    </label>
+                                    <div class="step-helper-text">
+                                        Los datos de la cuenta se enviarán por mail al finalizar el pedido.
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label class="radio-label">
+                                        <input type="radio" name="paymentMethod" value="mercadopago"> 
+                                        <strong>Mercado Pago</strong>
+                                    </label>
+                                    <div class="step-helper-text">
+                                        Serás redirigido a la plataforma de Mercado Pago para completar tu pago.
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label class="radio-label">
+                                        <input type="radio" name="paymentMethod" value="card"> 
+                                        <strong>Tarjeta de crédito/débito</strong>
+                                    </label>
+                                </div>
+
+                                <!-- CONTENEDOR PARA TARJETA -->
+                                <div id="card-fields" style="display: none; margin-top: var(--space-5);">
+                                    <div class="form-group mb-4">
+                                        <label for="cardNumber">Número de tarjeta <span class="required-mark">*</span></label>
+                                        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="cardName">Nombre como figura en la tarjeta <span class="required-mark">*</span></label>
+                                        <input type="text" id="cardName" name="cardName" class="form-control" placeholder="Jorge Lopez">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="expiry">Vencimiento <span class="required-mark">*</span></label>
+                                            <input type="text" id="expiry" name="expiry" class="form-control" placeholder="12/26">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cvv">CVV <span class="required-mark">*</span></label>
+                                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="***">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-center mt-5">
+                                    <button type="button" id="btn-step-3" class="btn btn-verde" style="min-width: 200px;">Finalizar compra</button>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </form>
+                </section>
+
+                <!-- Columna Derecha: Detalle del pedido -->
+                <aside class="checkout-summary-side">
+                    <div class="checkout-summary-card">
+                        <h3>Detalle del pedido</h3>
+                        <div id="checkout-summary-list" class="summary-item-list">
+                            <!-- Inyectado vía JS -->
+                        </div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span id="checkout-total-val">$0</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer mt-5">
+        <div class="container text-center">
+            <p>© 2025 Revida — Todos los derechos reservados. Compra segura.</p>
+        </div>
+    </footer>
+
+    <!-- Pantalla de Procesamiento (Glassmorphism) -->
+    <div id="processing-overlay" class="processing-overlay">
+        <div class="processing-content">
+            <div class="spinner"></div>
+            <h3>Procesando tu pedido...</h3>
+            <p>Por favor, no cierres esta ventana.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/data.js"></script>
+    <script src="../js/a11y-helpers.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/checkout.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

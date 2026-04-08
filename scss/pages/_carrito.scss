@@ -1,0 +1,238 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.page-carrito {
+    padding-bottom: $space-6; 
+
+    // Contenedor principal del carrito (Dos columnas)
+    > .container {
+        display: flex;
+        gap: $space-6;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: $space-6;
+    }
+
+    .carrito-list {
+        flex: 2;
+        min-width: 320px;
+
+        h1 {
+            margin-bottom: $space-5;
+            color: $brand;
+            font-weight: 700;
+        }
+    }
+
+    .carrito-summary {
+        flex: 1;
+        min-width: 300px;
+        align-self: flex-start;
+        position: sticky;
+        top: 120px;
+        background: transparent;
+        padding: $space-2 0; // Menos padding lateral ya que no hay caja
+        border: none;
+        box-shadow: none;
+
+        h3 {
+            margin-bottom: $space-4;
+            color: $brand;
+            font-weight: 700;
+            border-bottom: 2px solid #f4fdf0;
+            padding-bottom: $space-2;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: $space-3;
+            color: #555;
+
+            &.total {
+                font-weight: 700;
+                font-size: 1.35rem;
+                color: $text-color;
+                margin-top: $space-3;
+                margin-bottom: $space-4;
+                border-top: 1px solid #eee;
+                padding-top: $space-3;
+            }
+        }
+
+        /* Calculador de envío por CP */
+        .cp-calculator {
+            background-color: #fcfcfc;
+            border: 1px solid #eee;
+            border-radius: $radius-sm;
+            padding: $space-4;
+            margin-bottom: $space-4;
+
+            .cp-input-group {
+                .small-label {
+                    display: block;
+                    font-weight: 700;
+                    font-size: 0.85rem;
+                    color: $text-color;
+                    margin-bottom: 10px;
+                }
+
+                .flex-row {
+                    display: flex;
+                    gap: 10px;
+
+                    input {
+                        flex: 1;
+                        padding: 10px 14px;
+                        border: 1px solid #ddd;
+                        border-radius: $radius-sm;
+                        font-family: inherit;
+                        font-size: 1rem;
+                        outline: none;
+                        transition: all 0.3s ease;
+
+                        &:focus {
+                            border-color: $brand;
+                            box-shadow: 0 0 0 3px rgba(25, 117, 58, 0.1);
+                        }
+                    }
+                }
+            }
+
+            .cp-result {
+                margin-top: 12px;
+                padding: 12px;
+                background-color: #f4fdf0;
+                border-radius: $radius-sm;
+                color: $brand-dark;
+                border-left: 4px solid $brand;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+    }
+
+    /* --- COMPONENTE: Item de Carrito (Clean Code) --- */
+    .cart-page-item {
+        display: flex;
+        align-items: center;
+        padding: $space-5 0;
+        border-bottom: 1px solid #eee;
+        gap: $space-5;
+
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: $radius;
+            background: #fdfdfd;
+        }
+
+        .cart-item-info {
+            flex: 2;
+            h4 {
+                margin-bottom: $space-1;
+                font-weight: 600;
+                color: $text-color;
+            }
+            .text-muted.small {
+                font-size: 0.85rem;
+                margin-bottom: $space-2;
+                color: #888;
+            }
+            .unit-price {
+                font-size: 0.85rem;
+                color: #888;
+            }
+        }
+
+        .cart-item-qty {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cart-item-total-price {
+            flex: 1;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cart-item-action {
+            flex: 0 0 40px;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    /* Items en el Listado Full */
+    .full-cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $space-4 0;
+        border-bottom: 1px solid #eee;
+        gap: $space-4;
+        flex-wrap: wrap;
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: $space-4;
+            flex: 1;
+            min-width: 250px;
+
+            .item-img {
+                width: 90px;
+                height: 90px;
+                object-fit: contain;
+                border-radius: $radius-sm;
+                background-color: #fff;
+                padding: 6px;
+                border: 1px solid #f5f5f5;
+            }
+
+            .item-details {
+                .item-name {
+                    font-size: 1.15rem;
+                    font-weight: 700;
+                    margin-bottom: 6px;
+                    color: $text-color;
+                }
+
+                .item-price {
+                    color: #777;
+                    font-size: 0.95rem;
+                }
+            }
+        }
+
+        .item-actions-full {
+            display: flex;
+            align-items: center;
+            gap: $space-5;
+
+            .item-total-full {
+                width: 110px;
+                text-align: right;
+                font-weight: 700;
+                font-size: 1.1rem;
+                color: $text-color;
+            }
+
+            .delete-full-btn {
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                color: #999;
+                padding: 8px;
+                transition: color 0.2s;
+
+                &:hover {
+                    color: #ef4444 !important;
+                }
+            }
+        }
+    }
+}

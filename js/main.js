@@ -8,9 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarContadorCarrito();
     inicializarModalCarrito();
 
-    // 3. Detectar si estamos en la página de tienda
+    // 3. Inyectar contenedor de notificaciones
+    inyectarToastContainer();
+
+    // 4. Detectar si estamos en la página de tienda
     if (window.location.pathname.includes('tienda.html')) {
         renderizarTienda();
+    }
+
+    // 5. Detectar si estamos en la página de carrito completo
+    if (document.getElementById('full-cart-items')) {
+        renderizarPaginaCarrito();
     }
 });
 
@@ -31,10 +39,17 @@ function inyectarModalCarrito() {
             <!-- Región para anuncios de lectores de pantalla -->
             <div id="cart-status" class="sr-only" role="status" aria-live="polite"></div>
             <div class="cart-footer">
-                <div class="cart-total">Total: $<span id="cart-total-price">0</span></div>
+                <!-- Barra de progreso compra mínima -->
+                <div id="min-purchase-container" class="min-purchase-container" aria-live="polite">
+                    <!-- Se inyecta vía JS -->
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span>$<span id="cart-total-price">0</span></span>
+                </div>
                 <div class="cart-actions">
-                    <button id="checkout-btn" class="btn btn-verde btn-block">Finalizar Compra</button>
-                    <button id="empty-cart-btn" class="btn btn-outline btn-block">Vaciar Carrito</button>
+                    <button id="checkout-btn" class="btn btn-verde btn-block">Finalizar compra</button>
+                    <button id="view-cart-btn" class="btn btn-outline btn-block">Ir al carrito</button>
                 </div>
             </div>
         </div>
@@ -71,29 +86,22 @@ function inicializarModalCarrito() {
             if (e.target === modal) cerrarModal();
         });
 
-        // Finalizar compra (Checkout simulado)
+        // Ir al checkout directamente (Finalizar compra)
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', () => {
                 if (carrito.length === 0) return;
-                alert('¡Gracias por tu compra! (Simulación)');
-                carrito = [];
-                guardarCarrito();
-                cerrarModal();
-                actualizarContadorCarrito();
+                const isPage = window.location.pathname.includes('/pages/');
+                window.location.href = isPage ? './checkout.html' : './pages/checkout.html';
             });
         }
 
-        // Vaciar carrito
-        const emptyBtn = document.getElementById('empty-cart-btn');
-        if (emptyBtn) {
-            emptyBtn.addEventListener('click', () => {
+        // Ir a la página de carrito completa
+        const viewCartBtn = document.getElementById('view-cart-btn');
+        if (viewCartBtn) {
+            viewCartBtn.addEventListener('click', () => {
                 if (carrito.length === 0) return;
-                if (confirm('¿Estás seguro que querés vaciar el carrito?')) {
-                    carrito = [];
-                    guardarCarrito();
-                    renderizarCarritoEnModal(); // Re-renderizar para mostrar vacío
-                    actualizarContadorCarrito();
-                }
+                const isPage = window.location.pathname.includes('/pages/');
+                window.location.href = isPage ? './carrito.html' : './pages/carrito.html';
             });
         }
     }
@@ -104,18 +112,32 @@ function renderizarTienda() {
     const categoria = params.get('categoria');
     const titulo = document.getElementById('titulo-categoria');
     const contenedor = document.getElementById('contenedor-productos');
+    const botonesFiltro = document.querySelectorAll('.filter-btn');
 
-    // Actualizar título y breadcrumb
+    // Resaltar botón de filtro activo
+    botonesFiltro.forEach(btn => {
+        btn.classList.remove('active');
+        const url = btn.getAttribute('href');
+        
+        // Caso 'Todos' (sin categoría en URL)
+        if (!categoria && (url === 'tienda.html' || url.endsWith('/tienda.html'))) {
+            btn.classList.add('active');
+        } 
+        // Caso categoría específica
+        else if (categoria && url.includes(`categoria=${categoria}`)) {
+            btn.classList.add('active');
+        }
+    });
     // Actualizar título y breadcrumb
     if (categoria) {
         // Mapa de nombres amigables
         const nombresCategorias = {
-            'ecologicas': 'Bolsas ecológicas',
+            'ecologicas': 'Bolsas de tela',
             'composteras': 'Composteras',
             'personalizadas': 'Bolsas personalizadas',
             'papel': 'Bolsas de papel',
             'biodegradables': 'Bolsas biodegradables',
-            'diseños': 'Bolsas con diseños'
+            'disenos': 'Bolsas con diseños'
         };
 
         // Usar el nombre del mapa o capitalizar si no existe
@@ -179,40 +201,66 @@ function renderizarTienda() {
         // Check if the product needs a zoom wrapper (e.g., composteras)
         let imgHTML = `<img src="../${info.imagen}" alt="${info.nombre}">`;
 
-        // IDs for zoom logic
-        const simpleZoomIds = ['comp-02']; // Compostera simple (User likes this one as is)
-        const wideZoomIds = ['comp-01', 'comp-03', 'comp-04', 'comp-05']; // Double & Kits (User wants wider area)
-
-        let finalImgHTML = '';
-
-        if (simpleZoomIds.includes(info.id)) {
-            // Standard centered zoom inside card-img-container (as before)
-            let inner = `
-            <div class="img-zoom-wrapper" style="height:100%; display:flex; align-items:center; justify-content:center;">
-                <img src="../${info.imagen}" alt="${info.nombre}" class="img-zoom-large" style="height:auto; max-height:100%;">
-            </div>`;
-            finalImgHTML = `<div class="card-img-container">${inner}</div>`;
-        } else if (wideZoomIds.includes(info.id)) {
-            // Wider container: negative margins to use full card width
-            finalImgHTML = `
-            <div class="img-zoom-wrapper-wide" style="margin: -12px -12px 12px -12px; height: 232px; display:flex; align-items:center; justify-content:center; border-radius: 12px 12px 0 0; overflow:hidden; background-color:#fff;">
-                 <img src="../${info.imagen}" alt="${info.nombre}" class="img-zoom-large" style="height:auto; max-height:90%; width: auto; max-width: 95%;">
-            </div>`;
-        } else {
-            // Standard product
-            finalImgHTML = `<div class="card-img-container"><img src="../${info.imagen}" alt="${info.nombre}"></div>`;
+        // Lógica de contenedor de imagen
+        let containerClass = 'card-img-container';
+        if (info.categoria === 'composteras') {
+            containerClass += ' is-wide';
         }
+
+        let innerHTML = `
+            <div class="img-zoom-wrapper">
+                <img src="../${info.imagen}" alt="${info.nombre}">
+            </div>`;
+
+        const finalImgHTML = `<div class="${containerClass}">${innerHTML}</div>`;
+
+        // Separar Nombre - Cantidad (Regex robusto)
+        const partes = info.nombre.split(/\s*-\s*/);
+        const nombreLimpio = partes[0];
+        const detalleExtra = partes[1] || '';
 
         article.innerHTML = `
             ${finalImgHTML}
-            <h4>${info.nombre}</h4>
-            ${precioHTML}
-            <p>${info.descripcion}</p>
-            <div class="card-controls">
-                ${botonHTML}
+            <div class="card-body">
+                <h4>${nombreLimpio}</h4>
+                ${precioHTML}
+                <p>${detalleExtra || info.descripcion}</p>
+                <div class="card-controls">
+                    ${botonHTML}
+                </div>
             </div>
         `;
 
         contenedor.appendChild(article);
     });
 }
+
+function inyectarToastContainer() {
+    if (document.getElementById('toast-container')) return;
+    const container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+}
+
+// Función global para mostrar notificaciones sutiles
+window.mostrarToast = (mensaje) => {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>${mensaje}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // Se elimina automáticamente tras 3 segundos (coincidiendo con la animación CSS)
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.remove();
+        }
+    }, 3000);
+};

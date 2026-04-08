@@ -1,0 +1,39 @@
+@use "../abstracts/variables" as *;
+
+/* Utilidades de Espaciado (Basadas en variables del sistema) */
+
+/* Margen Superior */
+.mt-1 { margin-top: $space-1 !important; }
+.mt-2 { margin-top: $space-2 !important; }
+.mt-3 { margin-top: $space-3 !important; }
+.mt-4 { margin-top: $space-4 !important; }
+.mt-5 { margin-top: $space-5 !important; }
+.mt-6 { margin-top: $space-6 !important; }
+.mt-auto { margin-top: auto !important; }
+
+/* Margen Inferior */
+.mb-1 { margin-bottom: $space-1 !important; }
+.mb-2 { margin-bottom: $space-2 !important; }
+.mb-3 { margin-bottom: $space-3 !important; }
+.mb-4 { margin-bottom: $space-4 !important; }
+.mb-5 { margin-bottom: $space-5 !important; }
+.mb-6 { margin-bottom: $space-6 !important; }
+
+/* Padding General */
+.p-1 { padding: $space-1 !important; }
+.p-2 { padding: $space-2 !important; }
+.p-3 { padding: $space-3 !important; }
+.p-4 { padding: $space-4 !important; }
+.p-5 { padding: $space-5 !important; }
+.p-6 { padding: $space-6 !important; }
+
+/* Utilidades de Texto */
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-left { text-align: left !important; }
+
+.text-muted { color: #888 !important; }
+.small { font-size: $font-size-sm !important; }
+
+.fw-700 { font-weight: 700 !important; }
+.fw-400 { font-weight: 400 !important; }

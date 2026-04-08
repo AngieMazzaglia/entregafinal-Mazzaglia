@@ -72,3 +72,16 @@ a.btn:focus-visible,
     justify-content: center;
     width: 100%;
 }
+
+/* --- Estados de Botones (Unificado Clean Code) --- */
+.btn-disabled,
+.btn:disabled,
+button:disabled {
+    background-color: #e0e0e0 !important;
+    border-color: #e0e0e0 !important;
+    color: #777 !important;
+    opacity: 1 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+}

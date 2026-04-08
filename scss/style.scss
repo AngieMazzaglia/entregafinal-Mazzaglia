@@ -9,6 +9,7 @@
 // Estilos generales
 @use "base/generales";
 @use "base/animations";
+@use "base/utilities";
 
 // Componentes
 @use "components/header";
@@ -31,6 +32,8 @@
 
 // Paginas
 @use "pages/tienda";
+@use "pages/checkout";
+@use "pages/carrito";
 
 // Media queries
 @use "base/queries";

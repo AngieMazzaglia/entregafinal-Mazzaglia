@@ -60,8 +60,18 @@
 .tienda-grid {
     padding: $space-5 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: $space-5;
+    grid-template-columns: repeat(2, 1fr); // 2 por fila en mobile por pedido
+    gap: $space-3;
+
+    @include respond(md) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: $space-4;
+    }
+
+    @include respond(xl) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: $space-5;
+    }
 }
 
 .producto-vacio {
@@ -70,51 +80,97 @@
     padding: $space-6;
 }
 
-/* Tarjeta de producto optimizada */
+/* Tarjeta de producto refactorizada (Best Practices) */
+.tienda-grid .card {
+    text-align: left;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; // Clipa la imagen con el border-radius del card
+    
+    /* Variables de escala para normalización visual */
+    --base-scale: 1;
+    
+    &.cat-disenos {
+        --base-scale: 1.2; /* Compensación para imágenes de diseños que son visualmente más pequeñas */
+    }
+}
+
+.card-body {
+    padding: $space-4;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    h4 {
+        font-size: 1.05rem;
+        margin-bottom: $space-1;
+        line-height: 1.3;
+    }
+
+    p {
+        font-size: 0.825rem;
+        color: #666;
+        margin-bottom: $space-3;
+    }
+}
+
 .card-img-container {
     width: 100%;
-    height: 280px;
-    /* Un poco más alto para dar aire */
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    /* Fondo blanco para coincidir con imagenes */
-    border-radius: $radius-sm;
     overflow: hidden;
-    margin-bottom: $space-2;
-    padding: $space-2;
-    /* Padding interno para que la foto no toque los bordes */
+    padding: $space-3; // Safe Area universal para evitar recortes (12px)
+
+    &.is-wide {
+        padding: $space-2 $space-3; // Unificamos: 12px a los costados para evitar recortes
+        background-color: #fff;
+    }
 
     img {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        /* CLAVE: Muestra toda la foto sin cortar */
         transition: transform 0.3s ease;
+        transform: scale(var(--base-scale)); /* Escala base dinámica */
     }
 }
 
+.img-zoom-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Hover Universal: Todos crecen exactamente lo mismo (0.1 adicional a su base) */
 .card:hover .card-img-container img {
-    transform: scale(1.05);
+    transform: scale(calc(var(--base-scale) + 0.1));
 }
 
 .card-price {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: $brand;
-    margin: $space-2 0;
+    margin: $space-1 0;
 }
 
 /* Controles de tarjeta */
 .card-controls {
     margin-top: auto;
     padding-top: $space-2;
-    /* Ajustado a 8px */
     width: 100%;
 
     .btn {
         width: 100%;
         display: block;
+        padding: 10px 12px; // Más compacto
+        font-size: 0.9rem;
     }
 }

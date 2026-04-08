@@ -4,7 +4,7 @@ const productos = [
     // --- BOLSAS PERSONALIZADAS (Placeholders) ---
     {
         id: "bols-pers-01",
-        nombre: "Bolsa ecológica personalizada",
+        nombre: "Bolsas personalizadas",
         precio: "Pedir cotización",
         imagen: "assets/img/prod1.webp",
         categoria: "personalizadas",
@@ -58,7 +58,7 @@ const productos = [
         nombre: "Bolsa primavera - 50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio1.webp",
-        categoria: "diseños",
+        categoria: "disenos",
         descripcion: "Diseño exclusivo."
     },
     {
@@ -66,7 +66,7 @@ const productos = [
         nombre: "Bolsa sierras - 50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio2.webp",
-        categoria: "diseños",
+        categoria: "disenos",
         descripcion: "Diseño exclusivo."
     },
     {
@@ -74,7 +74,7 @@ const productos = [
         nombre: "Bolsa unión - 50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio3.webp",
-        categoria: "diseños",
+        categoria: "disenos",
         descripcion: "Diseño exclusivo."
     },
     {
@@ -82,7 +82,7 @@ const productos = [
         nombre: "Bolsa jardín - 50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio4.webp",
-        categoria: "diseños",
+        categoria: "disenos",
         descripcion: "Diseño exclusivo."
     },
     // --- BOLSAS DE PAPEL ---
@@ -96,7 +96,7 @@ const productos = [
     },
     {
         id: "bols-pap-01",
-        nombre: "Bolsa con manija troquelada - 50 unid.",
+        nombre: "Bolsa manija troquelada - 50 unidades",
         precio: 10000,
         imagen: "assets/img/papel2.webp",
         categoria: "papel",
@@ -129,7 +129,7 @@ const productos = [
     },
     {
         id: "bols-bio-01",
-        nombre: "Bolsa con manija troquelada - 50 unid.",
+        nombre: "Bolsa manija troquelada - 50 unidades",
         precio: 10000,
         imagen: "assets/img/biod2.webp",
         categoria: "biodegradables",
@@ -147,35 +147,35 @@ const productos = [
     // --- COMPOSTERAS ---
     {
         id: "comp-02",
-        nombre: "Compostera giratoria simple 60lt",
+        nombre: "Compostera simple 60lt",
         precio: 200000,
         imagen: "assets/img/compost1.webp",
         categoria: "composteras",
-        descripcion: "Ideal para hogares pequeños."
+        descripcion: "Compartimiento simple - 60lt"
     },
     {
         id: "comp-01",
-        nombre: "Compostera giratoria doble 120lt",
+        nombre: "Compostera doble 120lt",
         precio: 300000,
         imagen: "assets/img/compost2.webp",
         categoria: "composteras",
-        descripcion: "Doble compartimento con mayor capacidad."
+        descripcion: "Doble compartimento - 120lt"
     },
     {
         id: "comp-04",
-        nombre: "Compostera 60lt + Kit de herramientas",
+        nombre: "Compostera 60lt + Kit",
         precio: 220000,
         imagen: "assets/img/compost3.webp",
         categoria: "composteras",
-        descripcion: "Para hogares pequeños, con heramientas."
+        descripcion: "Simple con herramientas"
     },
     {
         id: "comp-03",
-        nombre: "Compostera 120lt + Kit de herramientas",
+        nombre: "Compostera 120lt + Kit",
         precio: 320000,
         imagen: "assets/img/compost4.webp",
         categoria: "composteras",
-        descripcion: "Doble compartimento, con herramientas."
+        descripcion: "Doble con herramientas."
     },
     {
         id: "comp-05",
@@ -183,7 +183,7 @@ const productos = [
         precio: 40000,
         imagen: "assets/img/compost5.webp",
         categoria: "composteras",
-        descripcion: "Herramientas básicas para compostar."
+        descripcion: "Herramientas para compostar."
     }
 ];
 
