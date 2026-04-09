@@ -41,8 +41,17 @@ window.guardarCarrito = () => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarContadorCarrito();
     
+    // Sincronizar grilla de tienda si existe la función
+    if (typeof window.actualizarCantidadesTienda === 'function') {
+        window.actualizarCantidadesTienda();
+    }
+    
     // Actualizar vistas si están en el DOM
-    const renderizadores = [window.renderizarCarritoEnModal, window.renderizarPaginaCarrito];
+    const renderizadores = [
+        window.renderizarCarritoEnModal, 
+        window.renderizarPaginaCarrito,
+        window.actualizarHint
+    ];
     renderizadores.forEach(render => {
         if (typeof render === 'function') render();
     });

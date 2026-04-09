@@ -15,9 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         inputsPaso1.forEach(id => {
             const el = document.getElementById(id);
-            el?.addEventListener('input', () => {
-                btnStep1.disabled = !verificarInputsCompletos(inputsPaso1);
+            if (!el) return;
+
+            el.addEventListener('input', () => {
+                const esValido = verificarInputsCompletos(inputsPaso1);
+                btnStep1.disabled = !esValido;
+                
+                // Si el mail es válido, sacamos el rojo.
+                // Los campos de letras/números ahora se manejan en main.js para mostrar el aviso de "carácter no permitido"
+                if (id === 'email' && verificarFormatoEmail(el.value)) {
+                    el.classList.remove('is-invalid');
+                }
             });
+
+            // Validación al perder el foco para el mail
+            if (id === 'email') {
+                el.addEventListener('blur', () => {
+                    if (el.value.trim() !== '') {
+                        validarCamposObligatorios([id]);
+                    }
+                });
+            }
         });
 
         btnStep1.addEventListener('click', () => {
@@ -48,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const el = document.getElementById(id);
             el?.addEventListener('input', () => {
                 btnStep2.disabled = !verificarInputsCompletos(shippingInputs);
+                if (validarCamposObligatorios([id])) {
+                    el.classList.remove('is-invalid');
+                }
             });
         });
 
@@ -81,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const el = document.getElementById(id);
             el?.addEventListener('input', () => {
                 btnStep3.disabled = !verificarInputsCompletos(cardInputs);
+                if (validarCamposObligatorios([id])) {
+                    el.classList.remove('is-invalid');
+                }
             });
         });
 
@@ -91,27 +115,62 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- FUNCIONES CORE ---
 
 /**
- * Verifica si un array de IDs de inputs están todos completos
+ * Verifica si un array de IDs de inputs están todos completos y con formato válido
  */
 const verificarInputsCompletos = (ids) => {
     return ids.every(id => {
         const input = document.getElementById(id);
-        return input && input.value.trim() !== '';
+        if (!input || input.value.trim() === '') return false;
+        
+        // Validaciones internas extra
+        if (input.type === 'email') {
+            return verificarFormatoEmail(input.value);
+        }
+        if (input.dataset.valid === 'numbers') {
+            return /^[0-9\s+-]+$/.test(input.value);
+        }
+        if (input.dataset.valid === 'letters') {
+            return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
+        }
+        
+        return true;
     });
 };
 
 /**
- * Valida visualmente los campos obligatorios
+ * Helper para validar formato de email
+ */
+const verificarFormatoEmail = (valor) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+};
+
+/**
+ * Valida visualmente los campos obligatorios y sus formatos
  */
 const validarCamposObligatorios = (ids) => {
     let todosValidos = true;
     ids.forEach(id => {
         const input = document.getElementById(id);
-        if (input && !input.value.trim()) {
+        if (!input) return;
+
+        let esValido = input.value.trim() !== '';
+        
+        // Validar formato si tiene valor
+        if (esValido) {
+            if (input.type === 'email') {
+                esValido = verificarFormatoEmail(input.value);
+            } else if (input.dataset.valid === 'numbers') {
+                esValido = /^[0-9\s+-]+$/.test(input.value);
+            } else if (input.dataset.valid === 'letters') {
+                esValido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
+            }
+        }
+
+        if (!esValido) {
             input.classList.add('is-invalid');
             todosValidos = false;
         } else {
-            input?.classList.remove('is-invalid');
+            input.classList.remove('is-invalid');
         }
     });
     return todosValidos;

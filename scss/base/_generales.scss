@@ -84,6 +84,24 @@ select:focus-visible {
     border-radius: 2px;
 }
 
+/* Reset autofill style (browser default light blue) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+    -webkit-text-fill-color: $text-color !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 /* Utilidades */
 .container {
     max-width: var(--maxw);
@@ -232,4 +250,49 @@ main .container,
 .flex { display: flex; }
 .justify-center { justify-content: center; }
 .align-center { align-items: center; }
-.btn-block { width: 100%; display: block; }
+.btn-block { width: 100%; display: block; }
+
+/* --- Tarjetas (Cards) Clickables --- */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: $radius;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    
+    // Para que las imágenes y contenido manual en productos.html hereden el estilo
+    padding: $space-4;
+    text-align: center;
+
+    &.card-elevada {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+/* Stretched Link: Hace que todo el contenedor sea clickeable */
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+
+// Aseguramos que otros botones o links dentro de la card sigan funcionando
+// si llegara a haberlos (ej: redes sociales o varios CTAs)
+.card a:not(.stretched-link),
+.card button {
+    position: relative;
+    z-index: 2;
+}
+

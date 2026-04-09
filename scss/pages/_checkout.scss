@@ -156,6 +156,19 @@
             margin-bottom: $space-4;
             max-height: 400px;
             overflow-y: auto;
+
+            .summary-item {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: $space-2;
+                margin-bottom: $space-2;
+                font-size: 0.95rem;
+                color: #555;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         .summary-total {

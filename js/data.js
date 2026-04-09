@@ -1,189 +1,346 @@
 const productos = [
 
 
-    // --- BOLSAS PERSONALIZADAS (Placeholders) ---
+    // --- BOLSAS PERSONALIZADAS ---
     {
         id: "bols-pers-01",
         nombre: "Bolsas personalizadas",
+        subtitulo: "A medida con tu logo",
         precio: "Pedir cotización",
         imagen: "assets/img/prod1.webp",
         categoria: "personalizadas",
-        descripcion: "Bolsas personalizables con tu logo."
+        descripcion: "Personalizá tus bolsas con el diseño o logo de tu marca.",
+        caracteristicas: [
+            "Impresión de alta calidad",
+            "Diferentes tamaños disponibles",
+            "Materiales ecológicos",
+            "Asesoramiento personalizado"
+        ]
     },
 
-    // --- BOLSAS ECOLOGICAS (Placeholders) ---
+    // --- BOLSAS ECOLOGICAS ---
     {
         id: "bols-eco-02",
-        nombre: "Bolsa de tela roja - 50 unidades",
+        nombre: "Bolsa de tela roja",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/bolsa1.webp",
         categoria: "ecologicas",
-        descripcion: "Tela ecológica roja, ligera y resistente."
+        descripcion: "Tela ecológica roja, ligera y resistente.",
+        caracteristicas: [
+            "Medidas: 45x40x10 cm",
+            "Tela ecológica 80gr",
+            "Manijas reforzadas",
+            "Lavable y reutilizable"
+        ]
     },
     {
         id: "bols-eco-03",
-        nombre: "Bolsa de tela amarilla - 50 unidades",
+        nombre: "Bolsa de tela amarilla",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/bolsa2.webp",
         categoria: "ecologicas",
-        descripcion: "Tela ecológica amarilla, ligera y resistente."
+        descripcion: "Tela ecológica amarilla, ligera y resistente.",
+        caracteristicas: [
+            "Medidas: 45x40x10 cm",
+            "Color vibrante y duradero",
+            "Costuras reforzadas",
+            "Ideal para compras diarias"
+        ]
     },
     {
         id: "bols-eco-04",
-        nombre: "Bolsa de tela verde - 50 unidades",
+        nombre: "Bolsa de tela verde",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/bolsa3.webp",
         categoria: "ecologicas",
-        descripcion: "Tela ecológica verde, ligera y resistente."
+        descripcion: "Tela ecológica verde, ligera y resistente.",
+        caracteristicas: [
+            "Material 100% reciclable",
+            "Soporta hasta 15kg",
+            "Fácil de plegar y guardar",
+            "Estilo minimalista"
+        ]
     },
     {
         id: "bols-eco-05",
-        nombre: "Bolsa de tela azul - 50 unidades",
+        nombre: "Bolsa de tela azul",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/bolsa4.webp",
         categoria: "ecologicas",
-        descripcion: "Tela ecológica azul, ligera y resistente."
+        descripcion: "Tela ecológica azul, ligera y resistente.",
+        caracteristicas: [
+            "Resistente a la humedad",
+            "Gran capacidad interna",
+            "Ideal para regalos corporativos",
+            "Amigable con el medio ambiente"
+        ]
     },
     {
         id: "bols-eco-01",
-        nombre: "Bolsas de tela - Mix de colores - 50 unid.",
+        nombre: "Bolsas de tela Mix colores",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/prod4.webp",
         categoria: "ecologicas",
-        descripcion: "Tela ecológica. Surtido de colores."
+        descripcion: "Tela ecológica. Surtido de colores.",
+        caracteristicas: [
+            "Variedad de colores primarios",
+            "Material Friselina 80gr",
+            "Ideal para eventos y ferias",
+            "Excelente relación precio-calidad"
+        ]
     },
+
     // --- BOLSAS CON DISEÑOS ---
     {
         id: "bols-dis-00",
-        nombre: "Bolsa primavera - 50 unidades",
+        nombre: "Bolsa Primavera",
+        subtitulo: "Pack x50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio1.webp",
         categoria: "disenos",
-        descripcion: "Diseño exclusivo."
+        descripcion: "Diseño floral exclusivo sobre tela ecológica.",
+        caracteristicas: [
+            "Estampa premium",
+            "Diseño artístico único",
+            "Tela reforzada",
+            "Pack surtido"
+        ]
     },
     {
         id: "bols-dis-01",
-        nombre: "Bolsa sierras - 50 unidades",
+        nombre: "Bolsa Sierras",
+        subtitulo: "Pack x50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio2.webp",
         categoria: "disenos",
-        descripcion: "Diseño exclusivo."
+        descripcion: "Diseños abstractos y modernos.",
+        caracteristicas: [
+            "Varios modelos por pack",
+            "Gama de colores tierra",
+            "Alta durabilidad",
+            "Tendencia sustentable"
+        ]
     },
     {
         id: "bols-dis-03",
-        nombre: "Bolsa unión - 50 unidades",
+        nombre: "Bolsa Unión",
+        subtitulo: "Pack x50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio3.webp",
         categoria: "disenos",
-        descripcion: "Diseño exclusivo."
+        descripcion: "Diseño conceptual exclusivo.",
+        caracteristicas: [
+            "Arte minimalista",
+            "Tintas al agua no tóxicas",
+            "Tamaño estándar 40x40",
+            "Edición limitada"
+        ]
     },
     {
         id: "bols-dis-04",
-        nombre: "Bolsa jardín - 50 unidades",
+        nombre: "Bolsa Jardín",
+        subtitulo: "Pack x50 unidades",
         precio: 12000,
         imagen: "assets/img/disenio4.webp",
         categoria: "disenos",
-        descripcion: "Diseño exclusivo."
+        descripcion: "Diseño botánico sobre tela rústica.",
+        caracteristicas: [
+            "Look natural",
+            "Detalle de terminación premium",
+            "Ideal para viveros y tiendas eco",
+            "Biodegradable"
+        ]
     },
+
     // --- BOLSAS DE PAPEL ---
     {
         id: "bols-pap-00",
-        nombre: "Bolsa con manija retorcida - 50 unidades",
+        nombre: "Bolsa manija retorcida",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/prod5.webp",
         categoria: "papel",
-        descripcion: "Clásica y resistente"
+        descripcion: "Clásica y resistente bolsa de papel Kraft.",
+        caracteristicas: [
+            "Papel Kraft 120gr",
+            "Manija de papel reforzada",
+            "Reciclable y compostable",
+            "Fondo reforzado"
+        ]
     },
     {
         id: "bols-pap-01",
-        nombre: "Bolsa manija troquelada - 50 unidades",
+        nombre: "Bolsa manija troquelada",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/papel2.webp",
         categoria: "papel",
-        descripcion: "Práctica y resistente."
+        descripcion: "Práctica y económica para despacho.",
+        caracteristicas: [
+            "Diseño tipo riñón",
+            "Papel de alta densidad",
+            "Ideal para indumentaria",
+            "Muy resistente"
+        ]
     },
     {
         id: "bols-pap-02",
-        nombre: "Bolsa con manija plana - 50 unidades",
+        nombre: "Bolsa manija plana",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/papel3.webp",
         categoria: "papel",
-        descripcion: "Resistente y versátil."
+        descripcion: "Resistente y versátil para gastronomía.",
+        caracteristicas: [
+            "Apta para alimentos",
+            "Fácil apertura",
+            "Estética rústica",
+            "Certificación FSC"
+        ]
     },
     {
         id: "bols-pap-03",
-        nombre: "Bolsa de papel tipo sobre - 50 unidades",
+        nombre: "Bolsa papel tipo sobre",
+        subtitulo: "Pack x100 unidades",
         precio: 10000,
         imagen: "assets/img/papel4.webp",
         categoria: "papel",
-        descripcion: "Ideal para delivery y take away."
+        descripcion: "Ideal para delivery y productos pequeños.",
+        caracteristicas: [
+            "Sin manija",
+            "Ocupa mínimo espacio",
+            "Económica",
+            "Perfecta para panaderías"
+        ]
     },
+
     // --- BOLSAS BIODEGRADABLES ---
     {
         id: "bols-bio-00",
-        nombre: "Bolsa tipo camiseta - 50 unidades",
+        nombre: "Bolsa tipo camiseta",
+        subtitulo: "Pack x100 unidades",
         precio: 10000,
         imagen: "assets/img/prod6.webp",
         categoria: "biodegradables",
-        descripcion: "Fabricada con materiales compostables."
+        descripcion: "Fabricada con materiales compostables certificados.",
+        caracteristicas: [
+            "100% Compostable",
+            "Se degrada en 180 días",
+            "Textura suave y resistente",
+            "Cumple norma EN 13432"
+        ]
     },
     {
         id: "bols-bio-01",
-        nombre: "Bolsa manija troquelada - 50 unidades",
+        nombre: "Bolsa manija troquelada",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/biod2.webp",
         categoria: "biodegradables",
-        descripcion: "Resistente y amigable con el ambiente."
+        descripcion: "Resistente y totalmente amigable con el ambiente.",
+        caracteristicas: [
+            "Material de origen vegetal",
+            "Sin plásticos derivados del petróleo",
+            "Resistencia superior",
+            "Versión premium"
+        ]
     },
     {
         id: "bols-bio-02",
-        nombre: "Bolsa tipo sobre - 50 unidades",
+        nombre: "Bolsa tipo sobre",
+        subtitulo: "Pack x50 unidades",
         precio: 10000,
         imagen: "assets/img/biod3.webp",
         categoria: "biodegradables",
-        descripcion: "Práctica para productos livianos y empaque."
+        descripcion: "Práctica para empaques sustentables.",
+        caracteristicas: [
+            "Cierre fácil",
+            "Ideal para e-commerce",
+            "Reducción de huella de carbono",
+            "Color natural"
+        ]
     },
 
     // --- COMPOSTERAS ---
     {
         id: "comp-02",
-        nombre: "Compostera simple 60lt",
+        nombre: "Compostera Simple 60lt",
+        subtitulo: "Módulo individual",
         precio: 200000,
         imagen: "assets/img/compost1.webp",
         categoria: "composteras",
-        descripcion: "Compartimiento simple - 60lt"
+        descripcion: "Compartimiento simple ideal para balcones.",
+        caracteristicas: [
+            "Capacidad 60 litros",
+            "Madera tratada",
+            "Incluye bandeja de lixiviados",
+            "Medidas: 40x40x60 cm"
+        ]
     },
     {
         id: "comp-01",
-        nombre: "Compostera doble 120lt",
+        nombre: "Compostera Doble 120lt",
+        subtitulo: "Módulo doble",
         precio: 300000,
         imagen: "assets/img/compost2.webp",
         categoria: "composteras",
-        descripcion: "Doble compartimento - 120lt"
+        descripcion: "Doble compartimento para proceso continuo.",
+        caracteristicas: [
+            "Capacidad total 120 litros",
+            "División interna",
+            "Puertas superiores amplias",
+            "Ideal para familias"
+        ]
     },
     {
         id: "comp-04",
         nombre: "Compostera 60lt + Kit",
+        subtitulo: "Combo inicial",
         precio: 220000,
         imagen: "assets/img/compost3.webp",
         categoria: "composteras",
-        descripcion: "Simple con herramientas"
+        descripcion: "Compostera simple cargada con todo el kit.",
+        caracteristicas: [
+            "Incluye herramientas",
+            "Manual de compostaje",
+            "Activador biológico",
+            "Unidad completa"
+        ]
     },
     {
         id: "comp-03",
         nombre: "Compostera 120lt + Kit",
+        subtitulo: "Combo Pro",
         precio: 320000,
         imagen: "assets/img/compost4.webp",
         categoria: "composteras",
-        descripcion: "Doble con herramientas."
+        descripcion: "La solución definitiva para tu jardín.",
+        caracteristicas: [
+            "Caja de herramientas premium",
+            "Mezclador para aireación",
+            "Terapia de núcleos de lombriz",
+            "Máximo rendimiento"
+        ]
     },
     {
         id: "comp-05",
-        nombre: "Kit de herramientas",
+        nombre: "Kit de Herramientas",
+        subtitulo: "Accesorios para compost",
         precio: 40000,
         imagen: "assets/img/compost5.webp",
         categoria: "composteras",
-        descripcion: "Herramientas para compostar."
+        descripcion: "Herramientas diseñadas para compostar.",
+        caracteristicas: [
+            "Pala y rastrillo de mano",
+            "Termómetro de suelo",
+            "Medidor de humedad",
+            "Bolsa de tela incluida"
+        ]
     }
 ];
 

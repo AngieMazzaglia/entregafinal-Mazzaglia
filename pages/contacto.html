@@ -133,7 +133,7 @@
                                             <label for="tel" class="form-label">Teléfono <span class="text-danger"
                                                     aria-hidden="true">*</span></label>
                                             <input id="tel" name="telefono" type="tel" class="form-control"
-                                                placeholder="+54 11 0000-0000" required autocomplete="tel">
+                                                placeholder="+54 11 0000-0000" required autocomplete="tel" data-valid="numbers">
                                         </div>
 
                                         <div class="col-12">
@@ -166,7 +166,7 @@
                                             <label for="nombre" class="form-label">Nombre y apellido <span
                                                     class="text-danger" aria-hidden="true">*</span></label>
                                             <input id="nombre" name="nombre" type="text" class="form-control"
-                                                placeholder="Ej: Ana Gómez" required autocomplete="name">
+                                                placeholder="Ej: Ana Gómez" required autocomplete="name" data-valid="letters">
                                             <div class="invalid-feedback" id="nombreError">Ingresá tu nombre.</div>
                                         </div>
 
@@ -192,7 +192,7 @@
                                                     aria-hidden="true">*</span></label>
                                             <input id="tel-cot" name="telefono" type="tel" class="form-control"
                                                 placeholder="+54 11 0000-0000" required autocomplete="tel"
-                                                aria-describedby="telError">
+                                                aria-describedby="telError" data-valid="numbers">
                                             <div class="invalid-feedback" id="telError">Ingresá un teléfono de
                                                 contacto.</div>
                                         </div>
