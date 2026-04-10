@@ -205,7 +205,5 @@
 
 .success-icon {
     margin-bottom: $space-4;
-    path:last-child {
-        fill: $brand; /* Tic verde de marca */
-    }
+    fill: $brand; /* Todo el ícono (círculo y tic) en verde */
 }

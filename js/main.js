@@ -7,10 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Inicializar lógica del carrito
     actualizarContadorCarrito();
     inicializarModalCarrito();
-    window.setupInputValidation?.();
-
-    // 3. Inyectar contenedor de notificaciones
+    inicializarAccesibilidad(); // Mejoras de ARIA
+    // 3. Inyectar contenedor de notificaciones e inicializar validaciones
     inyectarToastContainer();
+    window.setupInputValidation?.();
+    window.setupEmailValidation?.();
 
     // 4. Detectar si estamos en la página de tienda
     if (window.location.pathname.includes('tienda.html')) {
@@ -132,15 +133,15 @@ function renderizarTienda() {
     // Resaltar botón de filtro activo
     botonesFiltro.forEach(btn => {
         btn.classList.remove('active');
+        btn.removeAttribute('aria-current');
         const url = btn.getAttribute('href');
         
-        // Caso 'Todos' (sin categoría en URL)
-        if (!categoria && (url === 'tienda.html' || url.endsWith('/tienda.html'))) {
+        const isActive = (!categoria && (url === 'tienda.html' || url.endsWith('/tienda.html'))) || 
+                         (categoria && url.includes(`categoria=${categoria}`));
+
+        if (isActive) {
             btn.classList.add('active');
-        } 
-        // Caso categoría específica
-        else if (categoria && url.includes(`categoria=${categoria}`)) {
-            btn.classList.add('active');
+            btn.setAttribute('aria-current', 'page');
         }
     });
     // Actualizar título y breadcrumb
@@ -158,12 +159,20 @@ function renderizarTienda() {
         // Usar el nombre del mapa o capitalizar si no existe
         const catName = nombresCategorias[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
 
-        titulo.innerText = catName;
-
-        // Actualizar breadcrumb si existe
-        const breadcrumbCat = document.getElementById('breadcrumb-category');
-        if (breadcrumbCat) {
-            breadcrumbCat.innerText = catName;
+        // Actualizar breadcrumb dinámico (con niveles extras)
+        const dynamicBreadcrumb = document.getElementById('dynamic-breadcrumb');
+        if (dynamicBreadcrumb) {
+            dynamicBreadcrumb.innerHTML = `
+                <a href="tienda.html">Tienda</a> 
+                <span class="separator" aria-hidden="true">/</span> 
+                <span class="current" aria-current="page">${catName}</span>
+            `;
+        }
+    } else {
+        // Reset del breadcrumb si no hay categoría
+        const dynamicBreadcrumb = document.getElementById('dynamic-breadcrumb');
+        if (dynamicBreadcrumb) {
+            dynamicBreadcrumb.innerHTML = `<span class="current" aria-current="page">Tienda</span>`;
         }
     }
 
@@ -223,7 +232,7 @@ function renderizarTienda() {
 
         const innerImgHTML = `
             <div class="img-zoom-wrapper">
-                <img src="../${info.imagen}" alt="${info.nombre}">
+                <img src="../${info.imagen}" alt="Foto de producto: ${info.nombre}" loading="lazy">
             </div>`;
 
         const finalImgHTML = `<div class="${containerClass}">${innerImgHTML}</div>`;
@@ -233,9 +242,9 @@ function renderizarTienda() {
         const detalleExtra = info.subtitulo || partes[1] || '';
 
         article.innerHTML = `
-            <a href="${urlDestino}" class="card-img-link">${finalImgHTML}</a>
+            <a href="${urlDestino}" class="card-img-link" aria-hidden="true" tabindex="-1">${finalImgHTML}</a>
             <div class="card-body">
-                <a href="${urlDestino}" class="card-title-link"><h4>${nombreLimpio}</h4></a>
+                <a href="${urlDestino}" class="card-title-link"><h3>${nombreLimpio}</h3></a>
                 ${precioHTML}
                 <p>${detalleExtra || info.descripcion}</p>
                 
@@ -257,37 +266,48 @@ function renderizarTienda() {
         }
     });
 
-    // Delegación de eventos para Compra Rápida (Versión Híbrida)
-    contenedor.addEventListener('click', (e) => {
-        const wrapper = e.target.closest('.quick-buy-wrapper');
-        if (!wrapper) return;
-
-        const id = wrapper.dataset.id;
-        const btnToggle = e.target.closest('.btn-toggle-quick');
-        const btnMinus = e.target.closest('.qty-minus');
-        const btnPlus = e.target.closest('.qty-plus');
-
-        if (btnToggle) {
-            // Pasar a modo edición
-            window.renderizarEstadoEdicion(wrapper, id);
-        }
-
-        if (btnMinus) {
-            if (typeof window.restarEnCarrito === 'function') {
-                window.restarEnCarrito(id);
-                // La sincronización automática actualizará el número
-                window.reiniciarTemporizadorCierre(wrapper, id);
-            }
-        }
-
-        if (btnPlus) {
-            if (typeof window.sumarEnCarrito === 'function') {
-                window.sumarEnCarrito(id);
-                window.reiniciarTemporizadorCierre(wrapper, id);
-            }
-        }
-    });
+    // --- MAGIA DE ACCESIBILIDAD (Anuncio de carga) ---
+    const categoryName = categoria ? (nombresCategorias[categoria] || categoria) : "Tienda";
+    if (typeof anunciarParaScreenReader === 'function') {
+        anunciarParaScreenReader(`Se muestran ${productosAmostrar.length} productos en ${categoryName}.`);
+    }
 }
+
+// --- DELEGACIÓN GLOBAL DE EVENTOS PARA COMPRA RÁPIDA (Más robusto) ---
+document.addEventListener('click', (e) => {
+    // Solo actuar si estamos en una página con contenedor de productos
+    const contenedor = document.getElementById('contenedor-productos');
+    if (!contenedor) return;
+
+    const wrapper = e.target.closest('.quick-buy-wrapper');
+    if (!wrapper) return;
+
+    // Extraer ID con mayor compatibilidad
+    const id = wrapper.getAttribute('data-id') || wrapper.dataset.id;
+    if (!id) return;
+
+    const btnToggle = e.target.closest('.btn-toggle-quick');
+    const btnMinus = e.target.closest('.qty-minus');
+    const btnPlus = e.target.closest('.qty-plus');
+
+    if (btnToggle) {
+        window.renderizarEstadoEdicion(wrapper, id);
+    }
+
+    if (btnMinus) {
+        if (typeof window.restarEnCarrito === 'function') {
+            window.restarEnCarrito(id);
+            window.reiniciarTemporizadorCierre(wrapper, id);
+        }
+    }
+
+    if (btnPlus) {
+        if (typeof window.sumarEnCarrito === 'function') {
+            window.sumarEnCarrito(id);
+            window.reiniciarTemporizadorCierre(wrapper, id);
+        }
+    }
+});
 
 // --- UTILIDADES COMPRA RÁPIDA (HÍBRIDA) ---
 
@@ -394,18 +414,44 @@ function renderizarDetalleProducto() {
     };
     const catName = nombresCategorias[producto.categoria] || producto.categoria;
 
+    // --- MEJORA SEO: Inyectar JSON-LD dinámico ---
+    let schemaEl = document.getElementById('dynamic-product-schema');
+    if (!schemaEl) {
+        schemaEl = document.createElement('script');
+        schemaEl.id = 'dynamic-product-schema';
+        schemaEl.type = 'application/ld+json';
+        document.head.appendChild(schemaEl);
+    }
+    schemaEl.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": producto.nombre,
+        "description": producto.descripcion || `Adquirí ${producto.nombre} en Revida. Calidad sustentable y producción nacional.`,
+        "image": `${window.location.origin}/${pathBase}${producto.imagen}`,
+        "brand": {
+            "@type": "Brand",
+            "name": "Revida"
+        },
+        "offers": {
+            "@type": "Offer",
+            "priceCurrency": "ARS",
+            "price": producto.precio,
+            "availability": "https://schema.org/InStock"
+        }
+    });
+
     contenedor.innerHTML = `
         <div class="product-detail-header">
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                <a href="${pathBase}index.html">Inicio</a> <span class="separator">/</span>
-                <a href="${pathBase}pages/tienda.html">Tienda</a> <span class="separator">/</span>
-                <span class="current">${producto.nombre}</span>
+                <a href="${pathBase}index.html">Inicio</a> <span class="separator" aria-hidden="true">/</span>
+                <a href="${pathBase}pages/tienda.html">Tienda</a> <span class="separator" aria-hidden="true">/</span>
+                <span class="current" aria-current="page">${producto.nombre}</span>
             </nav>
 
             <p class="min-purchase-alert">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon-info">
+                    class="icon-info" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -416,7 +462,7 @@ function renderizarDetalleProducto() {
 
         <div class="product-detail-grid">
             <div class="product-image-box">
-                <img src="${pathBase}${producto.imagen}" alt="${producto.nombre}">
+                <img src="${pathBase}${producto.imagen}" alt="Fotografía en primer plano de ${producto.nombre}">
             </div>
             
             <div class="product-info-box">
@@ -438,9 +484,9 @@ function renderizarDetalleProducto() {
                 <div class="purchase-controls">
                     <div class="qty-and-hint">
                         <div class="quantity-controls">
-                            <button type="button" id="btn-minus">−</button>
-                            <span id="qty-value">1</span>
-                            <button type="button" id="btn-plus">+</button>
+                            <button type="button" id="btn-minus" aria-label="Disminuir cantidad">−</button>
+                            <span id="qty-value" aria-live="polite">1</span>
+                            <button type="button" id="btn-plus" aria-label="Aumentar cantidad">+</button>
                         </div>
                         <span id="min-purchase-hint" class="min-purchase-hint"></span>
                     </div>
@@ -451,22 +497,19 @@ function renderizarDetalleProducto() {
 
                 <div class="trust-badges">
                     <div class="badge-item badge-sprout">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Tallo -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 22C12 17 12 10 12 10" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
-                            <!-- Hoja Izquierda -->
                             <path d="M12 14C12 14 7 14 5 11C3 8 6 5 12 10" fill="#4CAF50"/>
-                            <!-- Hoja Derecha -->
                             <path d="M12 12C12 12 17 12 19 9C21 6 18 3 12 10" fill="#81C784"/>
                         </svg>
                         Producto sustentable
                     </div>
                     <div class="badge-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck" aria-hidden="true"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
                         Envíos a todo el país
                     </div>
                     <div class="badge-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         Envío: 3 a 5 días hábiles
                     </div>
                 </div>
@@ -564,38 +607,111 @@ window.setupInputValidation = () => {
         if (!hint) {
             hint = document.createElement('span');
             hint.className = 'input-error-hint';
-            hint.innerText = type === 'numbers' ? 'Solo números y símbolos (+, -, /)' : 'Solo se permiten letras';
+            if (type === 'numbers') {
+                hint.innerText = 'Solo números y símbolos (+, -)';
+            } else if (type === 'expiry') {
+                hint.innerText = 'Formato MM/AA (solo números y /)';
+            } else {
+                hint.innerText = 'Solo se permiten letras';
+            }
             parent.appendChild(hint);
         }
 
         input.addEventListener('input', (e) => {
             const val = e.target.value;
-            // Unificamos regex para incluir '/' (para fechas de vencimiento)
-            let regex = type === 'numbers' ? /[^0-9+\s\-\/]/g : /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g;
+            let regex;
+            if (type === 'numbers') {
+                regex = /[^0-9+\s\-]/g; // Teléfono/CP: sin barra
+            } else if (type === 'expiry') {
+                regex = /[^0-9\/]/g;    // Vencimiento: solo números y barra
+            } else {
+                regex = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g;
+            }
             
             if (regex.test(val)) {
-                // Si hay caracteres inválidos, los removemos
                 e.target.value = val.replace(regex, '');
-                // Mostramos el aviso visual
                 hint.classList.add('visible');
-                input.classList.add('is-invalid');
-                
-                // Lo ocultamos automáticamente tras 2 segundos si no vuelve a fallar
-                if (input.dataset.timer) clearTimeout(input.dataset.timer);
-                input.dataset.timer = setTimeout(() => {
-                    hint.classList.remove('visible');
-                    // Solo quitamos is-invalid si no está vacío (campo obligatorio)
-                    if (input.value.trim() !== '') {
-                        input.classList.remove('is-invalid');
-                    }
-                }, 2000);
             } else {
-                // Si el campo está bien y no está vacío, limpiamos errores
-                if (val.trim() !== '') {
-                    hint.classList.remove('visible');
-                    input.classList.remove('is-invalid');
-                }
+                hint.classList.remove('visible');
+            }
+        });
+
+        input.addEventListener('blur', () => {
+            const val = input.value.trim();
+            let regex;
+            if (type === 'numbers') {
+                regex = /^[0-9+\s\-]+$/;
+            } else if (type === 'expiry') {
+                regex = /^[0-9\/]+$/;
+            } else {
+                regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+            }
+            
+            if (val !== '' && regex.test(val)) {
+                input.classList.remove('is-invalid');
             }
         });
     });
 };
+
+/**
+ * Validación proactiva de Emails al perder el foco (blur)
+ */
+window.setupEmailValidation = () => {
+    const emailInputs = document.querySelectorAll('input[type="email"]');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    emailInputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            const val = input.value.trim();
+            if (val === '') return; // El 'required' nativo lo maneja el submit
+
+            if (!emailRegex.test(val)) {
+                input.classList.add('is-invalid');
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        // Limpiar el error mientras escribe si ya es válido
+        input.addEventListener('input', () => {
+            if (emailRegex.test(input.value.trim())) {
+                input.classList.remove('is-invalid');
+            }
+        });
+    });
+};
+// --- MEJORAS DE ACCESIBILIDAD ---
+function inicializarAccesibilidad() {
+    // 1. Sync aria-expanded para el menú de Productos (Dropdown)
+    const productosLink = document.getElementById('productos-link');
+    const dropdownLi = productosLink ? productosLink.parentElement : null;
+
+    if (productosLink && dropdownLi) {
+        // Al entrar con el mouse o foco
+        ['mouseenter', 'focusin'].forEach(evt => {
+            dropdownLi.addEventListener(evt, () => productosLink.setAttribute('aria-expanded', 'true'));
+        });
+
+        // Al salir
+        ['mouseleave', 'focusout'].forEach(evt => {
+            dropdownLi.addEventListener(evt, () => productosLink.setAttribute('aria-expanded', 'false'));
+        });
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && productosLink.getAttribute('aria-expanded') === 'true') {
+                productosLink.setAttribute('aria-expanded', 'false');
+                productosLink.focus();
+            }
+        });
+    }
+
+    // 2. Sync aria-expanded para el Menú Mobile (Hamburguesa)
+    const navToggle = document.getElementById('nav-toggle');
+    if (navToggle) {
+        navToggle.addEventListener('change', () => {
+            navToggle.setAttribute('aria-expanded', navToggle.checked);
+        });
+    }
+}

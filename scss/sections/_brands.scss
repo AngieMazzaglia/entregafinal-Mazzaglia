@@ -4,7 +4,7 @@
 /*  Marcas que nos eligen  */
 .franja-marcas {
     background: $bg-footer; // Verde oscuro (footer)
-    padding-block: $space-5;
+    padding-block: var(--space-7); // Aumentado para consistencia
     color: #fff; // Texto blanco para contraste
     text-align: center;
 

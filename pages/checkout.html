@@ -8,6 +8,18 @@
         content="Finalizá tu pedido de forma segura en Revida. Ingresá tus datos de envío y pago para recibir tus productos ecológicos en todo el país." />
     <meta name="keywords" content="completar pedido, pago seguro, checkout Revida, datos de envío" />
     <title>Checkout - Revida</title>
+
+    <!-- Metaetiquetas SEO y Sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Checkout - Revida" />
+    <meta property="og:description" content="Finalizá tu pedido de forma segura en Revida." />
+    <meta property="og:image" content="../assets/img/logo1.webp" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/img/logosolo.png" />
+    <link rel="apple-touch-icon" href="../assets/img/logosolo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,10 +27,12 @@
 </head>
 
 <body class="page-checkout">
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
     <header class="site-header site-header-minimal">
         <div class="container header-inner">
             <a href="../index.html">
-                <img class="logo" src="../assets/img/logo1.webp" alt="Logo Revida">
+                <img class="logo" src="../assets/img/logo1.webp" alt="Logo Revida - Volver al inicio">
             </a>
         </div>
     </header>
@@ -144,7 +158,7 @@
                                         </div>
                                         <div class="form-group" style="flex: 1;">
                                             <label for="city">Localidad <span class="required-mark">*</span></label>
-                                            <input type="text" id="city" name="city" class="form-control" placeholder="Ej: Olivos" data-valid="letters">
+                                            <input type="text" id="city" name="city" class="form-control" placeholder="Ej: Olivos">
                                         </div>
                                     </div>
                                 </div>
@@ -197,7 +211,7 @@
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="expiry">Vencimiento <span class="required-mark">*</span></label>
-                                            <input type="text" id="expiry" name="expiry" class="form-control" placeholder="12/26" data-valid="numbers">
+                                            <input type="text" id="expiry" name="expiry" class="form-control" placeholder="12/26" data-valid="expiry">
                                         </div>
                                         <div class="form-group">
                                             <label for="cvv">CVV <span class="required-mark">*</span></label>
@@ -224,7 +238,7 @@
                         </div>
                         <div class="summary-total">
                             <span>Total</span>
-                            <span id="checkout-total-val">$0</span>
+                            <span id="checkout-total-val" aria-live="polite">$0</span>
                         </div>
                     </div>
                 </aside>
@@ -234,12 +248,12 @@
 
     <footer class="site-footer mt-5">
         <div class="container text-center">
-            <p>© 2025 Revida — Todos los derechos reservados. Compra segura.</p>
+            <p>© 2026 Revida — Todos los derechos reservados. Compra segura.</p>
         </div>
     </footer>
 
     <!-- Pantalla de Procesamiento (Glassmorphism) -->
-    <div id="processing-overlay" class="processing-overlay">
+    <div id="processing-overlay" class="processing-overlay" role="alert" aria-busy="true" aria-live="assertive">
         <div class="processing-content">
             <div class="spinner"></div>
             <h3>Procesando tu pedido...</h3>

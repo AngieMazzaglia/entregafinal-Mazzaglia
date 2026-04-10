@@ -129,6 +129,9 @@ const verificarInputsCompletos = (ids) => {
         if (input.dataset.valid === 'numbers') {
             return /^[0-9\s+-]+$/.test(input.value);
         }
+        if (input.dataset.valid === 'expiry') {
+            return /^[0-9\/]+$/.test(input.value);
+        }
         if (input.dataset.valid === 'letters') {
             return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
         }
@@ -161,6 +164,8 @@ const validarCamposObligatorios = (ids) => {
                 esValido = verificarFormatoEmail(input.value);
             } else if (input.dataset.valid === 'numbers') {
                 esValido = /^[0-9\s+-]+$/.test(input.value);
+            } else if (input.dataset.valid === 'expiry') {
+                esValido = /^[0-9\/]+$/.test(input.value);
             } else if (input.dataset.valid === 'letters') {
                 esValido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
             }
@@ -168,9 +173,11 @@ const validarCamposObligatorios = (ids) => {
 
         if (!esValido) {
             input.classList.add('is-invalid');
+            input.setAttribute('aria-invalid', 'true');
             todosValidos = false;
         } else {
             input.classList.remove('is-invalid');
+            input.removeAttribute('aria-invalid');
         }
     });
     return todosValidos;
@@ -186,11 +193,22 @@ function irAlPaso(actual, siguiente) {
     if (sectionActual && sectionSiguiente) {
         sectionActual.classList.remove('active');
         sectionActual.classList.add('completed');
+        // Actualizar estados ARIA
+        sectionActual.setAttribute('aria-expanded', 'false');
+        sectionActual.setAttribute('aria-disabled', 'true');
         
         sectionSiguiente.classList.remove('disabled');
         sectionSiguiente.classList.add('active');
+        sectionSiguiente.setAttribute('aria-expanded', 'true');
+        sectionSiguiente.removeAttribute('aria-disabled');
 
         sectionSiguiente.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Anuncio para Screen Reader
+        const titleNext = sectionSiguiente.querySelector('.step-header')?.innerText || `Paso ${siguiente}`;
+        if (typeof anunciarParaScreenReader === 'function') {
+            anunciarParaScreenReader(`Paso ${actual} completado. Ahora estás en el ${titleNext}`);
+        }
     }
 }
 

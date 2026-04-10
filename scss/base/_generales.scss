@@ -20,6 +20,11 @@ body {
     background: var(--c-bg);
 }
 
+main {
+    flex: 1;
+    // Eliminado padding-bottom extra para que secciones con fondo toquen el footer
+}
+
 /* Tipografía de encabezados */
 h1,
 .h1 {
@@ -43,8 +48,7 @@ h2,
 }
 
 h3,
-.h3,
-.h4 {
+.h3 {
     font-size: 1.5rem;
     line-height: 1.4;
     color: $brand;
@@ -55,6 +59,8 @@ h4,
 .h4 {
     font-size: 1.1rem;
     line-height: 1.4;
+    color: $brand;
+    font-weight: 600;
 }
 
 img {
@@ -134,8 +140,14 @@ select:-webkit-autofill:active {
 
 /* Secciones (bloques)  */
 .bloque {
-    padding-block: var(--space-6);
+    padding-block: var(--space-7); // Aumentado de space-6 (32px) a space-7 (48px) para más aire
     background: #fff;
+    text-align: center; // Centrado de contenido por defecto
+
+    // Espacio extra al final de la página (dentro del bloque para evitar franjas blancas)
+    &:last-child {
+        padding-bottom: var(--space-9); 
+    }
 }
 
 .bloque-verde {
@@ -275,6 +287,13 @@ main .container,
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
     }
+
+    // Estilo para el título (ahora H3 por accesibilidad)
+    h3 {
+        font-size: 1.2rem;
+        margin-bottom: $space-3;
+        color: $brand;
+    }
 }
 
 /* Stretched Link: Hace que todo el contenedor sea clickeable */
@@ -294,5 +313,12 @@ main .container,
 .card button {
     position: relative;
     z-index: 2;
+}
+
+/* Marca de campo obligatorio */
+.required-mark {
+    color: var(--c-error, #e74c3c);
+    font-weight: 700;
+    margin-left: 2px;
 }
 

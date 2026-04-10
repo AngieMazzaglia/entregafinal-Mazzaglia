@@ -8,6 +8,17 @@
         content="Revisá tu selección de productos Revida, calculá el costo de envío y preparate para finalizar tu compra sustentable." />
     <meta name="keywords" content="carrito de compras, resumen pedido, Revida bolsas, compra ecológica" />
     <title>Tu Carrito - Revida</title>
+
+    <!-- Metaetiquetas SEO y Sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tu Carrito - Revida" />
+    <meta property="og:description" content="Revisá tus productos sustentables y finalizá tu pedido en Revida." />
+    <meta property="og:image" content="../assets/img/logo1.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/img/logosolo.png" />
+    <link rel="apple-touch-icon" href="../assets/img/logosolo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,9 +26,10 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
     <header class="site-header">
         <div class="container header-inner">
-            <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
             <a href="../index.html">
                 <img class="logo" src="../assets/img/logo1.webp" alt="Logo Revida">
             </a>
@@ -29,15 +41,15 @@
                 <ul class="nav-list">
                     <li><a href="../index.html">Inicio</a></li>
                     <li class="nav-item">
-                        <a href="./productos.html">Productos</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="./tienda.html?categoria=diseños">Bolsas con diseños</a></li>
+                        <a href="./productos.html" aria-haspopup="menu" aria-expanded="false" id="productos-link">Productos</a>
+                        <ul class="dropdown-menu" aria-labelledby="productos-link">
+                            <li><a href="./tienda.html?categoria=disenos">Bolsas con diseños</a></li>
                             <li><a href="./tienda.html?categoria=composteras">Composteras</a></li>
-                            <li><a href="./tienda.html?categoria=tela-lisa">Bolsas de tela</a></li>
+                            <li><a href="./tienda.html?categoria=ecologicas">Bolsas de tela</a></li>
                             <li><a href="./tienda.html?categoria=papel">Bolsas de papel</a></li>
                             <li><a href="./tienda.html?categoria=biodegradables">Bolsas biodegradables</a></li>
                             <li><a href="./contacto.html?form=quote">Bolsas personalizadas</a></li>
-                            <li><a href="./tienda.html" class="fw-700">Ver todos los productos</a></li>
+                            <li><a href="./tienda.html" style="font-weight: 700;">Ver todos los productos</a></li>
                         </ul>
                     </li>
                     <li><a href="./comocomprar.html">¿Cómo comprar?</a></li>
@@ -60,7 +72,7 @@
                     <button id="cart-btn" class="btn-cart" aria-label="Abrir carrito">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-shopping-cart">
+                            class="feather feather-shopping-cart" aria-hidden="true">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -132,11 +144,11 @@
 
             <nav class="footer-social" aria-label="Redes sociales">
                 <h3>Seguinos</h3>
-                <a href="#" aria-label="Seguinos en Instagram">Instagram</a> |
-                <a href="#" aria-label="Seguinos en Facebook">Facebook</a>
+                <a href="#" aria-label="Seguinos en Instagram" rel="noopener" target="_blank">Instagram</a> |
+                <a href="#" aria-label="Seguinos en Facebook" rel="noopener" target="_blank">Facebook</a>
             </nav>
         </div>
-        <p class="copy">© 2025 Revida — Todos los derechos reservados.</p>
+        <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts -->

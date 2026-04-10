@@ -9,7 +9,7 @@
   --c-bg-soft: #d2f8c4;
   --c-bg-footer: #1b5e20;
   --c-bg-beige: #ede9d0;
-  --c-error: #dc3545;
+  --c-error: #e74c3c;
   --radius: 12px;
   --space-1: 4px;
   --space-2: 8px;
@@ -17,6 +17,8 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
+  --space-7: 48px;
+  --space-9: 80px;
   --maxw: 1100px;
 }
 
@@ -49,6 +51,10 @@ body {
   background: var(--c-bg);
 }
 
+main {
+  flex: 1;
+}
+
 /* Tipografía de encabezados */
 h1,
 .h1 {
@@ -71,8 +77,7 @@ h2,
 }
 
 h3,
-.h3,
-.h4 {
+.h3 {
   font-size: 1.5rem;
   line-height: 1.4;
   color: #19753A;
@@ -83,6 +88,8 @@ h4,
 .h4 {
   font-size: 1.1rem;
   line-height: 1.4;
+  color: #19753A;
+  font-weight: 600;
 }
 
 img {
@@ -167,8 +174,12 @@ select:-webkit-autofill:active {
 
 /* Secciones (bloques)  */
 .bloque {
-  padding-block: var(--space-6);
+  padding-block: var(--space-7);
   background: #fff;
+  text-align: center;
+}
+.bloque:last-child {
+  padding-bottom: var(--space-9);
 }
 
 .bloque-verde {
@@ -249,40 +260,6 @@ main .container,
   flex-wrap: wrap;
   gap: 16px;
 }
-
-/* --- Validación de Formularios --- */
-.required-mark {
-  color: var(--c-error);
-  font-weight: 700;
-  margin-left: 2px;
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 1.25rem;
-}
-
-.input-error-hint {
-  color: var(--c-error);
-  font-size: 0.75rem;
-  font-weight: 600;
-  position: absolute;
-  bottom: -18px;
-  left: 4px;
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-.input-error-hint.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.form-control.is-invalid {
-  border-color: var(--c-error) !important;
-}
 .flex-resp.align-start {
   align-items: flex-start;
 }
@@ -334,6 +311,13 @@ main .container,
   display: block;
 }
 
+/* Marca de campo obligatorio */
+.required-mark {
+  color: var(--c-error, #e74c3c);
+  font-weight: 700;
+  margin-left: 2px;
+}
+
 /* --- Tarjetas (Cards) Clickables --- */
 .card {
   position: relative;
@@ -353,6 +337,11 @@ main .container,
 .card.card-elevada:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #19753A;
 }
 
 /* Stretched Link: Hace que todo el contenedor sea clickeable */
@@ -994,6 +983,30 @@ button:disabled {
   background-color: #fff8f8 !important;
 }
 
+.input-error-hint {
+  display: none;
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+}
+.input-error-hint.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* --- Pantalla de Procesamiento (Glassmorphism) --- */
 .processing-overlay {
   position: fixed;
@@ -1535,7 +1548,7 @@ button:disabled {
 /*  Marcas que nos eligen  */
 .franja-marcas {
   background: #1b5e20;
-  padding-block: 24px;
+  padding-block: var(--space-7);
   color: #fff;
   text-align: center;
 }
@@ -1663,7 +1676,7 @@ form.needs-validation {
 .bg-bosque-contacto {
   background: url("../img/bosque2.webp") center/cover no-repeat;
   position: relative;
-  padding-bottom: 32px;
+  padding-block: var(--space-9);
 }
 .bg-bosque-contacto::before {
   content: "";
@@ -1941,6 +1954,7 @@ form.needs-validation {
 }
 
 .cta-compra {
+  padding-block: var(--space-9);
   background: url("../img/bosque1.webp") center/cover no-repeat;
   position: relative;
   color: #fff;
@@ -2104,7 +2118,7 @@ form.needs-validation {
   height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease;
-  transform: scale(var(--base-scale));
+  transform: scale(var(--base-scale)); /* Escala base dinámica */
 }
 
 .img-zoom-wrapper {
@@ -2116,6 +2130,7 @@ form.needs-validation {
   overflow: hidden;
 }
 
+/* Hover Universal: Todos crecen exactamente lo mismo (0.1 adicional a su base) */
 .card:hover .card-img-container img {
   transform: scale(calc(var(--base-scale) + 0.1));
 }
@@ -2202,7 +2217,6 @@ form.needs-validation {
     transform: translateX(0);
   }
 }
-
 /* Controles de tarjeta */
 .card-controls {
   margin-top: auto;
@@ -2398,9 +2412,7 @@ form.needs-validation {
 
 .success-icon {
   margin-bottom: 16px;
-}
-.success-icon path:last-child {
-  fill: #19753A; /* Tic verde de marca */
+  fill: #19753A; /* Todo el ícono (círculo y tic) en verde */
 }
 
 .page-carrito {

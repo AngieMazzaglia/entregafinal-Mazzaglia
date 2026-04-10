@@ -1,8 +1,12 @@
-// Lógica del carrito de compras (Versión Clean Code - Corregida Final) 🧼🛒✨
-const MIN_COMPRA = 15000;
+window.MIN_COMPRA = 15000;
 const MIN_ENVIO_GRATIS = 50000;
+const MIN_COMPRA = window.MIN_COMPRA;
 
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+// SEGURIDAD: Limpieza de datos corruptos en el arranque (Best Practice)
+carrito = carrito.filter(item => item && item.id && item.nombre);
+localStorage.setItem('carrito', JSON.stringify(carrito));
 
 // --- UTILIDADES ---
 
@@ -60,6 +64,12 @@ window.guardarCarrito = () => {
 window.agregarAlCarrito = (idProducto, cantidad = 1) => {
     const numCant = parseInt(cantidad);
     const producto = productos.find(p => p.id === idProducto);
+    
+    if (!producto) {
+        console.error(`Producto con ID ${idProducto} no encontrado en la base de datos.`);
+        return;
+    }
+
     const itemEnCarrito = carrito.find(p => p.id === idProducto);
 
     if (itemEnCarrito) {
@@ -70,6 +80,12 @@ window.agregarAlCarrito = (idProducto, cantidad = 1) => {
 
     guardarCarrito();
     if (window.mostrarToast) window.mostrarToast(`¡Agregaste ${producto.nombre} al carrito!`);
+    
+    // Anuncio para lectores de pantalla
+    if (typeof anunciarParaScreenReader === 'function') {
+        const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+        anunciarParaScreenReader(`Agregaste ${producto.nombre} al carrito. Ahora tenés ${totalItems} ítems en total.`);
+    }
 };
 
 window.eliminarDelCarrito = (idProducto) => {
@@ -77,7 +93,8 @@ window.eliminarDelCarrito = (idProducto) => {
     guardarCarrito();
 };
 
-const calcularTotal = () => carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
+window.calcularTotal = () => carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
+const calcularTotal = window.calcularTotal;
 
 const actualizarContadorCarrito = () => {
     const contador = document.getElementById('cart-count');
@@ -115,6 +132,9 @@ window.renderizarCarritoEnModal = () => {
 
     const path = obtenerPathBase();
     carrito.forEach(prod => {
+        // SEGURIDAD: Si no tiene nombre (dato corrupto), lo salteamos
+        if (!prod || !prod.nombre) return;
+
         // Regex robusto para separar Nombre - Detalle
         const partes = prod.nombre.split(/\s*-\s*/);
         const nombreLimpio = partes[0];
@@ -123,21 +143,21 @@ window.renderizarCarritoEnModal = () => {
         const item = document.createElement('div');
         item.className = 'cart-item';
         item.innerHTML = `
-            <img src="${path}${prod.imagen}" alt="${prod.nombre}">
+            <img src="${path}${prod.imagen}" alt="Fotografía de ${nombreLimpio}">
             <div class="item-details">
                 <h5>${nombreLimpio}</h5>
                 ${infoExtra ? `<div class="text-muted small">${infoExtra}</div>` : ''}
                 <div class="item-controls-wrapper">
                     <div class="quantity-controls">
-                        <button onclick="restarEnCarrito('${prod.id}')">−</button>
-                        <span>${prod.cantidad}</span>
-                        <button onclick="sumarEnCarrito('${prod.id}')">+</button>
+                        <button onclick="restarEnCarrito('${prod.id}')" aria-label="Disminuir cantidad de ${nombreLimpio}">−</button>
+                        <span aria-live="polite">${prod.cantidad}</span>
+                        <button onclick="sumarEnCarrito('${prod.id}')" aria-label="Aumentar cantidad de ${nombreLimpio}">+</button>
                     </div>
                     <span class="item-price-unit">x ${formatearPrecio(prod.precio)}</span>
                 </div>
             </div>
             <div class="item-actions">
-                <button onclick="eliminarDelCarrito('${prod.id}')" class="delete-btn" title="Eliminar">&times;</button>
+                <button onclick="eliminarDelCarrito('${prod.id}')" class="delete-btn" aria-label="Eliminar ${nombreLimpio} del carrito" title="Eliminar">&times;</button>
                 <div class="item-total">${formatearPrecio(prod.precio * prod.cantidad)}</div>
             </div>
         `;
@@ -182,6 +202,9 @@ window.renderizarPaginaCarrito = () => {
 
     const path = obtenerPathBase();
     carrito.forEach(prod => {
+        // SEGURIDAD: Protección contra datos incompletos
+        if (!prod || !prod.nombre) return;
+
         const partes = prod.nombre.split(/\s*-\s*/);
         const nombreLimpio = partes[0];
         const infoExtra = partes[1] || '';
@@ -189,7 +212,7 @@ window.renderizarPaginaCarrito = () => {
         const item = document.createElement('article');
         item.className = 'cart-page-item';
         item.innerHTML = `
-            <img src="${path}${prod.imagen}" alt="">
+            <img src="${path}${prod.imagen}" alt="Fotografía de ${nombreLimpio}">
             <div class="cart-item-info">
                 <h4>${nombreLimpio}</h4>
                 ${infoExtra ? `<div class="text-muted small mb-1">${infoExtra}</div>` : ''}
@@ -197,15 +220,15 @@ window.renderizarPaginaCarrito = () => {
             </div>
             <div class="cart-item-qty">
                 <div class="quantity-controls">
-                    <button onclick="restarEnCarrito('${prod.id}')">−</button>
-                    <span>${prod.cantidad}</span>
-                    <button onclick="sumarEnCarrito('${prod.id}')">+</button>
+                    <button onclick="restarEnCarrito('${prod.id}')" aria-label="Disminuir cantidad de ${nombreLimpio}">−</button>
+                    <span aria-live="polite">${prod.cantidad}</span>
+                    <button onclick="sumarEnCarrito('${prod.id}')" aria-label="Aumentar cantidad de ${nombreLimpio}">+</button>
                 </div>
             </div>
             <div class="cart-item-total-price">${formatearPrecio(prod.precio * prod.cantidad)}</div>
             <div class="cart-item-action">
-                <button onclick="eliminarDelCarrito('${prod.id}')" class="delete-icon-btn" title="Eliminar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                <button onclick="eliminarDelCarrito('${prod.id}')" class="delete-icon-btn" aria-label="Eliminar ${nombreLimpio} del carrito" title="Eliminar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </button>
             </div>
         `;

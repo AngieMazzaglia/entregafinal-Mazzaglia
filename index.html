@@ -9,10 +9,48 @@
     <meta name="keywords"
         content="bolsas ecológicas, bolsas reutilizables, sustentabilidad, bolsas personalizadas, reciclaje, medio ambiente, Argentina, composteras, consumo responsable, productos ecológicos" />
     <title>Revida - Bolsas Ecológicas y Soluciones Sustentables</title>
+    
+    <!-- Metaetiquetas SEO y Sociales (Open Graph) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Revida - Bolsas Ecológicas y Soluciones Sustentables" />
+    <meta property="og:description" content="Especialistas en bolsas ecológicas reutilizables y soluciones sustentables en Argentina. Potenciá tu marca con impacto positivo." />
+    <meta property="og:image" content="./assets/img/logo1.webp" />
+    <meta property="og:site_name" content="Revida" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Revida - Bolsas Ecológicas" />
+    <meta name="twitter:description" content="Productos sustentables y reutilizables fabricados en Argentina." />
+    <meta name="twitter:image" content="./assets/img/logo1.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/img/logosolo.png" />
+    <link rel="apple-touch-icon" href="./assets/img/logosolo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <!-- Datos Estructurados (JSON-LD) para Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Revida",
+      "url": "https://revida.com.ar",
+      "logo": "https://revida.com.ar/assets/img/logo1.webp",
+      "description": "Fabricación de bolsas ecológicas y soluciones sustentables en Argentina.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AR"
+      },
+      "sameAs": [
+        "https://www.instagram.com/revida.ok",
+        "https://www.facebook.com/revida"
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -31,11 +69,11 @@
 
             <!-- Menú de navegación -->
             <nav class="site-nav" aria-label="Principal">
-                <ul class="nav-list">
+                <ul class="nav-list" id="nav-list">
                     <li><a href="./index.html" aria-current="page">Inicio</a></li>
                     <li class="nav-item">
-                        <a href="./pages/productos.html">Productos</a>
-                        <ul class="dropdown-menu">
+                        <a href="./pages/productos.html" aria-haspopup="menu" aria-expanded="false" id="productos-link">Productos</a>
+                        <ul class="dropdown-menu" aria-labelledby="productos-link">
                             <li><a href="./pages/tienda.html?categoria=disenos">Bolsas con diseños</a></li>
                             <li><a href="./pages/tienda.html?categoria=composteras">Composteras</a></li>
                             <li><a href="./pages/tienda.html?categoria=ecologicas">Bolsas de tela</a></li>
@@ -65,7 +103,7 @@
                     <button id="cart-btn" class="btn-cart" aria-label="Abrir carrito">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-shopping-cart">
+                            class="feather feather-shopping-cart" aria-hidden="true">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -96,8 +134,8 @@
                 <h2>Nuestros productos destacados</h2>
                 <div class="cards grid-3 gap-md">
                     <article class="card card-elevada">
-                        <img src="./assets/img/prod1.webp" alt="Bolsas personalizadas" />
-                        <h4>Bolsas personalizadas</h4>
+                        <img src="./assets/img/prod1.webp" alt="Muestrario de bolsas de tela ecológicas color crudo con logotipos impresos" />
+                        <h3>Bolsas personalizadas</h3>
                         <p>De materiales ecológicos y resistentes</p>
                         <p>
                             <a href="./pages/contacto.html?form=quote" class="btn-link stretched-link"
@@ -107,10 +145,10 @@
 
                     <article class="card card-elevada">
                         <div class="img-zoom-wrapper">
-                            <img src="./assets/img/disenio2.webp" alt="Bolsas de tela con diseños exclusivos"
+                            <img src="./assets/img/disenio2.webp" alt="Bolsa de tela ecológica con diseño artístico de hojas y motivos naturales"
                                 class="img-zoom-medium" />
                         </div>
-                        <h4>Bolsas con diseños exclusivos</h4>
+                        <h3>Bolsas con diseños exclusivos</h3>
                         <p>Bolsas de tela únicas y fuertes</p>
                         <p>
                             <a href="./pages/tienda.html?categoria=disenos" class="btn-link stretched-link"
@@ -120,9 +158,9 @@
 
                     <article class="card card-elevada">
                         <div class="img-zoom-wrapper">
-                            <img src="./assets/img/compost1.webp" alt="Composteras" class="img-zoom-large" />
+                            <img src="./assets/img/compost1.webp" alt="Compostera de madera tratada para hogar en entorno de balcón o jardín" class="img-zoom-large" />
                         </div>
-                        <h4>Composteras</h4>
+                        <h3>Composteras</h3>
                         <p>Las más elegidas por su diseño y practicidad</p>
                         <p>
                             <a href="./pages/tienda.html?categoria=composteras" class="btn-link stretched-link"
@@ -140,26 +178,26 @@
 
                 <div class="features grid-4 gap-md">
                     <article class="feature">
-                        <img class="ico" src="./assets/img/icono1.webp" alt="Reciclaje">
-                        <h4>Reciclaje</h4>
+                        <img class="ico" src="./assets/img/icono1.webp" alt="" aria-hidden="true">
+                        <h3>Reciclaje</h3>
                         <p>Trabajamos con materiales amigables con el medio ambiente</p>
                     </article>
 
                     <article class="feature">
-                        <img class="ico" src="./assets/img/icono2.webp" alt="Triple impacto">
-                        <h4>Triple impacto</h4>
+                        <img class="ico" src="./assets/img/icono2.webp" alt="" aria-hidden="true">
+                        <h3>Triple impacto</h3>
                         <p>Generamos un impacto social, ambiental y económico</p>
                     </article>
 
                     <article class="feature">
-                        <img class="ico" src="./assets/img/icono3.webp" alt="Producción nacional">
-                        <h4>Producción nacional</h4>
+                        <img class="ico" src="./assets/img/icono3.webp" alt="" aria-hidden="true">
+                        <h3>Producción nacional</h3>
                         <p>Todas nuestras fábricas están en Argentina</p>
                     </article>
 
                     <article class="feature">
-                        <img class="ico" src="./assets/img/icono4.webp" alt="Personalización">
-                        <h4>Personalización</h4>
+                        <img class="ico" src="./assets/img/icono4.webp" alt="" aria-hidden="true">
+                        <h3>Personalización</h3>
                         <p>Impresión a medida para tu marca o evento</p>
                     </article>
                 </div>
@@ -223,12 +261,12 @@
 
             <nav class="footer-social" aria-label="Redes sociales">
                 <h3>Seguinos</h3>
-                <a href="#" aria-label="Seguinos en Instagram">Instagram</a> |
-                <a href="#" aria-label="Seguinos en Facebook">Facebook</a>
+                <a href="#" aria-label="Seguinos en Instagram" rel="noopener" target="_blank">Instagram</a> |
+                <a href="#" aria-label="Seguinos en Facebook" rel="noopener" target="_blank">Facebook</a>
             </nav>
         </div>
 
-        <p class="copy">© 2025 Revida — Todos los derechos reservados.</p>
+        <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts -->
