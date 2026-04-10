@@ -1,6 +1,7 @@
 // Lógica del Checkout 3.0 (Versión Clean Code) 🛒✨
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar vista
     renderizarResumenCheckout();
     
     // Selectores Principales
@@ -21,14 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const esValido = verificarInputsCompletos(inputsPaso1);
                 btnStep1.disabled = !esValido;
                 
-                // Si el mail es válido, sacamos el rojo.
-                // Los campos de letras/números ahora se manejan en main.js para mostrar el aviso de "carácter no permitido"
                 if (id === 'email' && verificarFormatoEmail(el.value)) {
                     el.classList.remove('is-invalid');
                 }
             });
 
-            // Validación al perder el foco para el mail
             if (id === 'email') {
                 el.addEventListener('blur', () => {
                     if (el.value.trim() !== '') {
@@ -114,42 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- FUNCIONES CORE ---
 
-/**
- * Verifica si un array de IDs de inputs están todos completos y con formato válido
- */
 const verificarInputsCompletos = (ids) => {
     return ids.every(id => {
         const input = document.getElementById(id);
         if (!input || input.value.trim() === '') return false;
         
-        // Validaciones internas extra
-        if (input.type === 'email') {
-            return verificarFormatoEmail(input.value);
-        }
-        if (input.dataset.valid === 'numbers') {
-            return /^[0-9\s+-]+$/.test(input.value);
-        }
-        if (input.dataset.valid === 'expiry') {
-            return /^[0-9\/]+$/.test(input.value);
-        }
-        if (input.dataset.valid === 'letters') {
-            return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
-        }
+        if (input.type === 'email') return verificarFormatoEmail(input.value);
+        if (input.dataset.valid === 'numbers') return /^[0-9\s+-]+$/.test(input.value);
+        if (input.dataset.valid === 'expiry') return /^[0-9\/]+$/.test(input.value);
+        if (input.dataset.valid === 'letters') return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
         
         return true;
     });
 };
 
-/**
- * Helper para validar formato de email
- */
-const verificarFormatoEmail = (valor) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
-};
+const verificarFormatoEmail = (valor) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
 
-/**
- * Valida visualmente los campos obligatorios y sus formatos
- */
 const validarCamposObligatorios = (ids) => {
     let todosValidos = true;
     ids.forEach(id => {
@@ -158,17 +136,11 @@ const validarCamposObligatorios = (ids) => {
 
         let esValido = input.value.trim() !== '';
         
-        // Validar formato si tiene valor
         if (esValido) {
-            if (input.type === 'email') {
-                esValido = verificarFormatoEmail(input.value);
-            } else if (input.dataset.valid === 'numbers') {
-                esValido = /^[0-9\s+-]+$/.test(input.value);
-            } else if (input.dataset.valid === 'expiry') {
-                esValido = /^[0-9\/]+$/.test(input.value);
-            } else if (input.dataset.valid === 'letters') {
-                esValido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
-            }
+            if (input.type === 'email') esValido = verificarFormatoEmail(input.value);
+            else if (input.dataset.valid === 'numbers') esValido = /^[0-9\s+-]+$/.test(input.value);
+            else if (input.dataset.valid === 'expiry') esValido = /^[0-9\/]+$/.test(input.value);
+            else if (input.dataset.valid === 'letters') esValido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(input.value);
         }
 
         if (!esValido) {
@@ -183,9 +155,6 @@ const validarCamposObligatorios = (ids) => {
     return todosValidos;
 };
 
-/**
- * Navegación entre pasos con animación de éxito
- */
 function irAlPaso(actual, siguiente) {
     const sectionActual = document.getElementById(`step-${actual}`);
     const sectionSiguiente = document.getElementById(`step-${siguiente}`);
@@ -193,7 +162,6 @@ function irAlPaso(actual, siguiente) {
     if (sectionActual && sectionSiguiente) {
         sectionActual.classList.remove('active');
         sectionActual.classList.add('completed');
-        // Actualizar estados ARIA
         sectionActual.setAttribute('aria-expanded', 'false');
         sectionActual.setAttribute('aria-disabled', 'true');
         
@@ -204,17 +172,13 @@ function irAlPaso(actual, siguiente) {
 
         sectionSiguiente.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Anuncio para Screen Reader
-        const titleNext = sectionSiguiente.querySelector('.step-header')?.innerText || `Paso ${siguiente}`;
-        if (typeof anunciarParaScreenReader === 'function') {
-            anunciarParaScreenReader(`Paso ${actual} completado. Ahora estás en el ${titleNext}`);
+        if (typeof window.anunciarParaScreenReader === 'function') {
+            const titleNext = sectionSiguiente.querySelector('.step-header')?.innerText || `Paso ${siguiente}`;
+            window.anunciarParaScreenReader(`Paso ${actual} completado. Ahora estás en el ${titleNext}`);
         }
     }
 }
 
-/**
- * Gran final del checkout con efecto glassmorphism
- */
 function finalizarCompra() {
     const overlay = document.getElementById('processing-overlay');
     if (overlay) overlay.style.display = 'flex';
@@ -225,9 +189,8 @@ function finalizarCompra() {
     }, 2500);
 }
 
-/**
- * Renderiza el resumen lateral del pedido
- */
+const formatearPrecioResumen = (valor) => `$${valor.toLocaleString()}`;
+
 function renderizarResumenCheckout() {
     const contenedor = document.getElementById('checkout-summary-list');
     const totalEl = document.getElementById('checkout-total-val');
@@ -241,18 +204,15 @@ function renderizarResumenCheckout() {
         return;
     }
 
-    let total = 0;
+    const total = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
     contenedor.innerHTML = '';
 
     carrito.forEach(prod => {
-        const subtotal = prod.precio * prod.cantidad;
-        total += subtotal;
-
         const div = document.createElement('div');
         div.className = 'summary-item';
-        div.innerHTML = `<span>${prod.cantidad}x ${prod.nombre}</span><span>$${subtotal.toLocaleString()}</span>`;
+        div.innerHTML = `<span>${prod.cantidad}x ${prod.nombre}</span><span>${formatearPrecioResumen(prod.precio * prod.cantidad)}</span>`;
         contenedor.appendChild(div);
     });
 
-    totalEl.innerText = `$${total.toLocaleString()}`;
+    totalEl.innerText = formatearPrecioResumen(total);
 }

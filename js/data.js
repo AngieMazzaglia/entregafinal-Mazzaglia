@@ -352,9 +352,10 @@ const productos = [
 window.obtenerPathBase = () => window.location.pathname.includes('/pages/') ? '../' : './';
 
 /**
- * Constante centralizada de compra mínima
+ * Constantes centralizadas de negocio
  */
 window.MIN_COMPRA = 15000;
+window.MIN_ENVIO_GRATIS = 50000;
 
 // --- UTILIDADES DE DATOS ---
 

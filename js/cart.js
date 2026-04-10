@@ -1,5 +1,5 @@
-const MIN_ENVIO_GRATIS = 50000;
 const MIN_COMPRA = window.MIN_COMPRA;
+const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS;
 
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -93,7 +93,6 @@ window.eliminarDelCarrito = (idProducto) => {
 };
 
 window.calcularTotal = () => carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
-const calcularTotal = window.calcularTotal;
 
 const actualizarContadorCarrito = () => {
     const contador = document.getElementById('cart-count');
@@ -112,6 +111,66 @@ const actualizarContadorCarrito = () => {
 
 // --- VISTAS (UI) ---
 
+/**
+ * Genera el HTML para un ítem del carrito (Modelo unificado)
+ */
+const generarHTMLItem = (prod, esVistaMini = false) => {
+    const path = obtenerPathBase();
+    const partes = prod.nombre.split(/\s*-\s*/);
+    const nombreLimpio = partes[0];
+    const infoExtra = partes[1] || '';
+
+    if (esVistaMini) {
+        // Estilo compacto para el modal
+        return `
+            <div class="cart-item" data-id="${prod.id}">
+                <img src="${path}${prod.imagen}" alt="${nombreLimpio}">
+                <div class="item-details">
+                    <h5>${nombreLimpio}</h5>
+                    ${infoExtra ? `<div class="text-muted small">${infoExtra}</div>` : ''}
+                    <div class="item-controls-wrapper">
+                        <div class="quantity-controls">
+                            <button data-action="restar" aria-label="Disminuir quantity">−</button>
+                            <span aria-live="polite">${prod.cantidad}</span>
+                            <button data-action="sumar" aria-label="Aumentar quantity">+</button>
+                        </div>
+                        <span class="item-price-unit">x ${formatearPrecio(prod.precio)}</span>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button data-action="eliminar" class="delete-btn" aria-label="Eliminar" title="Eliminar">&times;</button>
+                    <div class="item-total">${formatearPrecio(prod.precio * prod.cantidad)}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Estilo extendido para la página de carrito
+    return `
+        <article class="cart-page-item" data-id="${prod.id}">
+            <img src="${path}${prod.imagen}" alt="${nombreLimpio}">
+            <div class="cart-item-info">
+                <h4>${nombreLimpio}</h4>
+                ${infoExtra ? `<div class="text-muted small mb-1">${infoExtra}</div>` : ''}
+                <div class="unit-price">Precio unitario: ${formatearPrecio(prod.precio)}</div>
+            </div>
+            <div class="cart-item-qty">
+                <div class="quantity-controls">
+                    <button data-action="restar" aria-label="Disminuir quantity">−</button>
+                    <span aria-live="polite">${prod.cantidad}</span>
+                    <button data-action="sumar" aria-label="Aumentar quantity">+</button>
+                </div>
+            </div>
+            <div class="cart-item-total-price">${formatearPrecio(prod.precio * prod.cantidad)}</div>
+            <div class="cart-item-action">
+                <button data-action="eliminar" class="delete-icon-btn" aria-label="Eliminar" title="Eliminar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </button>
+            </div>
+        </article>
+    `;
+};
+
 window.renderizarCarritoEnModal = () => {
     const contenedor = document.getElementById('cart-items');
     const precioTotalEl = document.getElementById('cart-total-price');
@@ -129,41 +188,12 @@ window.renderizarCarritoEnModal = () => {
         return;
     }
 
-    const path = obtenerPathBase();
     carrito.forEach(prod => {
-        // SEGURIDAD: Si no tiene nombre (dato corrupto), lo salteamos
         if (!prod || !prod.nombre) return;
-
-        // Regex robusto para separar Nombre - Detalle
-        const partes = prod.nombre.split(/\s*-\s*/);
-        const nombreLimpio = partes[0];
-        const infoExtra = partes[1] || '';
-        
-        const item = document.createElement('div');
-        item.className = 'cart-item';
-        item.innerHTML = `
-            <img src="${path}${prod.imagen}" alt="Fotografía de ${nombreLimpio}">
-            <div class="item-details">
-                <h5>${nombreLimpio}</h5>
-                ${infoExtra ? `<div class="text-muted small">${infoExtra}</div>` : ''}
-                <div class="item-controls-wrapper">
-                    <div class="quantity-controls">
-                        <button onclick="restarEnCarrito('${prod.id}')" aria-label="Disminuir cantidad de ${nombreLimpio}">−</button>
-                        <span aria-live="polite">${prod.cantidad}</span>
-                        <button onclick="sumarEnCarrito('${prod.id}')" aria-label="Aumentar cantidad de ${nombreLimpio}">+</button>
-                    </div>
-                    <span class="item-price-unit">x ${formatearPrecio(prod.precio)}</span>
-                </div>
-            </div>
-            <div class="item-actions">
-                <button onclick="eliminarDelCarrito('${prod.id}')" class="delete-btn" aria-label="Eliminar ${nombreLimpio} del carrito" title="Eliminar">&times;</button>
-                <div class="item-total">${formatearPrecio(prod.precio * prod.cantidad)}</div>
-            </div>
-        `;
-        contenedor.appendChild(item);
+        contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(prod, true));
     });
 
-    const total = calcularTotal();
+    const total = window.calcularTotal();
     precioTotalEl.innerText = total.toLocaleString();
 
     if (minPurchaseArea) {
@@ -184,7 +214,7 @@ window.renderizarPaginaCarrito = () => {
     const totalEl = document.querySelector('.total-val');
     const envioEl = document.querySelector('.envio-val');
     const promoArea = document.getElementById('shipping-promo-container-cart');
-    const btnContinuar = document.querySelector('button[onclick*="validarYRedirigirCheckout"]');
+    const btnContinuar = document.querySelector('.btn-continuar-compra');
 
     if (!contenedor) return;
     contenedor.innerHTML = '';
@@ -199,42 +229,12 @@ window.renderizarPaginaCarrito = () => {
         return;
     }
 
-    const path = obtenerPathBase();
     carrito.forEach(prod => {
-        // SEGURIDAD: Protección contra datos incompletos
         if (!prod || !prod.nombre) return;
-
-        const partes = prod.nombre.split(/\s*-\s*/);
-        const nombreLimpio = partes[0];
-        const infoExtra = partes[1] || '';
-        
-        const item = document.createElement('article');
-        item.className = 'cart-page-item';
-        item.innerHTML = `
-            <img src="${path}${prod.imagen}" alt="Fotografía de ${nombreLimpio}">
-            <div class="cart-item-info">
-                <h4>${nombreLimpio}</h4>
-                ${infoExtra ? `<div class="text-muted small mb-1">${infoExtra}</div>` : ''}
-                <div class="unit-price">Precio unitario: ${formatearPrecio(prod.precio)}</div>
-            </div>
-            <div class="cart-item-qty">
-                <div class="quantity-controls">
-                    <button onclick="restarEnCarrito('${prod.id}')" aria-label="Disminuir cantidad de ${nombreLimpio}">−</button>
-                    <span aria-live="polite">${prod.cantidad}</span>
-                    <button onclick="sumarEnCarrito('${prod.id}')" aria-label="Aumentar cantidad de ${nombreLimpio}">+</button>
-                </div>
-            </div>
-            <div class="cart-item-total-price">${formatearPrecio(prod.precio * prod.cantidad)}</div>
-            <div class="cart-item-action">
-                <button onclick="eliminarDelCarrito('${prod.id}')" class="delete-icon-btn" aria-label="Eliminar ${nombreLimpio} del carrito" title="Eliminar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                </button>
-            </div>
-        `;
-        contenedor.appendChild(item);
+        contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(prod, false));
     });
 
-    const subtotalValue = calcularTotal();
+    const subtotalValue = window.calcularTotal();
     if (subtotalEl) subtotalEl.innerText = formatearPrecio(subtotalValue);
     if (totalEl) totalEl.innerText = formatearPrecio(subtotalValue);
 
@@ -245,7 +245,7 @@ window.renderizarPaginaCarrito = () => {
             htmlExtra += generarHTMLBarraProgreso(subtotalValue, MIN_ENVIO_GRATIS, `Te faltan ${formatearPrecio(faltaEnvio)} para el ENVÍO GRATIS`);
             if (envioEl) envioEl.innerText = 'A calcular';
         } else {
-            if (envioEl) envioEl.innerHTML = '<span style="color:var(--c-brand); font-weight:700;">¡Gratis!</span>';
+            if (envioEl) envioEl.innerHTML = '<span class="reached-text">¡Gratis!</span>';
         }
 
         if (subtotalValue < MIN_COMPRA) {
@@ -259,11 +259,40 @@ window.renderizarPaginaCarrito = () => {
     }
 };
 
+// --- MANEJO DE EVENTOS (DELEGACIÓN GLOBAL) ---
+
+/**
+ * Escuchador centralizado para todas las acciones del carrito
+ * Funciona incluso para elementos inyectados dinámicamente o dentro de otros archivos.
+ */
+document.addEventListener('click', (e) => {
+    // 1. Detectar botones de acción (sumar, restar, eliminar)
+    const btnAction = e.target.closest('button[data-action]');
+    if (btnAction) {
+        const action = btnAction.dataset.action;
+        const itemContainer = btnAction.closest('[data-id]');
+        
+        if (itemContainer) {
+            const itemId = itemContainer.dataset.id;
+            if (action === 'sumar') window.sumarEnCarrito(itemId);
+            else if (action === 'restar') window.restarEnCarrito(itemId);
+            else if (action === 'eliminar') window.eliminarDelCarrito(itemId);
+        }
+
+        // 2. Detectar acciones de navegación
+        if (action === 'checkout') {
+            window.validarYRedirigirCheckout();
+        } else if (action === 'view-cart') {
+            window.irAPaginaCarrito();
+        }
+    }
+});
+
 // --- ACCIONES SECUNDARIAS ---
 
 window.sumarEnCarrito = (id) => {
     const item = carrito.find(p => p.id === id);
-    if (item) { item.cantidad++; guardarCarrito(); }
+    if (item) { item.cantidad++; window.guardarCarrito(); }
 };
 
 window.restarEnCarrito = (id) => {
@@ -272,20 +301,23 @@ window.restarEnCarrito = (id) => {
 
     if (item.cantidad > 1) {
         item.cantidad--;
-        guardarCarrito();
+        window.guardarCarrito();
     } else {
-        // Si es 1 y se resta, eliminamos el producto
-        eliminarDelCarrito(id);
+        window.eliminarDelCarrito(id);
     }
 };
 
 window.validarYRedirigirCheckout = () => {
-    const total = calcularTotal();
+    const total = window.calcularTotal();
     if (carrito.length === 0 || total < MIN_COMPRA) return;
     
-    // Corregir ruta dinámica
-    const isInsidePages = window.location.pathname.includes('/pages/');
-    window.location.href = isInsidePages ? './checkout.html' : './pages/checkout.html';
+    const path = window.location.pathname.includes('/pages/') ? '' : 'pages/';
+    window.location.href = `${path}checkout.html`;
+};
+
+window.irAPaginaCarrito = () => {
+    const path = window.location.pathname.includes('/pages/') ? '' : 'pages/';
+    window.location.href = `${path}carrito.html`;
 };
 
 const abrirModal = () => document.getElementById('cart-modal')?.classList.add('active');

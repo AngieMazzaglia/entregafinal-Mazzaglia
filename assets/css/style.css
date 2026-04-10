@@ -522,6 +522,23 @@ p.text-muted {
   font-weight: 400;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
+.ms-1 {
+  margin-left: 0.25rem;
+}
+
+.btn-step {
+  min-width: 200px;
+}
+
+.reached-text {
+  color: #2d5a27;
+  font-weight: 700;
+}
+
 /*  HEADER + NAV  */
 .site-header {
   background: #fff;
@@ -1341,6 +1358,7 @@ select.is-invalid {
 }
 
 .delete-btn,
+.delete-icon-btn,
 .cart-item-remove,
 .btn-remove {
   color: #e74c3c;

@@ -64,8 +64,8 @@ function inyectarModalCarrito() {
                     <span>$<span id="cart-total-price">0</span></span>
                 </div>
                 <div class="cart-actions">
-                    <button id="checkout-btn" class="btn btn-verde btn-block">Finalizar compra</button>
-                    <button id="view-cart-btn" class="btn btn-outline btn-block">Ir al carrito</button>
+                    <button id="checkout-btn" class="btn btn-verde btn-block" data-action="checkout">Finalizar compra</button>
+                    <button id="view-cart-btn" class="btn btn-outline btn-block" data-action="view-cart">Ir al carrito</button>
                 </div>
             </div>
         </div>
