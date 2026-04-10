@@ -76,7 +76,7 @@
                             <li><a href="./tienda.html?categoria=papel">Bolsas de papel</a></li>
                             <li><a href="./tienda.html?categoria=biodegradables">Bolsas biodegradables</a></li>
                             <li><a href="./contacto.html?form=quote">Bolsas personalizadas</a></li>
-                            <li><a href="./tienda.html" style="font-weight: 700;">Ver todos los productos</a></li>
+                            <li><a href="./tienda.html" class="fw-700">Ver todos los productos</a></li>
                         </ul>
                     </li>
                     <li><a href="./comocomprar.html">¿Cómo comprar?</a></li>
@@ -373,57 +373,12 @@
         <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
     </footer>
 
-    <!-- JS de Bootstrap y validación del formulario -->
-    <script>
-        (() => {
-            'use strict';
-
-            // Logic to switch tabs based on URL parameter (Vanilla JS for speed)
-            // Ejecutamos esto antes de cargar Bootstrap para evitar demoras por red
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('form') === 'quote') {
-                // Desactivar tab General
-                const generalTabBtn = document.getElementById('general-tab');
-                const generalTabPane = document.getElementById('general');
-                if (generalTabBtn && generalTabPane) {
-                    generalTabBtn.classList.remove('active');
-                    generalTabBtn.setAttribute('aria-selected', 'false');
-                    generalTabPane.classList.remove('show', 'active');
-                }
-
-                // Activar tab Cotización
-                const quoteTabBtn = document.getElementById('quote-tab');
-                const quoteTabPane = document.getElementById('quote');
-                if (quoteTabBtn && quoteTabPane) {
-                    quoteTabBtn.classList.add('active');
-                    quoteTabBtn.setAttribute('aria-selected', 'true');
-                    quoteTabPane.classList.add('show', 'active');
-                }
-            }
-
-            // Form validation logic
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    } else {
-                        // Redirección al mensaje exitoso tras validación
-                        event.preventDefault();
-                        window.location.href = 'mensaje-exitoso.html';
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        })();
-    </script>
 
 
     <script src="../js/data.js"></script>
-    <script src="../js/a11y-helpers.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/contacto.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

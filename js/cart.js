@@ -1,4 +1,3 @@
-window.MIN_COMPRA = 15000;
 const MIN_ENVIO_GRATIS = 50000;
 const MIN_COMPRA = window.MIN_COMPRA;
 
@@ -13,7 +12,7 @@ localStorage.setItem('carrito', JSON.stringify(carrito));
 /**
  * Obtiene la ruta base según la ubicación del archivo HTML
  */
-const obtenerPathBase = () => window.location.pathname.includes('/pages/') ? '../' : './';
+const obtenerPathBase = window.obtenerPathBase;
 
 /**
  * Formatea un número como moneda local

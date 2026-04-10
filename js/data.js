@@ -344,13 +344,43 @@ const productos = [
     }
 ];
 
-// Función helper para filtrar por categoría
+// --- UTILIDADES GLOBALES ---
+
+/**
+ * Obtiene la ruta base según la ubicación del archivo HTML relativo a la raíz
+ */
+window.obtenerPathBase = () => window.location.pathname.includes('/pages/') ? '../' : './';
+
+/**
+ * Constante centralizada de compra mínima
+ */
+window.MIN_COMPRA = 15000;
+
+// --- UTILIDADES DE DATOS ---
+
+/**
+ * Mapa centralizado de nombres de categorías para consistencia en todo el sitio
+ */
+const nombresCategorias = {
+    'ecologicas': 'Bolsas de tela',
+    'composteras': 'Composteras',
+    'personalizadas': 'Bolsas personalizadas',
+    'papel': 'Bolsas de papel',
+    'biodegradables': 'Bolsas biodegradables',
+    'disenos': 'Bolsas con diseños'
+};
+
+/**
+ * Filtra los productos por su categoría
+ */
 const obtenerProductosPorCategoria = (categoria) => {
     if (!categoria) return productos; // Devuelve todo si no hay categoría
     return productos.filter(p => p.categoria === categoria);
 };
 
-// Función helper para buscar por texto
+/**
+ * Busca productos por coincidencia en nombre o descripción
+ */
 const obtenerProductosPorBusqueda = (termino) => {
     if (!termino) return [];
     const lowerTerm = termino.toLowerCase();

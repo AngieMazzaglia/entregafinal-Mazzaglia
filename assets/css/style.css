@@ -506,20 +506,20 @@ main .container,
   text-align: left !important;
 }
 
-.text-muted {
-  color: #888 !important;
+p.text-muted {
+  color: #888;
 }
 
-.small {
-  font-size: 0.875rem !important;
+.small-text {
+  font-size: 0.875rem;
 }
 
 .fw-700 {
-  font-weight: 700 !important;
+  font-weight: 700;
 }
 
 .fw-400 {
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 
 /*  HEADER + NAV  */
@@ -534,7 +534,7 @@ main .container,
   justify-content: space-between;
   gap: 16px;
   padding-block: 12px;
-  max-width: 1250px !important;
+  max-width: 1250px;
 }
 
 .logo {
@@ -779,7 +779,7 @@ footer .footer-grid {
   gap: 16px;
   align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  max-width: 1250px !important;
+  max-width: 1250px;
 }
 footer .footer-grid > * {
   margin: 0;
@@ -825,6 +825,12 @@ a.btn,
   text-decoration: none !important;
   font-family: inherit;
   font-size: 1rem;
+}
+
+.site-nav a,
+.footer-nav a,
+.card-title-link {
+  text-decoration: none;
 }
 
 .btn-verde,
@@ -873,10 +879,10 @@ a.btn:focus-visible,
 }
 
 /* Botón Secundario (Outline) */
-.btn-outline {
+.btn.btn-outline {
   background-color: #fff;
   color: var(--c-brand);
-  border: 1px solid var(--c-brand) !important;
+  border: 1px solid var(--c-brand);
 }
 .btn-outline:hover {
   background-color: var(--c-brand);
@@ -892,16 +898,16 @@ a.btn:focus-visible,
 }
 
 /* --- Estados de Botones (Unificado Clean Code) --- */
-.btn-disabled,
 .btn:disabled,
-button:disabled {
-  background-color: #e0e0e0 !important;
-  border-color: #e0e0e0 !important;
-  color: #777 !important;
-  opacity: 1 !important;
-  cursor: not-allowed !important;
-  pointer-events: none !important;
-  box-shadow: none !important;
+button:disabled,
+.btn-disabled {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+  color: #777;
+  opacity: 1;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
 }
 
 /* Breadcrumbs Globales */
@@ -978,9 +984,11 @@ button:disabled {
 }
 
 /* --- Estados de Validación (Clean Code) --- */
-.is-invalid {
-  border-color: #e74c3c !important;
-  background-color: #fff8f8 !important;
+input.is-invalid,
+textarea.is-invalid,
+select.is-invalid {
+  border-color: #e74c3c;
+  background-color: #fff8f8;
 }
 
 .input-error-hint {
@@ -1333,11 +1341,12 @@ button:disabled {
 }
 
 .delete-btn,
-.delete-icon-btn {
-  color: #e74c3c !important;
-  background: none !important;
-  border: none !important;
-  padding: 8px !important;
+.cart-item-remove,
+.btn-remove {
+  color: #e74c3c;
+  background: none;
+  border: none;
+  padding: 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;

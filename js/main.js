@@ -146,18 +146,9 @@ function renderizarTienda() {
     });
     // Actualizar título y breadcrumb
     if (categoria) {
-        // Mapa de nombres amigables
-        const nombresCategorias = {
-            'ecologicas': 'Bolsas de tela',
-            'composteras': 'Composteras',
-            'personalizadas': 'Bolsas personalizadas',
-            'papel': 'Bolsas de papel',
-            'biodegradables': 'Bolsas biodegradables',
-            'disenos': 'Bolsas con diseños'
-        };
-
-        // Usar el nombre del mapa o capitalizar si no existe
-        const catName = nombresCategorias[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
+        // Usar el nombre del mapa global o capitalizar si no existe
+        const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[categoria]) 
+                        || (categoria ? (categoria.charAt(0).toUpperCase() + categoria.slice(1)) : 'Tienda');
 
         // Actualizar breadcrumb dinámico (con niveles extras)
         const dynamicBreadcrumb = document.getElementById('dynamic-breadcrumb');
@@ -396,23 +387,16 @@ function renderizarDetalleProducto() {
         return;
     }
 
-    const pathBase = window.location.pathname.includes('/pages/') ? '../' : './';
+    const pathBase = (typeof obtenerPathBase === 'function') ? obtenerPathBase() : './';
     
     // Preparar características
     const featuresHTML = producto.caracteristicas 
         ? `<ul>${producto.caracteristicas.map(f => `<li>${f}</li>`).join('')}</ul>`
         : `<p>${producto.descripcion}</p>`;
 
-    // Preparar el Badge de categoría (amigable)
-    const nombresCategorias = {
-        'ecologicas': 'Bolsas de tela',
-        'composteras': 'Composteras',
-        'personalizadas': 'Personalizadas',
-        'papel': 'Bolsas de papel',
-        'biodegradables': 'Biodegradables',
-        'disenos': 'Bolsas con diseños'
-    };
-    const catName = nombresCategorias[producto.categoria] || producto.categoria;
+    // Preparar el Badge de categoría (amigable) usando el mapa global
+    const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[producto.categoria]) 
+                    || producto.categoria;
 
     // --- MEJORA SEO: Inyectar JSON-LD dinámico ---
     let schemaEl = document.getElementById('dynamic-product-schema');
@@ -526,7 +510,7 @@ function renderizarDetalleProducto() {
     window.actualizarHint = () => {
         const totalActual = typeof calcularTotal === 'function' ? calcularTotal() : 0;
         const hintEl = document.getElementById('min-purchase-hint');
-        const minCompra = typeof MIN_COMPRA !== 'undefined' ? MIN_COMPRA : 15000;
+        const minCompra = (typeof MIN_COMPRA !== 'undefined') ? MIN_COMPRA : 15000;
         
         if (hintEl) {
             if (totalActual < minCompra) {
@@ -715,3 +699,19 @@ function inicializarAccesibilidad() {
         });
     }
 }
+
+// --- UTILIDADES DE ACCESIBILIDAD ---
+
+/**
+ * Anuncia cambios a lectores de pantalla (Live Regions)
+ */
+window.anunciarParaScreenReader = (mensaje) => {
+    const statusRegion = document.getElementById('cart-status');
+    if (statusRegion) {
+        statusRegion.innerText = mensaje;
+        // Limpiar después de unos segundos para que no se lea repetidamente si se navega
+        setTimeout(() => {
+            statusRegion.innerText = '';
+        }, 3000);
+    }
+};
