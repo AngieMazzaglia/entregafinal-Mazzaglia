@@ -1,82 +1,84 @@
+@use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
-@use "../abstracts/extend" as *;
-@use "../base/animations" as *;
 
-/* Botones (unificados + compat Bootstrap) */
-a.btn,
-.btn,
-.btn-verde,
-.btn-outline {
+/* ==========================================================================
+   BOTONES (Sistema Unificado)
+   ========================================================================== */
+
+/* Base de Botones (Bootstrap Compat + Custom) */
+a.btn, .btn, .btn-verde, .btn-outline {
     @include btn-base;
 }
 
-.btn-verde,
-.btn-success {
-    background-color: var(--c-brand);
-    color: #ffffff;
-    border-color: var(--c-brand);
+/* Variante: Primario (Verde Verde Verde) */
+.btn-verde, .btn-success {
+    background-color: $c-brand;
+    color: $c-bg;
+    border: 1px solid $c-brand;
+
+    &:hover {
+        background-color: $c-brand-dark;
+        border-color: $c-brand-dark;
+        color: $c-bg;
+        text-decoration: none;
+    }
 }
 
-.btn-verde:hover,
-.btn-success:hover {
-    background-color: var(--c-brand-dark);
-    color: #ffffff;
-    border-color: var(--c-brand-dark);
-    text-decoration: none;
+/* Variante: Secundario (Delineado) */
+.btn-outline {
+    background-color: transparent;
+    color: $c-brand;
+    border: 1px solid $c-brand;
+
+    &:hover {
+        background-color: $c-brand;
+        color: $c-bg;
+        text-decoration: none;
+    }
 }
 
-.btn:focus-visible,
-a.btn:focus-visible,
-.btn-verde:focus-visible {
-    @include focus-ring(rgba(46, 125, 50, 0.35), 3px, 2px);
-}
-
-/* Botón subrayado */
+/* Variante: Link Subrayado */
 .btn-link {
     background: none;
     border: none;
-    color: var(--c-brand);
+    color: $c-brand;
     font-weight: 700;
     text-decoration: underline;
     padding: 0;
     cursor: pointer;
     font-family: inherit;
     transition: color .2s ease, text-decoration-thickness .2s ease;
-}
-
-.btn-link:hover {
-    color: var(--c-brand-dark);
-    text-decoration-thickness: 2px;
-}
-
-.btn-link:focus-visible {
-    @include focus-ring(rgba(46, 125, 50, 0.3), 2px, 2px);
-}
-
-/* Botón Secundario (Outline) */
-.btn-outline {
-    background-color: #fff;
-    color: var(--c-brand);
-    border: 1px solid var(--c-brand) !important;
 
     &:hover {
-        background-color: var(--c-brand);
-        color: #fff;
-        text-decoration: none;
+        color: $c-brand-dark;
+        text-decoration-thickness: 2px;
+    }
+
+    &:focus-visible {
+        @include focus-ring(rgba(46, 125, 50, 0.3), 2px, 2px);
     }
 }
 
-/* Botón ancho completo */
+/* ==========================================================================
+   ESTADOS Y COMPORTAMIENTOS
+   ========================================================================== */
+
+/* Accesibilidad: Focus rings unificados */
+.btn:focus-visible,
+a.btn:focus-visible,
+.btn-verde:focus-visible {
+    @include focus-ring($c-brand, 3px, 2px);
+}
+
+/* Botón Ancho Completo (Flex Centered) */
 .btn-block {
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-/* --- Estados de Botones (Unificado Clean Code) --- */
-.btn-disabled,
-.btn:disabled,
-button:disabled {
+/* Estados Deshabilitados (Clean & Predictable) */
+.btn-disabled, .btn:disabled, button:disabled {
     background-color: #e0e0e0 !important;
     border-color: #e0e0e0 !important;
     color: #777 !important;
