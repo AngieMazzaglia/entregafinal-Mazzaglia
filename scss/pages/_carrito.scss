@@ -19,7 +19,7 @@
 
         h1 {
             margin-bottom: $space-5;
-            color: $brand;
+            color: $c-brand;
             font-weight: 700;
         }
     }
@@ -37,7 +37,7 @@
 
         h3 {
             margin-bottom: $space-4;
-            color: $brand;
+            color: $c-brand;
             font-weight: 700;
             border-bottom: 2px solid #f4fdf0;
             padding-bottom: $space-2;
@@ -52,7 +52,7 @@
             &.total {
                 font-weight: 700;
                 font-size: 1.35rem;
-                color: $text-color;
+                color: $c-text;
                 margin-top: $space-3;
                 margin-bottom: $space-4;
                 border-top: 1px solid #eee;
@@ -73,7 +73,7 @@
                     display: block;
                     font-weight: 700;
                     font-size: 0.85rem;
-                    color: $text-color;
+                    color: $c-text;
                     margin-bottom: 10px;
                 }
 
@@ -92,7 +92,7 @@
                         transition: all 0.3s ease;
 
                         &:focus {
-                            border-color: $brand;
+                            border-color: $c-brand;
                             box-shadow: 0 0 0 3px rgba(25, 117, 58, 0.1);
                         }
                     }
@@ -104,20 +104,20 @@
                 padding: 12px;
                 background-color: #f4fdf0;
                 border-radius: $radius-sm;
-                color: $brand-dark;
-                border-left: 4px solid $brand;
+                color: $c-brand-dark;
+                border-left: 4px solid $c-brand;
                 font-size: 0.9rem;
                 line-height: 1.5;
             }
         }
     }
 
-    /* --- COMPONENTE: Item de Carrito (Clean Code) --- */
+    /* --- COMPONENTE: Item de Carrito (Active) --- */
     .cart-page-item {
         display: flex;
         align-items: center;
         padding: $space-5 0;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid $border-color;
         gap: $space-5;
 
         img {
@@ -125,24 +125,22 @@
             height: 100px;
             object-fit: contain;
             border-radius: $radius;
-            background: #fdfdfd;
+            background: $c-bg;
+            padding: 8px;
+            border: 1px solid #f5f5f5;
         }
 
         .cart-item-info {
             flex: 2;
             h4 {
                 margin-bottom: $space-1;
-                font-weight: 600;
-                color: $text-color;
-            }
-            .text-muted.small {
-                font-size: 0.85rem;
-                margin-bottom: $space-2;
-                color: #888;
+                font-weight: 700;
+                color: $c-text;
+                font-size: 1.15rem;
             }
             .unit-price {
-                font-size: 0.85rem;
-                color: #888;
+                font-size: 0.9rem;
+                color: #777;
             }
         }
 
@@ -154,85 +152,16 @@
 
         .cart-item-total-price {
             flex: 1;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 600;
+            text-align: right;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: $c-text;
         }
 
         .cart-item-action {
             flex: 0 0 40px;
             display: flex;
             justify-content: flex-end;
-        }
-    }
-
-    /* Items en el Listado Full */
-    .full-cart-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: $space-4 0;
-        border-bottom: 1px solid #eee;
-        gap: $space-4;
-        flex-wrap: wrap;
-
-        .item-info {
-            display: flex;
-            align-items: center;
-            gap: $space-4;
-            flex: 1;
-            min-width: 250px;
-
-            .item-img {
-                width: 90px;
-                height: 90px;
-                object-fit: contain;
-                border-radius: $radius-sm;
-                background-color: #fff;
-                padding: 6px;
-                border: 1px solid #f5f5f5;
-            }
-
-            .item-details {
-                .item-name {
-                    font-size: 1.15rem;
-                    font-weight: 700;
-                    margin-bottom: 6px;
-                    color: $text-color;
-                }
-
-                .item-price {
-                    color: #777;
-                    font-size: 0.95rem;
-                }
-            }
-        }
-
-        .item-actions-full {
-            display: flex;
-            align-items: center;
-            gap: $space-5;
-
-            .item-total-full {
-                width: 110px;
-                text-align: right;
-                font-weight: 700;
-                font-size: 1.1rem;
-                color: $text-color;
-            }
-
-            .delete-full-btn {
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                color: #999;
-                padding: 8px;
-                transition: color 0.2s;
-
-                &:hover {
-                    color: #ef4444 !important;
-                }
-            }
         }
     }
 }

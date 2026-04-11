@@ -9,7 +9,7 @@
 
     h1 {
         margin-bottom: $space-2;
-        color: $brand;
+        color: $c-brand;
         margin-top: $space-2;
         text-align: center;
         /* Título centrado */
@@ -35,9 +35,9 @@
     .filter-btn {
         display: inline-block;
         padding: 6px 16px;
-        border: 1px solid $brand;
+        border: 1px solid $c-brand;
         border-radius: 50px; // Pill shape
-        color: $brand;
+        color: $c-brand;
         text-decoration: none;
         font-size: 0.95rem;
         transition: all 0.2s ease;
@@ -45,7 +45,7 @@
 
         &:hover,
         &.active {
-            background-color: $brand;
+            background-color: $c-brand;
             color: #fff;
             text-decoration: none;
         }
@@ -80,22 +80,22 @@
     padding: $space-6;
 }
 
-/* Tarjeta de producto refactorizada (Best Practices) */
+/* TARJETA DE PRODUCTO: Refactorizada (Best Practices) */
 .tienda-grid .card {
-    text-align: left;
-    padding: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; // Clipa la imagen con el border-radius del card
-    position: relative;
+    border: 1px solid $border-color;
+    border-radius: $radius; 
+    background-color: $c-bg;
+    box-shadow: $shadow-subtle;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     
-    /* Variables de escala para normalización visual */
-    --base-scale: 1;
-    
-    &.cat-disenos {
-        --base-scale: 1.2; /* Compensación para imágenes de diseños que son visualmente más pequeñas */
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: $shadow-medium;
     }
+
+    /* Variables de escala para normalización visual (Diseños son más pequeños en archivo original) */
+    --base-scale: 1;
+    &.cat-disenos { --base-scale: 1.2; }
 }
 
 .card-body {
@@ -109,11 +109,12 @@
         font-size: 1.05rem;
         margin-bottom: $space-1;
         line-height: 1.3;
+        color: $c-text;
     }
 
     p {
         font-size: 0.825rem;
-        color: #666;
+        color: #666; /* $c-text-muted legacy */
         margin-bottom: $space-3;
     }
 }
@@ -124,34 +125,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: $c-bg;
     overflow: hidden;
-    padding: $space-3; // Safe Area universal para evitar recortes (12px)
-
-    &.is-wide {
-        padding: $space-2 $space-3; // Unificamos: 12px a los costados para evitar recortes
-        background-color: #fff;
-    }
+    padding: $space-3; 
 
     img {
         width: 100%;
         height: 100%;
         object-fit: contain;
         transition: transform 0.3s ease;
-        transform: scale(var(--base-scale)); /* Escala base dinámica */
+        transform: scale(var(--base-scale));
     }
 }
 
-.img-zoom-wrapper {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-/* Hover Universal: Todos crecen exactamente lo mismo (0.1 adicional a su base) */
+/* Hover Universal: Zoom Proporcional +0.1 */
 .card:hover .card-img-container img {
     transform: scale(calc(var(--base-scale) + 0.1));
 }
@@ -159,11 +146,11 @@
 .card-price {
     font-size: 1.2rem;
     font-weight: 700;
-    color: $brand;
+    color: $c-brand;
     margin: $space-1 0;
 }
 
-/* Contenedor Compra Rápida Híbrida */
+/* COMPRA RÁPIDA: Refined Layout */
 .quick-buy-wrapper {
     display: flex;
     justify-content: flex-end;
@@ -177,8 +164,8 @@
         height: 38px;
         border-radius: 50%;
         border: none;
-        background-color: $brand;
-        color: #fff;
+        background-color: $c-brand;
+        color: $c-bg;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -186,25 +173,24 @@
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         
         &:hover {
-            background-color: $brand-dark;
+            background-color: $c-brand-dark;
             transform: scale(1.05);
         }
 
         &.state-badge {
             font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
     }
 
     .quick-qty-selector {
         display: flex;
         align-items: center;
-        background-color: #fff;
-        border: 1px solid $brand;
+        background-color: $c-bg;
+        border: 1px solid $c-brand;
         border-radius: 30px;
         padding: 2px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        box-shadow: $shadow-subtle;
         animation: slideInLeft 0.3s ease forwards;
 
         button {
@@ -213,13 +199,13 @@
             border-radius: 50%;
             border: none;
             background: transparent;
-            color: $brand;
+            color: $c-brand;
             font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            &:hover { background: rgba(0,0,0,0.05); }
+            &:hover { background: rgba($c-brand, 0.05); }
         }
 
         .qty-val {
@@ -227,7 +213,7 @@
             text-align: center;
             font-weight: 700;
             font-size: 0.95rem;
-            color: #333;
+            color: $c-text;
         }
     }
 }
@@ -237,7 +223,7 @@
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* Controles de tarjeta */
+/* Tarjeta: Controles Finales */
 .card-controls {
     margin-top: auto;
     padding-top: $space-1;
@@ -247,7 +233,6 @@
         width: 100%;
         padding: 10px 12px;
         font-size: 0.9rem;
-        text-align: center;
         justify-content: center;
     }
 }

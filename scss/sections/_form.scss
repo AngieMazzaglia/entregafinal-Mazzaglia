@@ -20,12 +20,12 @@
 // Bloque eliminado para heredar estilos globales de H1
 
 
-/* Contacto – formularios (Bootstrap)  */
+/* Contacto – formularios (Clean Architecture)  */
 form.needs-validation {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: $c-bg;
+    border: 1px solid $border-color;
     @include panel-rounded-lg($space-5);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: $shadow-subtle;
 }
 
 .tituloform {
@@ -36,29 +36,29 @@ form.needs-validation {
 
 .subtform {
     text-align: center;
-    color: #555;
+    color: #666;
     margin-bottom: 1.5rem;
     font-size: $font-size-sm;
 }
 
 .form-control:focus {
     border-color: var(--c-brand);
-    box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.25);
+    box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.15);
 }
 
-/* Acordeón */
+/* Acordeón (Sync with Brand) */
 .accordion-button {
     color: var(--c-brand);
     font-weight: 600;
 
     &:not(.collapsed) {
         color: var(--c-brand);
-        background-color: #fff;
+        background-color: $c-bg;
         box-shadow: none;
     }
 
     &:focus {
         border-color: var(--c-brand);
-        box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+        box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.15);
     }
 }

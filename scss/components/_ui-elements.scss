@@ -1,20 +1,24 @@
 @use "../abstracts/variables" as *;
 
+/* ==========================================================================
+   UI ELEMENTS (Shared Components)
+   ========================================================================== */
+
 /* Breadcrumbs Globales */
 .breadcrumb-nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 1rem;
-    color: #666;
+    color: #666; 
     margin-bottom: $space-2;
 
     a {
         color: #666;
-        text-decoration: none;
+        transition: color 0.3s ease;
 
         &:hover {
-            color: $brand;
+            color: $c-brand;
             text-decoration: underline;
         }
     }
@@ -26,72 +30,34 @@
 
     .current {
         font-weight: 600;
-        color: $brand;
+        color: $c-brand;
     }
 
-    /* Variante para fondos oscuros/imágenes */
+    /* Variante: Dark Backgrounds */
     &.breadcrumb-white {
         color: rgba(255, 255, 255, 0.9);
 
         a {
             color: rgba(255, 255, 255, 0.9);
-
-            &:hover {
-                color: #fff;
-                text-decoration: underline;
-            }
+            &:hover { color: #fff; }
         }
 
-        .separator {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .current {
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
+        .separator { color: rgba(255, 255, 255, 0.6); }
+        .current { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
     }
 }
 
-.breadcrumb-container {
-    text-align: left;
-    margin-bottom: 2rem;
+/* ==========================================================================
+   FEEDBACK & VALIDATION
+   ========================================================================== */
 
-    &.contact-breadcrumb {
-        // max-width: 800px;  <-- Eliminado para alinear con el resto
-        // margin-inline: auto; <-- Eliminado
-        padding-left: 0; // Asegurar que esté a la izquierda
-    }
-}
-
-/* Alerta compra mínima (estilo limpio) */
-.min-purchase-alert {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: transparent;
-    /* Sin fondo */
-    color: #555;
-    padding: 0;
-    border-radius: 0;
-    font-size: 0.95rem;
-    border: none;
-    margin-bottom: $space-1;
-
-    .icon-info {
-        color: $brand;
-        /* Color verde principal */
-    }
-}
-
-/* --- Estados de Validación (Clean Code) --- */
 .is-invalid {
     border-color: #e74c3c !important;
     background-color: #fff8f8 !important;
 }
 
 .input-error-hint {
-    display: none; // Oculto por defecto
+    display: none;
     color: #e74c3c;
     font-size: 0.8rem;
     margin-top: 4px;
@@ -100,66 +66,45 @@
     width: 100%;
 
     &.visible {
-        display: block; // Se muestra solo si hay error
+        display: block;
         animation: fadeIn 0.3s ease;
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- Pantalla de Procesamiento (Glassmorphism) --- */
+/* --- OVERLAY: Procesando (Glassmorphism) --- */
 .processing-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: $glass-bg;
+    backdrop-filter: blur($blur-intensity);
+    -webkit-backdrop-filter: blur($blur-intensity);
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     
-    .processing-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: $space-2;
-    }
-
     .spinner {
         width: 50px;
         height: 50px;
-        border: 4px solid rgba($brand, 0.1);
-        border-top: 4px solid $brand;
+        border: 4px solid rgba($c-brand, 0.1);
+        border-top: 4px solid $c-brand;
         border-radius: 50%;
         margin-bottom: $space-3;
         animation: spin 1s linear infinite;
     }
 
-    h3 {
-        color: $brand;
-        margin-bottom: $space-1;
-    }
-
-    p {
-        color: #666;
-        font-weight: 500;
-        font-size: 1rem;
-    }
+    h3 { color: $c-brand; }
+    p { color: #666; font-weight: 500; }
 }
 
-/* --- NOTIFICACIONES TOAST (Refined) --- */
+/* --- TOASTS: Notificaciones --- */
 .toast-container {
     position: fixed;
-    top: 100px; /* Debajo del header */
+    top: $header-height;
     right: 24px;
     z-index: 10000;
     display: flex;
@@ -168,57 +113,33 @@
 }
 
 .toast-notification {
-    background: #ffffff;
-    color: $brand; 
+    background: $c-bg;
+    color: $c-brand; 
     padding: 16px 24px;
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: $shadow-medium;
     display: flex;
     align-items: center;
     gap: 12px;
     font-weight: 600;
-    border-left: 5px solid $brand; /* Borde lateral verde */
+    border-left: 5px solid $c-brand;
     animation: slideInToast 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28),
                fadeOutToast 0.5s ease-in 2.5s forwards;
-    pointer-events: none;
 
-    svg {
-        flex-shrink: 0;
-        color: $brand;
-    }
+    svg { color: $c-brand; }
 }
 
-@keyframes slideInToast {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+/* ==========================================================================
+   LOGIC COMPONENTS
+   ========================================================================== */
 
-@keyframes fadeOutToast {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-}
-
-
-
-/* --- Componente: Controles de Cantidad (Reutilizable) --- */
+/* Controles de Cantidad (Capsule Design) */
 .quantity-controls {
     display: inline-flex;
     align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 20px; /* Estilo cápsula */
-    background-color: #fff;
+    border: 1px solid $border-color;
+    border-radius: 20px;
+    background-color: $c-bg;
     overflow: hidden;
 
     button {
@@ -227,29 +148,19 @@
         border: none;
         background-color: #f8f9fa;
         cursor: pointer;
-        color: $brand; 
+        color: $c-brand; 
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1rem;
         font-weight: 600;
-        transition: background-color 0.2s ease, color 0.2s ease;
-        border-radius: 0;
+        transition: all 0.2s ease;
 
         &:hover:not(:disabled) {
-            background-color: #f0f0f0;
-            color: $brand-dark;
+            background-color: #eee;
+            color: $c-brand-dark;
         }
 
-        &:disabled {
-            color: #ccc;
-            cursor: not-allowed;
-            background-color: #fdfdfd;
-        }
-
-        /* Reset de estilos de botón generales */
-        appearance: none;
-        -webkit-appearance: none;
+        &:disabled { color: #ccc; cursor: not-allowed; }
     }
 
     span {
@@ -258,11 +169,11 @@
         font-weight: 600;
         min-width: 34px;
         text-align: center;
-        color: #333;
     }
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+/* Keyframes */
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes slideInToast { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeOutToast { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }

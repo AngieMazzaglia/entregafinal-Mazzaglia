@@ -42,6 +42,7 @@ a.btn-blanco, .btn-blanco {
     background-color: $c-bg;
     color: $c-brand;
     border: 1px solid $c-brand;
+    text-shadow: none !important;
 
     &:hover {
         background-color: $c-bg-beige;

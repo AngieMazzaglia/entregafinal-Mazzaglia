@@ -31,9 +31,36 @@
 .text-center { text-align: center !important; }
 .text-right { text-align: right !important; }
 .text-left { text-align: left !important; }
-
 .text-muted { color: #888 !important; }
-.small { font-size: $font-size-sm !important; }
+.text-brand { color: $c-brand !important; }
+.text-brand-dark { color: $c-brand-dark !important; }
+.text-white { color: #fff !important; }
 
+/* Utilidades de Tipografía */
+.small { font-size: $font-size-sm !important; }
 .fw-700 { font-weight: 700 !important; }
 .fw-400 { font-weight: 400 !important; }
+.lh-base { line-height: 1.6 !important; }
+
+/* Utilidades de Fondo */
+.bg-white { background-color: #fff !important; }
+.bg-brand { background-color: $c-brand !important; }
+.bg-brand-dark { background-color: $c-brand-dark !important; }
+.bg-soft { background-color: $c-bg-soft !important; }
+.bg-beige { background-color: $c-bg-beige !important; }
+
+/* Utilidades de Flexbox */
+.d-flex { display: flex !important; }
+.flex-column { flex-direction: column !important; }
+.flex-1 { flex: 1 !important; }
+.justify-center { justify-content: center !important; }
+.align-center { align-items: center !important; }
+.gap-1 { gap: $space-1 !important; }
+.gap-2 { gap: $space-2 !important; }
+.gap-3 { gap: $space-3 !important; }
+
+/* Otros */
+.w-100 { width: 100% !important; }
+.d-block { display: block !important; }
+.rounded { border-radius: $radius !important; }
+.shadow-subtle { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; }

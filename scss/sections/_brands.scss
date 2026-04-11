@@ -3,15 +3,15 @@
 
 /*  Marcas que nos eligen  */
 .franja-marcas {
-    background: $bg-footer; // Verde oscuro (footer)
+    background: $c-bg-footer; // Verde oscuro (footer)
     padding-block: var(--space-7); // Aumentado para consistencia
-    color: #fff; // Texto blanco para contraste
+    color: $c-bg; // Texto blanco para contraste
     text-align: center;
 
     h2 {
         margin-top: 0;
         margin-bottom: $space-4;
-        color: #fff;
+        color: $c-bg;
     }
 }
 

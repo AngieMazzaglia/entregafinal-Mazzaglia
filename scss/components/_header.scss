@@ -13,7 +13,7 @@
     justify-content: space-between;
     gap: $space-4;
     padding-block: 12px;
-    max-width: 1250px !important; // Override del container global para dar más aire
+    max-width: $layout-max-width !important; 
 }
 
 .logo {
@@ -71,15 +71,15 @@ nav a[aria-current="page"] {
     width: 38px;
     height: 38px;
     font-size: 22px;
-    color: $brand-dark;
-    border: 1px solid $brand-soft;
+    color: $c-brand-dark;
+    border: 1px solid $c-brand-soft;
     border-radius: $radius-sm;
     background: #fff;
     cursor: pointer;
     transition: background-color .3s ease;
 
     &:hover {
-        background: $bg-soft;
+        background: $c-bg-soft;
     }
 }
 
@@ -156,7 +156,7 @@ nav a[aria-current="page"] {
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.2s ease;
-    border: 1px solid #eee;
+    border: 1px solid $border-color;
 
     li {
         display: block;

@@ -17,7 +17,9 @@ footer {
         gap: $space-4;
         align-items: start;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        max-width: 1250px !important; // Match header width
+        max-width: $layout-max-width !important; 
+        width: 100%;
+        margin-inline: auto;
 
         >* {
             margin: 0;

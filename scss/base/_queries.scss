@@ -1,126 +1,28 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/maps" as *;
 @use "../abstracts/mixins" as *;
-@use "./animations" as *;
 
-/* TODAS LAS MEDIA QUERIES  */
+/* ==========================================================================
+   SISTEMA DE RESPONSIVIDAD (Media Queries Centralizadas)
+   ========================================================================== */
 
-/* ≤360px — móviles pequeños */
-@media (max-width: 360px) {
-    .container {
-        padding-inline: 12px;
-    }
-
-    .logo {
-        height: 36px;
-    }
-
-    .header-inner {
-        gap: 8px;
-        padding-block: 10px;
-    }
-
-    .nav-list {
-        gap: 10px;
-        font-size: 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .hero {
-        padding: 40px 12px;
-    }
-
-    .hero h2 {
-        font-size: clamp(20px, 8vw, 26px);
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    a.btn,
-    .btn,
-    .btn-verde {
+/* Móviles Pequeños (Hasta XS: 360px) */
+@media (max-width: map-get($breakpoints, xs)) {
+    .container { padding-inline: 12px; }
+    .logo { height: 36px; }
+    .nav-list { gap: 10px; font-size: 14px; }
+    .hero { padding: 40px 12px; }
+    
+    a.btn, .btn, .btn-verde {
         padding: 10px 14px;
         font-size: .95rem;
     }
-
-    .features,
-    .steps {
-        gap: 12px;
-    }
-
-    .feature .ico,
-    .step .ico {
-        width: 56px;
-        height: 56px;
-    }
-
-    .step {
-        padding: 18px 12px;
-        min-height: auto;
-    }
-
-    .cards {
-        gap: $space-4;
-    }
-
-    .footer-grid>* {
-        text-align: center;
-    }
 }
 
-/* 361–480px — móviles medianos */
-@media (min-width: 361px) and (max-width: 480px) {
-    .container {
-        padding-inline: 14px;
-    }
-
-    .logo {
-        height: 44px;
-    }
-
-    .nav-list {
-        gap: 12px;
-        font-size: 15px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .hero {
-        padding: 48px 14px;
-    }
-
-    .hero h2 {
-        font-size: clamp(22px, 6.5vw, 30px);
-    }
-
-    .features,
-    .steps {
-        gap: 14px;
-    }
-
-    .feature .ico,
-    .step .ico {
-        width: 60px;
-        height: 60px;
-    }
-
-    .step {
-        padding: 22px 14px;
-        min-height: 140px;
-    }
-
-    .footer-grid>* {
-        text-align: center;
-    }
-}
-
-/* <800px — comportamiento del menú hamburguesa */
-@media (max-width: 799px) {
-    .header-inner {
-        flex-wrap: wrap;
-    }
+/* Comportamiento del Menú (Mobile-First de-facto) */
+/* Todo lo que sea MENOR que LG (1024px) usa el menú hamburguesa */
+@media (max-width: calc(1024px - 1px)) {
+    .header-inner { flex-wrap: wrap; }
 
     .site-nav {
         display: block;
@@ -128,13 +30,13 @@
         width: 100%;
         max-height: 0;
         overflow: hidden;
-        background: #fff;
+        background: $c-bg;
         border-top: 1px solid #eee;
         transition: max-height .5s ease;
     }
 
-    .nav-toggle:checked~.site-nav {
-        max-height: 300px;
+    .nav-toggle:checked ~ .site-nav {
+        max-height: 400px;
         animation: slideDown .3s ease-out;
     }
 
@@ -145,65 +47,58 @@
         padding: 12px 0;
     }
 
-    .nav-toggle-btn {
-        display: inline-flex;
-    }
-
+    .nav-toggle-btn { display: inline-flex; }
+    
     .nav-toggle-btn::before {
         content: "≡";
         transition: transform .3s ease;
     }
 
-    .nav-toggle:checked+.nav-toggle-btn::before {
+    .nav-toggle:checked + .nav-toggle-btn::before {
         content: "✕";
         transform: rotate(180deg);
     }
 }
 
-/* ≥480px — marcas 3 por fila */
+/* ==========================================================================
+   BREAKPOINTS ESTANDARIZADOS (respond mixin)
+   ========================================================================== */
+
+/* ≥ SM (480px) */
 @include respond(sm) {
     .franja-marcas .marcas {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* ≥680px — grillas y cards a 2 columnas */
+/* ≥ MD (768px) */
 @include respond(md) {
-    .grid-3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .cards {
+    .grid-3, .grid-4, .cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-
-/* ≥800px — cols a 2, desktop nav */
+/* ≥ LG (1024px) - VISTA DESKTOP */
 @include respond(lg) {
     .cols {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        gap: $space-5;
     }
 
-    .nav-toggle-btn {
-        display: none;
-    }
+    .nav-toggle-btn { display: none; }
 
     .site-nav {
         display: flex;
         align-items: center;
         width: auto;
         max-height: none;
-    }
+        background: transparent;
+        border-top: none;
 
-    .site-nav .nav-list {
-        flex-direction: row;
-        gap: var(--space-3);
+        .nav-list {
+            flex-direction: row;
+            gap: var(--space-4);
+        }
     }
 
     .franja-marcas .marcas {
@@ -211,20 +106,9 @@
     }
 }
 
-/* ≥980px — grillas 3/4 columnas */
+/* ≥ XL (1200px) */
 @include respond(xl) {
-    .grid-3 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .grid-4 {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* ≥1000px — cards a 3 columnas */
-@include respond(xxl) {
-    .cards {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .cards { grid-template-columns: repeat(3, 1fr); }
 }

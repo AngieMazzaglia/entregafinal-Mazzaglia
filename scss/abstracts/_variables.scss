@@ -1,6 +1,8 @@
-/* base */
+/* ==========================================================================
+   DESIGN TOKENS (CSS Variables)
+   ========================================================================== */
 :root {
-    --c-text: #2e2e2e;
+    // Colors
     --c-brand: #19753A;
     --c-brand-dark: #1b5e20;
     --c-brand-soft: #a5d6a7;
@@ -8,8 +10,13 @@
     --c-bg-soft: #d2f8c4;
     --c-bg-footer: #1b5e20;
     --c-bg-beige: #ede9d0;
+    --c-text: #2e2e2e;
 
+    // Structure
     --radius: 12px;
+    --maxw: 1100px;
+
+    // Spacing
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -18,11 +25,24 @@
     --space-6: 32px;
     --space-7: 48px;
     --space-9: 80px;
-    --maxw: 1100px;
 }
 
-/* VARIABLES SASS */
-// Espaciados
+/* ==========================================================================
+   SASS VARIABLES (Standardized Naming)
+   ========================================================================== */
+
+// Colors
+$c-brand: #19753A;
+$c-brand-dark: #1b5e20;
+$c-brand-soft: #a5d6a7;
+$c-bg: #ffffff;
+$c-bg-soft: #d2f8c4;
+$c-bg-footer: #1b5e20;
+$c-bg-beige: #ede9d0;
+$c-bg-beige-transparent: rgba(237, 233, 208, 0.75);
+$c-text: #2e2e2e;
+
+// Spacing
 $space-1: 4px;
 $space-2: 8px;
 $space-3: 12px;
@@ -32,24 +52,29 @@ $space-6: 32px;
 $space-7: 48px;
 $space-9: 80px;
 
-// Bordes
+// Borders & Radius
 $radius: 12px;
 $radius-sm: 8px;
 $radius-lg: 10px;
+$border-color: #dddddd; 
 
-// Colores
-$brand: #19753A;
-$brand-dark: #1b5e20;
-$brand-soft: #a5d6a7;
-$text-color: #2e2e2e;
-$bg-soft: #d2f8c4;
-$bg-footer: #1b5e20;
-$bg-beige: #ede9d0;
-$bg-beige: #ede9d0;
-$bg-beige-transparent: rgba(237, 233, 208, 0.75);
+// Layout & Dimensions
+$layout-max-width: 1250px;
+$header-height: 72px;
 
-// Tipografía
+// Shadows & Effects
+$shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.05);
+$shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+$glass-bg: rgba(255, 255, 255, 0.7);
+$blur-intensity: 12px;
+
+// Typography
 $font-size-base: 1rem;
-$font-size-sm: 0.875rem; // Unificado a 14px
-$font-size-xs: 0.875rem; // Unificado a 14px (alias kept for compatibility)
+$font-size-sm: 0.875rem; 
+$font-size-xs: 0.875rem; 
 $font-size-xxs: 0.7rem;
+
+/* ==========================================================================
+   ENLACE DE VARIABLES (Compatibility Aliases - Removidos tras Refactor)
+   ========================================================================== */
+// Refactor completo. El sitio ahora utiliza exclusivamente la nomenclatura estandarizada ($c-brand, $space-*, etc.)

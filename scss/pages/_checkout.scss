@@ -54,7 +54,7 @@
 
             &:focus {
                 outline: none;
-                border-color: $brand;
+                border-color: $c-brand;
                 box-shadow: 0 0 0 3px rgba(25, 117, 58, 0.1);
             }
 
@@ -76,7 +76,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: $text-color;
+            color: $c-text;
             font-size: 0.95rem;
         }
 
@@ -98,13 +98,16 @@
         }
     }
 
+    /* --- Pasos del Checkout (Acordeón) --- */
     .checkout-step {
         &.active {
-            border-color: $brand !important;
+            border-color: $c-brand !important;
             border-width: 1px;
+            box-shadow: $shadow-subtle;
 
             legend.step-header {
-                color: $brand;
+                color: $c-brand;
+                font-weight: 700;
             }
 
             .step-content {
@@ -113,83 +116,39 @@
         }
 
         &.completed {
+            border-color: $c-brand-soft;
+
             legend.step-header {
-                color: $brand;
+                color: $c-brand;
                 cursor: pointer;
+                
+                &::after {
+                    content: " ✓";
+                    font-size: 0.9rem;
+                }
             }
         }
         
         &.disabled {
-            opacity: 0.7;
+            opacity: 0.6;
             pointer-events: none;
+            
+            legend.step-header {
+                color: #ccc;
+            }
         }
     }
 
     .step-content {
         padding: $space-5;
-        display: none; /* Acordeón */
-    }
-
-
-
-    /* Columna de Resumen Lateral */
-    .checkout-summary-side {
-        .checkout-summary-card {
-            background-color: #fff;
-            border: 1px solid #eee;
-            border-radius: $radius;
-            padding: $space-5;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 24px;
-
-            h3 {
-                color: $brand;
-                border-bottom: 2px solid #f4fdf0;
-                padding-bottom: $space-2;
-                margin-bottom: $space-4;
-                font-weight: 700;
-            }
-        }
-
-        .summary-item-list {
-            margin-bottom: $space-4;
-            max-height: 400px;
-            overflow-y: auto;
-
-            .summary-item {
-                display: flex;
-                justify-content: space-between;
-                padding-bottom: $space-2;
-                margin-bottom: $space-2;
-                font-size: 0.95rem;
-                color: #555;
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.35rem;
-            color: $text-color;
-            border-top: 1px solid #eee;
-            padding-top: $space-3;
-            margin-top: $space-3;
-        }
+        display: none; 
     }
 }
 
-
-/* --- Página de Compra Exitosa (Clean Code) --- */
+/* --- Página de Compra Exitosa (Clean Architecture) --- */
 .page-confirmation {
     text-align: center;
-    padding: $space-6 0;
+    padding: $space-9 0;
     min-height: 60vh;
     display: flex;
     align-items: center;
@@ -200,10 +159,13 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+        max-width: 600px;
+        animation: fadeIn 0.8s ease-out;
     }
 }
 
 .success-icon {
-    margin-bottom: $space-4;
-    fill: $brand; /* Todo el ícono (círculo y tic) en verde */
+    margin-bottom: $space-5;
+    fill: $c-brand; 
+    filter: drop-shadow(0 4px 10px rgba($c-brand, 0.2));
 }

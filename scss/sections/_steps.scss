@@ -28,7 +28,7 @@
             bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
-            color: $brand;
+            color: $c-brand;
             font-size: 2.5rem;
             font-weight: 900;
             line-height: 1;
@@ -73,7 +73,7 @@
 .instruction-box {
     padding: 12px;
     margin-bottom: $space-5;
-    background-color: $bg-beige-transparent;
+    background-color: $c-bg-beige-transparent;
     /* Color beige con transparencia */
     backdrop-filter: blur(8px);
     /* Efecto de desenfoque */
@@ -99,8 +99,8 @@
 
 /* Nums pasos */
 .step-number {
-    background-color: $brand;
-    color: #fff;
+    background-color: $c-brand;
+    color: $c-bg;
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -140,7 +140,7 @@
 }
 
 .ico-payment {
-    color: $brand;
+    color: $c-brand;
     flex-shrink: 0;
 }
 

@@ -21,27 +21,27 @@
 
         // Título principal h1 - selector más específico
         h1 {
-            color: #fff;
+            color: $c-bg;
             margin-bottom: $space-5;
         }
     }
 
     // Textos de intro de cada columna ("Solicitá tu presupuesto", etc)
     .contact-text {
-        color: #fff;
+        color: $c-bg;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 
         // Selectores más específicos para h2 y h3
         h2,
         h3 {
-            color: #fff;
+            color: $c-bg;
         }
     }
 
     // ESTILOS DE TABS (Nav Pills Override)
     .nav-pills {
         .nav-link {
-            color: $brand-dark; // Color texto inactivo
+            color: $c-brand-dark; // Color texto inactivo
             font-weight: 600;
             background-color: transparent;
             transition: all .3s ease;
@@ -52,8 +52,8 @@
 
             // Selector más específico para estado activo
             &.active {
-                background-color: $brand; // Fondo verde activo
-                color: #fff;
+                background-color: $c-brand; // Fondo verde activo
+                color: $c-bg;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
         }
@@ -62,7 +62,7 @@
     // Contenedor del formulario dentro del tab
     .contact-form-container {
         border-radius: $radius;
-        color: $text-color;
+        color: $c-text;
         /* Restaurar color de texto oscuro */
 
         .contact-intro-text {
@@ -70,7 +70,7 @@
             // Ajustar el texto descriptivo dentro del formulario (que ahora está sobre fondo blanco)
             // Selectores más específicos para sobrescribir estilos globales
             h2 {
-                color: $brand; // Volver a verde porque ahora está sobre fondo blanco
+                color: $c-brand; // Volver a verde porque ahora está sobre fondo blanco
                 text-shadow: none;
                 font-size: 1.5rem;
                 margin-bottom: 0.5rem;
