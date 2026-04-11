@@ -3,7 +3,7 @@
 /*  Hero (Index) */
 .hero {
     position: relative;
-    color: #fff;
+    color: $c-bg;
     background: url("../img/hero.webp") center 35%/cover no-repeat;
     padding: 200px 12px;
 
@@ -11,8 +11,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        // Gradiente: negro oscuro a la izquierda, transparente a la derecha
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.1) 100%);
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.2) 100%);
         z-index: 1;
     }
 
@@ -28,20 +27,9 @@
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    /* Botón blanco específico */
-    .btn {
-        background-color: #fff;
-        color: $brand;
-        border-color: #fff;
+    .btn-blanco {
         margin-top: $space-5;
-        text-shadow: none;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-        &:hover {
-            background-color: var(--c-bg-beige);
-            color: $brand-dark;
-            border-color: var(--c-bg-beige);
-        }
+        box-shadow: $shadow-subtle;
     }
 }
 

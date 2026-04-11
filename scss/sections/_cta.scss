@@ -4,7 +4,7 @@
     padding-block: var(--space-9); // Más aire para que se luzca la imagen
     background: url("../img/bosque1.webp") center/cover no-repeat;
     position: relative;
-    color: #fff;
+    color: $c-bg;
     text-align: center;
 
     // Overlay oscuro para mejorar lectura
@@ -12,55 +12,47 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.6); // Oscurecer al 60%
+        background: rgba(0, 0, 0, 0.65); 
         z-index: 1;
     }
 
     .container {
         position: relative;
-        z-index: 2; // Texto por encima del overlay
+        z-index: 2; 
 
-        // Selector más específico para sobrescribir estilos globales
         h2 {
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: $c-bg;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
     }
 
     p {
         font-size: $font-size-base;
         font-weight: 500;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    }
-
-    // El botón se mantiene verde pero quizás necesite un borde blanco para destacar más
-    .btn {
-        border: 1px solid #fff;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        text-shadow: none; // Evitar que herede la sombra del texto general
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     }
 }
 
 /* CTA Box (Versión recuadro blanco para páginas institucionales) */
 .cta-box {
-    background: #fff;
-    padding: var(--space-7);
-    border-radius: var(--radius);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background: $c-bg;
+    padding: $space-7;
+    border-radius: $radius;
+    box-shadow: $shadow-medium;
     max-width: 800px;
     margin-inline: auto;
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid $border-color;
 
     h2 {
         margin-top: 0;
-        margin-bottom: var(--space-4);
-        color: var(--c-brand);
+        margin-bottom: $space-4;
+        color: $c-brand;
     }
 
     p {
-        margin-bottom: var(--space-5);
-        color: var(--text-color);
+        margin-bottom: $space-5;
+        color: #555;
         font-weight: 400;
         text-shadow: none;
     }

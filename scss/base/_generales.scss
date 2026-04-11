@@ -1,6 +1,9 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
+/* ==========================================================================
+   ELEMENTOS BASE & RESETS
+   ========================================================================== */
 * {
     box-sizing: border-box;
 }
@@ -15,52 +18,49 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Outfit', sans-serif;
-    font-size: $font-size-base; // Aumento ligero para compensar el tamaño de Outfit
-    color: $text-color;
+    font-size: $font-size-base; 
+    color: $c-text;
     background: var(--c-bg);
 }
 
 main {
     flex: 1;
-    // Eliminado padding-bottom extra para que secciones con fondo toquen el footer
 }
 
-/* Tipografía de encabezados */
-h1,
-.h1 {
+/* ==========================================================================
+   TIPOGRAFÍA (Headers con Nomenclatura Estándar)
+   ========================================================================== */
+h1, .h1 {
     font-size: 2rem;
     line-height: 1.2;
-    font-weight: 600; // Semi-bold para un look más moderno
-    color: $brand; // Verde principal
+    font-weight: 600;
+    color: $c-brand;
 }
 
-// Override for hero section (white text on dark background)
-.hero h1 {
-    color: #fff;
-}
-
-h2,
-.h2 {
+h2, .h2 {
     font-size: 1.75rem;
     line-height: 1.3;
-    color: $brand;
+    color: $c-brand;
     font-weight: 600;
 }
 
-h3,
-.h3 {
+h3, .h3 {
     font-size: 1.5rem;
     line-height: 1.4;
-    color: $brand;
+    color: $c-brand;
     font-weight: 600;
 }
 
-h4,
-.h4 {
+h4, .h4 {
     font-size: 1.1rem;
     line-height: 1.4;
-    color: $brand;
+    color: $c-brand;
     font-weight: 600;
+}
+
+/* Override para Hero (Texto blanco sobre fondo oscuro) */
+.hero h1 {
+    color: $c-bg; // Usando variable de fondo blanco para el contraste
 }
 
 img {
@@ -72,79 +72,38 @@ img {
 a {
     color: var(--c-brand);
     text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
-// Hover genérico para enlaces (se sobrescribe en botones y navs por especificidad)
-a:hover {
-    text-decoration: underline;
-}
-
-/* Mejora de focus para navegación por teclado */
+/* Accesibilidad: Focus visible unificado */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-    outline: 3px solid var(--c-brand);
-    outline-offset: 2px;
-    border-radius: 2px;
+    @include focus-ring(var(--c-brand));
 }
 
-/* Reset autofill style (browser default light blue) */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-textarea:-webkit-autofill:active,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus,
-select:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
-    -webkit-text-fill-color: $text-color !important;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-/* Utilidades */
+/* ==========================================================================
+   LAYOUT Y CONTENEDORES (Unificados)
+   ========================================================================== */
 .container {
     max-width: var(--maxw);
     margin-inline: auto;
     padding-inline: $space-4;
+    width: 100%;
 }
 
-.flow>*+* {
-    margin-top: var(--space-3);
-}
-
-.centrado {
-    text-align: center;
-}
-
-.derecha {
-    text-align: right;
-}
-
-.sr-only {
-    @include sr-only;
-}
-
-
-.btn-block-center {
-    display: block;
-    width: fit-content;
-    margin-inline: auto;
-}
-
-/* Secciones (bloques)  */
+/* Secciones Genéricas (Bloques) */
 .bloque {
-    padding-block: var(--space-7); // Aumentado de space-6 (32px) a space-7 (48px) para más aire
-    background: #fff;
-    text-align: center; // Centrado de contenido por defecto
+    padding-block: var(--space-7);
+    background: $c-bg;
+    text-align: center;
 
-    // Espacio extra al final de la página (dentro del bloque para evitar franjas blancas)
     &:last-child {
         padding-bottom: var(--space-9); 
     }
@@ -154,24 +113,13 @@ select:-webkit-autofill:active {
     background: var(--c-bg-soft);
 }
 
-.pt-small {
-    padding-top: $space-4 !important;
-}
-
-.bloque h2,
-.bloque h3 {
-    margin-top: 0;
-}
-
-/*  Grillas reutilizables (base) */
-.grid-3,
-.grid-4 {
+/* Grillas Reutilizables */
+.grid-3, .grid-4 {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-4);
 }
 
-/*  Dos columnas (ej: nosotros)  */
 .cols {
     display: grid;
     grid-template-columns: 1fr;
@@ -179,37 +127,16 @@ select:-webkit-autofill:active {
     text-align: left;
 }
 
-.col {
-    width: auto;
-    margin: 0;
-    display: block;
+/* ==========================================================================
+   UTILIDADES DE COMPORTAMIENTO (Flex & Grouping)
+   ========================================================================== */
+.d-flex { display: flex !important; }
+.justify-center { justify-content: center !important; }
+
+.flow > * + * {
+    margin-top: var(--space-3);
 }
 
-/*  Refuerzos de contenedor + skip link  */
-main .container,
-.bloque>.container {
-    max-width: var(--maxw);
-    margin-inline: auto;
-    padding-inline: $space-4;
-}
-
-.skip-link {
-    position: absolute;
-    left: -9999px;
-    top: auto;
-    background: #000;
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: $radius-sm;
-}
-
-.skip-link:focus {
-    left: 8px;
-    top: 8px;
-    z-index: 999;
-}
-
-// Grupos de botones
 .cta-group {
     display: flex;
     gap: 2rem;
@@ -218,24 +145,24 @@ main .container,
 
     .btn {
         flex: 0 1 225px;
-        width: 225px; // Forzar ancho explícito
+        width: 225px;
         text-align: center;
         justify-content: center;
     }
 }
 
-/* --- Utilidades de Layout Prolijas (Checkout/Formularios) --- */
 .flex-resp {
     display: flex;
     flex-wrap: wrap;
     gap: $space-4;
 
-    &.align-start { align-items: flex-start; }
-    &.gap-xl { gap: $space-6; }
-
     > * {
         flex: 1;
         min-width: 300px;
+    }
+
+    @include respond(lg) {
+        flex-wrap: nowrap; // Solo pasamos a desktop en LG
     }
 
     @media (max-width: 992px) {
@@ -253,28 +180,25 @@ main .container,
         flex: 1;
     }
 
-    @media (max-width: 576px) {
-        flex-direction: column;
-        gap: $space-3;
+    @include respond(xs) {
+        @media (max-width: 576px) {
+            flex-direction: column;
+            gap: $space-3;
+        }
     }
 }
 
-.flex { display: flex; }
-.justify-center { justify-content: center; }
-.align-center { align-items: center; }
-.btn-block { width: 100%; display: block; }
-
-/* --- Tarjetas (Cards) Clickables --- */
+/* ==========================================================================
+   COMPONENTES GENÉRICOS (Cards y Otros)
+   ========================================================================== */
 .card {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: $c-bg;
     border-radius: $radius;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
-    
-    // Para que las imágenes y contenido manual en productos.html hereden el estilo
     padding: $space-4;
     text-align: center;
 
@@ -288,15 +212,14 @@ main .container,
         }
     }
 
-    // Estilo para el título (ahora H3 por accesibilidad)
     h3 {
         font-size: 1.2rem;
         margin-bottom: $space-3;
-        color: $brand;
+        color: $c-brand;
     }
 }
 
-/* Stretched Link: Hace que todo el contenedor sea clickeable */
+/* Stretched Link: Contenedor Clickable */
 .stretched-link::after {
     position: absolute;
     top: 0;
@@ -307,8 +230,6 @@ main .container,
     content: "";
 }
 
-// Aseguramos que otros botones o links dentro de la card sigan funcionando
-// si llegara a haberlos (ej: redes sociales o varios CTAs)
 .card a:not(.stretched-link),
 .card button {
     position: relative;
@@ -317,8 +238,26 @@ main .container,
 
 /* Marca de campo obligatorio */
 .required-mark {
-    color: var(--c-error, #e74c3c);
+    color: #e74c3c;
     font-weight: 700;
     margin-left: 2px;
 }
-
+
+/* Skip link (Accesibilidad) */
+.skip-link {
+    @include sr-only;
+    &:focus {
+        position: fixed;
+        left: 8px;
+        top: 8px;
+        z-index: 999;
+        background: #000;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: $radius-sm;
+        width: auto;
+        height: auto;
+        clip: auto;
+    }
+}
+

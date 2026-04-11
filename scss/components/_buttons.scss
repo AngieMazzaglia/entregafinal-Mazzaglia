@@ -11,7 +11,7 @@ a.btn, .btn, .btn-verde, .btn-outline {
 }
 
 /* Variante: Primario (Verde Verde Verde) */
-.btn-verde, .btn-success {
+a.btn-verde, .btn-verde, .btn-success {
     background-color: $c-brand;
     color: $c-bg;
     border: 1px solid $c-brand;
@@ -25,7 +25,7 @@ a.btn, .btn, .btn-verde, .btn-outline {
 }
 
 /* Variante: Secundario (Delineado) */
-.btn-outline {
+a.btn-outline, .btn-outline {
     background-color: transparent;
     color: $c-brand;
     border: 1px solid $c-brand;
@@ -33,6 +33,20 @@ a.btn, .btn, .btn-verde, .btn-outline {
     &:hover {
         background-color: $c-brand;
         color: $c-bg;
+        text-decoration: none;
+    }
+}
+
+/* Variante: Blanco (Fondo Blanco, Letra Verde) */
+a.btn-blanco, .btn-blanco {
+    background-color: $c-bg;
+    color: $c-brand;
+    border: 1px solid $c-brand;
+
+    &:hover {
+        background-color: $c-bg-beige;
+        color: $c-brand-dark;
+        border-color: $c-brand-dark;
         text-decoration: none;
     }
 }
