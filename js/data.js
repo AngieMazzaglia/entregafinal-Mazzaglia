@@ -347,9 +347,15 @@ const productos = [
 // --- UTILIDADES GLOBALES ---
 
 /**
- * Obtiene la ruta base según la ubicación del archivo HTML relativo a la raíz
+ * Obtiene la ruta base según la ubicación del archivo HTML relativo a la raíz.
+ * Centralizado en data.js por ser el primer archivo en cargar.
  */
 window.obtenerPathBase = () => window.location.pathname.includes('/pages/') ? '../' : './';
+
+/**
+ * Formatea un número como moneda local (centralizado)
+ */
+window.formatearPrecio = (valor) => `$${valor.toLocaleString()}`;
 
 /**
  * Constantes centralizadas de negocio

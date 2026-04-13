@@ -5,7 +5,7 @@
 /* MIXINS */
 @mixin panel-base {
     border-radius: $radius;
-    padding: $space-3;
+    padding: $space-4;
 }
 
 @mixin panel-rounded-lg($padding) {
@@ -17,8 +17,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 10px 16px;
+    gap: $space-2;
+    padding: $space-3 $space-4;
     border-radius: $radius-sm;
     font-weight: 700;
     line-height: 1;

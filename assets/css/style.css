@@ -12,7 +12,7 @@
   --c-bg-beige: #ede9d0;
   --c-text: #2e2e2e;
   --radius: 12px;
-  --maxw: 1100px;
+  --maxw: 1200px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -143,7 +143,7 @@ select:focus-visible {
 
 /* Secciones Genéricas (Bloques) */
 .bloque {
-  padding-top: 40px; /* Compensación óptica para balancear altura de línea de títulos */
+  padding-top: 48px; /* Consistente con el sistema de espaciado */
   padding-bottom: var(--space-7);
   background: #ffffff;
   text-align: center;
@@ -602,7 +602,7 @@ input:-webkit-autofill:active {
   justify-content: space-between;
   gap: 16px;
   padding-block: 12px;
-  max-width: 1250px !important;
+  max-width: 1200px !important;
 }
 
 .logo {
@@ -706,7 +706,7 @@ nav a[aria-current=page] {
   color: white;
   border-radius: 50%;
   padding: 0.15rem 0.45rem;
-  font-size: 0.7rem;
+  font-size: 0.625rem;
   font-weight: 700;
   display: none;
 }
@@ -781,7 +781,7 @@ nav a[aria-current=page] {
   border: none;
   background: transparent;
   padding: 4px 0;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   width: 100%;
   outline: none;
   color: var(--c-text);
@@ -847,7 +847,7 @@ footer .footer-grid {
   gap: 16px;
   align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  max-width: 1250px !important;
+  max-width: 1200px !important;
   width: 100%;
   margin-inline: auto;
 }
@@ -872,7 +872,7 @@ footer .copy {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 16px;
   padding: 12px 16px;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #ddd;
   text-align: center;
 }
@@ -886,7 +886,7 @@ a.btn, .btn, .btn-verde, .btn-outline {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 8px;
   font-weight: 700;
   line-height: 1;
@@ -1498,7 +1498,7 @@ a.btn:focus-visible,
 
 .card {
   border-radius: 12px;
-  padding: 12px;
+  padding: 16px;
   gap: 8px;
   display: flex;
   flex-direction: column;
@@ -1584,7 +1584,7 @@ a.btn:focus-visible,
   background: transparent;
   border: none;
   border-radius: 12px;
-  padding: 12px;
+  padding: 16px;
 }
 .features .feature .ico {
   width: 64px;

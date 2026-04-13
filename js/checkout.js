@@ -189,12 +189,13 @@ function finalizarCompra() {
     }, 2500);
 }
 
-const formatearPrecioResumen = (valor) => `$${valor.toLocaleString()}`;
-
 function renderizarResumenCheckout() {
     const contenedor = document.getElementById('checkout-summary-list');
     const totalEl = document.getElementById('checkout-total-val');
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    // Acceso robusto a utilidades globales
+    const formatear = (val) => (typeof window.formatearPrecio === 'function') ? window.formatearPrecio(val) : `$${val}`;
 
     if (!contenedor || !totalEl) return;
 
@@ -204,15 +205,19 @@ function renderizarResumenCheckout() {
         return;
     }
 
-    const total = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
+    const total = (typeof window.calcularTotal === 'function') ? window.calcularTotal() : 0;
     contenedor.innerHTML = '';
 
     carrito.forEach(prod => {
         const div = document.createElement('div');
         div.className = 'summary-item';
-        div.innerHTML = `<span>${prod.cantidad}x ${prod.nombre}</span><span>${formatearPrecioResumen(prod.precio * prod.cantidad)}</span>`;
+        // Protección extra si el precio no es numérico (ej. "Pedir cotización")
+        const subtotalItem = (typeof prod.precio === 'number') ? prod.precio * prod.cantidad : 0;
+        const subtotalTexto = (typeof prod.precio === 'number') ? formatear(subtotalItem) : prod.precio;
+        
+        div.innerHTML = `<span>${prod.cantidad}x ${prod.nombre}</span><span>${subtotalTexto}</span>`;
         contenedor.appendChild(div);
     });
 
-    totalEl.innerText = formatearPrecioResumen(total);
+    totalEl.innerText = formatear(total);
 }

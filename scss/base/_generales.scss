@@ -106,7 +106,7 @@ select:focus-visible {
 
 /* Secciones Genéricas (Bloques) */
 .bloque {
-    padding-top: 40px; /* Compensación óptica para balancear altura de línea de títulos */
+    padding-top: $space-7; /* Consistente con el sistema de espaciado */
     padding-bottom: var(--space-7);
     background: $c-bg;
     text-align: center;

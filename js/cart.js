@@ -1,23 +1,22 @@
 const MIN_COMPRA = window.MIN_COMPRA;
 const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS;
 
-let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+let carrito = [];
+try {
+    carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+} catch (e) {
+    console.error("Error al leer el carrito de localStorage:", e);
+    carrito = [];
+}
 
 // SEGURIDAD: Limpieza de datos corruptos en el arranque (Best Practice)
 carrito = carrito.filter(item => item && item.id && item.nombre);
 localStorage.setItem('carrito', JSON.stringify(carrito));
 
-// --- UTILIDADES ---
+// --- UTILIDADES (Uso de globales centralizadas en data.js) ---
 
-/**
- * Obtiene la ruta base según la ubicación del archivo HTML
- */
 const obtenerPathBase = window.obtenerPathBase;
-
-/**
- * Formatea un número como moneda local
- */
-const formatearPrecio = (valor) => `$${valor.toLocaleString()}`;
+const formatearPrecio = window.formatearPrecio;
 
 /**
  * Genera el HTML para una barra de progreso premium
