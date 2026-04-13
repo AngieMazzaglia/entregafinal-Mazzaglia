@@ -540,7 +540,25 @@ function renderizarDetalleProducto() {
 
     if (btnAdd) {
         btnAdd.addEventListener('click', () => {
+            if (btnAdd.classList.contains('btn-added')) {
+                // Si ya fue agregado, el botón ahora abre el carrito
+                if (typeof abrirModal === 'function') {
+                    renderizarCarritoEnModal();
+                    abrirModal();
+                }
+                return;
+            }
+
+            // Primera vez: agregar al carrito
             agregarAlCarrito(producto.id, qtyValue.innerText);
+            
+            // Transformar botón
+            btnAdd.classList.add('btn-added');
+            btnAdd.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                ¡Agregado! Ir al carrito
+            `;
+            
             // Actualizar el hint tras sumar al carrito
             actualizarHint();
         });
@@ -555,26 +573,43 @@ function inyectarToastContainer() {
     document.body.appendChild(container);
 }
 
-// Función global para mostrar notificaciones sutiles
+// Función global para mostrar notificaciones clickeables
 window.mostrarToast = (mensaje) => {
     const container = document.getElementById('toast-container');
     if (!container) return;
 
     const toast = document.createElement('div');
-    toast.className = 'toast-notification';
+    toast.className = 'toast-notification clickable';
+    toast.setAttribute('role', 'button');
+    toast.setAttribute('aria-label', `${mensaje}. Hacer clic para ver el carrito.`);
+    
     toast.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        <span>${mensaje}</span>
+        <div class="toast-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div class="toast-text-wrapper">
+                <span class="toast-main-text">${mensaje}</span>
+                <span class="toast-sub-text">Toca para ver el carrito</span>
+            </div>
+        </div>
     `;
+
+    // Evento para abrir el carrito al hacer clic
+    toast.addEventListener('click', () => {
+        if (typeof abrirModal === 'function') {
+            renderizarCarritoEnModal();
+            abrirModal();
+        }
+        toast.remove(); // Se cierra al clickear
+    });
 
     container.appendChild(toast);
 
-    // Se elimina automáticamente tras 3 segundos (coincidiendo con la animación CSS)
+    // Se elimina automáticamente tras 3.5 segundos (un poco más para que de tiempo a leer y clickear)
     setTimeout(() => {
         if (toast.parentNode) {
             toast.remove();
         }
-    }, 3000);
+    }, 3500);
 };
 
 // --- VALIDACIÓN DE ENTRADA PROACTIVA ---

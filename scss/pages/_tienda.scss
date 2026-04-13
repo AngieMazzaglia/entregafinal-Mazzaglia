@@ -138,8 +138,8 @@
     }
 
     &.is-wide {
-        height: 220px; // Más aire para composteras
         padding: $space-2;
+        /* Ya no forzamos altura diferente para mantener alineación */
     }
 
     .img-zoom-wrapper {

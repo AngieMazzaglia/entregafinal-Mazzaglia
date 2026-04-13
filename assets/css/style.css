@@ -56,6 +56,7 @@ body {
   min-height: 100vh;
   font-family: "Outfit", sans-serif;
   font-size: 1rem;
+  line-height: 1.6; /* Mejorando la legibilidad de bloques de texto */
   color: #2e2e2e;
   background: var(--c-bg);
 }
@@ -1111,18 +1112,46 @@ a.btn:focus-visible,
 .toast-notification {
   background: #ffffff;
   color: #19753A;
-  padding: 16px 24px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 600;
   border-left: 5px solid #19753A;
-  animation: slideInToast 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), fadeOutToast 0.5s ease-in 2.5s forwards;
+  animation: slideInToast 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), fadeOutToast 0.5s ease-in 3s forwards;
+  transition: all 0.3s ease;
+}
+.toast-notification.clickable {
+  cursor: pointer;
+}
+.toast-notification.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background-color: #f9fdfa;
+}
+.toast-notification .toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.toast-notification .toast-text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.toast-notification .toast-main-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.toast-notification .toast-sub-text {
+  font-size: 0.75rem;
+  color: #777;
+  font-weight: 500;
+  opacity: 0.8;
 }
 .toast-notification svg {
   color: #19753A;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -2180,8 +2209,8 @@ form.needs-validation {
   transform: scale(var(--base-scale));
 }
 .card-img-container.is-wide {
-  height: 220px;
   padding: 8px;
+  /* Ya no forzamos altura diferente para mantener alineación */
 }
 .card-img-container .img-zoom-wrapper {
   width: 100%;
@@ -2848,6 +2877,16 @@ form.needs-validation {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.purchase-controls .btn-add-cart.btn-added {
+  background-color: transparent;
+  border: 2px solid #19753A;
+  color: #19753A;
+}
+.purchase-controls .btn-add-cart.btn-added:hover {
+  background-color: rgba(25, 117, 58, 0.05);
+  transform: scale(1.02);
 }
 
 /* Badges de Confianza */

@@ -19,6 +19,7 @@ body {
     min-height: 100vh;
     font-family: 'Outfit', sans-serif;
     font-size: $font-size-base; 
+    line-height: 1.6; /* Mejorando la legibilidad de bloques de texto */
     color: $c-text;
     background: var(--c-bg);
 }

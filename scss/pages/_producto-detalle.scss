@@ -197,6 +197,18 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &.btn-added {
+            background-color: transparent;
+            border: 2px solid $c-brand;
+            color: $c-brand;
+            
+            &:hover {
+                background-color: rgba($c-brand, 0.05);
+                transform: scale(1.02);
+            }
+        }
     }
 }
 

@@ -131,18 +131,50 @@
 .toast-notification {
     background: $c-bg;
     color: $c-brand; 
-    padding: 16px 24px;
-    border-radius: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
     box-shadow: $shadow-medium;
     display: flex;
     align-items: center;
     gap: 12px;
-    font-weight: 600;
     border-left: 5px solid $c-brand;
     animation: slideInToast 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28),
-               fadeOutToast 0.5s ease-in 2.5s forwards;
+               fadeOutToast 0.5s ease-in 3s forwards;
+    transition: all 0.3s ease;
 
-    svg { color: $c-brand; }
+    &.clickable {
+        cursor: pointer;
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background-color: #f9fdfa;
+        }
+    }
+
+    .toast-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .toast-text-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .toast-main-text {
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .toast-sub-text {
+        font-size: 0.75rem;
+        color: #777;
+        font-weight: 500;
+        opacity: 0.8;
+    }
+
+    svg { color: $c-brand; flex-shrink: 0; }
 }
 
 /* ==========================================================================
