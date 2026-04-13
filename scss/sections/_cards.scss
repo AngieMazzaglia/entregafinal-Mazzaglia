@@ -13,7 +13,7 @@
 .card {
     @extend %panel;
     @include panel-base;
-    gap: $space-2;
+    gap: $space-3;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -36,12 +36,12 @@
     }
 
     h4,
+    h3,
     h2 {
         font-size: $font-size-base;
-        font-weight: 700; // Aseguramos bold para diferenciar del texto normal
-        margin: 0 0 6px 0;
+        font-weight: 700; 
+        margin: 0; // Eliminamos margen para que el gap mande
         color: var(--c-text);
-        /* Force text color to override global H2 green */
     }
 
     p {

@@ -1499,7 +1499,7 @@ a.btn:focus-visible,
 .card {
   border-radius: 12px;
   padding: 16px;
-  gap: 8px;
+  gap: 12px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -1519,12 +1519,12 @@ a.btn:focus-visible,
   margin-bottom: 8px;
 }
 .card h4,
+.card h3,
 .card h2 {
   font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 6px 0;
+  margin: 0;
   color: var(--c-text);
-  /* Force text color to override global H2 green */
 }
 .card p {
   font-size: 0.875rem;
@@ -2647,6 +2647,18 @@ form.needs-validation {
   font-size: 0.9rem;
   line-height: 1.5;
 }
+.page-carrito .carrito-summary {
+  /* Aviso de Envío Gratis Alcanzado */
+}
+.page-carrito .carrito-summary .reached-promo {
+  text-align: center;
+  padding: 12px 0;
+  background-color: #fff;
+  color: #19753A;
+  font-weight: 700;
+  margin-top: 16px;
+  font-size: 1rem;
+}
 .page-carrito {
   /* --- COMPONENTE: Item de Carrito (Active) --- */
 }
@@ -3052,3 +3064,5 @@ form.needs-validation {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/*# sourceMappingURL=style.css.map */

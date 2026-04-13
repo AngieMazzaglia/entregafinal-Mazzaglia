@@ -363,6 +363,11 @@ window.formatearPrecio = (valor) => `$${valor.toLocaleString()}`;
 window.MIN_COMPRA = 15000;
 window.MIN_ENVIO_GRATIS = 50000;
 
+// Costos de Envío por Zona
+window.SHIPPING_CABA = 2000;
+window.SHIPPING_BSAS = 3000;
+window.SHIPPING_RESTO = 5000;
+
 // --- UTILIDADES DE DATOS ---
 
 /**

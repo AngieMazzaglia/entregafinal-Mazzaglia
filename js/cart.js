@@ -1,5 +1,10 @@
-const MIN_COMPRA = window.MIN_COMPRA;
-const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS;
+// Lógica del Carrito 3.0 (Versión Clean Code) 🛒✨
+
+/**
+ * CONFIGURACIÓN Y CONSTANTES
+ */
+const MIN_COMPRA = window.MIN_COMPRA || 15000;
+const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS || 50000;
 
 let carrito = [];
 try {
@@ -9,33 +14,12 @@ try {
     carrito = [];
 }
 
-// SEGURIDAD: Limpieza de datos corruptos en el arranque (Best Practice)
+// Seguridad: Limpieza de datos corruptos al arrancar
 carrito = carrito.filter(item => item && item.id && item.nombre);
 localStorage.setItem('carrito', JSON.stringify(carrito));
 
-// --- UTILIDADES (Uso de globales centralizadas en data.js) ---
-
 const obtenerPathBase = window.obtenerPathBase;
 const formatearPrecio = window.formatearPrecio;
-
-/**
- * Genera el HTML para una barra de progreso premium
- */
-const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false) => {
-    const porcentaje = Math.min((valorActual / meta) * 100, 100);
-    const claseReached = esExito ? 'reached' : '';
-    
-    return `
-        <div class="cart-progress-container">
-            <span class="progress-label" ${esExito ? 'style="color: var(--c-brand); font-weight: 700;"' : ''}>
-                ${mensaje}
-            </span>
-            <div class="progress-track">
-                <div class="progress-fill ${claseReached}" style="width: ${porcentaje}%"></div>
-            </div>
-        </div>
-    `;
-};
 
 // --- LÓGICA DE DATOS ---
 
@@ -43,18 +27,13 @@ window.guardarCarrito = () => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarContadorCarrito();
     
-    // Sincronizar grilla de tienda si existe la función
+    // Sincronizar grilla de tienda
     if (typeof window.actualizarCantidadesTienda === 'function') {
         window.actualizarCantidadesTienda();
     }
     
-    // Actualizar vistas si están en el DOM
-    const renderizadores = [
-        window.renderizarCarritoEnModal, 
-        window.renderizarPaginaCarrito,
-        window.actualizarHint
-    ];
-    renderizadores.forEach(render => {
+    // Actualizar todas las vistas vinculadas
+    [window.renderizarCarritoEnModal, window.renderizarPaginaCarrito, window.actualizarHint].forEach(render => {
         if (typeof render === 'function') render();
     });
 };
@@ -63,32 +42,22 @@ window.agregarAlCarrito = (idProducto, cantidad = 1) => {
     const numCant = parseInt(cantidad);
     const producto = productos.find(p => p.id === idProducto);
     
-    if (!producto) {
-        console.error(`Producto con ID ${idProducto} no encontrado en la base de datos.`);
-        return;
-    }
+    if (!producto) return console.error(`ID ${idProducto} no encontrado.`);
 
     const itemEnCarrito = carrito.find(p => p.id === idProducto);
-
     if (itemEnCarrito) {
         itemEnCarrito.cantidad += numCant;
     } else {
         carrito.push({ ...producto, cantidad: numCant });
     }
 
-    guardarCarrito();
+    window.guardarCarrito();
     if (window.mostrarToast) window.mostrarToast(`¡Agregaste ${producto.nombre} al carrito!`);
-    
-    // Anuncio para lectores de pantalla
-    if (typeof anunciarParaScreenReader === 'function') {
-        const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-        anunciarParaScreenReader(`Agregaste ${producto.nombre} al carrito. Ahora tenés ${totalItems} ítems en total.`);
-    }
 };
 
 window.eliminarDelCarrito = (idProducto) => {
     carrito = carrito.filter(p => p.id !== idProducto);
-    guardarCarrito();
+    window.guardarCarrito();
 };
 
 window.calcularTotal = () => carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
@@ -100,27 +69,33 @@ const actualizarContadorCarrito = () => {
     const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
     contador.innerText = totalItems;
     contador.style.display = totalItems > 0 ? 'inline-flex' : 'none';
-
-    const parent = contador.parentElement;
-    if (parent) {
-        parent.classList.add('pulse-anim');
-        setTimeout(() => parent.classList.remove('pulse-anim'), 300);
-    }
 };
 
-// --- VISTAS (UI) ---
+// --- COMPONENTES UI (HTML snippets) ---
 
 /**
- * Genera el HTML para un ítem del carrito (Modelo unificado)
+ * Genera la barra de progreso para promociones
+ */
+const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false) => {
+    const porcentaje = Math.min((valorActual / meta) * 100, 100);
+    return `
+        <div class="cart-progress-container">
+            <span class="progress-label" ${esExito ? 'style="color: var(--c-brand); font-weight: 700;"' : ''}>${mensaje}</span>
+            <div class="progress-track">
+                <div class="progress-fill ${esExito ? 'reached' : ''}" style="width: ${porcentaje}%"></div>
+            </div>
+        </div>
+    `;
+};
+
+/**
+ * Genera el ítem de carrito según la vista (Mini o Full)
  */
 const generarHTMLItem = (prod, esVistaMini = false) => {
     const path = obtenerPathBase();
-    const partes = prod.nombre.split(/\s*-\s*/);
-    const nombreLimpio = partes[0];
-    const infoExtra = partes[1] || '';
+    const [nombreLimpio, infoExtra = ''] = prod.nombre.split(/\s*-\s*/);
 
     if (esVistaMini) {
-        // Estilo compacto para el modal
         return `
             <div class="cart-item" data-id="${prod.id}">
                 <img src="${path}${prod.imagen}" alt="${nombreLimpio}">
@@ -129,22 +104,21 @@ const generarHTMLItem = (prod, esVistaMini = false) => {
                     ${infoExtra ? `<div class="text-muted small">${infoExtra}</div>` : ''}
                     <div class="item-controls-wrapper">
                         <div class="quantity-controls">
-                            <button data-action="restar" aria-label="Disminuir quantity">−</button>
-                            <span aria-live="polite">${prod.cantidad}</span>
-                            <button data-action="sumar" aria-label="Aumentar quantity">+</button>
+                            <button data-action="restar">−</button>
+                            <span>${prod.cantidad}</span>
+                            <button data-action="sumar">+</button>
                         </div>
                         <span class="item-price-unit">x ${formatearPrecio(prod.precio)}</span>
                     </div>
                 </div>
                 <div class="item-actions">
-                    <button data-action="eliminar" class="delete-btn" aria-label="Eliminar" title="Eliminar">&times;</button>
+                    <button data-action="eliminar" class="delete-btn">&times;</button>
                     <div class="item-total">${formatearPrecio(prod.precio * prod.cantidad)}</div>
                 </div>
             </div>
         `;
     }
 
-    // Estilo extendido para la página de carrito
     return `
         <article class="cart-page-item" data-id="${prod.id}">
             <img src="${path}${prod.imagen}" alt="${nombreLimpio}">
@@ -155,20 +129,25 @@ const generarHTMLItem = (prod, esVistaMini = false) => {
             </div>
             <div class="cart-item-qty">
                 <div class="quantity-controls">
-                    <button data-action="restar" aria-label="Disminuir quantity">−</button>
-                    <span aria-live="polite">${prod.cantidad}</span>
-                    <button data-action="sumar" aria-label="Aumentar quantity">+</button>
+                    <button data-action="restar">−</button>
+                    <span>${prod.cantidad}</span>
+                    <button data-action="sumar">+</button>
                 </div>
             </div>
             <div class="cart-item-total-price">${formatearPrecio(prod.precio * prod.cantidad)}</div>
             <div class="cart-item-action">
-                <button data-action="eliminar" class="delete-icon-btn" aria-label="Eliminar" title="Eliminar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                <button data-action="eliminar" class="delete-icon-btn">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </button>
             </div>
         </article>
     `;
 };
+
+// --- RENDERIZADORES ---
+
+window.abrirModal = () => document.getElementById('cart-modal')?.classList.add('active');
+window.cerrarModal = () => document.getElementById('cart-modal')?.classList.remove('active');
 
 window.renderizarCarritoEnModal = () => {
     const contenedor = document.getElementById('cart-items');
@@ -187,22 +166,18 @@ window.renderizarCarritoEnModal = () => {
         return;
     }
 
-    carrito.forEach(prod => {
-        if (!prod || !prod.nombre) return;
-        contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(prod, true));
-    });
-
+    carrito.forEach(p => contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(p, true)));
+    
     const total = window.calcularTotal();
     precioTotalEl.innerText = total.toLocaleString();
 
     if (minPurchaseArea) {
         if (total < MIN_COMPRA) {
-            const falta = MIN_COMPRA - total;
-            minPurchaseArea.innerHTML = generarHTMLBarraProgreso(total, MIN_COMPRA, `Te faltan ${formatearPrecio(falta)} para el mínimo`);
-            if (btnCheckout) btnCheckout.classList.add('btn-disabled');
+            minPurchaseArea.innerHTML = generarHTMLBarraProgreso(total, MIN_COMPRA, `Te faltan ${formatearPrecio(MIN_COMPRA - total)} para el mínimo`);
+            btnCheckout?.classList.add('btn-disabled');
         } else {
             minPurchaseArea.innerHTML = generarHTMLBarraProgreso(total, MIN_COMPRA, '¡Llegaste al mínimo de compra!', true);
-            if (btnCheckout) btnCheckout.classList.remove('btn-disabled');
+            btnCheckout?.classList.remove('btn-disabled');
         }
     }
 };
@@ -220,96 +195,119 @@ window.renderizarPaginaCarrito = () => {
 
     if (carrito.length === 0) {
         contenedor.innerHTML = '<div class="text-center p-5"><p>Tu carrito está vacío.</p><a href="./tienda.html" class="btn btn-verde">Ir a la tienda</a></div>';
-        if (subtotalEl) subtotalEl.innerText = '$0';
-        if (totalEl) totalEl.innerText = '$0';
+        ['.subtotal-val', '.total-val'].forEach(cl => { const el = document.querySelector(cl); if (el) el.innerText = '$0'; });
         if (envioEl) envioEl.innerText = 'A calcular';
         if (promoArea) promoArea.innerHTML = '';
-        if (btnContinuar) btnContinuar.classList.add('btn-disabled');
+        btnContinuar?.classList.add('btn-disabled');
+        
+        // Reset de envío
+        window.guardarCP('');
+        localStorage.removeItem('shippingMethodPreference');
         return;
     }
 
-    carrito.forEach(prod => {
-        if (!prod || !prod.nombre) return;
-        contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(prod, false));
-    });
+    carrito.forEach(p => contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(p, false)));
 
-    const subtotalValue = window.calcularTotal();
-    if (subtotalEl) subtotalEl.innerText = formatearPrecio(subtotalValue);
-    if (totalEl) totalEl.innerText = formatearPrecio(subtotalValue);
+    const subtotal = window.calcularTotal();
+    const savedCP = localStorage.getItem('userCP') || '';
+    const costoEnvio = window.calcularCostoEnvio(savedCP);
 
+    if (subtotalEl) subtotalEl.innerText = formatearPrecio(subtotal);
+
+    // Envío y Total
+    if (envioEl) {
+        if (subtotal >= MIN_ENVIO_GRATIS) envioEl.innerHTML = '<span class="reached-text">¡Gratis!</span>';
+        else if (costoEnvio !== null) envioEl.innerText = formatearPrecio(costoEnvio);
+        else envioEl.innerText = 'A calcular';
+    }
+    if (totalEl) totalEl.innerText = formatearPrecio(subtotal + (costoEnvio || 0));
+
+    // Promos y CP Calculator
     if (promoArea) {
-        let htmlExtra = '';
-        if (subtotalValue < MIN_ENVIO_GRATIS) {
-            const faltaEnvio = MIN_ENVIO_GRATIS - subtotalValue;
-            htmlExtra += generarHTMLBarraProgreso(subtotalValue, MIN_ENVIO_GRATIS, `Te faltan ${formatearPrecio(faltaEnvio)} para el ENVÍO GRATIS`);
-            if (envioEl) envioEl.innerText = 'A calcular';
+        let html = '';
+        if (subtotal < MIN_ENVIO_GRATIS) {
+            html += generarHTMLBarraProgreso(subtotal, MIN_ENVIO_GRATIS, `Te faltan ${formatearPrecio(MIN_ENVIO_GRATIS - subtotal)} para el ENVÍO GRATIS`);
         } else {
-            if (envioEl) envioEl.innerHTML = '<span class="reached-text">¡Gratis!</span>';
+            html += '<div class="reached-promo">🎉 ¡Tenés ENVÍO GRATIS!</div>';
         }
 
-        if (subtotalValue < MIN_COMPRA) {
-            const faltaMin = MIN_COMPRA - subtotalValue;
-            htmlExtra += `<div class="min-purchase-warning">⚠️ Te faltan ${formatearPrecio(faltaMin)} para el mínimo de compra</div>`;
-            if (btnContinuar) btnContinuar.classList.add('btn-disabled');
+        html += `
+            <div class="cp-calculator mt-4">
+                <div class="cp-input-group">
+                    <span class="small-label">Calcular costo de envío</span>
+                    <div class="flex-row">
+                        <input type="text" id="cart-cp-input" value="${savedCP}" placeholder="Cód. Postal" maxlength="4">
+                        <button class="btn btn-outline btn-sm" onclick="manejarCalculoCP()">Calcular</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (subtotal < MIN_COMPRA) {
+            html += `<div class="min-purchase-warning">⚠️ Te faltan ${formatearPrecio(MIN_COMPRA - subtotal)} para el mínimo de compra</div>`;
+            btnContinuar?.classList.add('btn-disabled');
         } else {
-            if (btnContinuar) btnContinuar.classList.remove('btn-disabled');
+            btnContinuar?.classList.remove('btn-disabled');
         }
-        promoArea.innerHTML = htmlExtra;
+        promoArea.innerHTML = html;
     }
 };
 
-// --- MANEJO DE EVENTOS (DELEGACIÓN GLOBAL) ---
+// --- ENVÍO ---
 
-/**
- * Escuchador centralizado para todas las acciones del carrito
- * Funciona incluso para elementos inyectados dinámicamente o dentro de otros archivos.
- */
+window.calcularCostoEnvio = (cp) => {
+    const total = window.calcularTotal();
+    if (total >= MIN_ENVIO_GRATIS) return 0;
+    if (!cp) return null;
+
+    const nCP = parseInt(cp);
+    if (isNaN(nCP)) return null;
+
+    if (nCP >= 1000 && nCP <= 1499) return window.SHIPPING_CABA || 2000;
+    if (nCP >= 1500 && nCP <= 1999) return window.SHIPPING_BSAS || 3000;
+    return window.SHIPPING_RESTO || 5000;
+};
+
+window.guardarCP = (cp) => cp ? localStorage.setItem('userCP', cp) : localStorage.removeItem('userCP');
+
+window.manejarCalculoCP = () => {
+    const input = document.getElementById('cart-cp-input');
+    if (!input) return;
+    const cp = input.value.trim();
+    if (cp.length < 4) return;
+    window.guardarCP(cp);
+    localStorage.setItem('shippingMethodPreference', 'shipping');
+    window.renderizarPaginaCarrito();
+};
+
+// --- EVENTOS ---
+
 document.addEventListener('click', (e) => {
-    // 1. Detectar botones de acción (sumar, restar, eliminar)
     const btnAction = e.target.closest('button[data-action]');
-    if (btnAction) {
-        const action = btnAction.dataset.action;
-        const itemContainer = btnAction.closest('[data-id]');
-        
-        if (itemContainer) {
-            const itemId = itemContainer.dataset.id;
-            if (action === 'sumar') window.sumarEnCarrito(itemId);
-            else if (action === 'restar') window.restarEnCarrito(itemId);
-            else if (action === 'eliminar') window.eliminarDelCarrito(itemId);
-        }
+    if (!btnAction) return;
 
-        // 2. Detectar acciones de navegación
-        if (action === 'checkout') {
-            window.validarYRedirigirCheckout();
-        } else if (action === 'view-cart') {
-            window.irAPaginaCarrito();
-        }
+    const action = btnAction.dataset.action;
+    const itemId = btnAction.closest('[data-id]')?.dataset.id;
+
+    if (itemId) {
+        if (action === 'sumar') window.sumarEnCarrito(itemId);
+        else if (action === 'restar') window.restarEnCarrito(itemId);
+        else if (action === 'eliminar') window.eliminarDelCarrito(itemId);
+    } else {
+        if (action === 'checkout') window.validarYRedirigirCheckout();
+        else if (action === 'view-cart') window.irAPaginaCarrito();
     }
 });
 
-// --- ACCIONES SECUNDARIAS ---
-
-window.sumarEnCarrito = (id) => {
-    const item = carrito.find(p => p.id === id);
-    if (item) { item.cantidad++; window.guardarCarrito(); }
-};
-
-window.restarEnCarrito = (id) => {
-    const item = carrito.find(p => p.id === id);
-    if (!item) return;
-
-    if (item.cantidad > 1) {
-        item.cantidad--;
-        window.guardarCarrito();
-    } else {
-        window.eliminarDelCarrito(id);
-    }
+window.sumarEnCarrito = (id) => { const item = carrito.find(p => p.id === id); if (item) { item.cantidad++; window.guardarCarrito(); } };
+window.restarEnCarrito = (id) => { 
+    const item = carrito.find(p => p.id === id); 
+    if (item && item.cantidad > 1) { item.cantidad--; window.guardarCarrito(); } 
+    else if (item) window.eliminarDelCarrito(id); 
 };
 
 window.validarYRedirigirCheckout = () => {
-    const total = window.calcularTotal();
-    if (carrito.length === 0 || total < MIN_COMPRA) return;
-    
+    if (carrito.length === 0 || window.calcularTotal() < MIN_COMPRA) return;
     const path = window.location.pathname.includes('/pages/') ? '' : 'pages/';
     window.location.href = `${path}checkout.html`;
 };
@@ -318,6 +316,3 @@ window.irAPaginaCarrito = () => {
     const path = window.location.pathname.includes('/pages/') ? '' : 'pages/';
     window.location.href = `${path}carrito.html`;
 };
-
-const abrirModal = () => document.getElementById('cart-modal')?.classList.add('active');
-const cerrarModal = () => document.getElementById('cart-modal')?.classList.remove('active');

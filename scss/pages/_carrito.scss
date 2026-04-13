@@ -110,6 +110,17 @@
                 line-height: 1.5;
             }
         }
+
+        /* Aviso de Envío Gratis Alcanzado */
+        .reached-promo {
+            text-align: center;
+            padding: $space-3 0;
+            background-color: #fff;
+            color: $c-brand;
+            font-weight: 700;
+            margin-top: $space-4;
+            font-size: 1rem;
+        }
     }
 
     /* --- COMPONENTE: Item de Carrito (Active) --- */
