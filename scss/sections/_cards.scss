@@ -6,7 +6,7 @@
 .cards {
     display: grid;
     gap: $space-5;
-    margin-top: $space-5;
+    margin-top: $space-4; /* Reducido para equilibrar con el margin del h2 */
     grid-template-columns: 1fr;
 }
 
@@ -24,9 +24,11 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
     }
 
+    // Imagen base (si no hay container específico)
     img {
         width: 100%;
-        height: 180px;
+        height: auto; // Cambiamos a auto para evitar estiramientos forzados
+        max-height: 200px;
         object-fit: contain;
         background-color: $c-bg;
         border-radius: $radius-sm;

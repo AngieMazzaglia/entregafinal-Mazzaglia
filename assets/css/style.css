@@ -67,6 +67,10 @@ main {
 /* ==========================================================================
    TIPOGRAFÍA (Headers con Nomenclatura Estándar)
    ========================================================================== */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  margin: 0;
+}
+
 h1, .h1 {
   font-size: 2rem;
   line-height: 1.2;
@@ -79,6 +83,7 @@ h2, .h2 {
   line-height: 1.3;
   color: #19753A;
   font-weight: 600;
+  margin-bottom: 12px; /* Pequeño espacio base inferior */
 }
 
 h3, .h3 {
@@ -137,7 +142,8 @@ select:focus-visible {
 
 /* Secciones Genéricas (Bloques) */
 .bloque {
-  padding-block: var(--space-7);
+  padding-top: 40px; /* Compensación óptica para balancear altura de línea de títulos */
+  padding-bottom: var(--space-7);
   background: #ffffff;
   text-align: center;
 }
@@ -301,13 +307,20 @@ select:focus-visible {
   left: 8px;
   top: 8px;
   z-index: 999;
-  background: #000;
-  color: #fff;
-  padding: 8px 12px;
   border-radius: 8px;
   width: auto;
   height: auto;
   clip: auto;
+}
+
+/* --- Corrección para Autocompletado (Evitar fondo azul) --- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: var(--c-text) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Hero entrada desde abajo */
@@ -440,6 +453,23 @@ select:focus-visible {
 
 .p-6 {
   padding: 32px !important;
+}
+
+/* Utilidades de Padding específicas */
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.pt-small {
+  padding-top: 16px !important;
+}
+
+.pb-small {
+  padding-bottom: 16px !important;
 }
 
 /* Utilidades de Texto */
@@ -1036,26 +1066,35 @@ a.btn:focus-visible,
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: none;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
+.processing-overlay .processing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+}
 .processing-overlay .spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(25, 117, 58, 0.1);
-  border-top: 4px solid #19753A;
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(25, 117, 58, 0.1);
+  border-top: 5px solid #19753A;
   border-radius: 50%;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   animation: spin 1s linear infinite;
 }
 .processing-overlay h3 {
   color: #19753A;
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 .processing-overlay p {
   color: #666;
   font-weight: 500;
+  margin: 0;
 }
 
 /* --- TOASTS: Notificaciones --- */
@@ -1424,7 +1463,7 @@ a.btn:focus-visible,
 .cards {
   display: grid;
   gap: 24px;
-  margin-top: 24px;
+  margin-top: 16px; /* Reducido para equilibrar con el margin del h2 */
   grid-template-columns: 1fr;
 }
 
@@ -1443,7 +1482,8 @@ a.btn:focus-visible,
 }
 .card img {
   width: 100%;
-  height: 180px;
+  height: auto;
+  max-height: 200px;
   object-fit: contain;
   background-color: #ffffff;
   border-radius: 8px;
@@ -2110,8 +2150,8 @@ form.needs-validation {
   flex-grow: 1;
   position: relative;
 }
-.card-body h4 {
-  font-size: 1.05rem;
+.card-body h3 {
+  font-size: 1.05rem !important;
   margin-bottom: 4px;
   line-height: 1.3;
   color: #2e2e2e;
@@ -2124,7 +2164,7 @@ form.needs-validation {
 
 .card-img-container {
   width: 100%;
-  height: 180px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2136,8 +2176,21 @@ form.needs-validation {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   transform: scale(var(--base-scale));
+}
+.card-img-container.is-wide {
+  height: 220px;
+  padding: 8px;
+}
+.card-img-container .img-zoom-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  margin-bottom: 0;
 }
 
 /* Hover Universal: Zoom Proporcional +0.1 */
@@ -2369,6 +2422,79 @@ form.needs-validation {
 .page-checkout .step-content {
   padding: 24px;
   display: none;
+}
+
+/* --- Layout de la Página (Grid) --- */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+@media (min-width: 1024px) {
+  .checkout-grid {
+    grid-template-columns: 1.8fr 1fr;
+  }
+}
+
+.checkout-summary-side {
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+}
+
+.checkout-summary-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.checkout-summary-card h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+  color: #19753A;
+  border-bottom: 2px solid #a5d6a7;
+  padding-bottom: 8px;
+}
+
+.summary-item-list {
+  margin-bottom: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.summary-item-list .summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: #2e2e2e;
+  border-bottom: 1px dashed #eee;
+}
+.summary-item-list .summary-item:last-child {
+  border-bottom: none;
+}
+.summary-item-list .summary-item span:first-child {
+  flex: 1;
+  padding-right: 12px;
+  line-height: 1.4;
+}
+.summary-item-list .summary-item span:last-child {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 2px solid #eee;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #19753A;
 }
 
 /* --- Página de Compra Exitosa (Clean Architecture) --- */
@@ -2887,5 +3013,3 @@ form.needs-validation {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/*# sourceMappingURL=style.css.map */

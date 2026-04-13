@@ -145,6 +145,83 @@
     }
 }
 
+/* --- Layout de la Página (Grid) --- */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-5;
+    margin-top: $space-5;
+
+    @include respond(lg) {
+        grid-template-columns: 1.8fr 1fr;
+    }
+}
+
+.checkout-summary-side {
+    position: sticky;
+    top: $space-5;
+    height: fit-content;
+}
+
+.checkout-summary-card {
+    background: $c-bg;
+    border: 1px solid #ddd;
+    border-radius: $radius;
+    padding: $space-5;
+    box-shadow: $shadow-subtle;
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: $space-4;
+        font-size: 1.25rem;
+        color: $c-brand;
+        border-bottom: 2px solid $c-brand-soft;
+        padding-bottom: $space-2;
+    }
+}
+
+.summary-item-list {
+    margin-bottom: $space-4;
+    max-height: 400px;
+    overflow-y: auto;
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $space-2 0;
+        font-size: 0.95rem;
+        color: $c-text;
+        border-bottom: 1px dashed #eee;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        span:first-child {
+            flex: 1;
+            padding-right: $space-3;
+            line-height: 1.4;
+        }
+
+        span:last-child {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+    }
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $space-4;
+    border-top: 2px solid #eee;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: $c-brand;
+}
+
 /* --- Página de Compra Exitosa (Clean Architecture) --- */
 .page-confirmation {
     text-align: center;

@@ -30,6 +30,10 @@ main {
 /* ==========================================================================
    TIPOGRAFÍA (Headers con Nomenclatura Estándar)
    ========================================================================== */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+    margin: 0;
+}
+
 h1, .h1 {
     font-size: 2rem;
     line-height: 1.2;
@@ -42,6 +46,7 @@ h2, .h2 {
     line-height: 1.3;
     color: $c-brand;
     font-weight: 600;
+    margin-bottom: $space-3; /* Pequeño espacio base inferior */
 }
 
 h3, .h3 {
@@ -100,7 +105,8 @@ select:focus-visible {
 
 /* Secciones Genéricas (Bloques) */
 .bloque {
-    padding-block: var(--space-7);
+    padding-top: 40px; /* Compensación óptica para balancear altura de línea de títulos */
+    padding-bottom: var(--space-7);
     background: $c-bg;
     text-align: center;
 
@@ -252,13 +258,21 @@ select:focus-visible {
         left: 8px;
         top: 8px;
         z-index: 999;
-        background: #000;
-        color: #fff;
-        padding: 8px 12px;
         border-radius: $radius-sm;
         width: auto;
         height: auto;
         clip: auto;
     }
 }
+
+/* --- Corrección para Autocompletado (Evitar fondo azul) --- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: var(--c-text) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 

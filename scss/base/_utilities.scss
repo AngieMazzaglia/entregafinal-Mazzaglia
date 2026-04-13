@@ -27,6 +27,12 @@
 .p-5 { padding: $space-5 !important; }
 .p-6 { padding: $space-6 !important; }
 
+/* Utilidades de Padding específicas */
+.pt-0 { padding-top: 0 !important; }
+.pb-0 { padding-bottom: 0 !important; }
+.pt-small { padding-top: $space-4 !important; }
+.pb-small { padding-bottom: $space-4 !important; }
+
 /* Utilidades de Texto */
 .text-center { text-align: center !important; }
 .text-right { text-align: right !important; }
