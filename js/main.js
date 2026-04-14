@@ -615,7 +615,8 @@ window.mostrarToast = (mensaje) => {
 // --- VALIDACIÓN DE ENTRADA PROACTIVA ---
 
 window.setupInputValidation = () => {
-    const inputs = document.querySelectorAll('input[data-valid]');
+    // Excluir inputs con formateadores propios (cardNumber y expiry los maneja checkout.js)
+    const inputs = document.querySelectorAll('input[data-valid]:not([data-valid="cardNumber"]):not([data-valid="expiry"])');
     
     inputs.forEach(input => {
         const type = input.dataset.valid; // "letters" o "numbers"
@@ -628,6 +629,10 @@ window.setupInputValidation = () => {
             hint.className = 'input-error-hint';
             if (type === 'numbers') {
                 hint.innerText = 'Solo números y símbolos (+, -)';
+            } else if (type === 'digits') {
+                hint.innerText = 'Solo se permiten números';
+            } else if (type === 'alphanumeric') {
+                hint.innerText = 'Solo letras y números (sin símbolos)';
             } else if (type === 'expiry') {
                 hint.innerText = 'Formato MM/AA (solo números y /)';
             } else {
@@ -640,9 +645,13 @@ window.setupInputValidation = () => {
             const val = e.target.value;
             let regex;
             if (type === 'numbers') {
-                regex = /[^0-9+\s\-]/g; // Teléfono/CP: sin barra
+                regex = /[^0-9+\s\-]/g;
+            } else if (type === 'digits') {
+                regex = /[^0-9]/g;
+            } else if (type === 'alphanumeric') {
+                regex = /[^a-zA-Z0-9]/g;
             } else if (type === 'expiry') {
-                regex = /[^0-9\/]/g;    // Vencimiento: solo números y barra
+                regex = /[^0-9\/]/g;
             } else {
                 regex = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g;
             }
@@ -660,6 +669,10 @@ window.setupInputValidation = () => {
             let regex;
             if (type === 'numbers') {
                 regex = /^[0-9+\s\-]+$/;
+            } else if (type === 'digits') {
+                regex = /^[0-9]+$/;
+            } else if (type === 'alphanumeric') {
+                regex = /^[a-zA-Z0-9]+$/;
             } else if (type === 'expiry') {
                 regex = /^[0-9\/]+$/;
             } else {

@@ -7,9 +7,30 @@
 const REGLAS_VALIDACION = {
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     numbers: /^[0-9\s+-]+$/,
-    expiry: /^[0-9\/]+$/,
-    letters: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
+    expiry: /^(0[1-9]|1[0-2])\/[0-9]{2}$/,
+    letters: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
+    cardNumber: /^[0-9]{16}$/   // se valida contra dígitos sin espacios
 };
+
+/**
+ * Crea (o recupera si ya existe) el elemento de hint de error
+ * para un campo determinado, siguiendo el patrón del validador global.
+ * @param {HTMLElement|null} input - El input de referencia
+ * @param {string} texto - Mensaje a mostrar al usuario
+ * @returns {HTMLElement|null}
+ */
+function crearHintInput(input, texto) {
+    const parent = input?.closest('.form-group');
+    if (!parent) return null;
+    let hint = parent.querySelector('.input-error-hint');
+    if (!hint) {
+        hint = document.createElement('span');
+        hint.className = 'input-error-hint';
+        hint.innerText = texto;
+        parent.appendChild(hint);
+    }
+    return hint;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // Inicializar vista
@@ -135,7 +156,47 @@ function setupPaso3() {
         });
     });
 
-    cardInputs.forEach(id => {
+    // Formateadores automáticos
+    const cardNumberInput = document.getElementById('cardNumber');
+    const expiryInput = document.getElementById('expiry');
+
+    // Crear hints para campos con formateadores propios (excluidos del validador global)
+    const cardNumberHint = crearHintInput(cardNumberInput, 'Solo se permiten números');
+    const expiryHint     = crearHintInput(expiryInput,     'Solo se permiten números');
+
+    cardNumberInput?.addEventListener('input', () => {
+        // Detectar caracteres inválidos ANTES de que el formateador los elimine
+        const hadInvalidChars = /[^\d\s]/.test(cardNumberInput.value);
+        formatearNumeroTarjeta(cardNumberInput);
+        btnFinalizar.disabled = !verificarInputsCompletos(cardInputs);
+        if (cardNumberHint) {
+            hadInvalidChars ? cardNumberHint.classList.add('visible') : cardNumberHint.classList.remove('visible');
+        }
+        if (validarInputs(['cardNumber'])) cardNumberInput.classList.remove('is-invalid');
+    });
+
+    expiryInput?.addEventListener('input', () => {
+        // Detectar letras ANTES de que el formateador las elimine
+        const hadLetters = /[a-zA-Z]/.test(expiryInput.value);
+        formatearVencimiento(expiryInput);
+        btnFinalizar.disabled = !verificarInputsCompletos(cardInputs);
+        if (expiryHint) {
+            hadLetters ? expiryHint.classList.add('visible') : expiryHint.classList.remove('visible');
+        }
+        // Solo marcar rojo cuando el campo está completo (MM/AA = 5 chars)
+        if (expiryInput.value.length === 5) {
+            validarInputs(['expiry']);
+        } else {
+            expiryInput.classList.remove('is-invalid');
+        }
+    });
+
+    expiryInput?.addEventListener('blur', () => {
+        if (expiryInput.value.trim() !== '') validarInputs(['expiry']);
+    });
+
+    // Resto de campos de tarjeta (sin formateadores especiales)
+    ['cardName', 'cvv'].forEach(id => {
         const el = document.getElementById(id);
         el?.addEventListener('input', () => {
             btnFinalizar.disabled = !verificarInputsCompletos(cardInputs);
@@ -162,11 +223,38 @@ function verificarInputsCompletos(ids) {
 }
 
 /**
- * Valida un valor contra una regla específica
+ * Valida un valor contra una regla específica.
+ * Para cardNumber, se eliminan los espacios antes de validar.
  */
 function validarFormato(valor, tipo) {
     const regex = REGLAS_VALIDACION[tipo];
-    return regex ? regex.test(valor) : true;
+    if (!regex) return true;
+    const valorAValidar = tipo === 'cardNumber' ? valor.replace(/\s/g, '') : valor;
+    return regex.test(valorAValidar);
+}
+
+// --- FORMATEADORES DE TARJETA ---
+
+/**
+ * Formatea el número de tarjeta con un espacio cada 4 dígitos.
+ * Permite solo dígitos, máximo 16.
+ */
+function formatearNumeroTarjeta(input) {
+    const soloDigitos = input.value.replace(/\D/g, '').slice(0, 16);
+    input.value = soloDigitos.replace(/(\d{4})(?=\d)/g, '$1 ');
+}
+
+/**
+ * Inserta automáticamente el '/' tras los primeros 2 dígitos del vencimiento.
+ * Maneja el backspace correctamente para no bloquear al borrar.
+ */
+function formatearVencimiento(input) {
+    let val = input.value.replace(/\D/g, '').slice(0, 4);
+    // El slash aparece en cuanto se escriben 2 dígitos
+    if (val.length >= 2) {
+        val = val.slice(0, 2) + '/' + val.slice(2);
+    }
+    input.value = val;
 }
 
 /**
@@ -264,8 +352,12 @@ function renderizarResumenCheckout() {
     if (metodo === 'pickup') {
         textoEnvio = 'Gratis';
     } else if (metodo === null) {
-        // Sin método seleccionado: estado neutro
-        textoEnvio = 'A calcular';
+        // Sin método seleccionado: mostrar "Gratis" si ya aplica por monto total
+        if (subtotal >= (window.MIN_ENVIO_GRATIS || 50000)) {
+            textoEnvio = 'Gratis';
+        } else {
+            textoEnvio = 'A calcular';
+        }
     } else {
         costoEnvio = (typeof window.calcularCostoEnvio === 'function') ? window.calcularCostoEnvio(cp) : 0;
         if (costoEnvio === 0 && (cp !== '' || subtotal >= (window.MIN_ENVIO_GRATIS || 50000))) {

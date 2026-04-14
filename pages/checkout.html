@@ -113,7 +113,7 @@
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="num">Altura <span class="required-mark">*</span></label>
-                                            <input type="text" id="num" name="num" class="form-control" placeholder="Ej: 1234" data-valid="numbers">
+                                            <input type="text" id="num" name="num" class="form-control" placeholder="Ej: 1234" data-valid="digits">
                                         </div>
                                         <div class="form-group">
                                             <label for="floor">Piso / Depto</label>
@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="zip">Código postal <span class="required-mark">*</span></label>
-                                            <input type="text" id="zip" name="zip" class="form-control" placeholder="Ej: 1417" data-valid="numbers">
+                                            <input type="text" id="zip" name="zip" class="form-control" placeholder="Ej: 1417" data-valid="alphanumeric">
                                         </div>
                                     </div>
 
@@ -202,7 +202,7 @@
                                 <div id="card-fields" style="display: none; margin-top: var(--space-5);">
                                     <div class="form-group mb-4">
                                         <label for="cardNumber">Número de tarjeta <span class="required-mark">*</span></label>
-                                        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX" data-valid="numbers">
+                                        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" inputmode="numeric" autocomplete="cc-number" data-valid="cardNumber">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="cardName">Nombre como figura en la tarjeta <span class="required-mark">*</span></label>
@@ -211,11 +211,11 @@
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="expiry">Vencimiento <span class="required-mark">*</span></label>
-                                            <input type="text" id="expiry" name="expiry" class="form-control" placeholder="12/26" data-valid="expiry">
+                                            <input type="text" id="expiry" name="expiry" class="form-control" placeholder="MM/AA" maxlength="5" inputmode="numeric" autocomplete="cc-exp" data-valid="expiry">
                                         </div>
                                         <div class="form-group">
                                             <label for="cvv">CVV <span class="required-mark">*</span></label>
-                                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="***" data-valid="numbers">
+                                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="***" maxlength="4" inputmode="numeric" autocomplete="cc-csc" data-valid="digits">
                                         </div>
                                     </div>
                                 </div>
