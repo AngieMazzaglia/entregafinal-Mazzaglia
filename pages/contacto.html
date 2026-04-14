@@ -48,6 +48,28 @@
       }
     }
     </script>
+    <!-- Estilos de Armonización Local (Neutralizar Bootstrap en Header) -->
+    <style>
+        /* Restaurar margen de navegador que Bootstrap quita para igualar el resto del sitio */
+        body {
+            margin: 8px !important;
+        }
+        .site-header {
+            margin-top: 0 !important;
+        }
+        .header-inner {
+            padding-block: 12px !important; /* Volvemos al estándar de 12px ya que recuperamos el margen de body */
+            min-height: auto !important;
+        }
+        .breadcrumb-container.contact-breadcrumb {
+            margin-top: 0 !important;
+            margin-bottom: var(--space-4);
+        }
+        /* Igualar exactamente el padding de .bloque estándar */
+        .bloque.bg-bosque-contacto {
+            padding-top: 48px !important; 
+        }
+    </style>
 </head>
 
 <body>
@@ -113,14 +135,16 @@
 
     <main id="contenido" tabindex="-1"> <!-- Accesibilidad -->
         <section class="bloque bg-bosque-contacto" aria-label="Contacto">
-            <div class="container text-center flow" id="accordionParent">
-                <!-- Breadcrumbs -->
+            <div class="container text-center">
+                <!-- Breadcrumbs (Fuera del flujo principal para evitar desplazamientos) -->
                 <div class="breadcrumb-container contact-breadcrumb">
                     <nav aria-label="breadcrumb" class="breadcrumb-nav breadcrumb-white">
                         <a href="../index.html">Inicio</a> <span class="separator" aria-hidden="true">/</span>
                         <span class="current" aria-current="page">Contacto</span>
                     </nav>
                 </div>
+
+                <div class="flow" id="accordionParent">
 
                 <h1>Contacto</h1>
 
