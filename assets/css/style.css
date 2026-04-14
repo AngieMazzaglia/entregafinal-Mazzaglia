@@ -871,12 +871,12 @@ footer .copy {
    BOTONES (Sistema Unificado)
    ========================================================================== */
 /* Base de Botones (Bootstrap Compat + Custom) */
-a.btn, .btn, .btn-verde, .btn-outline {
+a.btn, .btn, .btn-verde, .btn-outline, .btn-blanco {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 12px 28px;
   border-radius: 8px;
   font-weight: 700;
   line-height: 1;
@@ -908,7 +908,8 @@ a.btn-outline, .btn-outline {
   border: 1px solid #19753A;
 }
 a.btn-outline:hover, .btn-outline:hover {
-  background-color: #19753A;
+  background-color: var(--c-brand-dark);
+  border-color: var(--c-brand-dark);
   color: #ffffff;
   text-decoration: none;
 }
@@ -921,9 +922,9 @@ a.btn-blanco, .btn-blanco {
   text-shadow: none !important;
 }
 a.btn-blanco:hover, .btn-blanco:hover {
-  background-color: #1b5e20;
+  background-color: var(--c-brand-dark);
   color: #ffffff;
-  border-color: #1b5e20;
+  border-color: var(--c-brand-dark);
   text-decoration: none;
 }
 
