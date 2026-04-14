@@ -885,6 +885,7 @@ a.btn, .btn, .btn-verde, .btn-outline {
   text-decoration: none !important;
   font-family: inherit;
   font-size: 1rem;
+  text-shadow: none !important;
 }
 
 /* Variante: Primario (Verde Verde Verde) */
@@ -920,8 +921,8 @@ a.btn-blanco, .btn-blanco {
   text-shadow: none !important;
 }
 a.btn-blanco:hover, .btn-blanco:hover {
-  background-color: #ede9d0;
-  color: #1b5e20;
+  background-color: #1b5e20;
+  color: #ffffff;
   border-color: #1b5e20;
   text-decoration: none;
 }
@@ -1460,7 +1461,6 @@ a.btn:focus-visible,
   margin: 0;
   font-weight: 500;
   font-size: 1.2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 .hero .btn-blanco {
   margin-top: 24px;
@@ -1749,7 +1749,6 @@ form.needs-validation {
 }
 .bg-bosque-contacto .contact-text {
   color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 .bg-bosque-contacto .contact-text h2,
 .bg-bosque-contacto .contact-text h3 {
@@ -1779,13 +1778,11 @@ form.needs-validation {
 }
 .bg-bosque-contacto .contact-form-container .contact-intro-text h2 {
   color: #19753A;
-  text-shadow: none;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 .bg-bosque-contacto .contact-form-container .contact-intro-text p {
   color: #555;
-  text-shadow: none;
 }
 
 /*  Cómo comprar – pasos numerados */
@@ -1856,7 +1853,25 @@ form.needs-validation {
   /* Efecto de desenfoque */
   border: 1px solid #e0dfd5;
   border-radius: 12px;
+  transition: all 0.3s ease;
 }
+.instruction-box:hover {
+  border-color: var(--c-brand);
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+/* Efecto anidado: cuando el mouse entra a la caja, el botón se pone beige para resaltar */
+.instruction-box:hover .btn-blanco {
+  background-color: #ede9d0;
+  border-color: #1b5e20;
+}
+/* Cuando el mouse entra específicamente al botón, se pone verde oscuro */
+.instruction-box .btn-blanco:hover {
+  background-color: #1b5e20;
+  color: #ffffff;
+}
+
 .instruction-box:last-child {
   margin-bottom: 0;
 }
@@ -2019,14 +2034,15 @@ form.needs-validation {
   position: relative;
   z-index: 2;
 }
-.cta-compra .container h2 {
+.cta-compra h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
   color: #ffffff;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .cta-compra p {
+  margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* CTA Box (Versión recuadro blanco para páginas institucionales) */
@@ -3021,3 +3037,33 @@ form.needs-validation {
 }
 
 /*# sourceMappingURL=style.css.map */
+/* ==========================================================================
+   ALERTA DE COMPRA MÍNIMA & HIGHLIGHTS
+   ========================================================================== */
+.min-purchase-alert, 
+.min-compra-highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  background-color: rgba(25, 117, 58, 0.1);
+  color: var(--c-brand);
+  padding: var(--space-2) var(--space-4);
+  border-radius: 50px;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-4);
+}
+
+.icon-info {
+  flex-shrink: 0;
+  color: var(--c-brand);
+  /* Asegura que el icono no se vea más grande que el texto */
+  width: 1.2em;
+  height: 1.2em;
+}
+
+/* Ajuste específico para cuando está en un bloque centrado */
+.centrado .min-purchase-alert {
+  margin-left: auto;
+  margin-right: auto;
+}
