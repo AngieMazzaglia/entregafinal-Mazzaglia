@@ -252,7 +252,7 @@ function renderizarResumenCheckout() {
 
     // 2. Envío
     const radioEnvio = document.querySelector('input[name="deliveryMethod"]:checked');
-    const metodo = radioEnvio ? radioEnvio.value : 'pickup';
+    const metodo = radioEnvio ? radioEnvio.value : null; // null = sin selección aún
     
     // Prioridad: Input > Local Storage
     const zipInput = document.getElementById('zip');
@@ -263,6 +263,9 @@ function renderizarResumenCheckout() {
 
     if (metodo === 'pickup') {
         textoEnvio = 'Gratis';
+    } else if (metodo === null) {
+        // Sin método seleccionado: estado neutro
+        textoEnvio = 'A calcular';
     } else {
         costoEnvio = (typeof window.calcularCostoEnvio === 'function') ? window.calcularCostoEnvio(cp) : 0;
         if (costoEnvio === 0 && (cp !== '' || subtotal >= (window.MIN_ENVIO_GRATIS || 50000))) {

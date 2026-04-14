@@ -40,7 +40,7 @@
     <main id="main-content">
         <div class="container mt-5">
             <div class="checkout-header-info mb-5">
-                <h2>Completar el pago</h2>
+                <h1>Completar el pago</h1>
                 <p>Ingresá tus datos para completar el pedido.</p>
             </div>
 
@@ -86,7 +86,7 @@
                             <div class="step-content">
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
-                                        <input type="radio" name="deliveryMethod" value="pickup"> 
+                                        <input type="radio" name="deliveryMethod" value="pickup" aria-required="true"> 
                                         <strong>Retiro por sucursal</strong> 
                                         <span class="text-muted fw-400 ms-1">(gratis)</span>
                                     </label>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
-                                        <input type="radio" name="deliveryMethod" value="shipping"> 
+                                        <input type="radio" name="deliveryMethod" value="shipping" aria-required="true"> 
                                         <strong>Envío a domicilio</strong>
                                     </label>
                                 </div>
@@ -175,7 +175,7 @@
                             <div class="step-content">
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
-                                        <input type="radio" name="paymentMethod" value="transfer"> 
+                                        <input type="radio" name="paymentMethod" value="transfer" aria-required="true"> 
                                         <strong>Transferencia bancaria</strong>
                                     </label>
                                     <div class="step-helper-text">
@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
-                                        <input type="radio" name="paymentMethod" value="mercadopago"> 
+                                        <input type="radio" name="paymentMethod" value="mercadopago" aria-required="true"> 
                                         <strong>Mercado Pago</strong>
                                     </label>
                                     <div class="step-helper-text">
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
-                                        <input type="radio" name="paymentMethod" value="card"> 
+                                        <input type="radio" name="paymentMethod" value="card" aria-required="true"> 
                                         <strong>Tarjeta de crédito/débito</strong>
                                     </label>
                                 </div>

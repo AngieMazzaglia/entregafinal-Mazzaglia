@@ -66,6 +66,7 @@
         /* Restaurar color de texto oscuro */
 
         .contact-intro-text {
+            padding-bottom: $space-2; // Aire sutil debajo del texto, antes del formulario
 
             // Ajustar el texto descriptivo dentro del formulario (que ahora está sobre fondo blanco)
             // Selectores más específicos para sobrescribir estilos globales
