@@ -36,6 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
             productosNavLink.setAttribute('aria-current', 'page');
         }
     }
+
+    // 8. Efecto de Scroll en el Header (Sombra y Elevación)
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+            header.classList.add('is-scrolled');
+        } else {
+            header.classList.remove('is-scrolled');
+        }
+    });
 });
 
 function inyectarModalCarrito() {

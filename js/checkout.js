@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPaso1();
     setupPaso2();
     setupPaso3();
+    setupNavegacionPasos();
 });
 
 // --- CONFIGURACIÓN DE PASOS ---
@@ -172,13 +173,26 @@ function setupPaso3() {
         if (cardNumberHint) {
             hadInvalidChars ? cardNumberHint.classList.add('visible') : cardNumberHint.classList.remove('visible');
         }
-        if (validarInputs(['cardNumber'])) cardNumberInput.classList.remove('is-invalid');
+        
+        // Solo quitar el rojo si el numero llega a ser válido (16 dígitos sin espacios)
+        const pureDigits = cardNumberInput.value.replace(/\s/g, '');
+        if (pureDigits.length === 16) {
+            validarInputs(['cardNumber']);
+        } else {
+            // No agregamos is-invalid mientras escribe, pero si ya estaba, lo dejamos hasta que sea válido
+        }
     });
 
-    expiryInput?.addEventListener('input', () => {
+    cardNumberInput?.addEventListener('blur', () => {
+        if (cardNumberInput.value.trim() !== '') {
+            validarInputs(['cardNumber']);
+        }
+    });
+
+    expiryInput?.addEventListener('input', (e) => {
         // Detectar letras ANTES de que el formateador las elimine
         const hadLetters = /[a-zA-Z]/.test(expiryInput.value);
-        formatearVencimiento(expiryInput);
+        formatearVencimiento(expiryInput, e);
         btnFinalizar.disabled = !verificarInputsCompletos(cardInputs);
         if (expiryHint) {
             hadLetters ? expiryHint.classList.add('visible') : expiryHint.classList.remove('visible');
@@ -246,15 +260,21 @@ function formatearNumeroTarjeta(input) {
 
 /**
  * Inserta automáticamente el '/' tras los primeros 2 dígitos del vencimiento.
- * Maneja el backspace correctamente para no bloquear al borrar.
+ * Es inteligente: agrega la barra al escribir, pero permite borrarla.
  */
-function formatearVencimiento(input) {
-    let val = input.value.replace(/\D/g, '').slice(0, 4);
-    // El slash aparece en cuanto se escriben 2 dígitos
-    if (val.length >= 2) {
-        val = val.slice(0, 2) + '/' + val.slice(2);
+function formatearVencimiento(input, event) {
+    let val = input.value.replace(/\D/g, '');
+    
+    // Si el usuario está borrando y termina en 2 dígitos, no forzamos la barra
+    if (event && event.inputType === 'deleteContentBackward') {
+        if (val.length === 2 && input.value.length === 2) return;
     }
-    input.value = val;
+
+    if (val.length >= 2) {
+        input.value = val.slice(0, 2) + '/' + val.slice(2, 4);
+    } else {
+        input.value = val;
+    }
 }
 
 /**
@@ -278,6 +298,50 @@ function validarInputs(ids) {
         }
     });
     return todosValidos;
+}
+
+/**
+ * Permite que los encabezados de pasos completados sean clickeables
+ * para que el usuario pueda volver atrás y editar.
+ */
+function setupNavegacionPasos() {
+    const headers = document.querySelectorAll('.step-header');
+    headers.forEach(header => {
+        const stepSection = header.parentElement;
+        header.addEventListener('click', () => {
+            // Solo dejamos volver si el paso fue completado o es el siguiente inmediato
+            if (stepSection.classList.contains('completed')) {
+                const stepId = parseInt(stepSection.id.replace('step-', ''));
+                const activeSection = document.querySelector('.checkout-step.active');
+                if (activeSection) {
+                    const activeId = parseInt(activeSection.id.replace('step-', ''));
+                    if (stepId < activeId) {
+                        volverAlPaso(activeId, stepId);
+                    }
+                }
+            }
+        });
+    });
+}
+
+/**
+ * Lógica para retroceder a un paso anterior
+ */
+function volverAlPaso(actual, anterior) {
+    const sectionActual = document.getElementById(`step-${actual}`);
+    const sectionAnterior = document.getElementById(`step-${anterior}`);
+
+    if (sectionActual && sectionAnterior) {
+        sectionActual.classList.remove('active');
+        // No removemos 'completed' si el usuario solo vuelve a mirar, 
+        // se removerá si realmente cambia algo o lo volvemos activo
+        
+        sectionAnterior.classList.remove('completed', 'disabled');
+        sectionAnterior.classList.add('active');
+        sectionAnterior.setAttribute('aria-expanded', 'true');
+        
+        sectionAnterior.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
 function irAlPaso(actual, siguiente) {

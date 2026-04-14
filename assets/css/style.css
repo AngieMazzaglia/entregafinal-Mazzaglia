@@ -48,11 +48,28 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0;
   font-family: "Outfit", sans-serif;
   font-size: 1rem;
   line-height: 1.6; /* Mejorando la legibilidad de bloques de texto */
   color: #2e2e2e;
   background: var(--c-bg);
+}
+
+/* Animación de entrada suave aplicada a los contenedores principales (no al body para no romper fixed modal) */
+main, .site-header {
+  animation: pageAppearance 0.6s ease-out forwards;
+}
+
+@keyframes pageAppearance {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 main {
@@ -586,17 +603,30 @@ input:-webkit-autofill:active {
 
 /*  HEADER + NAV  */
 .site-header {
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background-color: var(--c-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.header-inner {
+/* Efecto cuando el usuario scrollea hacia abajo */
+.site-header.is-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.container.header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
   padding-block: 12px;
-  max-width: 1200px !important;
+  transition: padding 0.3s ease;
+}
+
+/* Reducimos el padding interno al scrollear para el efecto 'slim' */
+.site-header.is-scrolled .header-inner {
+  padding-block: 8px;
 }
 
 .logo {
@@ -2417,6 +2447,11 @@ form.needs-validation {
 .page-checkout .checkout-step.completed legend.step-header {
   color: #19753A;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+.page-checkout .checkout-step.completed legend.step-header:hover {
+  opacity: 0.7;
+  text-decoration: underline;
 }
 .page-checkout .checkout-step.completed legend.step-header::after {
   content: " ✓";
@@ -3068,3 +3103,48 @@ form.needs-validation {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ==========================================================================
+   CHECKOUT FOCUS MODE (Refinements)
+   ========================================================================== */
+.checkout-security-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--c-brand);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border: 1px solid var(--c-brand-soft);
+    border-radius: 20px;
+}
+
+.footer-minimal {
+    padding: var(--space-6) 0;
+    border-top: 1px solid #eee;
+    background: #fdfdfd;
+}
+
+.footer-links-minimal {
+    margin-bottom: var(--space-3);
+    text-align: center;
+}
+
+.footer-links-minimal a {
+    color: var(--c-text);
+    font-size: 0.85rem;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.footer-links-minimal a:hover {
+    opacity: 1;
+    color: var(--c-brand);
+}
+
+.footer-links-minimal .sep {
+    margin: 0 10px;
+    color: #ddd;
+}
+
