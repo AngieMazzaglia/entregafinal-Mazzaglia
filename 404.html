@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página no encontrada en Revida. Buscá nuestras soluciones sustentables desde el inicio." />
+    <title>Página no encontrada - Revida</title>
+
+    <!-- Metaetiquetas SEO (No indexar errores) -->
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/img/logosolo.png" />
+    <link rel="apple-touch-icon" href="./assets/img/logosolo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <style>
+        .error-404-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            padding: var(--space-8) var(--space-4);
+            text-align: center;
+        }
+
+        .error-img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            margin-bottom: var(--space-6);
+            opacity: 0.9;
+        }
+
+        .error-title {
+            color: var(--color-bosque);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: var(--space-3);
+        }
+
+        .error-text {
+            color: var(--color-gris-oscuro);
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin-bottom: var(--space-6);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./index.html">
+                <img class="logo" src="./assets/img/logo1.webp" alt="Logo Revida">
+            </a>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <div class="container">
+            <section class="error-404-container">
+                <img src="./assets/img/error-404.png" alt="Ilustración de una bolsa ecológica perdida en el bosque" class="error-img">
+                <h1 class="error-title">¡Ups! Página no encontrada</h1>
+                <p class="error-text">Parece que te perdiste en el bosque buscando esta página... ¡No te preocupes! Podemos volver al inicio y empezar de nuevo.</p>
+                <div class="flex gap-md">
+                    <a href="./index.html" class="btn btn-verde">Ir al Inicio</a>
+                    <a href="./pages/tienda.html" class="btn btn-outline">Ir a la Tienda</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <section class="footer-info">
+                <h3>Sobre nosotros</h3>
+                <p>Promovemos hábitos sustentables y el consumo responsable para un futuro más verde.</p>
+            </section>
+
+            <address class="footer-contacto">
+                <h3>Contacto</h3>
+                <p>Email: <a href="mailto:info@revida.com">info@revida.com</a></p>
+                <p>Tel: +54 11 1234-5678</p>
+            </address>
+
+            <nav class="footer-social" aria-label="Redes sociales">
+                <h3>Seguinos</h3>
+                <a href="https://www.instagram.com/revida.ok" aria-label="Seguinos en Instagram" rel="noopener noreferrer" target="_blank">Instagram</a> |
+                <a href="https://www.facebook.com/revida" aria-label="Seguinos en Facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+            </nav>
+        </div>
+        <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts (Cargamos los básicos para que funcione el carrito o buscador si estuvieran habilitados, aunque en 404 no es crítico) -->
+    <script src="./js/data.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
