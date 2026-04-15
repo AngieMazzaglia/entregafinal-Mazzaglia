@@ -244,7 +244,25 @@ function validarFormato(valor, tipo) {
     const regex = REGLAS_VALIDACION[tipo];
     if (!regex) return true;
     const valorAValidar = tipo === 'cardNumber' ? valor.replace(/\s/g, '') : valor;
-    return regex.test(valorAValidar);
+    
+    const esFormatoValido = regex.test(valorAValidar);
+    if (!esFormatoValido) return false;
+
+    // Validación extra para fecha de vencimiento (no estar en el pasado)
+    if (tipo === 'expiry') {
+        const [mStr, yStr] = valorAValidar.split('/');
+        const mes = parseInt(mStr, 10);
+        const anio = parseInt('20' + yStr, 10); // Asumimos siglo 21
+        
+        const hoy = new Date();
+        const anioActual = hoy.getFullYear();
+        const mesActual = hoy.getMonth() + 1; // 1-12
+
+        if (anio < anioActual) return false;
+        if (anio === anioActual && mes < mesActual) return false;
+    }
+
+    return true;
 }
 
 // --- FORMATEADORES DE TARJETA ---

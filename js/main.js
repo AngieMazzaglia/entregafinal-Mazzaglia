@@ -209,9 +209,7 @@ function renderizarTienda() {
         }
 
         const esPersonalizada = info.categoria === 'personalizadas';
-        const urlDestino = esPersonalizada 
-            ? `./contacto.html?form=quote` 
-            : `./producto-detalle.html?id=${info.id}${categoria ? `&categoria=${categoria}` : ''}`;
+        const urlDestino = `./producto-detalle.html?id=${info.id}${categoria ? `&categoria=${categoria}` : ''}`;
         const canQuickAdd = !esPersonalizada && typeof info.precio === 'number';
 
         let precioHTML = '';
@@ -219,7 +217,7 @@ function renderizarTienda() {
 
         if (typeof info.precio === 'string') {
             precioHTML = `<div class="card-price">${info.precio}</div>`;
-            botonHTML = `<a href="${urlDestino}" class="btn btn-verde btn-block" aria-label="Pedir cotización de ${info.nombre}">Pedir cotización</a>`;
+            botonHTML = `<a href="${urlDestino}" class="btn btn-verde btn-block" aria-label="Ver detalles de ${info.nombre}">Ver detalles</a>`;
         } else {
             precioHTML = `<div class="card-price">$${info.precio.toLocaleString()}</div>`;
             botonHTML = `<a href="${urlDestino}" class="btn btn-verde btn-block" aria-label="Ver detalle de ${info.nombre}">Ver detalles</a>`;
@@ -254,6 +252,10 @@ function renderizarTienda() {
                 ${canQuickAdd ? `
                     <div class="quick-buy-wrapper" data-id="${info.id}">
                         <!-- El contenido se genera dinámicamente -->
+                    </div>
+                ` : esPersonalizada ? `
+                    <div class="quick-buy-wrapper">
+                        <a href="./contacto.html?form=quote" class="btn-cotizar-mini" aria-label="Cotizar ${info.nombre}">Cotizar</a>
                     </div>
                 ` : ''}
 
@@ -466,12 +468,11 @@ function renderizarDetalleProducto() {
             </div>
             
             <div class="product-info-box">
-                <span class="category-tag">${catName}</span>
                 <h1>${producto.nombre}</h1>
                 ${producto.subtitulo ? `<span class="pack-subtitle">${producto.subtitulo}</span>` : ''}
                 
                 <div class="price-large">
-                    $${typeof producto.precio === 'number' ? producto.precio.toLocaleString() : producto.precio}
+                    ${typeof producto.precio === 'number' ? `$${producto.precio.toLocaleString()}` : producto.precio}
                     ${producto.categoria !== 'composteras' && typeof producto.precio === 'number' ? 
                         `<span class="price-notice">Precio por pack</span>` : ''}
                 </div>
@@ -482,17 +483,23 @@ function renderizarDetalleProducto() {
                 </div>
 
                 <div class="purchase-controls">
-                    <div class="qty-and-hint">
-                        <div class="quantity-controls">
-                            <button type="button" id="btn-minus" aria-label="Disminuir cantidad">−</button>
-                            <span id="qty-value" aria-live="polite">1</span>
-                            <button type="button" id="btn-plus" aria-label="Aumentar cantidad">+</button>
+                    ${producto.categoria === 'personalizadas' ? `
+                        <a href="${pathBase}pages/contacto.html?form=quote" class="btn btn-verde btn-block text-center" style="text-decoration: none;">
+                            Solicitar presupuesto
+                        </a>
+                    ` : `
+                        <div class="qty-and-hint">
+                            <div class="quantity-controls">
+                                <button type="button" id="btn-minus" aria-label="Disminuir cantidad">−</button>
+                                <span id="qty-value" aria-live="polite">1</span>
+                                <button type="button" id="btn-plus" aria-label="Aumentar cantidad">+</button>
+                            </div>
+                            <span id="min-purchase-hint" class="min-purchase-hint"></span>
                         </div>
-                        <span id="min-purchase-hint" class="min-purchase-hint"></span>
-                    </div>
-                    <button class="btn btn-verde btn-add-cart" id="btn-add-to-cart">
-                        Agregar al carrito
-                    </button>
+                        <button class="btn btn-verde btn-add-cart" id="btn-add-to-cart">
+                            Agregar al carrito
+                        </button>
+                    `}
                 </div>
 
                 <div class="trust-badges">

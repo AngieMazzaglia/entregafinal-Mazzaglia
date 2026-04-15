@@ -5,16 +5,18 @@ const productos = [
     {
         id: "bols-pers-01",
         nombre: "Bolsas personalizadas",
-        subtitulo: "A medida con tu logo",
+        subtitulo: "A medida según tu marca",
         precio: "Pedir cotización",
         imagen: "assets/img/prod1.webp",
         categoria: "personalizadas",
         descripcion: "Personalizá tus bolsas con el diseño o logo de tu marca.",
         caracteristicas: [
-            "Impresión de alta calidad",
-            "Diferentes tamaños disponibles",
-            "Materiales ecológicos",
-            "Asesoramiento personalizado"
+            "Diferentes tamaños y materiales disponibles",
+            "Impresión con logo o diseño personalizado",
+            "Producción a pedido (mínimo 50 unidades)",
+            "Asesoramiento en diseño y formato",
+            "Opciones para bolsas de tela, papel o biodegradables",
+            "Ideal para marcas, eventos y packaging"
         ]
     },
 
@@ -28,10 +30,10 @@ const productos = [
         categoria: "ecologicas",
         descripcion: "Tela ecológica roja, ligera y resistente.",
         caracteristicas: [
-            "Medidas: 45x40x10 cm",
-            "Tela ecológica 80gr",
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica de 80 g",
             "Manijas reforzadas",
-            "Lavable y reutilizable"
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -43,10 +45,10 @@ const productos = [
         categoria: "ecologicas",
         descripcion: "Tela ecológica amarilla, ligera y resistente.",
         caracteristicas: [
-            "Medidas: 45x40x10 cm",
-            "Color vibrante y duradero",
-            "Costuras reforzadas",
-            "Ideal para compras diarias"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica de 80 g",
+            "Manijas reforzadas",
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -58,10 +60,10 @@ const productos = [
         categoria: "ecologicas",
         descripcion: "Tela ecológica verde, ligera y resistente.",
         caracteristicas: [
-            "Material 100% reciclable",
-            "Soporta hasta 15kg",
-            "Fácil de plegar y guardar",
-            "Estilo minimalista"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica de 80 g",
+            "Manijas reforzadas",
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -73,10 +75,10 @@ const productos = [
         categoria: "ecologicas",
         descripcion: "Tela ecológica azul, ligera y resistente.",
         caracteristicas: [
-            "Resistente a la humedad",
-            "Gran capacidad interna",
-            "Ideal para regalos corporativos",
-            "Amigable con el medio ambiente"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica de 80 g",
+            "Manijas reforzadas",
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -88,10 +90,10 @@ const productos = [
         categoria: "ecologicas",
         descripcion: "Tela ecológica. Surtido de colores.",
         caracteristicas: [
-            "Variedad de colores primarios",
-            "Material Friselina 80gr",
-            "Ideal para eventos y ferias",
-            "Excelente relación precio-calidad"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica de 80 g",
+            "Manijas reforzadas",
+            "Reutilizable y fácil de limpiar"
         ]
     },
 
@@ -105,10 +107,10 @@ const productos = [
         categoria: "disenos",
         descripcion: "Diseño floral exclusivo sobre tela ecológica.",
         caracteristicas: [
-            "Estampa premium",
-            "Diseño artístico único",
-            "Tela reforzada",
-            "Pack surtido"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica liviana y resistente",
+            "Diseño exclusivo de la marca",
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -120,10 +122,10 @@ const productos = [
         categoria: "disenos",
         descripcion: "Diseños abstractos y modernos.",
         caracteristicas: [
-            "Varios modelos por pack",
-            "Gama de colores tierra",
-            "Alta durabilidad",
-            "Tendencia sustentable"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica liviana y resistente",
+            "Diseño exclusivo de la marca",
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -135,10 +137,10 @@ const productos = [
         categoria: "disenos",
         descripcion: "Diseño conceptual exclusivo.",
         caracteristicas: [
-            "Arte minimalista",
-            "Tintas al agua no tóxicas",
-            "Tamaño estándar 40x40",
-            "Edición limitada"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica liviana y resistente",
+            "Diseño exclusivo de la marca",
+            "Reutilizable y fácil de limpiar"
         ]
     },
     {
@@ -150,10 +152,10 @@ const productos = [
         categoria: "disenos",
         descripcion: "Diseño botánico sobre tela rústica.",
         caracteristicas: [
-            "Look natural",
-            "Detalle de terminación premium",
-            "Ideal para viveros y tiendas eco",
-            "Biodegradable"
+            "Medidas: 45 × 40 × 10 cm",
+            "Tela ecológica liviana y resistente",
+            "Diseño exclusivo de la marca",
+            "Reutilizable y fácil de limpiar"
         ]
     },
 
@@ -167,10 +169,10 @@ const productos = [
         categoria: "papel",
         descripcion: "Clásica y resistente bolsa de papel Kraft.",
         caracteristicas: [
-            "Papel Kraft 120gr",
-            "Manija de papel reforzada",
-            "Reciclable y compostable",
-            "Fondo reforzado"
+            "Papel kraft resistente",
+            "Manijas de cordón reforzadas",
+            "Mayor capacidad de carga",
+            "Ideal para productos más pesados"
         ]
     },
     {
@@ -182,10 +184,10 @@ const productos = [
         categoria: "papel",
         descripcion: "Práctica y económica para despacho.",
         caracteristicas: [
-            "Diseño tipo riñón",
-            "Papel de alta densidad",
-            "Ideal para indumentaria",
-            "Muy resistente"
+            "Papel kraft resistente",
+            "Manija troquelada integrada",
+            "Formato práctico para entrega",
+            "Ideal para delivery y take away"
         ]
     },
     {
@@ -197,10 +199,10 @@ const productos = [
         categoria: "papel",
         descripcion: "Resistente y versátil para gastronomía.",
         caracteristicas: [
-            "Apta para alimentos",
-            "Fácil apertura",
-            "Estética rústica",
-            "Certificación FSC"
+            "Papel kraft resistente",
+            "Manijas planas reforzadas",
+            "Base amplia para mayor capacidad",
+            "Ideal para tiendas y retail"
         ]
     },
     {
@@ -212,10 +214,10 @@ const productos = [
         categoria: "papel",
         descripcion: "Ideal para delivery y productos pequeños.",
         caracteristicas: [
-            "Sin manija",
-            "Ocupa mínimo espacio",
-            "Económica",
-            "Perfecta para panaderías"
+            "Papel kraft resistente",
+            "Cierre superior plegable",
+            "Formato liviano y funcional",
+            "Ideal para productos pequeños"
         ]
     },
 
@@ -229,10 +231,10 @@ const productos = [
         categoria: "biodegradables",
         descripcion: "Fabricada con materiales compostables certificados.",
         caracteristicas: [
-            "100% Compostable",
-            "Se degrada en 180 días",
-            "Textura suave y resistente",
-            "Cumple norma EN 13432"
+            "Material biodegradable resistente",
+            "Formato tipo camiseta con asas",
+            "Amplia capacidad de carga",
+            "Ideal para compras y uso diario"
         ]
     },
     {
@@ -244,10 +246,10 @@ const productos = [
         categoria: "biodegradables",
         descripcion: "Resistente y totalmente amigable con el ambiente.",
         caracteristicas: [
-            "Material de origen vegetal",
-            "Sin plásticos derivados del petróleo",
-            "Resistencia superior",
-            "Versión premium"
+            "Material biodegradable resistente",
+            "Manija troquelada integrada",
+            "Formato práctico para entrega",
+            "Ideal para delivery y take away"
         ]
     },
     {
@@ -259,10 +261,10 @@ const productos = [
         categoria: "biodegradables",
         descripcion: "Práctica para empaques sustentables.",
         caracteristicas: [
-            "Cierre fácil",
-            "Ideal para e-commerce",
-            "Reducción de huella de carbono",
-            "Color natural"
+            "Material biodegradable flexible",
+            "Formato liviano y adaptable",
+            "Fácil de manipular y almacenar",
+            "Ideal para envolver o proteger productos"
         ]
     },
 
@@ -276,10 +278,10 @@ const productos = [
         categoria: "composteras",
         descripcion: "Compartimiento simple ideal para balcones.",
         caracteristicas: [
-            "Capacidad 60 litros",
-            "Madera tratada",
-            "Incluye bandeja de lixiviados",
-            "Medidas: 40x40x60 cm"
+            "Estructura resistente y duradera",
+            "Sistema de ventilación integrado",
+            "Fácil de usar y mantener",
+            "Ideal para compostaje doméstico"
         ]
     },
     {
@@ -291,10 +293,10 @@ const productos = [
         categoria: "composteras",
         descripcion: "Doble compartimento para proceso continuo.",
         caracteristicas: [
-            "Capacidad total 120 litros",
-            "División interna",
-            "Puertas superiores amplias",
-            "Ideal para familias"
+            "Doble compartimento independiente",
+            "Permite compostaje continuo",
+            "Estructura resistente y estable",
+            "Ideal para mayor volumen de residuos"
         ]
     },
     {
@@ -306,10 +308,10 @@ const productos = [
         categoria: "composteras",
         descripcion: "Compostera simple cargada con todo el kit.",
         caracteristicas: [
-            "Incluye herramientas",
-            "Manual de compostaje",
-            "Activador biológico",
-            "Unidad completa"
+            "Sistema de compostaje completo",
+            "Incluye accesorios de uso (pala, guantes, cesto y bandejas)",
+            "Diseño práctico y funcional",
+            "Ideal para comenzar a compostar"
         ]
     },
     {
@@ -321,10 +323,10 @@ const productos = [
         categoria: "composteras",
         descripcion: "La solución definitiva para tu jardín.",
         caracteristicas: [
-            "Caja de herramientas premium",
-            "Mezclador para aireación",
-            "Terapia de núcleos de lombriz",
-            "Máximo rendimiento"
+            "Doble compartimento independiente",
+            "Incluye accesorios de uso (pala, guantes, cesto y bandejas)",
+            "Permite compostaje continuo",
+            "Ideal para uso intensivo o familiar"
         ]
     },
     {
@@ -336,10 +338,10 @@ const productos = [
         categoria: "composteras",
         descripcion: "Herramientas diseñadas para compostar.",
         caracteristicas: [
-            "Pala y rastrillo de mano",
-            "Termómetro de suelo",
-            "Medidor de humedad",
-            "Bolsa de tela incluida"
+            "Incluye pala, guantes, bandejas y cesto de residuos",
+            "Práctico y fácil de utilizar",
+            "Accesorios esenciales para compostar",
+            "Ideal para iniciarse en el compostaje"
         ]
     }
 ];
@@ -396,15 +398,15 @@ const obtenerProductosPorCategoria = (categoria) => {
  */
 const obtenerProductosPorBusqueda = (termino) => {
     if (!termino) return [];
-    
+
     // Normalizamos el término: minúsculas y sin espacios extra al inicio/final
     const lowerTerm = termino.toLowerCase().trim();
 
     // 1. Verificamos si el término coincide exactamente con el NOMBRE de una categoría
     // Ejemplo: Si busca "bolsas de tela" o "composteras"
     const catKeys = Object.keys(nombresCategorias);
-    const matchedCat = catKeys.find(key => 
-        nombresCategorias[key].toLowerCase() === lowerTerm || 
+    const matchedCat = catKeys.find(key =>
+        nombresCategorias[key].toLowerCase() === lowerTerm ||
         key.toLowerCase() === lowerTerm
     );
 
@@ -415,7 +417,7 @@ const obtenerProductosPorBusqueda = (termino) => {
 
     // 2. Si no es una categoría exacta, hacemos búsqueda por palabras
     const palabras = lowerTerm.split(/\s+/).filter(p => p.length > 2); // palabras de más de 2 letras
-    
+
     return productos.filter(p => {
         // Creamos un súper-texto con toda la info del producto para buscar ahí
         const nombreCat = nombresCategorias[p.categoria] || "";
@@ -427,15 +429,15 @@ const obtenerProductosPorBusqueda = (termino) => {
             ${nombreCat} 
             ${p.caracteristicas ? p.caracteristicas.join(" ") : ""}
         `.toLowerCase();
-        
+
         // Coincidencia exacta del término completo (Prioridad)
         if (searchableText.includes(lowerTerm)) return true;
-        
+
         // Si hay varias palabras, verificamos que TODAS las palabras significativas estén presentes
         if (palabras.length > 0) {
             return palabras.every(pal => searchableText.includes(pal));
         }
-        
+
         return false;
     });
 };

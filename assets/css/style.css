@@ -2328,6 +2328,28 @@ form.needs-validation {
     transform: translateX(0);
   }
 }
+
+.btn-cotizar-mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background-color: #19753A;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.btn-cotizar-mini:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
 /* Tarjeta: Controles Finales */
 .card-controls {
   margin-top: auto;
@@ -2634,21 +2656,31 @@ form.needs-validation {
 }
 .page-carrito .carrito-summary .cp-calculator .cp-input-group .flex-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  align-items: center;
 }
 .page-carrito .carrito-summary .cp-calculator .cp-input-group .flex-row input {
   flex: 1;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.95rem;
   outline: none;
   transition: all 0.3s ease;
+  height: 42px;
 }
 .page-carrito .carrito-summary .cp-calculator .cp-input-group .flex-row input:focus {
   border-color: #19753A;
   box-shadow: 0 0 0 3px rgba(25, 117, 58, 0.1);
+}
+.page-carrito .carrito-summary .cp-calculator .cp-input-group .flex-row .btn-sm {
+  height: 42px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 .page-carrito .carrito-summary .cp-result {
   margin-top: 12px;
@@ -2763,6 +2795,7 @@ form.needs-validation {
 }
 .product-image-box img {
   max-width: 100%;
+  max-height: 420px;
   height: auto;
   object-fit: contain;
   transition: transform 0.3s ease;
@@ -2834,7 +2867,6 @@ form.needs-validation {
   margin-bottom: 12px;
   color: #666;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .product-features ul {
