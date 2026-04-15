@@ -374,12 +374,12 @@ window.SHIPPING_RESTO = 5000;
  * Mapa centralizado de nombres de categorías para consistencia en todo el sitio
  */
 const nombresCategorias = {
-    'ecologicas': 'Bolsas de tela',
+    'ecologicas': 'Bolsas de tela lisas',
     'composteras': 'Composteras',
     'personalizadas': 'Bolsas personalizadas',
     'papel': 'Bolsas de papel',
     'biodegradables': 'Bolsas biodegradables',
-    'disenos': 'Bolsas con diseños'
+    'disenos': 'Bolsas de tela con diseños'
 };
 
 /**
@@ -391,13 +391,51 @@ const obtenerProductosPorCategoria = (categoria) => {
 };
 
 /**
- * Busca productos por coincidencia en nombre o descripción
+ * Busca productos por coincidencia inteligente en nombre, descripción, subtítulo o categoría.
+ * Maneja múltiples palabras y coincidencias con nombres de categorías.
  */
 const obtenerProductosPorBusqueda = (termino) => {
     if (!termino) return [];
-    const lowerTerm = termino.toLowerCase();
-    return productos.filter(p =>
-        p.nombre.toLowerCase().includes(lowerTerm) ||
-        p.descripcion.toLowerCase().includes(lowerTerm)
+    
+    // Normalizamos el término: minúsculas y sin espacios extra al inicio/final
+    const lowerTerm = termino.toLowerCase().trim();
+
+    // 1. Verificamos si el término coincide exactamente con el NOMBRE de una categoría
+    // Ejemplo: Si busca "bolsas de tela" o "composteras"
+    const catKeys = Object.keys(nombresCategorias);
+    const matchedCat = catKeys.find(key => 
+        nombresCategorias[key].toLowerCase() === lowerTerm || 
+        key.toLowerCase() === lowerTerm
     );
+
+    // Si es una categoría, devolvemos todos los productos de esa categoría
+    if (matchedCat) {
+        return productos.filter(p => p.categoria === matchedCat);
+    }
+
+    // 2. Si no es una categoría exacta, hacemos búsqueda por palabras
+    const palabras = lowerTerm.split(/\s+/).filter(p => p.length > 2); // palabras de más de 2 letras
+    
+    return productos.filter(p => {
+        // Creamos un súper-texto con toda la info del producto para buscar ahí
+        const nombreCat = nombresCategorias[p.categoria] || "";
+        const searchableText = `
+            ${p.nombre} 
+            ${p.descripcion} 
+            ${p.subtitulo || ""} 
+            ${p.categoria} 
+            ${nombreCat} 
+            ${p.caracteristicas ? p.caracteristicas.join(" ") : ""}
+        `.toLowerCase();
+        
+        // Coincidencia exacta del término completo (Prioridad)
+        if (searchableText.includes(lowerTerm)) return true;
+        
+        // Si hay varias palabras, verificamos que TODAS las palabras significativas estén presentes
+        if (palabras.length > 0) {
+            return palabras.every(pal => searchableText.includes(pal));
+        }
+        
+        return false;
+    });
 };

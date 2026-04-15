@@ -209,7 +209,9 @@ function renderizarTienda() {
         }
 
         const esPersonalizada = info.categoria === 'personalizadas';
-        const urlDestino = esPersonalizada ? `./contacto.html?form=quote` : `./producto-detalle.html?id=${info.id}`;
+        const urlDestino = esPersonalizada 
+            ? `./contacto.html?form=quote` 
+            : `./producto-detalle.html?id=${info.id}${categoria ? `&categoria=${categoria}` : ''}`;
         const canQuickAdd = !esPersonalizada && typeof info.precio === 'number';
 
         let precioHTML = '';
@@ -439,6 +441,10 @@ function renderizarDetalleProducto() {
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <a href="${pathBase}index.html">Inicio</a> <span class="separator" aria-hidden="true">/</span>
                 <a href="${pathBase}pages/tienda.html">Tienda</a> <span class="separator" aria-hidden="true">/</span>
+                ${params.get('categoria') ? `
+                    <a href="${pathBase}pages/tienda.html?categoria=${params.get('categoria')}">${nombresCategorias[params.get('categoria')] || params.get('categoria')}</a>
+                    <span class="separator" aria-hidden="true">/</span>
+                ` : ''}
                 <span class="current" aria-current="page">${producto.nombre}</span>
             </nav>
 
