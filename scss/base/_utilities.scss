@@ -66,6 +66,10 @@
 .gap-3 { gap: $space-3 !important; }
 
 /* Otros */
+.flow > * + * {
+    margin-top: var(--space-3);
+}
+
 .w-100 { width: 100% !important; }
 .d-block { display: block !important; }
 .rounded { border-radius: $radius !important; }

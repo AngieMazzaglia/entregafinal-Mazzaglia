@@ -9,17 +9,15 @@
 // Estilos generales
 @use "base/generales";
 @use "base/animations";
-@use "base/utilities";
 
-// Componentes
+// Componentes y UI Elements
 @use "components/header";
 @use "components/footer";
 @use "components/buttons";
 @use "components/ui-elements";
 @use "components/cart";
-/* Agregado: Breadcrumbs y Alertas */
 
-// Secciones
+// Secciones de Maquetación
 @use "sections/hero";
 @use "sections/cards";
 @use "sections/features";

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="¡Gracias por tu compra en Revida! Tu pedido ha sido procesado correctamente. Recibirás un correo con los detalles en breve." />
+    <meta name="keywords" content="compra exitosa, agradecimiento, pedido confirmado, Revida Argentina" />
     <title>¡Compra Exitosa! - Revida</title>
 
     <!-- Metaetiquetas SEO y Sociales -->
@@ -25,7 +26,7 @@
 </head>
 
 <body>
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Accesibilidad -->
 
     <header class="site-header">
         <div class="container header-inner">
@@ -83,7 +84,7 @@
         </div>
     </header>
 
-    <main id="main-content" class="page-confirmation">
+    <main id="contenido" tabindex="-1" class="page-confirmation"> <!-- Accesibilidad -->
         <div class="container confirmation-card">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" class="success-icon" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -97,10 +98,26 @@
         </div>
     </main>
 
-    <footer class="site-footer mt-auto" role="contentinfo">
-        <div class="container feedback-footer text-center">
-             <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <section class="footer-info">
+                <h3>Sobre nosotros</h3>
+                <p>Promovemos hábitos sustentables y el consumo responsable para un futuro más verde.</p>
+            </section>
+
+            <address class="footer-contacto">
+                <h3>Contacto</h3>
+                <p>Email: <a href="mailto:info@revida.com">info@revida.com</a></p>
+                <p>Tel: +54 11 1234-5678</p>
+            </address>
+
+            <nav class="footer-social" aria-label="Redes sociales">
+                <h3>Seguinos</h3>
+                <a href="https://www.instagram.com/revida.ok" aria-label="Seguinos en Instagram" rel="noopener noreferrer" target="_blank">Instagram</a> |
+                <a href="https://www.facebook.com/revida.ok" aria-label="Seguinos en Facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+            </nav>
         </div>
+        <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts -->

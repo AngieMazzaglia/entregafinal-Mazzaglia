@@ -435,16 +435,16 @@ function renderizarResumenCheckout() {
         textoEnvio = 'Gratis';
     } else if (metodo === null) {
         // Sin método seleccionado: mostrar "Gratis" si ya aplica por monto total
-        if (subtotal >= (window.MIN_ENVIO_GRATIS || 50000)) {
+        if (subtotal >= window.MIN_ENVIO_GRATIS) {
             textoEnvio = 'Gratis';
         } else {
             textoEnvio = 'A calcular';
         }
     } else {
         costoEnvio = (typeof window.calcularCostoEnvio === 'function') ? window.calcularCostoEnvio(cp) : 0;
-        if (costoEnvio === 0 && (cp !== '' || subtotal >= (window.MIN_ENVIO_GRATIS || 50000))) {
+        if (costoEnvio === 0 && (cp !== '' || subtotal >= window.MIN_ENVIO_GRATIS)) {
             textoEnvio = 'Gratis';
-        } else if (costoEnvio === null || (cp === '' && subtotal < (window.MIN_ENVIO_GRATIS || 50000))) {
+        } else if (costoEnvio === null || (cp === '' && subtotal < window.MIN_ENVIO_GRATIS)) {
             textoEnvio = 'A calcular';
             costoEnvio = 0;
         } else {

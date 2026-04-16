@@ -134,16 +134,7 @@ select:focus-visible {
     text-align: left;
 }
 
-/* ==========================================================================
-   UTILIDADES DE COMPORTAMIENTO (Flex & Grouping)
-   ========================================================================== */
-.d-flex { display: flex !important; }
-.justify-center { justify-content: center !important; }
-.text-center { text-align: center !important; }
 
-.flow > * + * {
-    margin-top: var(--space-3);
-}
 
 .cta-group {
     display: flex;

@@ -3,8 +3,9 @@
 /**
  * CONFIGURACIÓN Y CONSTANTES
  */
-const MIN_COMPRA = window.MIN_COMPRA || 15000;
-const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS || 50000;
+// CONFIGURACIÓN Y CONSTANTES (Consumidas desde window.data.js)
+const MIN_COMPRA = window.MIN_COMPRA;
+const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS;
 
 let carrito = [];
 try {
@@ -263,9 +264,9 @@ window.calcularCostoEnvio = (cp) => {
     const nCP = parseInt(cp);
     if (isNaN(nCP)) return null;
 
-    if (nCP >= 1000 && nCP <= 1499) return window.SHIPPING_CABA || 2000;
-    if (nCP >= 1500 && nCP <= 1999) return window.SHIPPING_BSAS || 3000;
-    return window.SHIPPING_RESTO || 5000;
+    if (nCP >= 1000 && nCP <= 1499) return window.SHIPPING_CABA;
+    if (nCP >= 1500 && nCP <= 1999) return window.SHIPPING_BSAS;
+    return window.SHIPPING_RESTO;
 };
 
 window.guardarCP = (cp) => cp ? localStorage.setItem('userCP', cp) : localStorage.removeItem('userCP');

@@ -33,7 +33,7 @@
 </head>
 
 <body class="page-checkout">
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Accesibilidad -->
 
     <header class="site-header site-header-minimal">
         <div class="container header-inner">
@@ -47,7 +47,7 @@
         </div>
     </header>
 
-    <main id="main-content">
+    <main id="contenido" tabindex="-1"> <!-- Accesibilidad -->
         <div class="container mt-5">
             <div class="checkout-header-info mb-5">
                 <h1>Completar el pago</h1>
@@ -186,6 +186,9 @@
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
                                         <input type="radio" name="paymentMethod" value="transfer" aria-required="true"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor" class="payment-icon" aria-hidden="true">
+                                            <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z" />
+                                        </svg>
                                         <strong>Transferencia bancaria</strong>
                                     </label>
                                     <div class="step-helper-text">
@@ -195,6 +198,7 @@
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
                                         <input type="radio" name="paymentMethod" value="mercadopago" aria-required="true"> 
+                                        <img src="../assets/img/MP2.webp" alt="" class="payment-icon" width="24" height="24" style="object-fit: contain;" aria-hidden="true">
                                         <strong>Mercado Pago</strong>
                                     </label>
                                     <div class="step-helper-text">
@@ -204,6 +208,9 @@
                                 <div class="form-group mb-4">
                                     <label class="radio-label">
                                         <input type="radio" name="paymentMethod" value="card" aria-required="true"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor" class="payment-icon" aria-hidden="true">
+                                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                                        </svg>
                                         <strong>Tarjeta de crédito/débito</strong>
                                     </label>
                                 </div>
