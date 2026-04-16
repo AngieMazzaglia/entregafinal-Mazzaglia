@@ -1887,22 +1887,14 @@ form.needs-validation {
   transition: all 0.3s ease;
 }
 .instruction-box:hover {
-  border-color: var(--c-brand);
-  background-color: #ffffff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-/* Efecto anidado: cuando el mouse entra a la caja, el botón se pone beige para resaltar */
-.instruction-box:hover .btn-blanco {
-  background-color: #ede9d0;
-  border-color: #1b5e20;
-}
-/* Cuando el mouse entra específicamente al botón, se pone verde oscuro */
 .instruction-box .btn-blanco:hover {
-  background-color: #1b5e20;
-  color: #ffffff;
+  background-color: #1b5e20 !important;
+  color: #ffffff !important;
+  border-color: #1b5e20 !important;
 }
-
 .instruction-box:last-child {
   margin-bottom: 0;
 }

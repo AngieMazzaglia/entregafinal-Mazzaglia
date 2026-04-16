@@ -78,7 +78,19 @@
     backdrop-filter: blur(8px);
     /* Efecto de desenfoque */
     border: 1px solid #e0dfd5;
-    border-radius: $radius;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: $shadow-lg;
+    }
+
+    // El botón solo cambia cuando el mouse está directamente sobre él
+    .btn-blanco:hover {
+        background-color: $c-brand-dark;
+        color: $c-bg;
+        border-color: $c-brand-dark;
+    }
 
     // Reset margin for the last box
     &:last-child {
