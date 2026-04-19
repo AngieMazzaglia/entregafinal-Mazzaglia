@@ -26,19 +26,20 @@
         flex-wrap: wrap; 
         position: relative; 
         justify-content: space-between;
-        padding-block: 8px; // Más compacto en mobile
+        padding-block: 8px; 
+        min-height: 58px; // Evita que el logo absoluto colisione con el borde inferior
     }
 
     .logo-link {
         position: absolute;
         left: 50%;
-        top: 28px; // Posición fija para que no baje al abrir el menú (altura bar / 2)
+        top: 28px; 
         transform: translate(-50%, -50%);
         z-index: 10;
         margin-top: 0;
 
         &:hover {
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(1.02);
         }
     }
 
@@ -74,6 +75,11 @@
     .nav-toggle:checked ~ .site-nav {
         max-height: 500px;
         animation: slideDown .3s ease-out;
+    }
+
+    /* Píldora de Checkout a la derecha en mobile */
+    .checkout-security-badge {
+        margin-left: auto;
     }
 
     .site-nav .nav-list {

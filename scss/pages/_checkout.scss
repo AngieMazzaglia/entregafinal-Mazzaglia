@@ -160,6 +160,40 @@
         padding: $space-5;
         display: none; 
     }
+
+    /* Píldora de seguridad a la derecha en mobile */
+    .checkout-security-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $c-brand;
+        padding: 5px 14px;
+        background: transparent;
+        border: 1px solid $c-brand;
+        border-radius: 50px; // Forma de píldora
+        width: fit-content;
+        margin-bottom: $space-2;
+        
+        svg {
+            color: $c-brand;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .checkout-security-badge {
+            margin-left: auto;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            gap: 5px;
+
+            svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
 }
 
 /* --- Layout de la Página (Grid) --- */

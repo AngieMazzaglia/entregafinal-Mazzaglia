@@ -26,7 +26,11 @@
 .logo-link {
     display: flex;
     align-items: center;
-    // Animación de hover removida por solicitud
+    transition: transform 0.23s ease-out;
+    
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 
 /* Menú base */

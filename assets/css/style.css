@@ -672,6 +672,10 @@ input:-webkit-autofill:active {
 .logo-link {
   display: flex;
   align-items: center;
+  transition: transform 0.23s ease-out;
+}
+.logo-link:hover {
+  transform: scale(1.02);
 }
 
 /* Menú base */
@@ -2770,6 +2774,38 @@ form.needs-validation {
   padding: 24px;
   display: none;
 }
+.page-checkout {
+  /* Píldora de seguridad a la derecha en mobile */
+}
+.page-checkout .checkout-security-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #19753A;
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid #19753A;
+  border-radius: 50px;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+.page-checkout .checkout-security-badge svg {
+  color: #19753A;
+}
+@media (max-width: 1023px) {
+  .page-checkout .checkout-security-badge {
+    margin-left: auto;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+  .page-checkout .checkout-security-badge svg {
+    width: 14px;
+    height: 14px;
+  }
+}
 
 /* --- Layout de la Página (Grid) --- */
 .checkout-grid {
@@ -3499,6 +3535,7 @@ form.needs-validation {
     position: relative;
     justify-content: space-between;
     padding-block: 8px;
+    min-height: 58px;
   }
   .logo-link {
     position: absolute;
@@ -3509,7 +3546,7 @@ form.needs-validation {
     margin-top: 0;
   }
   .logo-link:hover {
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1.02);
   }
   .header-actions-mobile {
     display: flex;
@@ -3538,6 +3575,10 @@ form.needs-validation {
   .nav-toggle:checked ~ .site-nav {
     max-height: 500px;
     animation: slideDown 0.3s ease-out;
+  }
+  /* Píldora de Checkout a la derecha en mobile */
+  .checkout-security-badge {
+    margin-left: auto;
   }
   .site-nav .nav-list {
     flex-direction: column;
