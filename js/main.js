@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Inicializar lógica del carrito
     actualizarContadorCarrito();
     inicializarModalCarrito();
+    inicializarSearchMobile(); // Nueva lógica para búsqueda mobile
     inicializarAccesibilidad(); // Mejoras de ARIA
     // 3. Inyectar contenedor de notificaciones e inicializar validaciones
     inyectarToastContainer();
@@ -88,17 +89,24 @@ function inyectarModalCarrito() {
 // --- LÓGICA DEL CARRITO (UI) ---
 
 function inicializarModalCarrito() {
+    // Pueden haber dos botones de carrito (Desktop y Mobile)
     const cartBtn = document.getElementById('cart-btn');
+    const cartBtnMobile = document.getElementById('cart-btn-mobile');
     const modal = document.getElementById('cart-modal');
     // Buscar el botón de cierre dentro del modal recién creado
     const closeBtn = document.getElementById('close-cart');
     const checkoutBtn = document.getElementById('checkout-btn');
 
-    if (cartBtn && modal) {
-        cartBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Evitar saltos si es un link
-            renderizarCarritoEnModal();
-            abrirModal();
+    if (modal) {
+        // Asignar evento a ambos botones de carrito
+        [cartBtn, cartBtnMobile].forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Evitar saltos si es un link
+                    renderizarCarritoEnModal();
+                    abrirModal();
+                });
+            }
         });
 
         if (closeBtn) {
@@ -130,6 +138,34 @@ function inicializarModalCarrito() {
                 window.location.href = isPage ? './carrito.html' : './pages/carrito.html';
             });
         }
+    }
+}
+
+/**
+ * Controla la apertura/cierre del buscador desplegable en mobile
+ */
+function inicializarSearchMobile() {
+    const toggle = document.getElementById('mobile-search-toggle');
+    const searchBar = document.getElementById('mobile-search-bar');
+    
+    if (toggle && searchBar) {
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            searchBar.classList.toggle('active');
+            
+            // Foco automático en el input al abrir
+            if (searchBar.classList.contains('active')) {
+                const input = searchBar.querySelector('input');
+                if (input) input.focus();
+            }
+        });
+
+        // Cerrar si se hace click fuera del buscador (opcional pero recomendado)
+        document.addEventListener('click', (e) => {
+            if (!searchBar.contains(e.target) && !toggle.contains(e.target)) {
+                searchBar.classList.remove('active');
+            }
+        });
     }
 }
 

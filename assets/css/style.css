@@ -627,6 +627,26 @@ input:-webkit-autofill:active {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
 }
 
+/* Utilidades de Visibilidad */
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+@media (min-width: 1024px) {
+  .d-lg-none {
+    display: none !important;
+  }
+  .d-lg-block {
+    display: block !important;
+  }
+  .d-lg-flex {
+    display: flex !important;
+  }
+}
 /*  HEADER + NAV  */
 .site-header {
   background: #fff;
@@ -646,8 +666,12 @@ input:-webkit-autofill:active {
   height: 48px;
   width: auto;
   display: block;
-  margin-right: 20px;
   cursor: pointer;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
 }
 
 /* Menú base */
@@ -746,6 +770,50 @@ nav a[aria-current=page] {
   font-size: 0.625rem;
   font-weight: 700;
   display: none;
+  line-height: 1;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Acciones Mobile (Lupa + Carrito) */
+.header-actions-mobile {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-right: -5px;
+}
+.header-actions-mobile .btn-icon {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: var(--c-brand);
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.header-actions-mobile .btn-icon:hover {
+  transform: scale(1.1);
+  background: transparent;
+}
+.header-actions-mobile .btn-icon:focus {
+  outline: none;
+}
+.header-actions-mobile .btn-cart {
+  padding: 8px;
+  font-size: 1.2rem;
+}
+.header-actions-mobile .btn-cart svg {
+  width: 22px;
+  height: 22px;
 }
 
 /* Dropdown Menu (Desktop Only) */
@@ -875,6 +943,52 @@ nav a[aria-current=page] {
     width: 180px;
   }
 }
+/* MOBILE SEARCH BAR (Dropdown que empuja contenido) */
+.mobile-search-bar {
+  display: none;
+  width: 100%;
+  background: #fdfdfd;
+  border-top: 1px solid #eee;
+  padding-block: 15px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.mobile-search-bar.active {
+  display: block;
+  animation: slideDown 0.3s ease-out;
+}
+.mobile-search-bar .container {
+  max-width: 100%;
+}
+.mobile-search-bar form {
+  display: flex;
+  gap: 10px;
+}
+.mobile-search-bar form input[type=search] {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--c-brand-soft);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+}
+.mobile-search-bar form input[type=search]:focus {
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+.mobile-search-bar form button {
+  background: var(--c-brand);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.mobile-search-bar form button:hover {
+  background: var(--c-brand-dark);
+}
+
 /*  Footer  */
 footer {
   background: var(--c-bg-footer);
@@ -3382,6 +3496,23 @@ form.needs-validation {
 @media (max-width: 1023px) {
   .header-inner {
     flex-wrap: wrap;
+    position: relative;
+    justify-content: space-between;
+    padding-block: 8px;
+  }
+  .logo-link {
+    position: absolute;
+    left: 50%;
+    top: 28px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    margin-top: 0;
+  }
+  .logo-link:hover {
+    transform: translate(-50%, -50%);
+  }
+  .header-actions-mobile {
+    display: flex;
   }
   .site-nav {
     display: block;
@@ -3392,16 +3523,27 @@ form.needs-validation {
     background: #ffffff;
     border-top: 1px solid #eee;
     transition: max-height 0.5s ease;
+    margin-top: 0;
+  }
+  .site-nav .search-form,
+  .site-nav .nav-actions {
+    display: none !important;
+  }
+  /* MOBILE SEARCH BAR (Dropdown que empuja contenido) */
+  .mobile-search-bar {
+    display: none;
+    width: 100%;
+    margin-top: 0;
   }
   .nav-toggle:checked ~ .site-nav {
-    max-height: 400px;
+    max-height: 500px;
     animation: slideDown 0.3s ease-out;
   }
   .site-nav .nav-list {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 12px 0;
+    padding: 20px 0;
   }
   .nav-toggle-btn {
     display: inline-flex;

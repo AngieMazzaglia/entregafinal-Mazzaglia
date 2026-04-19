@@ -64,12 +64,15 @@ window.eliminarDelCarrito = (idProducto) => {
 window.calcularTotal = () => carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
 
 const actualizarContadorCarrito = () => {
-    const contador = document.getElementById('cart-count');
-    if (!contador) return;
-
+    const contadores = document.querySelectorAll('#cart-count, #cart-count-mobile');
     const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-    contador.innerText = totalItems;
-    contador.style.display = totalItems > 0 ? 'inline-flex' : 'none';
+
+    contadores.forEach(contador => {
+        if (contador) {
+            contador.innerText = totalItems;
+            contador.style.display = totalItems > 0 ? 'inline-flex' : 'none';
+        }
+    });
 };
 
 // --- COMPONENTES UI (HTML snippets) ---
