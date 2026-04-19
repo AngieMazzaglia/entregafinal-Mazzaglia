@@ -12,7 +12,7 @@
   --c-bg-beige: #ede9d0;
   --c-text: #2e2e2e;
   --radius: 12px;
-  --maxw: 1200px;
+  --maxw: 1100px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -659,7 +659,7 @@ input:-webkit-autofill:active {
   justify-content: space-between;
   gap: 16px;
   padding-block: 12px;
-  max-width: 1200px !important;
+  max-width: 1100px !important;
 }
 
 .logo {
@@ -1009,7 +1009,7 @@ footer .footer-grid {
   gap: 16px;
   align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  max-width: 1200px !important;
+  max-width: 1100px !important;
   width: 100%;
   margin-inline: auto;
 }
@@ -1781,12 +1781,85 @@ a.btn:focus-visible,
   width: 100%;
 }
 
-/* Espaciado extra específico para section productos */
-.card-actions-products {
+/* Acciones de la Card (Nuevo Sistema Minimalista) */
+.card-actions {
   margin-top: auto;
   padding-top: 16px;
-  /* 16px para más aire */
   width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estado del botón cuando ya hay productos */
+.btn-add-main.is-added {
+  background-color: transparent;
+  color: #19753A;
+  border: 1px solid #19753A;
+}
+.btn-add-main.is-added:hover {
+  background-color: rgba(25, 117, 58, 0.05);
+  color: #1b5e20;
+  border-color: #1b5e20;
+}
+
+/* Selector de Cantidad - Integración en botón */
+.quick-qty-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 44px;
+  background: #ffffff;
+  border: 1px solid #19753A;
+  border-radius: 8px;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+.quick-qty-selector button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: #19753A;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quick-qty-selector button:hover {
+  background: rgba(25, 117, 58, 0.1);
+}
+.quick-qty-selector button:active {
+  background: rgba(25, 117, 58, 0.2);
+}
+.quick-qty-selector .qty-val {
+  font-weight: 700;
+  color: #19753A;
+  font-size: 1.1rem;
+}
+
+.card-controls {
+  display: none;
+}
+
+.btn-link-subtle {
+  color: #888;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+  background: transparent;
+  border: none;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+.btn-link-subtle:hover {
+  color: #19753A;
+  text-decoration-thickness: 2px;
 }
 
 /* Wrapper to clip the zoomed image */

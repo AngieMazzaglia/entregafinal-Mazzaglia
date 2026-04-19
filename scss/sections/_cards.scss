@@ -59,12 +59,89 @@
     width: 100%;
 }
 
-/* Espaciado extra específico para section productos */
-.card-actions-products {
+/* Acciones de la Card (Nuevo Sistema Minimalista) */
+.card-actions {
     margin-top: auto;
     padding-top: $space-4;
-    /* 16px para más aire */
     width: 100%;
+    min-height: 44px; // Mantiene la altura consistente durante la "mutación"
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado del botón cuando ya hay productos */
+.btn-add-main.is-added {
+    background-color: transparent;
+    color: $c-brand;
+    border: 1px solid $c-brand;
+
+    &:hover {
+        background-color: rgba($c-brand, 0.05);
+        color: $c-brand-dark;
+        border-color: $c-brand-dark;
+    }
+}
+
+/* Selector de Cantidad - Integración en botón */
+.quick-qty-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 44px;
+    background: $c-bg;
+    border: 1px solid $c-brand;
+    border-radius: $radius-sm;
+    overflow: hidden;
+    animation: fadeIn .2s ease-out;
+
+    button {
+        @include flex-center;
+        width: 40px;
+        height: 100%;
+        border: none;
+        background: transparent;
+        color: $c-brand;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba($c-brand, 0.1);
+        }
+        
+        &:active {
+            background: rgba($c-brand, 0.2);
+        }
+    }
+
+    .qty-val {
+        font-weight: 700;
+        color: $c-brand;
+        font-size: 1.1rem;
+    }
+}
+
+.card-controls {
+    display: none; // Obsoleto con el nuevo sistema
+}
+
+.btn-link-subtle {
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    background: transparent;
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+
+    &:hover {
+        color: $c-brand;
+        text-decoration-thickness: 2px;
+    }
 }
 
 /* Wrapper to clip the zoomed image */

@@ -252,10 +252,18 @@ function renderizarTienda() {
 
         if (typeof info.precio === 'string') {
             precioHTML = `<div class="card-price">${info.precio}</div>`;
-            botonHTML = `<a href="${urlDestino}" class="btn btn-verde btn-block" aria-label="Ver detalles de ${info.nombre}">Ver detalles</a>`;
         } else {
             precioHTML = `<div class="card-price">$${info.precio.toLocaleString()}</div>`;
-            botonHTML = `<a href="${urlDestino}" class="btn btn-verde btn-block" aria-label="Ver detalle de ${info.nombre}">Ver detalles</a>`;
+        }
+
+        // Nuevo sistema de botones prioritarios (Opción C: Minimalista)
+        let actionButtonHTML = '';
+        if (esPersonalizada) {
+            actionButtonHTML = `<a href="./contacto.html?form=quote" class="btn btn-verde btn-block" aria-label="Solicitar presupuesto para ${info.nombre}">Cotizar</a>`;
+        } else if (canQuickAdd) {
+            actionButtonHTML = `<button class="btn btn-verde btn-block btn-add-main" data-id="${info.id}" aria-label="Agregar ${info.nombre} al carrito">+ Agregar al carrito</button>`;
+        } else {
+            actionButtonHTML = `<a href="${urlDestino}" class="btn btn-verde btn-block">Ver detalles</a>`;
         }
 
         // Determinar icono del carrito
@@ -284,18 +292,9 @@ function renderizarTienda() {
                 ${precioHTML}
                 <p>${detalleExtra || info.descripcion}</p>
                 
-                ${canQuickAdd ? `
-                    <div class="quick-buy-wrapper" data-id="${info.id}">
-                        <!-- El contenido se genera dinámicamente -->
-                    </div>
-                ` : esPersonalizada ? `
-                    <div class="quick-buy-wrapper">
-                        <a href="./contacto.html?form=quote" class="btn-cotizar-mini" aria-label="Cotizar ${info.nombre}">Cotizar</a>
-                    </div>
-                ` : ''}
 
-                <div class="card-controls">
-                    ${botonHTML}
+                <div class="card-actions" data-id="${info.id}">
+                    ${actionButtonHTML}
                 </div>
             </div>
         `;
@@ -319,19 +318,25 @@ document.addEventListener('click', (e) => {
     const contenedor = document.getElementById('contenedor-productos');
     if (!contenedor) return;
 
-    const wrapper = e.target.closest('.quick-buy-wrapper');
-    if (!wrapper) return;
-
-    // Extraer ID con mayor compatibilidad
-    const id = wrapper.getAttribute('data-id') || wrapper.dataset.id;
-    if (!id) return;
-
+    const btnAddMain = e.target.closest('.btn-add-main'); 
     const btnToggle = e.target.closest('.btn-toggle-quick');
     const btnMinus = e.target.closest('.qty-minus');
     const btnPlus = e.target.closest('.qty-plus');
 
-    if (btnToggle) {
-        window.renderizarEstadoEdicion(wrapper, id);
+    // Si no es ninguno de nuestros botones, salimos
+    if (!btnAddMain && !btnToggle && !btnMinus && !btnPlus) return;
+
+    // Extraer ID y Wrapper
+    const target = btnAddMain || btnToggle || btnMinus || btnPlus;
+    const wrapper = target.closest('.card-actions'); 
+    const id = target.getAttribute('data-id') || target.dataset.id || (wrapper ? wrapper.dataset.id : null);
+    
+    if (!id || !wrapper) return;
+
+    if (btnAddMain || btnToggle) {
+        if (typeof window.renderizarEstadoEdicion === 'function') {
+            window.renderizarEstadoEdicion(wrapper, id);
+        }
     }
 
     if (btnMinus) {
@@ -357,7 +362,7 @@ window.obtenerCantidadEnCarrito = (id) => {
 };
 
 window.actualizarCantidadesTienda = () => {
-    const wrappers = document.querySelectorAll('.quick-buy-wrapper');
+    const wrappers = document.querySelectorAll('.card-actions[data-id]');
     wrappers.forEach(w => {
         // Solo actualizamos si NO está en modo edición (para no interrumpir al usuario)
         if (!w.classList.contains('is-editing')) {
@@ -371,7 +376,7 @@ window.actualizarCantidadesTienda = () => {
 };
 
 window.actualizarControlCompraRapida = (id) => {
-    const wrapper = document.querySelector(`.quick-buy-wrapper[data-id="${id}"]`);
+    const wrapper = document.querySelector(`.card-actions[data-id="${id}"]`);
     if (!wrapper) return;
 
     const cant = window.obtenerCantidadEnCarrito(id);
@@ -380,9 +385,10 @@ window.actualizarControlCompraRapida = (id) => {
     wrapper.classList.remove('is-editing');
     
     if (cant === 0) {
-        wrapper.innerHTML = `<button class="btn-toggle-quick state-empty" aria-label="Agregar al carrito">${cartIcon}</button>`;
+        wrapper.innerHTML = `<button class="btn btn-verde btn-block btn-add-main" data-id="${id}" aria-label="Agregar al carrito">+ Agregar al carrito</button>`;
     } else {
-        wrapper.innerHTML = `<button class="btn-toggle-quick state-badge" aria-label="Editar cantidad">${cant}</button>`;
+        // Botón mutado: muestra cantidad y permite volver a editar
+        wrapper.innerHTML = `<button class="btn btn-verde btn-block btn-add-main is-added" data-id="${id}" aria-label="Editar cantidad">¡Agregado! (${cant})</button>`;
     }
 };
 
@@ -414,7 +420,7 @@ window.reiniciarTemporizadorCierre = (wrapper, id) => {
     timersTienda[id] = setTimeout(() => {
         window.actualizarControlCompraRapida(id);
         delete timersTienda[id];
-    }, 2000); // 2 segundos de inactividad
+    }, 3000); // 3 segundos de inactividad
 };
 
 function renderizarDetalleProducto() {
