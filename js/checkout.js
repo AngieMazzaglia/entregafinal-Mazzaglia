@@ -41,7 +41,34 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPaso2();
     setupPaso3();
     setupNavegacionPasos();
+    setupSummaryToggleMovil();
 });
+
+/**
+ * Lógica para el acordeón del resumen en dispositivos móviles
+ */
+function setupSummaryToggleMovil() {
+    const toggle = document.getElementById('summary-toggle');
+    const summarySide = document.querySelector('.checkout-summary-side');
+    
+    if (toggle && summarySide) {
+        toggle.addEventListener('click', () => {
+            const isExpanded = summarySide.classList.toggle('is-expanded');
+            toggle.classList.toggle('is-active');
+            
+            // Cambiar texto de ayuda según estado
+            const textEl = toggle.querySelector('.toggle-text');
+            if (textEl) {
+                const chevron = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+                const iconCart = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-cart-toggle"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>';
+                
+                textEl.innerHTML = isExpanded 
+                    ? `${iconCart} Ocultar detalle de pedido ${chevron}` 
+                    : `${iconCart} Ver detalle de pedido ${chevron}`;
+            }
+        });
+    }
+}
 
 // --- CONFIGURACIÓN DE PASOS ---
 
@@ -460,5 +487,19 @@ function renderizarResumenCheckout() {
     contenedor.appendChild(envioDiv);
 
     // 4. Total Final
-    totalEl.innerText = formatear(subtotal + costoEnvio);
+    const totalFormateado = formatear(subtotal + costoEnvio);
+    totalEl.innerText = totalFormateado;
+
+    // Sincronizar con el total del toggle móvil si existe
+    const mobileTotalEl = document.getElementById('mobile-summary-total-val');
+    if (mobileTotalEl) {
+        mobileTotalEl.innerText = totalFormateado;
+    }
+    
+    const toggle = document.getElementById('mobile-summary-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            document.getElementById('checkout-summary-list').classList.toggle('show');
+        });
+    }
 }

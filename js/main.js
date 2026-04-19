@@ -163,10 +163,9 @@ function renderizarTienda() {
         // Actualizar breadcrumb dinámico (con niveles extras)
         const dynamicBreadcrumb = document.getElementById('dynamic-breadcrumb');
         if (dynamicBreadcrumb) {
+            // Ya mostramos "Productos" en el estático, así que aquí solo cargamos el nombre final
             dynamicBreadcrumb.innerHTML = `
-                <a href="tienda.html">Tienda</a> 
-                <span class="separator" aria-hidden="true">/</span> 
-                <span class="current" aria-current="page">${catName}</span>
+                <span class="active" aria-current="page">${catName}</span>
             `;
         }
     } else {
@@ -440,14 +439,18 @@ function renderizarDetalleProducto() {
 
     contenedor.innerHTML = `
         <div class="product-detail-header">
-            <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                <a href="${pathBase}index.html">Inicio</a> <span class="separator" aria-hidden="true">/</span>
-                <a href="${pathBase}pages/tienda.html">Tienda</a> <span class="separator" aria-hidden="true">/</span>
+            <nav aria-label="breadcrumb" class="breadcrumb-nav hide-last-on-mobile">
+                <a href="${pathBase}index.html" class="home-link"><span>Inicio</span></a> 
+                <span class="separator" aria-hidden="true">/</span>
+                
+                <a href="${pathBase}pages/productos.html">Productos</a> 
+                <span class="separator" aria-hidden="true">/</span>
+                
                 ${params.get('categoria') ? `
                     <a href="${pathBase}pages/tienda.html?categoria=${params.get('categoria')}">${nombresCategorias[params.get('categoria')] || params.get('categoria')}</a>
                     <span class="separator" aria-hidden="true">/</span>
                 ` : ''}
-                <span class="current" aria-current="page">${producto.nombre}</span>
+                <span class="active" aria-current="page">${producto.nombre}</span>
             </nav>
 
             <p class="min-purchase-alert">
@@ -463,12 +466,13 @@ function renderizarDetalleProducto() {
         </div>
 
         <div class="product-detail-grid">
+            <h1 class="product-title-detail">${producto.nombre}</h1>
+            
             <div class="product-image-box">
                 <img src="${pathBase}${producto.imagen}" alt="Fotografía en primer plano de ${producto.nombre}">
             </div>
             
             <div class="product-info-box">
-                <h1>${producto.nombre}</h1>
                 ${producto.subtitulo ? `<span class="pack-subtitle">${producto.subtitulo}</span>` : ''}
                 
                 <div class="price-large">

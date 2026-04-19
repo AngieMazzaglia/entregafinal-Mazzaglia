@@ -3,7 +3,7 @@
 
 .product-detail-page {
     padding: $space-6 0;
-    background-color: #fdfdfd; // Un fondo casi blanco muy limpio
+    background-color: #fdfdfd; 
 }
 
 .product-detail-header {
@@ -25,17 +25,39 @@
 .product-detail-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-4;
+    gap: $space-3;
     align-items: start;
+    grid-template-areas: 
+        "title"
+        "image"
+        "info";
 
     @include respond(md) {
-        grid-template-columns: 0.8fr 1.2fr; // Un poco más equilibrado
-        gap: 60px; // Más aire entre columnas
+        grid-template-columns: 0.8fr 1.2fr;
+        column-gap: 60px;
+        row-gap: 10px; // Reducido para que el nombre y el pack estén más cerca
+        grid-template-areas: 
+            "image title"
+            "image info";
+    }
+}
+
+.product-title-detail {
+    grid-area: title;
+    font-size: 1.8rem;
+    color: $c-brand-dark;
+    margin: $space-1 0;
+    line-height: 1.1;
+    
+    @include respond(md) {
+        font-size: 2.2rem;
+        margin-bottom: 0; // Eliminamos margen extra porque el grid ya tiene gap
     }
 }
 
 /* Columna Imagen */
 .product-image-box {
+    grid-area: image;
     background: #fff;
     border-radius: $radius;
     padding: $space-3;
@@ -43,12 +65,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 280px; // Reducido para equilibrar
-    max-width: 450px; // Evitar que crezca demasiado
+    min-height: 200px; 
+    width: 100%;
+    max-width: 450px; 
     border: 1px solid #f0f0f0;
+    margin-bottom: $space-2;
+
+    @media (max-width: 768px) {
+        max-width: 320px; // Reducido para celular como pidió el usuario
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     img {
         max-width: 100%;
+        max-height: 350px; // Limitar altura para que no sea "enorme"
         height: auto;
         object-fit: contain;
         transition: transform 0.3s ease;
@@ -61,6 +92,7 @@
 
 /* Columna Información */
 .product-info-box {
+    grid-area: info;
     display: flex;
     flex-direction: column;
     gap: $space-2;
@@ -79,10 +111,12 @@
     }
 
     h1 {
+        // El H1 se movió al header, pero mantenemos estilos básicos por si acaso
         font-size: 1.8rem;
         color: $c-brand-dark;
         margin: 0;
         line-height: 1.1;
+        display: none; // Ocultar si quedó algún remanente no deseado en mobile/desktop
     }
 
     .pack-subtitle {

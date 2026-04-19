@@ -71,26 +71,22 @@
 }
 
 .instruction-box {
-    padding: 12px;
+    padding: 24px;   // Más aire interno para legibilidad
     margin-bottom: $space-5;
     background-color: $c-bg-beige-transparent;
     /* Color beige con transparencia */
     backdrop-filter: blur(8px);
     /* Efecto de desenfoque */
     border: 1px solid #e0dfd5;
+    border-radius: $radius; // Restaurando el redondeado premium que te gustaba
+    margin-top: $space-6;   // Manteniendo el aire justo (32px)
     transition: all 0.3s ease;
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: $shadow-lg;
+        box-shadow: $shadow-medium;
     }
 
-    // El botón solo cambia cuando el mouse está directamente sobre él
-    .btn-blanco:hover {
-        background-color: $c-brand-dark;
-        color: $c-bg;
-        border-color: $c-brand-dark;
-    }
 
     // Reset margin for the last box
     &:last-child {
@@ -127,9 +123,8 @@
 }
 
 .min-compra-highlight {
-    font-size: 1.25rem;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    @extend .min-purchase-alert;
+    font-size: 1rem;
 }
 
 /* Lista de métodos de pago con íconos */

@@ -128,53 +128,58 @@ nav a[aria-current="page"] {
     }
 }
 
-/* Dropdown Menu */
+/* Dropdown Menu (Desktop Only) */
 .nav-list li {
     position: relative;
 
-    &:hover .dropdown-menu,
-    &:focus-within .dropdown-menu {
-        display: block;
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
+    @include respond(lg) {
+        &:hover .dropdown-menu,
+        &:focus-within .dropdown-menu {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    padding: 0.5rem 0;
-    min-width: 220px;
-    list-style: none;
-    z-index: 1000;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.2s ease;
-    border: 1px solid $border-color;
+    display: none; // Oculto por defecto en mobile
 
-    li {
-        display: block;
-        margin: 0;
-    }
+    @include respond(lg) {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        padding: 0.5rem 0;
+        min-width: 220px;
+        list-style: none;
+        z-index: 1000;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.2s ease;
+        border: 1px solid $border-color;
 
-    a {
-        display: block;
-        padding: 0.75rem 1.5rem;
-        color: #333;
-        font-weight: 500;
-        white-space: nowrap;
-        font-size: $font-size-sm;
+        li {
+            display: block;
+            margin: 0;
+        }
 
-        &:hover {
-            background: #f4fdf0;
-            color: var(--c-brand);
-            // No necesitamos border-bottom aquí porque el selector padre ya es específico
+        a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: $font-size-sm;
+
+            &:hover {
+                background: #f4fdf0;
+                color: var(--c-brand);
+            }
         }
     }
 }

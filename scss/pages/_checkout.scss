@@ -178,6 +178,107 @@
     position: sticky;
     top: $space-5;
     height: fit-content;
+    z-index: 10;
+
+    @media (max-width: 1023px) { order: -1; 
+        position: relative;
+        top: 0;
+        margin: 0 15px; // Mismo margen que la cápsula
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        width: calc(100% - 30px); // Ajuste por márgenes
+        background-color: $c-bg-beige;
+        border: 1px solid rgba($c-brand, 0.1);
+        border-top: none; // Unir con la cápsula
+        border-radius: 0 0 $radius $radius; // Redondeado solo abajo
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+        &.is-expanded {
+            max-height: 1500px;
+            margin-bottom: $space-5;
+            padding-bottom: $space-3;
+            border-bottom: 2px solid $c-brand; // Cierre de marca
+        }
+
+        .checkout-summary-card {
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+        }
+    }
+}
+
+/* Toggle de Resumen Móvil (Estilo Floating Capsule Unificada) */
+.checkout-mobile-toggle {
+    display: none;
+    position: relative; // Cambiado de sticky para no tapar inputs
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: $c-bg-beige;
+    border: 1px solid rgba($c-brand, 0.1);
+    border-bottom: 2px solid $c-brand;
+    padding: $space-3 $space-4;
+    margin: 10px 15px 0; // Sin margen inferior para que se pegue al abrir
+    border-radius: $radius; 
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+    &.is-active {
+        border-radius: $radius $radius 0 0; // Se vuelve "recto" abajo para unir
+        border-bottom: 1px dashed rgba($c-brand, 0.2); // Línea de unión sutil
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    &:hover {
+        background-color: darken($c-bg-beige, 2%);
+    }
+
+    .toggle-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 $space-4;
+    }
+
+    .toggle-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: $c-brand-dark;
+        font-weight: 600;
+        font-size: 1rem;
+
+        .icon-cart-toggle, .icon-chevron {
+            color: $c-brand;
+        }
+
+        .icon-chevron {
+            transition: transform 0.3s ease;
+        }
+    }
+
+    .toggle-total {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: $c-brand;
+        letter-spacing: -0.5px;
+    }
+
+    &.is-active {
+        .icon-chevron {
+            transform: rotate(180deg);
+        }
+    }
+
+    @media (max-width: 1023px) { order: -1; 
+        display: block;
+    }
 }
 
 .checkout-summary-card {

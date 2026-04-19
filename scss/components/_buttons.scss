@@ -31,7 +31,8 @@ a.btn-outline, .btn-outline {
     border: 1px solid $c-brand;
 
     &:hover {
-        background-color: $c-brand;
+        background-color: $c-brand-dark; // Fondo verde oscuro en hover (Unificado)
+        border-color: $c-brand-dark;
         color: $c-bg;
         text-decoration: none;
     }
@@ -45,8 +46,8 @@ a.btn-blanco, .btn-blanco {
     text-shadow: none !important;
 
     &:hover {
-        background-color: $c-bg-beige;
-        color: $c-brand-dark;
+        background-color: $c-brand-dark; // Fondo verde oscuro en hover
+        color: $c-bg;                   // Letra blanca en hover
         border-color: $c-brand-dark;
         text-decoration: none;
     }

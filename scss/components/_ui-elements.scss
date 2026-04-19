@@ -5,32 +5,84 @@
    ========================================================================== */
 
 /* Breadcrumbs Globales */
+.breadcrumb,
 .breadcrumb-nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-size: 1rem;
+    flex-wrap: nowrap;
+    font-size: 0.95rem;
     color: #666; 
-    margin-bottom: $space-2;
+    margin-bottom: $space-4;
+    overflow: hidden;
+
+    @media (max-width: 1023px) {
+        font-size: 0.85rem;
+        margin-bottom: $space-3;
+    }
 
     a {
         color: #666;
+        text-decoration: none;
         transition: color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
 
         &:hover {
             color: $c-brand;
-            text-decoration: underline;
         }
     }
 
     .separator {
         margin: 0 0.5rem;
-        color: #999;
+        color: #ccc;
+        font-size: 0.8rem;
     }
 
-    .current {
+    .current, .active {
         font-weight: 600;
         color: $c-brand;
+    }
+
+    /* Ocultar el último paso SOLO en el detalle de producto profundo */
+    &.hide-last-on-mobile {
+        @media (max-width: 768px) {
+            .current, .active, 
+            .separator:last-of-type {
+                display: none !important;
+            }
+        }
+    }
+
+    /* Home Link Icon Logic */
+    .home-link {
+        display: flex;
+        align-items: center;
+        
+        &::before {
+            content: "🏠";
+            font-size: 1.1rem;
+            margin-right: 4px;
+            
+            @media (min-width: 1024px) {
+                display: none; // Sin icono en desktop
+            }
+        }
+        
+        span {
+            font-weight: inherit;
+
+            @media (max-width: 1023px) {
+                display: none; // Solo icono en pantallas móviles/tablets
+            }
+        }
+    }
+
+    /* Step Hiding Utility */
+    .hide-mobile {
+        @media (max-width: 768px) {
+            display: none !important;
+        }
     }
 
     /* Variante: Dark Backgrounds */
@@ -43,7 +95,7 @@
         }
 
         .separator { color: rgba(255, 255, 255, 0.6); }
-        .current { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+        .current, .active { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
     }
 }
 
