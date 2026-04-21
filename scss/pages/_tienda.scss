@@ -18,7 +18,7 @@
     /* Subtítulo (el párrafo que no es la alerta) */
     p:not(.min-purchase-alert) {
         text-align: center;
-        color: #666;
+        color: $c-text-muted;
         /* Un gris suave para el subtítulo queda bien */
     }
 
@@ -121,20 +121,20 @@
     }
 
     h3 {
-        font-size: 1rem !important;
+        font-size: 1rem;
         margin-bottom: $space-1;
         line-height: 1.2;
         color: $c-text;
 
         @include respond(md) {
-            font-size: 1.05rem !important;
+            font-size: 1.05rem;
             margin-bottom: $space-1;
         }
     }
 
     p {
         font-size: 0.8rem;
-        color: #666;
+        color: $c-text-muted;
         margin-bottom: $space-2;
         /* Limitar a 2 líneas en mobile para no estirar la card */
         display: -webkit-box;

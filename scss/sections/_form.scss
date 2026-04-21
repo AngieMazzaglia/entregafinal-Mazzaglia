@@ -4,7 +4,6 @@
 /* Contacto – Resetear estilos de Bootstrap que pueda afectar */
 .contact-text {
     h3 {
-        font-family: 'Outfit', sans-serif;
         font-size: $font-size-base;
         font-weight: 700;
         line-height: 1.4;
@@ -24,7 +23,7 @@
 form.needs-validation {
     background: $c-bg;
     border: 1px solid $border-color;
-    @include panel-rounded-lg($space-5);
+    @include panel($space-5);
     box-shadow: $shadow-subtle;
 }
 
@@ -43,7 +42,7 @@ form.needs-validation {
 
 .form-control:focus {
     border-color: var(--c-brand);
-    box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.15);
+    box-shadow: 0 0 0 .25rem rgba($c-brand, 0.15);
 }
 
 /* Acordeón (Sync with Brand) */

@@ -21,7 +21,7 @@
 
 /* Comportamiento del Menú (Mobile-First de-facto) */
 /* Todo lo que sea MENOR que LG (1024px) usa el menú hamburguesa */
-@media (max-width: calc(1024px - 1px)) {
+@media (max-width: calc(#{map-get($breakpoints, lg)} - 1px)) {
     .header-inner { 
         flex-wrap: wrap; 
         position: relative; 

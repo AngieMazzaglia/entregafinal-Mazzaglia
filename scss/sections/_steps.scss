@@ -96,7 +96,7 @@
     /* Color beige con transparencia */
     backdrop-filter: blur(8px);
     /* Efecto de desenfoque */
-    border: 1px solid #e0dfd5;
+    border: 1px solid $border-color;
     border-radius: $radius; // Restaurando el redondeado premium que te gustaba
     margin-top: $space-6;   // Manteniendo el aire justo (32px)
     transition: all 0.3s ease;
@@ -150,7 +150,7 @@
 }
 
 .min-compra-highlight {
-    @extend .min-purchase-alert;
+    @include alert-pill;
     font-size: 1rem;
 }
 

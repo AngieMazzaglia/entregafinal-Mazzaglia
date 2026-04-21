@@ -1,33 +1,4 @@
 /* ==========================================================================
-   DESIGN TOKENS (CSS Variables)
-   ========================================================================== */
-:root {
-    // Colors
-    --c-brand: #19753A;
-    --c-brand-dark: #1b5e20;
-    --c-brand-soft: #a5d6a7;
-    --c-bg: #ffffff;
-    --c-bg-soft: #d2f8c4;
-    --c-bg-footer: #1b5e20;
-    --c-bg-beige: #ede9d0;
-    --c-text: #2e2e2e;
-
-    // Structure
-    --radius: 12px;
-    --maxw: 1100px;
-
-    // Spacing
-    --space-1: 4px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-5: 24px;
-    --space-6: 32px;
-    --space-7: 48px;
-    --space-9: 80px;
-}
-
-/* ==========================================================================
    SASS VARIABLES (Standardized Naming)
    ========================================================================== */
 
@@ -41,6 +12,11 @@ $c-bg-footer: #1b5e20;
 $c-bg-beige: #ede9d0;
 $c-bg-beige-transparent: rgba(237, 233, 208, 0.75);
 $c-text: #2e2e2e;
+$c-text-muted: #666;
+$c-gray-light: #ccc;
+$c-danger: #e74c3c;
+$c-warning: #d35400;
+$c-warning-soft: #fff5e6;
 
 // Spacing (Sincronizado con CSS Variables)
 $space-1: 4px;
@@ -62,6 +38,13 @@ $border-color: #dddddd;
 $layout-max-width: 1100px; // Unificado con --maxw
 $header-height: 72px;
 
+// Layering (Z-Index) - Unificado
+$z-index-toast: 10000;
+$z-index-modal: 1050;
+$z-index-overlay: 1000;
+$z-index-header: 100;
+$z-index-dropdown: 50;
+
 // Shadows & Effects
 $shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.05);
 $shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -73,6 +56,35 @@ $font-size-base: 1rem;       // 16px
 $font-size-sm: 0.875rem;     // 14px
 $font-size-xs: 0.75rem;      // 12px
 $font-size-xxs: 0.625rem;    // 10px
+
+/* ==========================================================================
+   DESIGN TOKENS (CSS Variables - Driven by SASS Variables)
+   ========================================================================== */
+:root {
+    // Colors
+    --c-brand: #{$c-brand};
+    --c-brand-dark: #{$c-brand-dark};
+    --c-brand-soft: #{$c-brand-soft};
+    --c-bg: #{$c-bg};
+    --c-bg-soft: #{$c-bg-soft};
+    --c-bg-footer: #{$c-bg-footer};
+    --c-bg-beige: #{$c-bg-beige};
+    --c-text: #{$c-text};
+
+    // Structure
+    --radius: #{$radius};
+    --maxw: #{$layout-max-width};
+
+    // Spacing
+    --space-1: #{$space-1};
+    --space-2: #{$space-2};
+    --space-3: #{$space-3};
+    --space-4: #{$space-4};
+    --space-5: #{$space-5};
+    --space-6: #{$space-6};
+    --space-7: #{$space-7};
+    --space-9: #{$space-9};
+}
 
 /* ==========================================================================
    ENLACE DE VARIABLES (Compatibility Aliases - Removidos tras Refactor)

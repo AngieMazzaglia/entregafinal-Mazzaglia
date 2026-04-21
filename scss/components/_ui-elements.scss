@@ -1,4 +1,5 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 /* ==========================================================================
    UI ELEMENTS (Shared Components)
@@ -12,7 +13,7 @@
     align-items: center;
     flex-wrap: nowrap;
     font-size: 0.95rem;
-    color: #666; 
+    color: $c-text-muted; 
     margin-bottom: $space-4;
     overflow: hidden;
 
@@ -22,7 +23,7 @@
     }
 
     a {
-        color: #666;
+        color: $c-text-muted;
         text-decoration: none;
         transition: color 0.3s ease;
         display: inline-flex;
@@ -35,7 +36,7 @@
 
     .separator {
         margin: 0 0.5rem;
-        color: #ccc;
+        color: $c-gray-light;
         font-size: 0.8rem;
     }
 
@@ -136,7 +137,7 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: $z-index-overlay;
     
     .processing-content {
         display: flex;
@@ -174,7 +175,7 @@
     position: fixed;
     top: $header-height;
     right: 24px;
-    z-index: 10000;
+    z-index: $z-index-toast;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -272,8 +273,13 @@
     }
 }
 
-/* Keyframes */
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes slideInToast { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes fadeOutToast { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+
+/* Alerta Global: Compra Mínima / Mayorista */
+.min-purchase-alert {
+    @include alert-pill;
+
+    &--lg {
+        @include alert-pill("lg");
+    }
+}

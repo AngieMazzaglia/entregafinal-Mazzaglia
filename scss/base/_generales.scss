@@ -164,7 +164,8 @@ select:focus-visible {
         flex-wrap: nowrap; // Solo pasamos a desktop en LG
     }
 
-    @media (max-width: 992px) {
+    // Stack en Mobile/Tablet
+    @media (max-width: 991px) {
         flex-direction: column;
         > * { width: 100%; }
     }
@@ -179,44 +180,16 @@ select:focus-visible {
         flex: 1;
     }
 
-    @include respond(xs) {
-        @media (max-width: 576px) {
-            flex-direction: column;
-            gap: $space-3;
-        }
+    @media (max-width: 575px) {
+        flex-direction: column;
+        gap: $space-3;
     }
 }
 
 /* ==========================================================================
    COMPONENTES GENÉRICOS (Cards y Otros)
    ========================================================================== */
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background: $c-bg;
-    border-radius: $radius;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    padding: $space-4;
-    text-align: center;
 
-    &.card-elevada {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        border: 1px solid #eee;
-
-        &:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-    }
-
-    h3 {
-        font-size: 1.2rem;
-        margin-bottom: $space-3;
-        color: $c-brand;
-    }
-}
 
 /* Stretched Link: Contenedor Clickable */
 .stretched-link::after {

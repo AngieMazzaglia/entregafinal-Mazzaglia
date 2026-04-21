@@ -71,7 +71,7 @@ a.btn-blanco, .btn-blanco {
     }
 
     &:focus-visible {
-        @include focus-ring(rgba(46, 125, 50, 0.3), 2px, 2px);
+        @include focus-ring($c-brand-soft, 2px, 2px);
     }
 }
 

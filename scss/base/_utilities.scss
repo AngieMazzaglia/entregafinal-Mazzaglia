@@ -78,7 +78,6 @@
 
 /* Utilidades de Visibilidad */
 .d-none { display: none !important; }
-.d-block { display: block !important; }
 
 @include respond(lg) {
     .d-lg-none { display: none !important; }

@@ -51,6 +51,16 @@
     }
 }
 
+/* Spinner de carga */
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Notificaciones Toast */
+@keyframes slideInToast { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeOutToast { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
+
+/* Aparecer suave (General) */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
 
 /* Respeto por preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {

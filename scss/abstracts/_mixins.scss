@@ -3,13 +3,8 @@
 @use "sass:map";
 
 /* MIXINS */
-@mixin panel-base {
+@mixin panel($padding: $space-4, $radius: $radius) {
     border-radius: $radius;
-    padding: $space-4;
-}
-
-@mixin panel-rounded-lg($padding) {
-    border-radius: $radius-lg;
     padding: $padding;
 }
 
@@ -24,7 +19,7 @@
     line-height: 1;
     border: 1px solid transparent;
     cursor: pointer;
-    text-decoration: none !important;
+    text-decoration: none; // Eliminado !important (Preferir especificidad)
     font-family: inherit; // Heredar fuente del body (Outfit)
     font-size: $font-size-base; // Asegurar tamaño base consistente
 }
@@ -55,5 +50,52 @@
 @mixin respond($size) {
     @media (min-width: map.get($breakpoints, $size)) {
         @content;
+    }
+}
+
+/* Mixin para Alertas tipo "Píldora" (Venta Mayorista, etc) */
+@mixin alert-pill($variant: "normal") {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid rgba($c-brand, 0.2);
+    color: $c-brand-dark;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+    margin-bottom: $space-4;
+
+    @include respond(md) {
+        padding: 10px 26px;
+        font-size: 0.95rem;
+        gap: 12px;
+
+        .icon-info {
+            font-size: 1.15rem;
+        }
+    }
+
+    @if $variant == "lg" {
+        margin-bottom: 0; 
+        @include respond(md) {
+            padding: 14px 36px;
+            font-size: 1.1rem;
+            gap: 16px;
+            .icon-info { font-size: 1.4rem; }
+        }
+    }
+
+    strong {
+        color: $c-brand;
+        font-weight: 700;
+    }
+
+    .icon-info {
+        color: $c-brand;
+        font-size: 1.1rem;
+        flex-shrink: 0;
     }
 }

@@ -14,7 +14,7 @@
     .feature {
         background: transparent;
         border: none;
-        @include panel-base;
+        @include panel;
 
         .ico {
             width: 64px;

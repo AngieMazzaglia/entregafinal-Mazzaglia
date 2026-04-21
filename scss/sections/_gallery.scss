@@ -53,14 +53,14 @@
     border-radius: $radius-sm;
     text-align: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e0dfd5; // Borde igual a instruction-box
+    border: 1px solid $border-color; // Borde igual a instruction-box
 
     // Aumentamos especificidad para sobrescribir estilos globales de h3
     .galeria-nosotros & h3,
     .galeria-nosotros & h2 {
         margin-top: 0;
         margin-bottom: $space-1;
-        color: #1a1a1a;
+        color: $c-text;
         font-size: 1.05rem;
         font-weight: 700;
         letter-spacing: -0.2px;
@@ -70,6 +70,6 @@
         margin: 0;
         font-size: 0.9rem;
         line-height: 1.4;
-        color: #4a4a4a;
+        color: $c-text-muted;
     }
 }
