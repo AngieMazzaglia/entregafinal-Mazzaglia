@@ -184,17 +184,21 @@ nav a[aria-current="page"] {
     }
 }
 
-/* Dropdown Menu (Desktop Only) */
+/* Dropdown Menu (Desktop Hover Only) */
 .nav-list li {
     position: relative;
 
-    @include respond(lg) {
-        &:hover .dropdown-menu,
-        &:focus-within .dropdown-menu {
-            display: block;
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
+    // Solo habilitamos el hover si el dispositivo soporta hover real (mouse)
+    // Esto evita que en tablets se abra al tocar
+    @media (hover: hover) {
+        @include respond(lg) {
+            &:hover .dropdown-menu,
+            &:focus-within .dropdown-menu {
+                display: block;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     }
 }
