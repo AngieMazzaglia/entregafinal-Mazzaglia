@@ -2123,6 +2123,10 @@ form.needs-validation {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-top: 12px;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
 }
 .steps .step {
   border-radius: 12px;
@@ -2133,6 +2137,22 @@ form.needs-validation {
   gap: 8px;
   position: relative;
   padding: 10px;
+  /* Ajuste Mobile: Independencia visual */
+}
+@media (max-width: 991px) {
+  .steps .step {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+  }
+  .steps .step .ico {
+    margin: 0 auto 4px;
+  }
+  .steps .step p {
+    margin-top: 4px;
+  }
+}
+.steps .step {
   /* Flechas */
 }
 .steps .step::after {
@@ -2230,6 +2250,13 @@ form.needs-validation {
   position: absolute;
   top: 12px;
   left: 12px;
+}
+@media (max-width: 991px) {
+  .step-number {
+    top: 28px;
+    left: calc(50% - 65px);
+    transform: none;
+  }
 }
 
 .min-compra-highlight {

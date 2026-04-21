@@ -503,7 +503,7 @@ function renderizarDetalleProducto() {
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
-                <strong>Venta Mayorista</strong> - Compra mínima: $15.000
+                <strong>Venta Mayorista</strong> - Compra mínima: $20.000
             </p>
         </div>
 

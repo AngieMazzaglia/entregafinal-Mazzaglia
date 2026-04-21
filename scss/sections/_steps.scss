@@ -10,6 +10,10 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: $space-4;
     margin-top: $space-3;
+    padding: 0;        // Reset de padding de <ol> (Culpable del margen extra)
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
 
     .step {
         border-radius: $radius;
@@ -20,6 +24,21 @@
         gap: $space-2;
         position: relative;
         padding: 10px;
+
+        /* Ajuste Mobile: Independencia visual */
+        @media (max-width: 991px) {
+            flex-direction: column; // Volvemos al flujo vertical
+            align-items: center;
+            padding: 30px 15px;
+
+            .ico {
+                margin: 0 auto $space-1;
+            }
+
+            p {
+                margin-top: $space-1;
+            }
+        }
 
         /* Flechas */
         &::after {
@@ -112,14 +131,22 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     font-weight: 700;
     font-size: 0.9rem;
+
+    // Desktop: En la esquina
     position: absolute;
     top: 12px;
     left: 12px;
+
+    // Mobile: Centrado Relativo al Dibujo
+    // Lo posicionamos respecto al centro (50%) para que no empuje al dibujo
+    @media (max-width: 991px) {
+        top: 28px; // Alineado con el centro vertical del icono aprox
+        left: calc(50% - 65px); // 50% (centro) - margen para no pisar el icono
+        transform: none;
+    }
 }
 
 .min-compra-highlight {

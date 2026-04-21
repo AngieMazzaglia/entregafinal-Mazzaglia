@@ -362,7 +362,7 @@ window.formatearPrecio = (valor) => `$${valor.toLocaleString()}`;
 /**
  * Constantes centralizadas de negocio
  */
-window.MIN_COMPRA = 15000;
+window.MIN_COMPRA = 20000;
 window.MIN_ENVIO_GRATIS = 50000;
 
 // Costos de Envío por Zona
