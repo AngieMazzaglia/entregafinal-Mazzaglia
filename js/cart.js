@@ -84,7 +84,7 @@ const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false) =
     const porcentaje = Math.min((valorActual / meta) * 100, 100);
     return `
         <div class="cart-progress-container">
-            <span class="progress-label" ${esExito ? 'style="color: var(--c-brand); font-weight: 700;"' : ''}>${mensaje}</span>
+            <span class="progress-label ${esExito ? 'reached' : ''}">${mensaje}</span>
             <div class="progress-track">
                 <div class="progress-fill ${esExito ? 'reached' : ''}" style="width: ${porcentaje}%"></div>
             </div>

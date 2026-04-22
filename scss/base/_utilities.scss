@@ -62,6 +62,12 @@
 .flex-1 { flex: 1 !important; }
 .justify-center { justify-content: center !important; }
 .align-center { align-items: center !important; }
+.flex-center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+}
 .gap-1 { gap: $space-1 !important; }
 .gap-2 { gap: $space-2 !important; }
 .gap-3 { gap: $space-3 !important; }

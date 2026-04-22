@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 // Módulos base y utilidades
-@use "abstracts/variables";
+@use "abstracts/variables" as *;
 @use "abstracts/maps";
-@use "abstracts/mixins";
+@use "abstracts/mixins" as *;
 @use "abstracts/extend";
 
 // Estilos generales
@@ -34,6 +34,7 @@
 @use "pages/checkout";
 @use "pages/carrito";
 @use "pages/producto-detalle";
+@use "pages/404" as page404;
 
 // Media queries
 @use "base/queries";

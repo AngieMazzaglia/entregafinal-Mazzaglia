@@ -25,21 +25,18 @@
     }
 
     .carrito-summary {
-        flex: 1;
-        min-width: 300px;
-        align-self: flex-start;
-        position: sticky;
-        top: 120px;
-        background: transparent;
-        padding: $space-2 0; // Menos padding lateral ya que no hay caja
-        border: none;
-        box-shadow: none;
+    flex: 1;
+    min-width: 300px;
+    align-self: flex-start;
+    position: sticky;
+    top: 120px;
+    // Quitamos los resets manuales para que .card-elevada funcione correctamente
 
         h3 {
             margin-bottom: $space-4;
             color: $c-brand;
             font-weight: 700;
-            border-bottom: 2px solid #f4fdf0;
+            border-bottom: 2px solid $c-brand-soft;
             padding-bottom: $space-2;
         }
 
@@ -47,7 +44,7 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: $space-3;
-            color: #555;
+            color: $c-text-muted;
 
             &.total {
                 font-weight: 700;
@@ -62,8 +59,8 @@
 
         /* Calculador de envío por CP */
         .cp-calculator {
-            background-color: #fcfcfc;
-            border: 1px solid #eee;
+            background-color: $c-bg;
+            border: 1px solid $border-color;
             border-radius: $radius-sm;
             padding: $space-4;
             margin-bottom: $space-4;
@@ -115,7 +112,7 @@
             .cp-result {
                 margin-top: 12px;
                 padding: 12px;
-                background-color: #f4fdf0;
+                background-color: $c-brand-soft;
                 border-radius: $radius-sm;
                 color: $c-brand-dark;
                 border-left: 4px solid $c-brand;
@@ -163,7 +160,7 @@
             border-radius: $radius;
             background: $c-bg;
             padding: 8px;
-            border: 1px solid #f5f5f5;
+            border: 1px solid $border-color;
 
             @media (max-width: 1023px) {
                 grid-area: img;

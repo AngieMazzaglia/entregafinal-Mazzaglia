@@ -48,28 +48,6 @@
       }
     }
     </script>
-    <!-- Estilos de Armonización Local (Neutralizar Bootstrap en Header) -->
-    <style>
-        /* Restaurar margen de navegador que Bootstrap quita para igualar el resto del sitio */
-        body {
-            margin: 8px !important;
-        }
-        .site-header {
-            margin-top: 0 !important;
-        }
-        .header-inner {
-            padding-block: 12px;
-            min-height: auto !important;
-        }
-        .breadcrumb-container.contact-breadcrumb {
-            margin-top: 0 !important;
-            margin-bottom: var(--space-4);
-        }
-        /* Igualar exactamente el padding de .bloque estándar */
-        .bloque.bg-bosque-contacto {
-            padding-top: 48px !important; 
-        }
-    </style>
 </head>
 
 <body>
@@ -164,16 +142,13 @@
 
     <main id="contenido" tabindex="-1"> <!-- Accesibilidad -->
         <section class="bloque bg-bosque-contacto" aria-label="Contacto">
-            <div class="container text-center">
-                <!-- Breadcrumbs (Fuera del flujo principal para evitar desplazamientos) -->
-                <div class="breadcrumb-container contact-breadcrumb">
-                    <nav aria-label="breadcrumb" class="breadcrumb-nav breadcrumb-white">
-                    <a href="../index.html" class="home-link"><span>Inicio</span></a> <span class="separator" aria-hidden="true">/</span>
+            <div class="container text-center flow">
+                <!-- Breadcrumbs -->
+                <nav aria-label="breadcrumb" class="breadcrumb-nav breadcrumb-white">
+                    <a href="../index.html" class="home-link"><span>Inicio</span></a> 
+                    <span class="separator" aria-hidden="true">/</span>
                     <span class="active" aria-current="page">Contacto</span>
                 </nav>
-                </div>
-
-                <div class="flow" id="accordionParent">
 
                 <h1>Contacto</h1>
 
@@ -291,7 +266,7 @@
                                                 aria-describedby="provError" aria-required="true">
                                                 <option value="" disabled selected>Seleccioná una provincia</option>
                                                 <option value="Buenos Aires">Buenos Aires</option>
-                                                <option value="CABA">Ciudad Autónoma de Buenos Aires (CABA)</option>
+                                                <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
                                                 <option value="Catamarca">Catamarca</option>
                                                 <option value="Chaco">Chaco</option>
                                                 <option value="Chubut">Chubut</option>
@@ -396,7 +371,6 @@
                             </div>
                         </div>
 
-                    </div>
                 </div>
 
             </div>

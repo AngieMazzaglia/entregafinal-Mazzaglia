@@ -24,12 +24,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css?v=3.9">
-    <style>
-        /* Restaurar margen de navegador que Bootstrap quita para igualar el resto del sitio */
-        body {
-            margin: 8px !important;
-        }
-    </style>
 </head>
 
 <body class="page-checkout">
@@ -96,7 +90,7 @@
                                     </div>
                                 </div>
                                 
-                                <div style="display: flex; justify-content: center; width: 100%;" class="mt-4">
+                                <div class="flex-center mt-4">
                                     <button type="button" id="btn-step-1" class="btn btn-verde btn-step">Continuar</button>
                                 </div>
                             </div>
@@ -124,7 +118,7 @@
                                 </div>
                                 
                                 <!-- GRILLA DE DIRECCIÓN (Se muestra si elige Envío) -->
-                                <div id="shipping-address-form" style="display: none; margin-top: var(--space-5);">
+                                <div id="shipping-address-form" class="mt-5" style="display: none;">
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="address">Calle <span class="required-mark">*</span></label>
@@ -156,7 +150,7 @@
                                                 <option value="Catamarca">Catamarca</option>
                                                 <option value="Chaco">Chaco</option>
                                                 <option value="Chubut">Chubut</option>
-                                                <option value="CABA">Ciudad Autónoma de Buenos Aires (CABA)</option>
+                                                <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
                                                 <option value="Córdoba">Córdoba</option>
                                                 <option value="Corrientes">Corrientes</option>
                                                 <option value="Entre Ríos">Entre Ríos</option>
@@ -185,7 +179,7 @@
                                     </div>
                                 </div>
                                 
-                                <div style="display: flex; justify-content: center; width: 100%;" class="mt-5">
+                                <div class="flex-center mt-5">
                                     <button type="button" id="btn-step-2" class="btn btn-verde btn-step" disabled>Continuar</button>
                                 </div>
                             </div>
@@ -228,7 +222,7 @@
                                 </div>
 
                                 <!-- CONTENEDOR PARA TARJETA -->
-                                <div id="card-fields" style="display: none; margin-top: var(--space-5);">
+                                <div id="card-fields" class="mt-5" style="display: none;">
                                     <div class="form-group mb-4">
                                         <label for="cardNumber">Número de tarjeta <span class="required-mark">*</span></label>
                                         <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" inputmode="numeric" autocomplete="cc-number" data-valid="cardNumber">
@@ -249,7 +243,7 @@
                                     </div>
                                 </div>
                                 
-                                <div style="display: flex; justify-content: center; width: 100%;" class="mt-5">
+                                <div class="flex-center mt-5">
                                     <button type="button" id="btn-step-3" class="btn btn-verde btn-step">Finalizar compra</button>
                                 </div>
                             </div>

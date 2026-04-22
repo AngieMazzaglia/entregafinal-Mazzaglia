@@ -52,6 +52,7 @@ html {
 }
 
 body {
+  margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -557,6 +558,13 @@ input:-webkit-autofill:active {
 
 .align-center {
   align-items: center !important;
+}
+
+.flex-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100%;
 }
 
 .gap-1 {
@@ -1655,9 +1663,13 @@ a.btn:focus-visible,
   display: block;
   font-size: 0.9rem;
   margin-bottom: 8px;
-  color: var(--c-brand);
+  color: #19753A;
   font-weight: 600;
   text-align: center;
+}
+.cart-progress-container .progress-label.reached {
+  color: #1b5e20;
+  font-weight: 700;
 }
 .cart-progress-container .progress-track {
   background-color: #d2f8c4;
@@ -2096,7 +2108,8 @@ form.needs-validation {
 .bg-bosque-contacto {
   background: url("../img/bosque2.webp") center/cover no-repeat;
   position: relative;
-  padding-block: var(--space-9);
+  padding-top: 48px;
+  padding-bottom: var(--space-9);
 }
 .bg-bosque-contacto::before {
   content: "";
@@ -2898,15 +2911,9 @@ form.needs-validation {
   margin-right: 4px; /* Espacio con el texto */
   color: #2e2e2e;
   opacity: 0.8;
-  transition: color 0.3s ease, transform 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.page-checkout .checkout-form-container .radio-label:hover .payment-icon {
-  color: #19753A;
-  opacity: 1;
-  transform: translateY(-2px);
 }
 .page-checkout .checkout-form-container .step-helper-text {
   margin-left: 32px;
@@ -3200,23 +3207,19 @@ form.needs-validation {
   align-self: flex-start;
   position: sticky;
   top: 120px;
-  background: transparent;
-  padding: 8px 0;
-  border: none;
-  box-shadow: none;
 }
 .page-carrito .carrito-summary h3 {
   margin-bottom: 16px;
   color: #19753A;
   font-weight: 700;
-  border-bottom: 2px solid #f4fdf0;
+  border-bottom: 2px solid #a5d6a7;
   padding-bottom: 8px;
 }
 .page-carrito .carrito-summary .summary-line {
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
-  color: #555;
+  color: #666;
 }
 .page-carrito .carrito-summary .summary-line.total {
   font-weight: 700;
@@ -3231,8 +3234,8 @@ form.needs-validation {
   /* Calculador de envío por CP */
 }
 .page-carrito .carrito-summary .cp-calculator {
-  background-color: #fcfcfc;
-  border: 1px solid #eee;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
@@ -3279,7 +3282,7 @@ form.needs-validation {
 .page-carrito .carrito-summary .cp-calculator .cp-result {
   margin-top: 12px;
   padding: 12px;
-  background-color: #f4fdf0;
+  background-color: #a5d6a7;
   border-radius: 8px;
   color: #1b5e20;
   border-left: 4px solid #19753A;
@@ -3325,7 +3328,7 @@ form.needs-validation {
   border-radius: 12px;
   background: #ffffff;
   padding: 8px;
-  border: 1px solid #f5f5f5;
+  border: 1px solid #dddddd;
 }
 @media (max-width: 1023px) {
   .page-carrito .cart-page-item img {
@@ -3673,6 +3676,42 @@ form.needs-validation {
     transform: rotate(360deg);
   }
 }
+.error-404-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  padding: 32px 16px;
+  text-align: center;
+}
+.error-404-container .error-img {
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+.error-404-container .error-title {
+  color: #19753A;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.error-404-container .error-text {
+  color: #2e2e2e;
+  font-size: 1.15rem;
+  max-width: 550px;
+  margin-bottom: 16px;
+}
+.error-404-container .error-actions {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ==========================================================================
    SISTEMA DE RESPONSIVIDAD (Media Queries Centralizadas)
    ========================================================================== */

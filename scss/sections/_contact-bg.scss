@@ -4,7 +4,8 @@
 .bg-bosque-contacto {
     background: url("../img/bosque2.webp") center/cover no-repeat;
     position: relative;
-    padding-block: var(--space-9); // Más aire equilibrado
+    padding-top: $space-7; // Igualamos al estándar de .bloque
+    padding-bottom: var(--space-9); // Mantenemos el aire inferior para el formulario
 
     // Overlay oscuro
     &::before {
