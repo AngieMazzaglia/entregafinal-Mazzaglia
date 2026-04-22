@@ -85,20 +85,18 @@
 }
 
 .steps-cta {
-    margin-top: 8px;
+    margin-top: $space-2;
     text-align: center;
 }
 
 .instruction-box {
-    padding: 24px;   // Más aire interno para legibilidad
+    padding: $space-4;   // Más aire interno para legibilidad
     margin-bottom: $space-5;
     background-color: $c-bg-beige-transparent;
-    /* Color beige con transparencia */
     backdrop-filter: blur(8px);
-    /* Efecto de desenfoque */
     border: 1px solid $border-color;
-    border-radius: $radius; // Restaurando el redondeado premium que te gustaba
-    margin-top: $space-6;   // Manteniendo el aire justo (32px)
+    border-radius: $radius; 
+    margin-top: $space-6;
     transition: all 0.3s ease;
 
     &:hover {
@@ -106,8 +104,6 @@
         box-shadow: $shadow-medium;
     }
 
-
-    // Reset margin for the last box
     &:last-child {
         margin-bottom: 0;
     }
@@ -116,8 +112,7 @@
 /* Títulos de instructivos */
 .instruction-title {
     text-align: center;
-    color: var(--c-text);
-    /* Restaurar color oscuro */
+    color: $c-text;
 
     span {
         font-weight: 400;
@@ -137,14 +132,13 @@
 
     // Desktop: En la esquina
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: $space-3;
+    left: $space-3;
 
     // Mobile: Centrado Relativo al Dibujo
-    // Lo posicionamos respecto al centro (50%) para que no empuje al dibujo
     @media (max-width: 991px) {
-        top: 28px; // Alineado con el centro vertical del icono aprox
-        left: calc(50% - 65px); // 50% (centro) - margen para no pisar el icono
+        top: $space-4; 
+        left: calc(50% - 65px); 
         transform: none;
     }
 }
@@ -183,8 +177,8 @@
 
     h3,
     h2 {
-        margin-top: 32px;
-        margin-bottom: 8px;
+        margin-top: $space-5;
+        margin-bottom: $space-2;
 
         &:first-child {
             margin-top: 0;

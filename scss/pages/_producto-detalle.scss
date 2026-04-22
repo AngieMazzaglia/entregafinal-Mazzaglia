@@ -35,23 +35,27 @@
     @include respond(md) {
         grid-template-columns: 0.8fr 1.2fr;
         column-gap: 60px;
-        row-gap: 10px; // Reducido para que el nombre y el pack estén más cerca
+        row-gap: $space-4; 
         grid-template-areas: 
-            "image title"
             "image info";
     }
 }
 
+.product-header-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    margin-bottom: $space-2;
+}
+
 .product-title-detail {
-    grid-area: title;
     font-size: 1.8rem;
     color: $c-brand-dark;
-    margin: $space-1 0;
+    margin: 0;
     line-height: 1.1;
     
     @include respond(md) {
         font-size: 2.2rem;
-        margin-bottom: 0; // Eliminamos margen extra porque el grid ya tiene gap
     }
 }
 
@@ -98,37 +102,9 @@
     gap: $space-2;
 
     .category-tag {
-        display: inline-block;
-        background: rgba($c-brand, 0.1);
-        color: $c-brand;
-        padding: 4px 12px;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        width: fit-content;
+        display: none; // Oculto por ahora, se usa el breadcrumb o la pildora de subtitulo
     }
 
-    h1 {
-        // El H1 se movió al header, pero mantenemos estilos básicos por si acaso
-        font-size: 1.8rem;
-        color: $c-brand-dark;
-        margin: 0;
-        line-height: 1.1;
-        display: none; // Ocultar si quedó algún remanente no deseado en mobile/desktop
-    }
-
-    .pack-subtitle {
-        display: inline-block;
-        background: #f0f0f0;
-        color: #666;
-        padding: 4px 12px;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        width: fit-content;
-    }
 
     .price-large {
         font-size: 1.6rem;
@@ -208,6 +184,21 @@
         gap: 32px; 
         flex-wrap: wrap;
         width: 100%;
+    }
+
+    .quantity-controls {
+        border-radius: $radius-lg; // Un poco más cuadrado para seguir el estilo de los botones grandes
+        
+        button {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+
+        span {
+            min-width: 44px;
+            font-size: 1.1rem;
+        }
     }
 
     .min-purchase-hint {

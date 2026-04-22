@@ -196,10 +196,18 @@ function renderizarTienda() {
         const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[categoria]) 
                         || (categoria ? (categoria.charAt(0).toUpperCase() + categoria.slice(1)) : 'Tienda');
 
-        // Actualizar breadcrumb dinámico (con niveles extras)
+        if (titulo) titulo.innerText = catName;
+        
+        // --- MEJORA SEO: Título dinámico por categoría ---
+        document.title = `${catName} - Tienda Revida`;
+        
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            metaDesc.setAttribute('content', `Explorá nuestra selección de ${catName.toLowerCase()} en Revida. Productos sustentables de alta calidad.`);
+        }
+
         const dynamicBreadcrumb = document.getElementById('dynamic-breadcrumb');
         if (dynamicBreadcrumb) {
-            // Ya mostramos "Productos" en el estático, así que aquí solo cargamos el nombre final
             dynamicBreadcrumb.innerHTML = `
                 <span class="active" aria-current="page">${catName}</span>
             `;
@@ -218,6 +226,13 @@ function renderizarTienda() {
 
     if (busqueda) {
         titulo.innerText = `Resultados para: "${busqueda}"`;
+        document.title = `Resultados para "${busqueda}" - Tienda Revida`;
+        
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            metaDesc.setAttribute('content', `Resultados de búsqueda para "${busqueda}" en la tienda de Revida. Productos ecológicos y sustentables.`);
+        }
+
         const breadcrumbCat = document.getElementById('breadcrumb-category');
         if (breadcrumbCat) breadcrumbCat.innerText = "Búsqueda";
 
@@ -290,7 +305,8 @@ function renderizarTienda() {
             <div class="card-body">
                 <a href="${urlDestino}" class="card-title-link"><h3>${nombreLimpio}</h3></a>
                 ${precioHTML}
-                <p>${detalleExtra || info.descripcion}</p>
+                ${detalleExtra ? `<span class="card-subtitle">${detalleExtra}</span>` : ''}
+                <p>${info.descripcion}</p>
                 
 
                 <div class="card-actions" data-id="${info.id}">
@@ -453,7 +469,15 @@ function renderizarDetalleProducto() {
     const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[producto.categoria]) 
                     || producto.categoria;
 
-    // --- MEJORA SEO: Inyectar JSON-LD dinámico ---
+    // --- MEJORA SEO: Actualizar Título y Meta Tags dinámicamente ---
+    document.title = `${producto.nombre} - Revida`;
+    
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+        metaDescription.setAttribute('content', producto.descripcion || `Comprá ${producto.nombre} en Revida. Productos sustentables de alta calidad.`);
+    }
+
+    // Inyectar JSON-LD dinámico
     let schemaEl = document.getElementById('dynamic-product-schema');
     if (!schemaEl) {
         schemaEl = document.createElement('script');
@@ -508,14 +532,16 @@ function renderizarDetalleProducto() {
         </div>
 
         <div class="product-detail-grid">
-            <h1 class="product-title-detail">${producto.nombre}</h1>
             
             <div class="product-image-box">
                 <img src="${pathBase}${producto.imagen}" alt="Fotografía en primer plano de ${producto.nombre}">
             </div>
             
             <div class="product-info-box">
-                ${producto.subtitulo ? `<span class="pack-subtitle">${producto.subtitulo}</span>` : ''}
+                <div class="product-header-group">
+                    <h1 class="product-title-detail">${producto.nombre}</h1>
+                    ${producto.subtitulo ? `<span class="pack-subtitle">${producto.subtitulo}</span>` : ''}
+                </div>
                 
                 <div class="price-large">
                     ${typeof producto.precio === 'number' ? `$${producto.precio.toLocaleString()}` : producto.precio}

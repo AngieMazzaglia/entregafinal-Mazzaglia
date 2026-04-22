@@ -257,8 +257,10 @@
         transition: all 0.2s ease;
 
         &:hover:not(:disabled) {
-            background-color: #eee;
-            color: $c-brand-dark;
+            background-color: $c-brand;
+            color: $c-bg;
+            transform: scale(1.1);
+            z-index: 2; // Asegura que el botón escalado quede por encima
         }
 
         &:disabled { color: #ccc; cursor: not-allowed; }
@@ -281,5 +283,27 @@
 
     &--lg {
         @include alert-pill("lg");
+    }
+}
+
+/* Píldoras de Información de Producto (Packs, Medidas, etc) */
+.pack-subtitle {
+    display: inline-block;
+    background: rgba($c-brand, 0.1); // Verde suave de la marca más definido
+    color: $c-brand-dark; // Verde oscuro legible
+    border: 1px solid rgba($c-brand, 0.15); // Borde sutil para toque premium
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem; // Un poco más pequeña para elegancia
+    font-weight: 600; // Más peso visual
+    text-transform: uppercase; // Toque más profesional/etiqueta
+    letter-spacing: 0.5px;
+    width: fit-content;
+    margin-bottom: $space-2;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: rgba($c-brand, 0.15);
+        border-color: rgba($c-brand, 0.3);
     }
 }

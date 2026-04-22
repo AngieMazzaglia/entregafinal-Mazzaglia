@@ -36,17 +36,17 @@
         display: inline-block;
         padding: 6px 16px;
         border: 1px solid $c-brand;
-        border-radius: 50px; // Pill shape
+        border-radius: 50px;
         color: $c-brand;
+        background-color: transparent;
         text-decoration: none;
         font-size: 0.95rem;
         transition: all 0.2s ease;
-        background: transparent;
 
         &:hover,
         &.active {
             background-color: $c-brand;
-            color: #fff;
+            color: $c-bg;
             text-decoration: none;
         }
     }
@@ -197,7 +197,16 @@
     font-size: 1.2rem;
     font-weight: 700;
     color: $c-brand;
-    margin: $space-1 0;
+    margin: $space-1 0 0 0; // Solo margen superior
+}
+
+/* Subtítulo compacto para tarjetas (Pack x50, etc) */
+.card-subtitle {
+    display: block;
+    font-size: 0.8rem;
+    color: $c-text-muted;
+    font-weight: 500;
+    margin-bottom: $space-2;
 }
 
 /* COMPRA RÁPIDA: Refined Layout */
@@ -264,7 +273,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            &:hover { background: rgba($c-brand, 0.05); }
+            transition: all 0.2s ease;
+
+            &:hover { 
+                background: rgba($c-brand, 0.1); 
+                color: $c-brand-dark;
+            }
         }
 
         .qty-val {
