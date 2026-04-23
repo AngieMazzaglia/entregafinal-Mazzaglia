@@ -12,21 +12,19 @@
     const sincronizarPestanasPorURL = () => {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('form') === 'quote') {
-            const quoteTabBtn = document.getElementById('quote-tab');
-            const generalTabBtn = document.getElementById('general-tab');
-            const quoteTabPane = document.getElementById('quote');
-            const generalTabPane = document.getElementById('general');
+            const tabs = document.querySelectorAll('.nav-link');
+            const targetPane = document.getElementById('quote');
+            const tab = document.getElementById('quote-tab');
 
-            if (quoteTabBtn && quoteTabPane && generalTabBtn && generalTabPane) {
-                // Desactivar General
-                generalTabBtn.classList.remove('active');
-                generalTabBtn.setAttribute('aria-selected', 'false');
-                generalTabPane.classList.remove('show', 'active');
+            if (targetPane) {
+                // Ocultar todos los paneles quitando la clase active
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active', 'show'));
+                // Quitar clase active de todos los botones
+                tabs.forEach(t => t.classList.remove('active'));
 
-                // Activar Cotización
-                quoteTabBtn.classList.add('active');
-                quoteTabBtn.setAttribute('aria-selected', 'true');
-                quoteTabPane.classList.add('show', 'active');
+                // Mostrar el elegido agregando la clase active
+                targetPane.classList.add('active', 'show');
+                tab.classList.add('active');
             }
         }
     };
@@ -54,7 +52,8 @@
                     if (overlay) overlay.classList.add('active');
                     
                     setTimeout(() => {
-                        window.location.href = 'mensaje-exitoso.html';
+                        const path = window.obtenerPathBase();
+                        window.location.href = `${path}pages/mensaje-exitoso.html`;
                     }, 1500);
                 }
                 form.classList.add('was-validated');

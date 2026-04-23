@@ -70,7 +70,13 @@ const actualizarContadorCarrito = () => {
     contadores.forEach(contador => {
         if (contador) {
             contador.innerText = totalItems;
-            contador.style.display = totalItems > 0 ? 'inline-flex' : 'none';
+            if (totalItems > 0) {
+                contador.classList.remove('d-none');
+                contador.setAttribute('aria-label', `${totalItems} ${totalItems === 1 ? 'producto' : 'productos'} en el carrito`);
+            } else {
+                contador.classList.add('d-none');
+                contador.setAttribute('aria-label', 'Carrito vacío');
+            }
         }
     });
 };
@@ -241,7 +247,7 @@ window.renderizarPaginaCarrito = () => {
                     <span class="small-label">Calcular costo de envío</span>
                     <div class="flex-row">
                         <input type="text" id="cart-cp-input" value="${savedCP}" placeholder="Cód. Postal" maxlength="4">
-                        <button class="btn btn-outline btn-sm" onclick="manejarCalculoCP()">Calcular</button>
+                        <button class="btn btn-outline btn-sm" data-action="calcular-cp">Calcular</button>
                     </div>
                 </div>
             </div>
@@ -300,6 +306,7 @@ document.addEventListener('click', (e) => {
     } else {
         if (action === 'checkout') window.validarYRedirigirCheckout();
         else if (action === 'view-cart') window.irAPaginaCarrito();
+        else if (action === 'calcular-cp') window.manejarCalculoCP();
     }
 });
 
@@ -312,11 +319,11 @@ window.restarEnCarrito = (id) => {
 
 window.validarYRedirigirCheckout = () => {
     if (carrito.length === 0 || window.calcularTotal() < MIN_COMPRA) return;
-    const path = window.location.pathname.includes('/pages/') ? '' : 'pages/';
-    window.location.href = `${path}checkout.html`;
+    const path = obtenerPathBase();
+    window.location.href = `${path}pages/checkout.html`;
 };
 
 window.irAPaginaCarrito = () => {
-    const path = window.location.pathname.includes('/pages/') ? '' : 'pages/';
-    window.location.href = `${path}carrito.html`;
+    const path = obtenerPathBase();
+    window.location.href = `${path}pages/carrito.html`;
 };

@@ -124,8 +124,8 @@ function inicializarModalCarrito() {
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', () => {
                 if (carrito.length === 0) return;
-                const isPage = window.location.pathname.includes('/pages/');
-                window.location.href = isPage ? './checkout.html' : './pages/checkout.html';
+                const path = obtenerPathBase();
+                window.location.href = `${path}pages/checkout.html`;
             });
         }
 
@@ -134,8 +134,8 @@ function inicializarModalCarrito() {
         if (viewCartBtn) {
             viewCartBtn.addEventListener('click', () => {
                 if (carrito.length === 0) return;
-                const isPage = window.location.pathname.includes('/pages/');
-                window.location.href = isPage ? './carrito.html' : './pages/carrito.html';
+                const path = obtenerPathBase();
+                window.location.href = `${path}pages/carrito.html`;
             });
         }
     }

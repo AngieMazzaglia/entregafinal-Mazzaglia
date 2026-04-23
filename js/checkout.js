@@ -128,7 +128,7 @@ function setupPaso2() {
         const shippingRadio = document.querySelector('input[name="deliveryMethod"][value="shipping"]');
         if (shippingRadio) {
             shippingRadio.checked = true;
-            shippingForm.style.display = 'block';
+            shippingForm.classList.remove('d-none');
             btnNext.disabled = !verificarInputsCompletos(shippingInputs);
         }
     }
@@ -140,7 +140,9 @@ function setupPaso2() {
     radiosEnvio.forEach(radio => {
         radio.addEventListener('change', () => {
             const esEnvio = radio.value === 'shipping';
-            shippingForm.style.display = esEnvio ? 'block' : 'none';
+            if (esEnvio) shippingForm.classList.remove('d-none');
+            else shippingForm.classList.add('d-none');
+            
             localStorage.setItem('shippingMethodPreference', radio.value);
             renderizarResumenCheckout();
             btnNext.disabled = esEnvio ? !verificarInputsCompletos(shippingInputs) : false;
@@ -179,7 +181,9 @@ function setupPaso3() {
     radiosPago.forEach(radio => {
         radio.addEventListener('change', () => {
             const esTarjeta = radio.value === 'card';
-            cardFields.style.display = esTarjeta ? 'block' : 'none';
+            if (esTarjeta) cardFields.classList.remove('d-none');
+            else cardFields.classList.add('d-none');
+            
             btnFinalizar.disabled = esTarjeta ? !verificarInputsCompletos(cardInputs) : false;
         });
     });
@@ -409,7 +413,7 @@ function irAlPaso(actual, siguiente) {
 
 function finalizarCompra() {
     const overlay = document.getElementById('processing-overlay');
-    if (overlay) overlay.style.display = 'flex';
+    if (overlay) overlay.classList.add('active');
 
     setTimeout(() => {
         localStorage.removeItem('carrito');
@@ -482,7 +486,6 @@ function renderizarResumenCheckout() {
     // 3. Inyectar línea de envío
     const envioDiv = document.createElement('div');
     envioDiv.className = 'summary-item shipping-line';
-    envioDiv.style.cssText = 'border-top: 1px dashed #eee; margin-top: 10px; padding-top: 10px;';
     envioDiv.innerHTML = `<span>Envío</span><span class="${textoEnvio === 'Gratis' ? 'reached-text' : ''}">${textoEnvio}</span>`;
     contenedor.appendChild(envioDiv);
 

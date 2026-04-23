@@ -331,18 +331,26 @@
     max-height: 400px;
     overflow-y: auto;
 
-    .summary-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: $space-2 0;
-        font-size: 0.95rem;
-        color: $c-text;
-        border-bottom: 1px dashed $border-color;
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: $space-2 0;
+            font-size: 0.95rem;
+            color: $c-text;
+            border-bottom: 1px dashed $border-color;
 
-        &:last-child {
-            border-bottom: none;
-        }
+            &.shipping-line {
+                border-top: 1px dashed rgba($c-brand, 0.2);
+                margin-top: $space-3;
+                padding-top: $space-3;
+                font-weight: 600;
+                border-bottom: none;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
 
         span:first-child {
             flex: 1;

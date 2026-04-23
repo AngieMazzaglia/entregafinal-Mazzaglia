@@ -3138,6 +3138,13 @@ form.needs-validation {
   color: #2e2e2e;
   border-bottom: 1px dashed #dddddd;
 }
+.summary-item-list .summary-item.shipping-line {
+  border-top: 1px dashed rgba(25, 117, 58, 0.2);
+  margin-top: 12px;
+  padding-top: 12px;
+  font-weight: 600;
+  border-bottom: none;
+}
 .summary-item-list .summary-item:last-child {
   border-bottom: none;
 }
