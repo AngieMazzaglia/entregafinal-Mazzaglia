@@ -2,7 +2,7 @@
 @use "../abstracts/maps" as *; // Ensure all maps/variables are available
 
 .bg-bosque-contacto {
-    background: url("../img/bosque_contact_new.png") center/cover no-repeat;
+    background: url("../img/bosque_contact_new.webp") center/cover no-repeat;
     position: relative;
     padding-top: $space-7; // Igualamos al estándar de .bloque
     padding-bottom: var(--space-9); // Mantenemos el aire inferior para el formulario

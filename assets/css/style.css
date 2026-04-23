@@ -2110,7 +2110,7 @@ form.needs-validation {
 }
 
 .bg-bosque-contacto {
-  background: url("../img/bosque_contact_new.png") center/cover no-repeat;
+  background: url("../img/bosque_contact_new.webp") center/cover no-repeat;
   position: relative;
   padding-top: 48px;
   padding-bottom: var(--space-9);
@@ -2456,7 +2456,7 @@ form.needs-validation {
 
 .cta-compra {
   padding-block: var(--space-9);
-  background: url("../img/bosque_cta_new.png") center/cover no-repeat;
+  background: url("../img/bosque_cta_new.webp") center/cover no-repeat;
   position: relative;
   color: #ffffff;
   text-align: center;
