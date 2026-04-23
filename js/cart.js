@@ -86,13 +86,14 @@ const actualizarContadorCarrito = () => {
 /**
  * Genera la barra de progreso para promociones
  */
-const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false) => {
+const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false, esAviso = false) => {
     const porcentaje = Math.min((valorActual / meta) * 100, 100);
+    const warningClass = (esAviso && !esExito) ? 'is-warning' : '';
     return `
         <div class="cart-progress-container">
-            <span class="progress-label ${esExito ? 'reached' : ''}">${mensaje}</span>
+            <span class="progress-label ${esExito ? 'reached' : ''} ${warningClass}">${mensaje}</span>
             <div class="progress-track">
-                <div class="progress-fill ${esExito ? 'reached' : ''}" style="width: ${porcentaje}%"></div>
+                <div class="progress-fill ${esExito ? 'reached' : ''} ${warningClass}" style="width: ${porcentaje}%"></div>
             </div>
         </div>
     `;
@@ -183,7 +184,7 @@ window.renderizarCarritoEnModal = () => {
 
     if (minPurchaseArea) {
         if (total < MIN_COMPRA) {
-            minPurchaseArea.innerHTML = generarHTMLBarraProgreso(total, MIN_COMPRA, `Te faltan ${formatearPrecio(MIN_COMPRA - total)} para el mínimo`);
+            minPurchaseArea.innerHTML = generarHTMLBarraProgreso(total, MIN_COMPRA, `Te faltan ${formatearPrecio(MIN_COMPRA - total)} para el mínimo`, false, true);
             btnCheckout?.classList.add('btn-disabled');
         } else {
             minPurchaseArea.innerHTML = generarHTMLBarraProgreso(total, MIN_COMPRA, '¡Llegaste al mínimo de compra!', true);
@@ -236,7 +237,7 @@ window.renderizarPaginaCarrito = () => {
     if (promoArea) {
         let html = '';
         if (subtotal < MIN_ENVIO_GRATIS) {
-            html += generarHTMLBarraProgreso(subtotal, MIN_ENVIO_GRATIS, `Te faltan ${formatearPrecio(MIN_ENVIO_GRATIS - subtotal)} para el ENVÍO GRATIS`);
+            html += generarHTMLBarraProgreso(subtotal, MIN_ENVIO_GRATIS, `Te faltan ${formatearPrecio(MIN_ENVIO_GRATIS - subtotal)} para el ENVÍO GRATIS`, false, false);
         } else {
             html += '<div class="reached-promo">🎉 ¡Tenés ENVÍO GRATIS!</div>';
         }

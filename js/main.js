@@ -611,9 +611,11 @@ function renderizarDetalleProducto() {
             if (totalActual < minCompra) {
                 const falta = minCompra - totalActual;
                 hintEl.innerText = `Faltan $${falta.toLocaleString()} para el mínimo`;
+                hintEl.classList.add('is-warning');
                 hintEl.classList.remove('reached');
             } else {
                 hintEl.innerText = `¡Llegaste al mínimo!`;
+                hintEl.classList.remove('is-warning');
                 hintEl.classList.add('reached');
             }
         }

@@ -203,8 +203,13 @@
 
     .min-purchase-hint {
         font-size: 0.85rem;
-        color: #666;
+        color: #666; // Gris por defecto
         font-weight: 500;
+        
+        &.is-warning {
+            color: $c-warning;
+            font-weight: 600;
+        }
         
         &.reached {
             color: $c-brand;

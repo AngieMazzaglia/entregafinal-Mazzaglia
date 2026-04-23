@@ -1671,6 +1671,9 @@ a.btn:focus-visible,
   font-weight: 600;
   text-align: center;
 }
+.cart-progress-container .progress-label.is-warning {
+  color: #d35400;
+}
 .cart-progress-container .progress-label.reached {
   color: #1b5e20;
   font-weight: 700;
@@ -1685,14 +1688,17 @@ a.btn:focus-visible,
   margin: 0 auto;
 }
 .cart-progress-container .progress-fill {
-  background-color: var(--c-brand);
+  background-color: #19753A;
   height: 100%;
   width: 0%;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 10px;
 }
+.cart-progress-container .progress-fill.is-warning {
+  background-color: #d35400;
+}
 .cart-progress-container .progress-fill.reached {
-  background-color: #2d5a27;
+  background-color: #1b5e20;
 }
 
 .delete-btn,
@@ -3609,6 +3615,10 @@ form.needs-validation {
   font-size: 0.85rem;
   color: #666;
   font-weight: 500;
+}
+.purchase-controls .min-purchase-hint.is-warning {
+  color: #d35400;
+  font-weight: 600;
 }
 .purchase-controls .min-purchase-hint.reached {
   color: #19753A;
