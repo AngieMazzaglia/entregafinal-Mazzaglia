@@ -1281,6 +1281,10 @@ a.btn:focus-visible,
   align-items: center;
   z-index: 1000;
 }
+.processing-overlay.active {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
 .processing-overlay .processing-content {
   display: flex;
   flex-direction: column;

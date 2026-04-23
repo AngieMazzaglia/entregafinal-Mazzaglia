@@ -47,9 +47,15 @@
                     const firstInvalid = form.querySelector(':invalid');
                     if (firstInvalid) firstInvalid.focus();
                 } else {
-                    // Redirección al mensaje exitoso tras validación
+                    // Redirección al mensaje exitoso tras breve delay con pantalla de carga
                     event.preventDefault();
-                    window.location.href = 'mensaje-exitoso.html';
+                    
+                    const overlay = document.getElementById('processing-overlay');
+                    if (overlay) overlay.classList.add('active');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'mensaje-exitoso.html';
+                    }, 1500);
                 }
                 form.classList.add('was-validated');
             }, false);
