@@ -10,7 +10,7 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: $space-4;
     margin-top: $space-3;
-    padding: 0;        // Reset de padding de <ol> (Culpable del margen extra)
+    padding: 0;
     margin-left: auto;
     margin-right: auto;
     list-style: none;
@@ -27,7 +27,7 @@
 
         /* Ajuste Mobile: Independencia visual */
         @media (max-width: 991px) {
-            flex-direction: column; // Volvemos al flujo vertical
+            flex-direction: column;
             align-items: center;
             padding: 30px 15px;
 
@@ -90,12 +90,12 @@
 }
 
 .instruction-box {
-    padding: $space-4;   // Más aire interno para legibilidad
+    padding: $space-4;
     margin-bottom: $space-5;
     background-color: $c-bg-beige-transparent;
     backdrop-filter: blur(8px);
     border: 1px solid $border-color;
-    border-radius: $radius; 
+    border-radius: $radius;
     margin-top: $space-6;
     transition: all 0.3s ease;
 
@@ -137,8 +137,8 @@
 
     // Mobile: Centrado Relativo al Dibujo
     @media (max-width: 991px) {
-        top: $space-4; 
-        left: calc(50% - 65px); 
+        top: $space-4;
+        left: calc(50% - 65px);
         transform: none;
     }
 }

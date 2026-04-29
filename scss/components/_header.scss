@@ -13,7 +13,7 @@
     justify-content: space-between;
     gap: $space-4;
     padding-block: 12px;
-    max-width: $layout-max-width !important; 
+    max-width: $layout-max-width !important;
 }
 
 .logo {
@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     transition: transform 0.23s ease-out;
-    
+
     &:hover {
         transform: scale(1.02);
     }
@@ -46,9 +46,7 @@
     gap: var(--space-3);
     align-items: center;
 
-    // Aumentamos especificidad para ganar al selector global a:hover
-    // Selector original: 0-3-2
-    // Nuevo selector: 0-4-2 (agregando .site-header & o similar)
+    // Nuevo selector: 0-4-2 
     .site-header &>li>a:not(.btn-cart) {
         padding: 4px 6px;
         color: var(--c-brand);
@@ -57,7 +55,7 @@
 
         &:hover {
             color: var(--c-brand-dark);
-            text-decoration: none; // Ahora sí debería aplicar
+            text-decoration: none;
             border-bottom: 2px solid var(--c-brand);
             padding-bottom: 2px;
         }
@@ -107,7 +105,6 @@ nav a[aria-current="page"] {
     text-decoration: none;
     -webkit-appearance: none;
     appearance: none;
-    /* Reset para móviles */
     color: var(--c-brand);
 
     &:hover {
@@ -117,7 +114,7 @@ nav a[aria-current="page"] {
         transition: transform 0.2s ease;
     }
 
-    /* Mantener focus visible para accesibilidad pero personalizado si se desea */
+    /* Mantener focus visible para accesibilidad */
     &:focus-visible {
         outline: 2px solid var(--c-brand);
         border-radius: 4px;
@@ -143,10 +140,10 @@ nav a[aria-current="page"] {
 
 /* Acciones Mobile (Lupa + Carrito) */
 .header-actions-mobile {
-    display: none; // Oculto por defecto en desktop
+    display: none;
     align-items: center;
     gap: $space-2;
-    margin-right: -5px; // Ajuste fino para borde derecho
+    margin-right: -5px;
 
     .btn-icon {
         background: transparent;
@@ -176,7 +173,7 @@ nav a[aria-current="page"] {
     .btn-cart {
         padding: 8px;
         font-size: 1.2rem;
-        
+
         svg {
             width: 22px;
             height: 22px;
@@ -184,14 +181,14 @@ nav a[aria-current="page"] {
     }
 }
 
-/* Dropdown Menu (Desktop Hover Only) */
+/* Dropdown Menu */
 .nav-list li {
     position: relative;
 
     // Solo habilitamos el hover si el dispositivo soporta hover real (mouse)
-    // Esto evita que en tablets se abra al tocar
     @media (hover: hover) {
         @include respond(lg) {
+
             &:hover .dropdown-menu,
             &:focus-within .dropdown-menu {
                 display: block;
@@ -204,7 +201,7 @@ nav a[aria-current="page"] {
 }
 
 .dropdown-menu {
-    display: none; // Oculto por defecto en mobile
+    display: none;
 
     @include respond(lg) {
         position: absolute;
@@ -245,31 +242,26 @@ nav a[aria-current="page"] {
 }
 
 /* SEARCH BAR */
-/* SEARCH BAR */
 .search-form {
     display: flex;
     align-items: center;
     background: #fff;
-    /* Fondo blanco */
     border-radius: 99px;
     padding: 0 0 0 8px;
-    /* Ajuste padding */
     border: 1px solid var(--c-brand);
-    /* Borde fino color principal */
     transition: all 0.3s ease;
     margin-block: 10px;
 
     &:focus-within {
         background: #fff;
         border-color: var(--c-brand-dark);
-        /* Borde más oscuro al foco */
         box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
     }
 
     input[type="search"] {
         border: none;
         background: transparent;
-        padding: 4px 0; // Revertido a original
+        padding: 4px 0;
         font-size: $font-size-xs;
         width: 100%;
         outline: none;
@@ -277,11 +269,10 @@ nav a[aria-current="page"] {
         font-family: inherit;
         -webkit-appearance: none;
         appearance: none;
-        height: 28px; // Revertido a original
+        height: 28px;
 
         &::placeholder {
             color: $c-text-muted;
-            /* Oscurecido para mejor contraste */
         }
     }
 
@@ -289,7 +280,7 @@ nav a[aria-current="page"] {
         background: transparent;
         border: none;
         cursor: pointer;
-        padding: 4px 8px; // Revertido a original
+        padding: 4px 8px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -311,11 +302,10 @@ nav a[aria-current="page"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centrado en mobile */
-    gap: 8px; // Separación explícita para que no se peguen
+    gap: 8px;
 }
 
-/* Ajustes Desktop para Search y Actions se hacen en _queries.scss o via media query aqui */
+/* Ajustes Desktop para Search y Actions */
 @include respond(lg) {
     .search-form {
         margin-block: 0;
@@ -327,14 +317,14 @@ nav a[aria-current="page"] {
     }
 }
 
-/* MOBILE SEARCH BAR (Dropdown que empuja contenido) */
+/* MOBILE SEARCH BAR */
 .mobile-search-bar {
-    display: none; // Oculto por defecto
+    display: none;
     width: 100%;
     background: #fdfdfd;
     border-top: 1px solid $border-color;
     padding-block: 15px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 
     &.active {
         display: block;

@@ -8,7 +8,7 @@
 
 .galeria-nosotros {
     display: grid;
-    grid-template-columns: 1fr; // Mobile: 1 columna
+    grid-template-columns: 1fr;
     gap: $space-5;
 
     // Desktop: 2 columnas
@@ -20,12 +20,12 @@
 .galeria-item {
     position: relative;
     border-radius: $radius-sm;
-    overflow: hidden; // Recorta la imagen si se escala
+    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 350px; // Reducido de 400px
+    height: 350px;
 
     @include respond(md) {
-        height: 420px; // Reducido de 500px, un poco más chico
+        height: 420px;
     }
 
     img {
@@ -53,7 +53,7 @@
     border-radius: $radius-sm;
     text-align: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border: 1px solid $border-color; // Borde igual a instruction-box
+    border: 1px solid $border-color;
 
     h3 {
         margin-top: 0;

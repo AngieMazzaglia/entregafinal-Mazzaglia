@@ -348,20 +348,13 @@ const productos = [
 
 // --- UTILIDADES GLOBALES ---
 
-/**
- * Obtiene la ruta base según la ubicación del archivo HTML relativo a la raíz.
- * Centralizado en data.js por ser el primer archivo en cargar.
- */
+/* Obtiene la ruta base según la ubicación del archivo HTML relativo a la raíz. */
 window.obtenerPathBase = () => window.location.pathname.includes('/pages/') ? '../' : './';
 
-/**
- * Formatea un número como moneda local (centralizado)
- */
+/* Formatea un número como moneda local (centralizado) */
 window.formatearPrecio = (valor) => `$${valor.toLocaleString()}`;
 
-/**
- * Constantes centralizadas de negocio
- */
+/* Constantes centralizadas de negocio */
 window.MIN_COMPRA = 20000;
 window.MIN_ENVIO_GRATIS = 50000;
 
@@ -372,9 +365,7 @@ window.SHIPPING_RESTO = 5000;
 
 // --- UTILIDADES DE DATOS ---
 
-/**
- * Mapa centralizado de nombres de categorías para consistencia en todo el sitio
- */
+/*Mapa centralizado de nombres de categorías para consistencia en todo el sitiom*/
 const nombresCategorias = {
     'ecologicas': 'Bolsas de tela lisas',
     'composteras': 'Composteras',
@@ -384,26 +375,20 @@ const nombresCategorias = {
     'disenos': 'Bolsas de tela con diseños'
 };
 
-/**
- * Filtra los productos por su categoría
- */
+/* Filtra los productos por su categoría */
 const obtenerProductosPorCategoria = (categoria) => {
-    if (!categoria) return productos; // Devuelve todo si no hay categoría
+    if (!categoria) return productos;
     return productos.filter(p => p.categoria === categoria);
 };
 
-/**
- * Busca productos por coincidencia inteligente en nombre, descripción, subtítulo o categoría.
- * Maneja múltiples palabras y coincidencias con nombres de categorías.
- */
+/* Busca productos por coincidencia inteligente en nombre, descripción, subtítulo o categoría. */
 const obtenerProductosPorBusqueda = (termino) => {
     if (!termino) return [];
 
     // Normalizamos el término: minúsculas y sin espacios extra al inicio/final
     const lowerTerm = termino.toLowerCase().trim();
 
-    // 1. Verificamos si el término coincide exactamente con el NOMBRE de una categoría
-    // Ejemplo: Si busca "bolsas de tela" o "composteras"
+    // 1. Verificamos si el término coincide exactamente con el NOMBRE de una categoría //
     const catKeys = Object.keys(nombresCategorias);
     const matchedCat = catKeys.find(key =>
         nombresCategorias[key].toLowerCase() === lowerTerm ||
@@ -416,7 +401,7 @@ const obtenerProductosPorBusqueda = (termino) => {
     }
 
     // 2. Si no es una categoría exacta, hacemos búsqueda por palabras
-    const palabras = lowerTerm.split(/\s+/).filter(p => p.length > 2); // palabras de más de 2 letras
+    const palabras = lowerTerm.split(/\s+/).filter(p => p.length > 2);
 
     return productos.filter(p => {
         // Creamos un súper-texto con toda la info del producto para buscar ahí
@@ -433,7 +418,7 @@ const obtenerProductosPorBusqueda = (termino) => {
         // Coincidencia exacta del término completo (Prioridad)
         if (searchableText.includes(lowerTerm)) return true;
 
-        // Si hay varias palabras, verificamos que TODAS las palabras significativas estén presentes
+        // Si hay varias palabras, verificamos que todas las palabras significativas estén presentes
         if (palabras.length > 0) {
             return palabras.every(pal => searchableText.includes(pal));
         }

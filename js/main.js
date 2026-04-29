@@ -1,14 +1,14 @@
 // Archivo principal que conecta todo
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Inyectar el HTML del modal (para no repetirlo en cada archivo)
+    // 1. Inyectar el HTML del modal
     inyectarModalCarrito();
 
     // 2. Inicializar lógica del carrito
     actualizarContadorCarrito();
     inicializarModalCarrito();
-    inicializarSearchMobile(); // Nueva lógica para búsqueda mobile
-    inicializarAccesibilidad(); // Mejoras de ARIA
+    inicializarSearchMobile();
+    inicializarAccesibilidad();
     // 3. Inyectar contenedor de notificaciones e inicializar validaciones
     inyectarToastContainer();
     window.setupInputValidation?.();
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function inyectarModalCarrito() {
-    // Si ya existe (por seguridad), no hacemos nada
     if (document.getElementById('cart-modal')) return;
 
     const modalHTML = `
@@ -89,20 +88,17 @@ function inyectarModalCarrito() {
 // --- LÓGICA DEL CARRITO (UI) ---
 
 function inicializarModalCarrito() {
-    // Pueden haber dos botones de carrito (Desktop y Mobile)
     const cartBtn = document.getElementById('cart-btn');
     const cartBtnMobile = document.getElementById('cart-btn-mobile');
     const modal = document.getElementById('cart-modal');
-    // Buscar el botón de cierre dentro del modal recién creado
     const closeBtn = document.getElementById('close-cart');
     const checkoutBtn = document.getElementById('checkout-btn');
 
     if (modal) {
-        // Asignar evento a ambos botones de carrito
         [cartBtn, cartBtnMobile].forEach(btn => {
             if (btn) {
                 btn.addEventListener('click', (e) => {
-                    e.preventDefault(); // Evitar saltos si es un link
+                    e.preventDefault();
                     renderizarCarritoEnModal();
                     abrirModal();
                 });
@@ -141,26 +137,22 @@ function inicializarModalCarrito() {
     }
 }
 
-/**
- * Controla la apertura/cierre del buscador desplegable en mobile
- */
+/* apertura/cierre del buscador desplegable en mobile */
 function inicializarSearchMobile() {
     const toggle = document.getElementById('mobile-search-toggle');
     const searchBar = document.getElementById('mobile-search-bar');
-    
+
     if (toggle && searchBar) {
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
             searchBar.classList.toggle('active');
-            
-            // Foco automático en el input al abrir
+
             if (searchBar.classList.contains('active')) {
                 const input = searchBar.querySelector('input');
                 if (input) input.focus();
             }
         });
 
-        // Cerrar si se hace click fuera del buscador (opcional pero recomendado)
         document.addEventListener('click', (e) => {
             if (!searchBar.contains(e.target) && !toggle.contains(e.target)) {
                 searchBar.classList.remove('active');
@@ -181,9 +173,9 @@ function renderizarTienda() {
         btn.classList.remove('active');
         btn.removeAttribute('aria-current');
         const url = btn.getAttribute('href');
-        
-        const isActive = (!categoria && (url === 'tienda.html' || url.endsWith('/tienda.html'))) || 
-                         (categoria && url.includes(`categoria=${categoria}`));
+
+        const isActive = (!categoria && (url === 'tienda.html' || url.endsWith('/tienda.html'))) ||
+            (categoria && url.includes(`categoria=${categoria}`));
 
         if (isActive) {
             btn.classList.add('active');
@@ -192,15 +184,14 @@ function renderizarTienda() {
     });
     // Actualizar título y breadcrumb
     if (categoria) {
-        // Usar el nombre del mapa global o capitalizar si no existe
-        const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[categoria]) 
-                        || (categoria ? (categoria.charAt(0).toUpperCase() + categoria.slice(1)) : 'Tienda');
+        const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[categoria])
+            || (categoria ? (categoria.charAt(0).toUpperCase() + categoria.slice(1)) : 'Tienda');
 
         if (titulo) titulo.innerText = catName;
-        
-        // --- MEJORA SEO: Título dinámico por categoría ---
+
+        // --- MEJORA SEO ---
         document.title = `${catName} - Tienda Revida`;
-        
+
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
             metaDesc.setAttribute('content', `Explorá nuestra selección de ${catName.toLowerCase()} en Revida. Productos sustentables de alta calidad.`);
@@ -227,7 +218,7 @@ function renderizarTienda() {
     if (busqueda) {
         titulo.innerText = `Resultados para: "${busqueda}"`;
         document.title = `Resultados para "${busqueda}" - Tienda Revida`;
-        
+
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
             metaDesc.setAttribute('content', `Resultados de búsqueda para "${busqueda}" en la tienda de Revida. Productos ecológicos y sustentables.`);
@@ -271,7 +262,7 @@ function renderizarTienda() {
             precioHTML = `<div class="card-price">$${info.precio.toLocaleString()}</div>`;
         }
 
-        // Nuevo sistema de botones prioritarios (Opción C: Minimalista)
+        // Nuevo sistema de botones prioritarios
         let actionButtonHTML = '';
         if (esPersonalizada) {
             actionButtonHTML = `<a href="./contacto.html?form=quote" class="btn btn-verde btn-block" aria-label="Solicitar presupuesto para ${info.nombre}">Cotizar</a>`;
@@ -321,20 +312,20 @@ function renderizarTienda() {
         }
     });
 
-    // --- MAGIA DE ACCESIBILIDAD (Anuncio de carga) ---
+    // --- ACCESIBILIDAD (Anuncio de carga) ---
     const categoryName = categoria ? (nombresCategorias[categoria] || categoria) : "Tienda";
     if (typeof anunciarParaScreenReader === 'function') {
         anunciarParaScreenReader(`Se muestran ${productosAmostrar.length} productos en ${categoryName}.`);
     }
 }
 
-// --- DELEGACIÓN GLOBAL DE EVENTOS PARA COMPRA RÁPIDA (Más robusto) ---
+// --- DELEGACIÓN GLOBAL DE EVENTOS PARA COMPRA RÁPIDA ---
 document.addEventListener('click', (e) => {
     // Solo actuar si estamos en una página con contenedor de productos
     const contenedor = document.getElementById('contenedor-productos');
     if (!contenedor) return;
 
-    const btnAddMain = e.target.closest('.btn-add-main'); 
+    const btnAddMain = e.target.closest('.btn-add-main');
     const btnToggle = e.target.closest('.btn-toggle-quick');
     const btnMinus = e.target.closest('.qty-minus');
     const btnPlus = e.target.closest('.qty-plus');
@@ -344,9 +335,9 @@ document.addEventListener('click', (e) => {
 
     // Extraer ID y Wrapper
     const target = btnAddMain || btnToggle || btnMinus || btnPlus;
-    const wrapper = target.closest('.card-actions'); 
+    const wrapper = target.closest('.card-actions');
     const id = target.getAttribute('data-id') || target.dataset.id || (wrapper ? wrapper.dataset.id : null);
-    
+
     if (!id || !wrapper) return;
 
     if (btnAddMain || btnToggle) {
@@ -370,7 +361,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// --- UTILIDADES COMPRA RÁPIDA (HÍBRIDA) ---
+// --- UTILIDADES COMPRA RÁPIDA ---
 
 window.obtenerCantidadEnCarrito = (id) => {
     const item = (typeof carrito !== 'undefined' ? carrito : []).find(p => p.id === id);
@@ -399,7 +390,7 @@ window.actualizarControlCompraRapida = (id) => {
     const cartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`;
 
     wrapper.classList.remove('is-editing');
-    
+
     if (cant === 0) {
         wrapper.innerHTML = `<button class="btn btn-verde btn-block btn-add-main" data-id="${id}" aria-label="Agregar al carrito">+ Agregar al carrito</button>`;
     } else {
@@ -414,7 +405,7 @@ window.renderizarEstadoEdicion = (wrapper, id) => {
     if (cant === 0 && typeof window.agregarAlCarrito === 'function') {
         window.agregarAlCarrito(id, 1);
     }
-    
+
     wrapper.classList.add('is-editing');
     wrapper.innerHTML = `
         <div class="quick-qty-selector">
@@ -432,11 +423,11 @@ const timersTienda = {};
 
 window.reiniciarTemporizadorCierre = (wrapper, id) => {
     if (timersTienda[id]) clearTimeout(timersTienda[id]);
-    
+
     timersTienda[id] = setTimeout(() => {
         window.actualizarControlCompraRapida(id);
         delete timersTienda[id];
-    }, 3000); // 3 segundos de inactividad
+    }, 3000);
 };
 
 function renderizarDetalleProducto() {
@@ -459,19 +450,19 @@ function renderizarDetalleProducto() {
     }
 
     const pathBase = (typeof obtenerPathBase === 'function') ? obtenerPathBase() : './';
-    
+
     // Preparar características
-    const featuresHTML = producto.caracteristicas 
+    const featuresHTML = producto.caracteristicas
         ? `<ul>${producto.caracteristicas.map(f => `<li>${f}</li>`).join('')}</ul>`
         : `<p>${producto.descripcion}</p>`;
 
-    // Preparar el Badge de categoría (amigable) usando el mapa global
-    const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[producto.categoria]) 
-                    || producto.categoria;
+    // Preparar el Badge de categoría
+    const catName = (typeof nombresCategorias !== 'undefined' && nombresCategorias[producto.categoria])
+        || producto.categoria;
 
-    // --- MEJORA SEO: Actualizar Título y Meta Tags dinámicamente ---
+    // --- MEJORA SEO ---
     document.title = `${producto.nombre} - Revida`;
-    
+
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
         metaDescription.setAttribute('content', producto.descripcion || `Comprá ${producto.nombre} en Revida. Productos sustentables de alta calidad.`);
@@ -545,8 +536,8 @@ function renderizarDetalleProducto() {
                 
                 <div class="price-large">
                     ${typeof producto.precio === 'number' ? `$${producto.precio.toLocaleString()}` : producto.precio}
-                    ${producto.categoria !== 'composteras' && typeof producto.precio === 'number' ? 
-                        `<span class="price-notice">Precio por pack</span>` : ''}
+                    ${producto.categoria !== 'composteras' && typeof producto.precio === 'number' ?
+            `<span class="price-notice">Precio por pack</span>` : ''}
                 </div>
                 
                 <div class="product-features">
@@ -606,7 +597,7 @@ function renderizarDetalleProducto() {
         const totalActual = typeof calcularTotal === 'function' ? calcularTotal() : 0;
         const hintEl = document.getElementById('min-purchase-hint');
         const minCompra = (typeof MIN_COMPRA !== 'undefined') ? MIN_COMPRA : 15000;
-        
+
         if (hintEl) {
             if (totalActual < minCompra) {
                 const falta = minCompra - totalActual;
@@ -638,7 +629,6 @@ function renderizarDetalleProducto() {
     if (btnAdd) {
         btnAdd.addEventListener('click', () => {
             if (btnAdd.classList.contains('btn-added')) {
-                // Si ya fue agregado, el botón ahora abre el carrito
                 if (typeof abrirModal === 'function') {
                     renderizarCarritoEnModal();
                     abrirModal();
@@ -648,14 +638,14 @@ function renderizarDetalleProducto() {
 
             // Primera vez: agregar al carrito
             agregarAlCarrito(producto.id, qtyValue.innerText);
-            
+
             // Transformar botón
             btnAdd.classList.add('btn-added');
             btnAdd.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 ¡Agregado! Ir al carrito
             `;
-            
+
             // Actualizar el hint tras sumar al carrito
             actualizarHint();
         });
@@ -679,7 +669,7 @@ window.mostrarToast = (mensaje) => {
     toast.className = 'toast-notification clickable';
     toast.setAttribute('role', 'button');
     toast.setAttribute('aria-label', `${mensaje}. Hacer clic para ver el carrito.`);
-    
+
     toast.innerHTML = `
         <div class="toast-content">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -696,12 +686,12 @@ window.mostrarToast = (mensaje) => {
             renderizarCarritoEnModal();
             abrirModal();
         }
-        toast.remove(); // Se cierra al clickear
+        toast.remove();
     });
 
     container.appendChild(toast);
 
-    // Se elimina automáticamente tras 3.5 segundos (un poco más para que de tiempo a leer y clickear)
+    // Se elimina automáticamente tras 3.5 segundos
     setTimeout(() => {
         if (toast.parentNode) {
             toast.remove();
@@ -712,13 +702,13 @@ window.mostrarToast = (mensaje) => {
 // --- VALIDACIÓN DE ENTRADA PROACTIVA ---
 
 window.setupInputValidation = () => {
-    // Excluir inputs con formateadores propios (cardNumber y expiry los maneja checkout.js)
+    // Excluir inputs con formateadores propios
     const inputs = document.querySelectorAll('input[data-valid]:not([data-valid="cardNumber"]):not([data-valid="expiry"])');
-    
+
     inputs.forEach(input => {
-        const type = input.dataset.valid; // "letters" o "numbers"
+        const type = input.dataset.valid;
         const parent = input.closest('.form-group') || input.parentElement;
-        
+
         // Crear el mensaje de error si no existe
         let hint = parent.querySelector('.input-error-hint');
         if (!hint) {
@@ -752,7 +742,7 @@ window.setupInputValidation = () => {
             } else {
                 regex = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g;
             }
-            
+
             if (regex.test(val)) {
                 e.target.value = val.replace(regex, '');
                 hint.classList.add('visible');
@@ -775,7 +765,7 @@ window.setupInputValidation = () => {
             } else {
                 regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
             }
-            
+
             if (val !== '' && regex.test(val)) {
                 input.classList.remove('is-invalid');
             }
@@ -783,9 +773,7 @@ window.setupInputValidation = () => {
     });
 };
 
-/**
- * Validación proactiva de Emails al perder el foco (blur)
- */
+/* Validación proactiva de Emails al perder el foco */
 window.setupEmailValidation = () => {
     const emailInputs = document.querySelectorAll('input[type="email"]');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -793,7 +781,7 @@ window.setupEmailValidation = () => {
     emailInputs.forEach(input => {
         input.addEventListener('blur', () => {
             const val = input.value.trim();
-            if (val === '') return; // El 'required' nativo lo maneja el submit
+            if (val === '') return;
 
             if (!emailRegex.test(val)) {
                 input.classList.add('is-invalid');
@@ -812,7 +800,7 @@ window.setupEmailValidation = () => {
 };
 // --- MEJORAS DE ACCESIBILIDAD ---
 function inicializarAccesibilidad() {
-    // 1. Sync aria-expanded para el menú de Productos (Dropdown)
+    // 1. Sync aria-expanded para el menú de Productos
     const productosLink = document.getElementById('productos-link');
     const dropdownLi = productosLink ? productosLink.parentElement : null;
 
@@ -836,7 +824,7 @@ function inicializarAccesibilidad() {
         });
     }
 
-    // 2. Sync aria-expanded para el Menú Mobile (Hamburguesa)
+    // 2. Sync aria-expanded para el Menú Mobile
     const navToggle = document.getElementById('nav-toggle');
     if (navToggle) {
         navToggle.addEventListener('change', () => {
@@ -847,14 +835,11 @@ function inicializarAccesibilidad() {
 
 // --- UTILIDADES DE ACCESIBILIDAD ---
 
-/**
- * Anuncia cambios a lectores de pantalla (Live Regions)
- */
+/* Anuncia cambios a lectores de pantalla */
 window.anunciarParaScreenReader = (mensaje) => {
     const statusRegion = document.getElementById('cart-status');
     if (statusRegion) {
         statusRegion.innerText = mensaje;
-        // Limpiar después de unos segundos para que no se lea repetidamente si se navega
         setTimeout(() => {
             statusRegion.innerText = '';
         }, 3000);

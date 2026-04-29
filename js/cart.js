@@ -1,9 +1,4 @@
-// Lógica del Carrito 3.0 (Versión Clean Code) 🛒✨
-
-/**
- * CONFIGURACIÓN Y CONSTANTES
- */
-// CONFIGURACIÓN Y CONSTANTES (Consumidas desde window.data.js)
+// CONFIGURACIÓN Y CONSTANTES
 const MIN_COMPRA = window.MIN_COMPRA;
 const MIN_ENVIO_GRATIS = window.MIN_ENVIO_GRATIS;
 
@@ -27,12 +22,12 @@ const formatearPrecio = window.formatearPrecio;
 window.guardarCarrito = () => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarContadorCarrito();
-    
+
     // Sincronizar grilla de tienda
     if (typeof window.actualizarCantidadesTienda === 'function') {
         window.actualizarCantidadesTienda();
     }
-    
+
     // Actualizar todas las vistas vinculadas
     [window.renderizarCarritoEnModal, window.renderizarPaginaCarrito, window.actualizarHint].forEach(render => {
         if (typeof render === 'function') render();
@@ -42,7 +37,7 @@ window.guardarCarrito = () => {
 window.agregarAlCarrito = (idProducto, cantidad = 1) => {
     const numCant = parseInt(cantidad);
     const producto = productos.find(p => p.id === idProducto);
-    
+
     if (!producto) return console.error(`ID ${idProducto} no encontrado.`);
 
     const itemEnCarrito = carrito.find(p => p.id === idProducto);
@@ -83,9 +78,7 @@ const actualizarContadorCarrito = () => {
 
 // --- COMPONENTES UI (HTML snippets) ---
 
-/**
- * Genera la barra de progreso para promociones
- */
+/* Genera la barra de progreso para promociones */
 const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false, esAviso = false) => {
     const porcentaje = Math.min((valorActual / meta) * 100, 100);
     const warningClass = (esAviso && !esExito) ? 'is-warning' : '';
@@ -99,9 +92,7 @@ const generarHTMLBarraProgreso = (valorActual, meta, mensaje, esExito = false, e
     `;
 };
 
-/**
- * Genera el ítem de carrito según la vista (Mini o Full)
- */
+/* Genera el ítem de carrito según la vista (Mini o Full) */
 const generarHTMLItem = (prod, esVistaMini = false) => {
     const path = obtenerPathBase();
     const [nombreLimpio, infoExtra = ''] = prod.nombre.split(/\s*-\s*/);
@@ -178,7 +169,7 @@ window.renderizarCarritoEnModal = () => {
     }
 
     carrito.forEach(p => contenedor.insertAdjacentHTML('beforeend', generarHTMLItem(p, true)));
-    
+
     const total = window.calcularTotal();
     precioTotalEl.innerText = total.toLocaleString();
 
@@ -210,7 +201,7 @@ window.renderizarPaginaCarrito = () => {
         if (envioEl) envioEl.innerText = 'A calcular';
         if (promoArea) promoArea.innerHTML = '';
         btnContinuar?.classList.add('btn-disabled');
-        
+
         // Reset de envío
         window.guardarCP('');
         localStorage.removeItem('shippingMethodPreference');
@@ -312,10 +303,10 @@ document.addEventListener('click', (e) => {
 });
 
 window.sumarEnCarrito = (id) => { const item = carrito.find(p => p.id === id); if (item) { item.cantidad++; window.guardarCarrito(); } };
-window.restarEnCarrito = (id) => { 
-    const item = carrito.find(p => p.id === id); 
-    if (item && item.cantidad > 1) { item.cantidad--; window.guardarCarrito(); } 
-    else if (item) window.eliminarDelCarrito(id); 
+window.restarEnCarrito = (id) => {
+    const item = carrito.find(p => p.id === id);
+    if (item && item.cantidad > 1) { item.cantidad--; window.guardarCarrito(); }
+    else if (item) window.eliminarDelCarrito(id);
 };
 
 window.validarYRedirigirCheckout = () => {

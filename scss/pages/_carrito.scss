@@ -2,10 +2,10 @@
 @use "../abstracts/mixins" as *;
 
 .page-carrito {
-    padding-bottom: $space-6; 
+    padding-bottom: $space-6;
 
-    // Contenedor principal del carrito (Dos columnas)
-    > .container {
+    // Contenedor principal del carrito 
+    >.container {
         display: flex;
         gap: $space-6;
         align-items: flex-start;
@@ -25,12 +25,11 @@
     }
 
     .carrito-summary {
-    flex: 1;
-    min-width: 300px;
-    align-self: flex-start;
-    position: sticky;
-    top: 120px;
-    // Quitamos los resets manuales para que .card-elevada funcione correctamente
+        flex: 1;
+        min-width: 300px;
+        align-self: flex-start;
+        position: sticky;
+        top: 120px;
 
         h3 {
             margin-bottom: $space-4;
@@ -91,7 +90,7 @@
                         font-size: 1rem;
                         outline: none;
                         transition: all 0.3s ease;
-                        min-width: 0; // Prevenir desbordamientos por flex-basis
+                        min-width: 0;
 
                         @media (max-width: 1023px) {
                             flex: 1;
@@ -104,7 +103,7 @@
                     }
 
                     button {
-                        flex-shrink: 0; // Evitar que el botón se achique en pantallas pequeñas
+                        flex-shrink: 0;
                     }
                 }
             }
@@ -133,7 +132,7 @@
         }
     }
 
-    /* --- COMPONENTE: Item de Carrito (Active) --- */
+    /* --- COMPONENTE: Item de Carrito --- */
     .cart-page-item {
         display: flex;
         align-items: center;
@@ -145,7 +144,7 @@
         @media (max-width: 1023px) {
             display: grid;
             grid-template-columns: 80px 1fr auto;
-            grid-template-areas: 
+            grid-template-areas:
                 "img info action"
                 "img qty  price";
             gap: $space-2 $space-4;
@@ -164,7 +163,7 @@
 
             @media (max-width: 1023px) {
                 grid-area: img;
-                grid-row: 1 / 3; // Span info and controls row
+                grid-row: 1 / 3;
                 width: 80px;
                 height: 80px;
             }
@@ -172,6 +171,7 @@
 
         .cart-item-info {
             flex: 2;
+
             @media (max-width: 1023px) {
                 grid-area: info;
             }
@@ -187,6 +187,7 @@
                     line-height: 1.2;
                 }
             }
+
             .unit-price {
                 font-size: 0.9rem;
                 color: #777;

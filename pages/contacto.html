@@ -13,7 +13,8 @@
     <!-- Metaetiquetas SEO y Sociales -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Contacto - Revida" />
-    <meta property="og:description" content="¿Tenés dudas o necesitás un presupuesto? Contactanos para asesoramiento personalizado en bolsas ecológicas." />
+    <meta property="og:description"
+        content="¿Tenés dudas o necesitás un presupuesto? Contactanos para asesoramiento personalizado en bolsas ecológicas." />
     <meta property="og:image" content="../assets/img/logo1.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="../assets/img/logo1.webp" />
@@ -28,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 
-    <!-- Datos Estructurados (JSON-LD) -->
+    <!-- Datos Estructurados -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -66,12 +67,16 @@
             <!-- 3. Acciones permanentes en Mobile (Derecha) -->
             <div class="header-actions-mobile d-lg-none">
                 <button id="mobile-search-toggle" class="btn-icon" aria-label="Abrir búsqueda">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
                 </button>
                 <button id="cart-btn-mobile" class="btn-cart" aria-label="Abrir carrito">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-shopping-cart" aria-hidden="true">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -85,7 +90,8 @@
                 <ul class="nav-list">
                     <li><a href="../index.html">Inicio</a></li>
                     <li class="nav-item">
-                        <a href="./productos.html" aria-haspopup="menu" aria-expanded="false" id="productos-link">Productos</a>
+                        <a href="./productos.html" aria-haspopup="menu" aria-expanded="false"
+                            id="productos-link">Productos</a>
                         <ul class="dropdown-menu" aria-labelledby="productos-link">
                             <li><a href="./producto-detalle.html?id=bols-pers-01">Bolsas personalizadas</a></li>
                             <li><a href="./tienda.html?categoria=ecologicas">Bolsas de tela lisas</a></li>
@@ -133,7 +139,8 @@
         <div id="mobile-search-bar" class="mobile-search-bar d-lg-none">
             <div class="container">
                 <form action="./tienda.html" method="get" role="search">
-                    <input type="search" name="search" placeholder="Buscar productos..." aria-label="Buscar en la tienda">
+                    <input type="search" name="search" placeholder="Buscar productos..."
+                        aria-label="Buscar en la tienda">
                     <button type="submit">Buscar</button>
                 </form>
             </div>
@@ -145,7 +152,7 @@
             <div class="container text-center flow">
                 <!-- Breadcrumbs -->
                 <nav aria-label="breadcrumb" class="breadcrumb-nav breadcrumb-white">
-                    <a href="../index.html" class="home-link"><span>Inicio</span></a> 
+                    <a href="../index.html" class="home-link"><span>Inicio</span></a>
                     <span class="separator" aria-hidden="true">/</span>
                     <span class="active" aria-current="page">Contacto</span>
                 </nav>
@@ -187,7 +194,8 @@
                                             <label for="email" class="form-label">Email <span class="text-danger"
                                                     aria-hidden="true">*</span></label>
                                             <input id="email" name="email" type="email" class="form-control"
-                                                placeholder="nombre@correo.com" required autocomplete="email" aria-required="true">
+                                                placeholder="nombre@correo.com" required autocomplete="email"
+                                                aria-required="true">
                                             <div class="invalid-feedback">Ingresá un correo válido.</div>
                                         </div>
 
@@ -195,14 +203,16 @@
                                             <label for="tel" class="form-label">Teléfono <span class="text-danger"
                                                     aria-hidden="true">*</span></label>
                                             <input id="tel" name="telefono" type="tel" class="form-control"
-                                                placeholder="+54 11 0000-0000" required autocomplete="tel" data-valid="numbers" aria-required="true">
+                                                placeholder="+54 11 0000-0000" required autocomplete="tel"
+                                                data-valid="numbers" aria-required="true">
                                         </div>
 
                                         <div class="col-12">
                                             <label for="msg" class="form-label">Mensaje <span class="text-danger"
                                                     aria-hidden="true">*</span></label>
                                             <textarea id="msg" name="mensaje" rows="4" class="form-control"
-                                                placeholder="Contanos en qué podemos ayudarte" required aria-required="true"></textarea>
+                                                placeholder="Contanos en qué podemos ayudarte" required
+                                                aria-required="true"></textarea>
                                             <div class="invalid-feedback">Por favor, escribí un mensaje.</div>
                                         </div>
 
@@ -228,7 +238,9 @@
                                             <label for="nombre" class="form-label">Nombre y apellido <span
                                                     class="text-danger" aria-hidden="true">*</span></label>
                                             <input id="nombre" name="nombre" type="text" class="form-control"
-                                                placeholder="Ej: Ana Gómez" required autocomplete="name" data-valid="letters" aria-required="true" aria-describedby="nombreError">
+                                                placeholder="Ej: Ana Gómez" required autocomplete="name"
+                                                data-valid="letters" aria-required="true"
+                                                aria-describedby="nombreError">
                                             <div class="invalid-feedback" id="nombreError">Ingresá tu nombre.</div>
                                         </div>
 
@@ -322,9 +334,11 @@
                                             <label for="cantidad" class="form-label">Cantidad aproximada <span
                                                     class="text-danger" aria-hidden="true">*</span></label>
                                             <input id="cantidad" name="cantidad" type="number" class="form-control"
-                                                placeholder="Ej: 100" min="50" step="50" required aria-required="true" aria-describedby="cantHelp cantError">
+                                                placeholder="Ej: 100" min="50" step="50" required aria-required="true"
+                                                aria-describedby="cantHelp cantError">
                                             <div id="cantHelp" class="form-text">Mínimo 50 unidades.</div>
-                                            <div id="cantError" class="invalid-feedback">Por favor indicá una cantidad válida (mínimo
+                                            <div id="cantError" class="invalid-feedback">Por favor indicá una cantidad
+                                                válida (mínimo
                                                 50).</div>
                                         </div>
 
@@ -371,9 +385,9 @@
                             </div>
                         </div>
 
-                </div>
+                    </div>
 
-            </div>
+                </div>
         </section>
     </main>
 
@@ -393,8 +407,10 @@
 
             <nav class="footer-social" aria-label="Redes sociales">
                 <h3>Seguinos</h3>
-                <a href="https://www.instagram.com/revida.ok" aria-label="Seguinos en Instagram" rel="noopener noreferrer" target="_blank">Instagram</a> |
-                <a href="https://www.facebook.com/revida.ok" aria-label="Seguinos en Facebook" rel="noopener noreferrer" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/revida.ok" aria-label="Seguinos en Instagram"
+                    rel="noopener noreferrer" target="_blank">Instagram</a> |
+                <a href="https://www.facebook.com/revida.ok" aria-label="Seguinos en Facebook" rel="noopener noreferrer"
+                    target="_blank">Facebook</a>
             </nav>
         </div>
         <p class="copy">© 2026 Revida — Todos los derechos reservados.</p>
@@ -402,7 +418,7 @@
 
 
 
-    <!-- Pantalla de Procesamiento (Glassmorphism) -->
+    <!-- Pantalla de Procesamiento -->
     <div id="processing-overlay" class="processing-overlay" role="alert" aria-busy="true" aria-live="assertive">
         <div class="processing-content">
             <div class="spinner"></div>

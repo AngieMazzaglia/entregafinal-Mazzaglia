@@ -3,7 +3,7 @@
 
 .product-detail-page {
     padding: $space-6 0;
-    background-color: #fdfdfd; 
+    background-color: #fdfdfd;
 }
 
 .product-detail-header {
@@ -27,7 +27,7 @@
     grid-template-columns: 1fr;
     gap: $space-3;
     align-items: start;
-    grid-template-areas: 
+    grid-template-areas:
         "title"
         "image"
         "info";
@@ -35,8 +35,8 @@
     @include respond(md) {
         grid-template-columns: 0.8fr 1.2fr;
         column-gap: 60px;
-        row-gap: $space-4; 
-        grid-template-areas: 
+        row-gap: $space-4;
+        grid-template-areas:
             "image info";
     }
 }
@@ -53,7 +53,7 @@
     color: $c-brand-dark;
     margin: 0;
     line-height: 1.1;
-    
+
     @include respond(md) {
         font-size: 2.2rem;
     }
@@ -69,25 +69,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 200px; 
+    min-height: 200px;
     width: 100%;
-    max-width: 450px; 
+    max-width: 450px;
     border: 1px solid #f0f0f0;
     margin-bottom: $space-2;
 
     @media (max-width: 768px) {
-        max-width: 320px; // Reducido para celular como pidió el usuario
+        max-width: 320px;
         margin-left: auto;
         margin-right: auto;
     }
 
     img {
         max-width: 100%;
-        max-height: 350px; // Limitar altura para que no sea "enorme"
+        max-height: 350px;
         height: auto;
         object-fit: contain;
         transition: transform 0.3s ease;
-        
+
         &:hover {
             transform: scale(1.03);
         }
@@ -102,7 +102,7 @@
     gap: $space-2;
 
     .category-tag {
-        display: none; // Oculto por ahora, se usa el breadcrumb o la pildora de subtitulo
+        display: none;
     }
 
 
@@ -132,7 +132,7 @@
 /* Características */
 .product-features {
     margin: $space-2 0;
-    
+
     h3 {
         font-size: 0.95rem;
         margin-bottom: $space-3;
@@ -171,7 +171,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $space-4; 
+    gap: $space-4;
     margin-top: $space-4;
     padding-top: $space-4;
     border-top: 1px solid #eee;
@@ -181,14 +181,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 32px; 
+        gap: 32px;
         flex-wrap: wrap;
         width: 100%;
     }
 
     .quantity-controls {
-        border-radius: $radius-lg; // Un poco más cuadrado para seguir el estilo de los botones grandes
-        
+        border-radius: $radius-lg;
+
         button {
             width: 40px;
             height: 40px;
@@ -203,14 +203,14 @@
 
     .min-purchase-hint {
         font-size: 0.85rem;
-        color: #666; // Gris por defecto
+        color: #666;
         font-weight: 500;
-        
+
         &.is-warning {
             color: $c-warning;
             font-weight: 600;
         }
-        
+
         &.reached {
             color: $c-brand;
             font-weight: 700;
@@ -233,7 +233,7 @@
             background-color: transparent;
             border: 2px solid $c-brand;
             color: $c-brand;
-            
+
             &:hover {
                 background-color: rgba($c-brand, 0.05);
                 transform: scale(1.02);
@@ -274,12 +274,12 @@
     }
 }
 
-/* LOADING & SPINNER (Centralized Logic) */
+/* LOADING & SPINNER  */
 .loading-state {
     grid-column: 1 / -1;
     text-align: center;
     padding: $space-6;
-    
+
     .spinner {
         width: 40px;
         height: 40px;
@@ -291,4 +291,8 @@
     }
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

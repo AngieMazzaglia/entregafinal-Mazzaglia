@@ -19,9 +19,9 @@
     line-height: 1;
     border: 1px solid transparent;
     cursor: pointer;
-    text-decoration: none; // Eliminado !important (Preferir especificidad)
-    font-family: inherit; // Heredar fuente del body (Outfit)
-    font-size: $font-size-base; // Asegurar tamaño base consistente
+    text-decoration: none;
+    font-family: inherit;
+    font-size: $font-size-base;
 }
 
 @mixin flex-center {
@@ -53,7 +53,7 @@
     }
 }
 
-/* Mixin para Alertas tipo "Píldora" (Venta Mayorista, etc) */
+/* Mixin para Alertas tipo "Píldora"  */
 @mixin alert-pill($variant: "normal") {
     display: inline-flex;
     align-items: center;
@@ -78,13 +78,17 @@
         }
     }
 
-    @if $variant == "lg" {
-        margin-bottom: 0; 
+    @if $variant =="lg" {
+        margin-bottom: 0;
+
         @include respond(md) {
             padding: 14px 36px;
             font-size: 1.1rem;
             gap: 16px;
-            .icon-info { font-size: 1.4rem; }
+
+            .icon-info {
+                font-size: 1.4rem;
+            }
         }
     }
 

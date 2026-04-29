@@ -3,26 +3,24 @@
 @use "../abstracts/mixins" as *;
 
 .page-checkout {
-    /* Fieldset as natural container (Legend sits on top border) */
     fieldset.checkout-step {
-        border: 1px solid $border-color; /* Borde gris base */
+        border: 1px solid $border-color;
         margin: 0 0 $space-5;
-        padding: 0 0 $space-3; /* Agregamos aire en la base para que no quede pegado al estar cerrado */
+        padding: 0 0 $space-3;
         border-radius: $radius;
         transition: all 0.3s ease;
         min-width: 0;
-        /* NOTA: NO usar overflow: hidden o el legend no 'cortará' la línea */
     }
 
-    /* Legend tradicional (Sobre la línea) */
+    /* Legend tradicional */
     legend.step-header {
-        width: auto; /* Ancho automático para que ocupe solo el texto */
-        padding: 0 10px; /* Crea el espacio en la línea */
-        margin-left: 20px; /* Separación desde la izquierda */
+        width: auto;
+        padding: 0 10px;
+        margin-left: 20px;
         font-weight: 700;
         font-size: 1.1rem;
-        background-color: $c-bg; /* Asegura que el fondo sea blanco y tape la línea */
-        color: $c-gray-light; /* Gris para estado inactivo */
+        background-color: $c-bg;
+        color: $c-gray-light;
         display: block;
         float: none;
         border-bottom: none;
@@ -41,12 +39,12 @@
             transition: all 0.3s ease;
 
             /* Aire y flecha personalizada para selectores */
-            &[name="prov"], 
+            &[name="prov"],
             &.form-select,
             select {
                 padding-right: 40px;
                 cursor: pointer;
-                appearance: none; // Quitar flecha nativa
+                appearance: none;
                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
                 background-repeat: no-repeat;
                 background-position: right 15px center;
@@ -91,7 +89,7 @@
 
             .payment-icon {
                 margin-left: 0;
-                margin-right: 4px; /* Espacio con el texto */
+                margin-right: 4px;
                 color: $c-text;
                 opacity: 0.8;
                 display: flex;
@@ -132,18 +130,18 @@
             legend.step-header {
                 color: $c-brand;
                 cursor: pointer;
-                
+
                 &::after {
                     content: " ✓";
                     font-size: 0.9rem;
                 }
             }
         }
-        
+
         &.disabled {
             opacity: 0.6;
             pointer-events: none;
-            
+
             legend.step-header {
                 color: $c-gray-light;
             }
@@ -152,7 +150,7 @@
 
     .step-content {
         padding: $space-5;
-        display: none; 
+        display: none;
     }
 
     /* Píldora de seguridad a la derecha en mobile */
@@ -166,10 +164,10 @@
         padding: 5px 14px;
         background: transparent;
         border: 1px solid $c-brand;
-        border-radius: 50px; // Forma de píldora
+        border-radius: 50px;
         width: fit-content;
         margin-bottom: $space-2;
-        
+
         svg {
             color: $c-brand;
         }
@@ -190,7 +188,7 @@
     }
 }
 
-/* --- Layout de la Página (Grid) --- */
+/* --- Layout de la Página --- */
 .checkout-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -208,25 +206,26 @@
     height: fit-content;
     z-index: 10;
 
-    @media (max-width: 1023px) { order: -1; 
+    @media (max-width: 1023px) {
+        order: -1;
         position: relative;
         top: 0;
-        margin: 0 15px; // Mismo margen que la cápsula
+        margin: 0 15px;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        width: calc(100% - 30px); // Ajuste por márgenes
+        width: calc(100% - 30px);
         background-color: $c-bg-beige;
         border: 1px solid rgba($c-brand, 0.1);
-        border-top: none; // Unir con la cápsula
-        border-radius: 0 0 $radius $radius; // Redondeado solo abajo
+        border-top: none;
+        border-radius: 0 0 $radius $radius;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 
         &.is-expanded {
             max-height: 1500px;
             margin-bottom: $space-5;
             padding-bottom: $space-3;
-            border-bottom: 2px solid $c-brand; // Cierre de marca
+            border-bottom: 2px solid $c-brand;
         }
 
         .checkout-summary-card {
@@ -238,10 +237,10 @@
     }
 }
 
-/* Toggle de Resumen Móvil (Estilo Floating Capsule Unificada) */
+/* Toggle de Resumen Móvil */
 .checkout-mobile-toggle {
     display: none;
-    position: relative; // Cambiado de sticky para no tapar inputs
+    position: relative;
     left: 0;
     right: 0;
     z-index: 100;
@@ -249,15 +248,15 @@
     border: 1px solid rgba($c-brand, 0.1);
     border-bottom: 2px solid $c-brand;
     padding: $space-3 $space-4;
-    margin: 10px 15px 0; // Sin margen inferior para que se pegue al abrir
-    border-radius: $radius; 
+    margin: 10px 15px 0;
+    border-radius: $radius;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 
     &.is-active {
-        border-radius: $radius $radius 0 0; // Se vuelve "recto" abajo para unir
-        border-bottom: 1px dashed rgba($c-brand, 0.2); // Línea de unión sutil
+        border-radius: $radius $radius 0 0;
+        border-bottom: 1px dashed rgba($c-brand, 0.2);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
@@ -282,7 +281,8 @@
         font-weight: 600;
         font-size: 1rem;
 
-        .icon-cart-toggle, .icon-chevron {
+        .icon-cart-toggle,
+        .icon-chevron {
             color: $c-brand;
         }
 
@@ -304,7 +304,8 @@
         }
     }
 
-    @media (max-width: 1023px) { order: -1; 
+    @media (max-width: 1023px) {
+        order: -1;
         display: block;
     }
 }
@@ -331,26 +332,26 @@
     max-height: 400px;
     overflow-y: auto;
 
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: $space-2 0;
-            font-size: 0.95rem;
-            color: $c-text;
-            border-bottom: 1px dashed $border-color;
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $space-2 0;
+        font-size: 0.95rem;
+        color: $c-text;
+        border-bottom: 1px dashed $border-color;
 
-            &.shipping-line {
-                border-top: 1px dashed rgba($c-brand, 0.2);
-                margin-top: $space-3;
-                padding-top: $space-3;
-                font-weight: 600;
-                border-bottom: none;
-            }
+        &.shipping-line {
+            border-top: 1px dashed rgba($c-brand, 0.2);
+            margin-top: $space-3;
+            padding-top: $space-3;
+            font-weight: 600;
+            border-bottom: none;
+        }
 
-            &:last-child {
-                border-bottom: none;
-            }
+        &:last-child {
+            border-bottom: none;
+        }
 
         span:first-child {
             flex: 1;
@@ -376,7 +377,7 @@
     color: $c-brand;
 }
 
-/* --- Página de Compra Exitosa (Clean Architecture) --- */
+/* --- Página de Compra Exitosa  --- */
 .page-confirmation {
     text-align: center;
     padding: $space-9 0;
@@ -397,6 +398,6 @@
 
 .success-icon {
     margin-bottom: $space-5;
-    fill: $c-brand; 
+    fill: $c-brand;
     filter: drop-shadow(0 4px 10px rgba($c-brand, 0.2));
 }

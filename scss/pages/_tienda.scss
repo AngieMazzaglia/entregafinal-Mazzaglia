@@ -3,23 +3,20 @@
 
 .tienda-header {
     text-align: left;
-    /* Alineado a la izquierda */
     padding: $space-6 0 $space-2;
-    /* Sacamos padding lateral porque lo da el container */
+
 
     h1 {
         margin-bottom: $space-2;
         color: $c-brand;
         margin-top: $space-2;
         text-align: center;
-        /* Título centrado */
     }
 
-    /* Subtítulo (el párrafo que no es la alerta) */
+    /* Subtítulo */
     p:not(.min-purchase-alert) {
         text-align: center;
         color: $c-text-muted;
-        /* Un gris suave para el subtítulo queda bien */
     }
 
     /* Navegación de filtros */
@@ -60,7 +57,7 @@
 .tienda-grid {
     padding: $space-5 0;
     display: grid;
-    grid-template-columns: 1fr; // Una columna para permitir diseño horizontal
+    grid-template-columns: 1fr;
     gap: $space-4;
 
     @include respond(md) {
@@ -82,16 +79,16 @@
 /* TARJETA DE PRODUCTO: Refactorizada para Mobile Horizontal */
 .tienda-grid .card {
     display: flex;
-    flex-direction: row; // Horizontal por defecto (Mobile)
+    flex-direction: row;
     align-items: stretch;
     border: 1px solid $border-color;
-    border-radius: $radius; 
+    border-radius: $radius;
     background-color: $c-bg;
     box-shadow: $shadow-subtle;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     position: relative;
-    
+
     &:hover {
         transform: translateY(-3px);
         box-shadow: $shadow-medium;
@@ -99,10 +96,14 @@
 
     /* Variables de escala */
     --base-scale: 1;
-    &.cat-disenos { --base-scale: 1.2; }
+
+    &.cat-disenos {
+        --base-scale: 1.2;
+    }
 
     @include respond(md) {
-        flex-direction: column; // Vertical en Desktop
+        flex-direction: column;
+
         &:hover {
             transform: translateY(-5px);
         }
@@ -136,7 +137,6 @@
         font-size: 0.8rem;
         color: $c-text-muted;
         margin-bottom: $space-2;
-        /* Limitar a 2 líneas en mobile para no estirar la card */
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -145,14 +145,14 @@
         @include respond(md) {
             font-size: 0.825rem;
             margin-bottom: $space-3;
-            display: block; // Sin límite en desktop
+            display: block;
         }
     }
 }
 
 .card-img-container {
-    width: 130px; // Ancho fijo para la imagen en horizontal
-    height: 140px; // Altura fija solicitada (140px)
+    width: 130px;
+    height: 140px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -160,7 +160,7 @@
     background-color: $c-bg;
     overflow: hidden;
     padding: $space-2;
-    border-right: 1px solid rgba(0,0,0,0.05);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
 
     @include respond(md) {
         width: 100%;
@@ -188,7 +188,7 @@
     }
 }
 
-/* Hover Universal: Zoom Proporcional +0.1 */
+/* Hover Universal */
 .card:hover .card-img-container img {
     transform: scale(calc(var(--base-scale) + 0.1));
 }
@@ -197,10 +197,10 @@
     font-size: 1.2rem;
     font-weight: 700;
     color: $c-brand;
-    margin: $space-1 0 0 0; // Solo margen superior
+    margin: $space-1 0 0 0;
 }
 
-/* Subtítulo compacto para tarjetas (Pack x50, etc) */
+/* Subtítulo compacto para tarjetas  */
 .card-subtitle {
     display: block;
     font-size: 0.8rem;
@@ -209,14 +209,13 @@
     margin-bottom: $space-2;
 }
 
-/* COMPRA RÁPIDA: Refined Layout */
+/* COMPRA RÁPIDA */
 .quick-buy-wrapper {
     display: flex;
     justify-content: flex-end;
     margin-bottom: $space-2;
     height: 38px;
     z-index: 5;
-    /* En mobile horizontal lo posicionamos abajo a la derecha */
     position: absolute;
     bottom: $space-3;
     right: $space-3;
@@ -226,7 +225,7 @@
         top: auto;
         right: auto;
     }
-    
+
     .btn-toggle-quick {
         width: 38px;
         height: 38px;
@@ -239,7 +238,7 @@
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        
+
         &:hover {
             background-color: $c-brand-dark;
             transform: scale(1.05);
@@ -247,7 +246,7 @@
 
         &.state-badge {
             font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
     }
 
@@ -275,8 +274,8 @@
             cursor: pointer;
             transition: all 0.2s ease;
 
-            &:hover { 
-                background: rgba($c-brand, 0.1); 
+            &:hover {
+                background: rgba($c-brand, 0.1);
                 color: $c-brand-dark;
             }
         }
@@ -292,8 +291,15 @@
 }
 
 @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(10px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Tarjeta: Controles Finales */
@@ -303,7 +309,7 @@
     width: 100%;
 
     .btn {
-        width: auto; // No ocupar todo el ancho en mobile por pedido
+        width: auto;
         min-width: 135px;
         padding: 8px 16px;
         font-size: 0.85rem;

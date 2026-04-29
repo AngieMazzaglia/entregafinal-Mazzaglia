@@ -1,24 +1,24 @@
 @use "../abstracts/variables" as *;
 
 .cta-compra {
-    padding-block: var(--space-9); // Más aire para que se luzca la imagen
+    padding-block: var(--space-9);
     background: url("../img/bosque_cta_new.webp") center/cover no-repeat;
     position: relative;
     color: $c-bg;
     text-align: center;
 
-    // Overlay oscuro para mejorar lectura
+    // Overlay oscuro 
     &::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.65); 
+        background: rgba(0, 0, 0, 0.65);
         z-index: 1;
     }
 
     .container {
         position: relative;
-        z-index: 2; 
+        z-index: 2;
 
         h2 {
             color: $c-bg;
@@ -33,7 +33,7 @@
     }
 }
 
-/* CTA Box (Versión recuadro blanco para páginas institucionales) */
+/* CTA Box */
 .cta-box {
     background: $c-bg;
     padding: $space-7;

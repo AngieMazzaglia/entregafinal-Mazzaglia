@@ -1,17 +1,20 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-/* ==========================================================================
-   BOTONES (Sistema Unificado)
-   ========================================================================== */
+/* BOTONES */
 
-/* Base de Botones (Bootstrap Compat + Custom) */
-a.btn, .btn, .btn-verde, .btn-outline {
+/* Base de Botones */
+a.btn,
+.btn,
+.btn-verde,
+.btn-outline {
     @include btn-base;
 }
 
-/* Variante: Primario (Verde Verde Verde) */
-a.btn-verde, .btn-verde, .btn-success {
+/* Variante: Primario */
+a.btn-verde,
+.btn-verde,
+.btn-success {
     background-color: $c-brand;
     color: $c-bg;
     border: 1px solid $c-brand;
@@ -24,29 +27,31 @@ a.btn-verde, .btn-verde, .btn-success {
     }
 }
 
-/* Variante: Secundario (Delineado) */
-a.btn-outline, .btn-outline {
+/* Variante: Secundario */
+a.btn-outline,
+.btn-outline {
     background-color: transparent;
     color: $c-brand;
     border: 1px solid $c-brand;
 
     &:hover {
-        background-color: $c-brand-dark; // Fondo verde oscuro en hover (Unificado)
+        background-color: $c-brand-dark;
         border-color: $c-brand-dark;
         color: $c-bg;
         text-decoration: none;
     }
 }
 
-/* Variante: Blanco (Fondo Blanco, Letra Verde) */
-a.btn-blanco, .btn-blanco {
+/* Variante: Blanco */
+a.btn-blanco,
+.btn-blanco {
     background-color: $c-bg;
     color: $c-brand;
     border: 1px solid $c-brand;
 
     &:hover {
-        background-color: $c-brand-dark; // Fondo verde oscuro en hover
-        color: $c-bg;                   // Letra blanca en hover
+        background-color: $c-brand-dark;
+        color: $c-bg;
         border-color: $c-brand-dark;
         text-decoration: none;
     }
@@ -74,9 +79,7 @@ a.btn-blanco, .btn-blanco {
     }
 }
 
-/* ==========================================================================
-   ESTADOS Y COMPORTAMIENTOS
-   ========================================================================== */
+/* ESTADOS Y COMPORTAMIENTOS */
 
 /* Accesibilidad: Focus rings unificados */
 .btn:focus-visible,
@@ -85,15 +88,17 @@ a.btn:focus-visible,
     @include focus-ring($c-brand, 3px, 2px);
 }
 
-/* Botón Ancho Completo (Flex Centered) */
+/* Botón Ancho Completo */
 .btn-block {
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-/* Estados Deshabilitados (Clean & Predictable) */
-.btn-disabled, .btn:disabled, button:disabled {
+/* Estados Deshabilitados  */
+.btn-disabled,
+.btn:disabled,
+button:disabled {
     background-color: #e0e0e0;
     border-color: #e0e0e0;
     color: #777;

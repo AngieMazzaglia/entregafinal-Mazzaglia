@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SASS VARIABLES (Standardized Naming)
+   SASS VARIABLES
    ========================================================================== */
 
 // Colors
@@ -18,7 +18,7 @@ $c-danger: #e74c3c;
 $c-warning: #d35400;
 $c-warning-soft: #fff5e6;
 
-// Spacing (Sincronizado con CSS Variables)
+// Spacing
 $space-1: 4px;
 $space-2: 8px;
 $space-3: 12px;
@@ -32,10 +32,10 @@ $space-9: 80px;
 $radius: 12px;
 $radius-sm: 8px;
 $radius-lg: 10px;
-$border-color: #dddddd; 
+$border-color: #dddddd;
 
 // Layout & Dimensions
-$layout-max-width: 1100px; // Unificado con --maxw
+$layout-max-width: 1100px;
 $header-height: 72px;
 
 // Layering (Z-Index) - Unificado
@@ -51,42 +51,37 @@ $shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
 $glass-bg: rgba(255, 255, 255, 0.7);
 $blur-intensity: 12px;
 
-// Typography (Escala simplificada)
-$font-size-base: 1rem;       // 16px
-$font-size-sm: 0.875rem;     // 14px
-$font-size-xs: 0.75rem;      // 12px
-$font-size-xxs: 0.625rem;    // 10px
+// Typography
+$font-size-base: 1rem; // 16px
+$font-size-sm: 0.875rem; // 14px
+$font-size-xs: 0.75rem; // 12px
+$font-size-xxs: 0.625rem; // 10px
 
 /* ==========================================================================
-   DESIGN TOKENS (CSS Variables - Driven by SASS Variables)
+   DESIGN TOKENS
    ========================================================================== */
 :root {
-    // Colors
-    --c-brand: #{$c-brand};
-    --c-brand-dark: #{$c-brand-dark};
-    --c-brand-soft: #{$c-brand-soft};
-    --c-bg: #{$c-bg};
-    --c-bg-soft: #{$c-bg-soft};
-    --c-bg-footer: #{$c-bg-footer};
-    --c-bg-beige: #{$c-bg-beige};
-    --c-text: #{$c-text};
+   // Colors
+   --c-brand: #{$c-brand};
+   --c-brand-dark: #{$c-brand-dark};
+   --c-brand-soft: #{$c-brand-soft};
+   --c-bg: #{$c-bg};
+   --c-bg-soft: #{$c-bg-soft};
+   --c-bg-footer: #{$c-bg-footer};
+   --c-bg-beige: #{$c-bg-beige};
+   --c-text: #{$c-text};
 
-    // Structure
-    --radius: #{$radius};
-    --maxw: #{$layout-max-width};
+   // Structure
+   --radius: #{$radius};
+   --maxw: #{$layout-max-width};
 
-    // Spacing
-    --space-1: #{$space-1};
-    --space-2: #{$space-2};
-    --space-3: #{$space-3};
-    --space-4: #{$space-4};
-    --space-5: #{$space-5};
-    --space-6: #{$space-6};
-    --space-7: #{$space-7};
-    --space-9: #{$space-9};
+   // Spacing
+   --space-1: #{$space-1};
+   --space-2: #{$space-2};
+   --space-3: #{$space-3};
+   --space-4: #{$space-4};
+   --space-5: #{$space-5};
+   --space-6: #{$space-6};
+   --space-7: #{$space-7};
+   --space-9: #{$space-9};
 }
-
-/* ==========================================================================
-   ENLACE DE VARIABLES (Compatibility Aliases - Removidos tras Refactor)
-   ========================================================================== */
-// Refactor completo. El sitio ahora utiliza exclusivamente la nomenclatura estandarizada ($c-brand, $space-*, etc.)

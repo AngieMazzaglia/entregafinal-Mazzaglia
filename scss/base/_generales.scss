@@ -1,9 +1,7 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-/* ==========================================================================
-   ELEMENTOS BASE & RESETS
-   ========================================================================== */
+/*   ELEMENTOS BASE & RESETS */
 * {
     box-sizing: border-box;
 }
@@ -19,8 +17,8 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Outfit', sans-serif;
-    font-size: $font-size-base; 
-    line-height: 1.6; /* Mejorando la legibilidad de bloques de texto */
+    font-size: $font-size-base;
+    line-height: 1.6;
     color: $c-text;
     background: var(--c-bg);
 }
@@ -29,45 +27,54 @@ main {
     flex: 1;
 }
 
-/* ==========================================================================
-   TIPOGRAFÍA (Headers con Nomenclatura Estándar)
-   ========================================================================== */
-h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+/*    TIPOGRAFÍA  */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
     margin: 0;
 }
 
-h1, .h1 {
+h1,
+.h1 {
     font-size: 2rem;
     line-height: 1.2;
     font-weight: 600;
     color: $c-brand;
 }
 
-h2, .h2 {
+h2,
+.h2 {
     font-size: 1.75rem;
     line-height: 1.3;
     color: $c-brand;
     font-weight: 600;
-    margin-bottom: $space-3; /* Pequeño espacio base inferior */
+    margin-bottom: $space-3;
 }
 
-h3, .h3 {
+h3,
+.h3 {
     font-size: 1.5rem;
     line-height: 1.4;
     color: $c-brand;
     font-weight: 600;
 }
 
-h4, .h4 {
+h4,
+.h4 {
     font-size: 1.1rem;
     line-height: 1.4;
     color: $c-brand;
     font-weight: 600;
 }
 
-/* Override para Hero (Texto blanco sobre fondo oscuro) */
+/* Override para Hero */
 .hero h1 {
-    color: $c-bg; // Usando variable de fondo blanco para el contraste
+    color: $c-bg;
 }
 
 img {
@@ -95,9 +102,7 @@ select:focus-visible {
     @include focus-ring(var(--c-brand));
 }
 
-/* ==========================================================================
-   LAYOUT Y CONTENEDORES (Unificados)
-   ========================================================================== */
+/*    LAYOUT Y CONTENEDORES  */
 .container {
     max-width: var(--maxw);
     margin-inline: auto;
@@ -107,13 +112,13 @@ select:focus-visible {
 
 /* Secciones Genéricas (Bloques) */
 .bloque {
-    padding-top: $space-7; /* Consistente con el sistema de espaciado */
+    padding-top: $space-7;
     padding-bottom: var(--space-7);
     background: $c-bg;
     text-align: center;
 
     &:last-child {
-        padding-bottom: var(--space-9); 
+        padding-bottom: var(--space-9);
     }
 }
 
@@ -122,7 +127,8 @@ select:focus-visible {
 }
 
 /* Grillas Reutilizables */
-.grid-3, .grid-4 {
+.grid-3,
+.grid-4 {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-4);
@@ -156,19 +162,22 @@ select:focus-visible {
     flex-wrap: wrap;
     gap: $space-4;
 
-    > * {
+    >* {
         flex: 1;
         min-width: 300px;
     }
 
     @include respond(lg) {
-        flex-wrap: nowrap; // Solo pasamos a desktop en LG
+        flex-wrap: nowrap;
     }
 
     // Stack en Mobile/Tablet
     @media (max-width: 991px) {
         flex-direction: column;
-        > * { width: 100%; }
+
+        >* {
+            width: 100%;
+        }
     }
 }
 
@@ -177,7 +186,7 @@ select:focus-visible {
     gap: $space-4;
     margin-bottom: $space-4;
 
-    > .form-group {
+    >.form-group {
         flex: 1;
     }
 
@@ -187,10 +196,7 @@ select:focus-visible {
     }
 }
 
-/* ==========================================================================
-   COMPONENTES GENÉRICOS (Cards y Otros)
-   ========================================================================== */
-
+/*    COMPONENTES GENÉRICOS (Cards y Otros) */
 
 /* Stretched Link: Contenedor Clickable */
 .stretched-link::after {
@@ -219,6 +225,7 @@ select:focus-visible {
 /* Skip link (Accesibilidad) */
 .skip-link {
     @include sr-only;
+
     &:focus {
         position: fixed;
         left: 8px;
@@ -231,14 +238,12 @@ select:focus-visible {
     }
 }
 
-/* --- Corrección para Autocompletado (Evitar fondo azul) --- */
+/* --- Corrección para Autocompletado --- */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
     -webkit-text-fill-color: var(--c-text) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
-
-

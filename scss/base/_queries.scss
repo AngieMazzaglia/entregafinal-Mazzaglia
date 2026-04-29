@@ -2,18 +2,30 @@
 @use "../abstracts/maps" as *;
 @use "../abstracts/mixins" as *;
 
-/* ==========================================================================
-   SISTEMA DE RESPONSIVIDAD (Media Queries Centralizadas)
-   ========================================================================== */
+/*    SISTEMA DE RESPONSIVIDAD  */
 
 /* Móviles Pequeños (Hasta XS: 360px) */
 @media (max-width: map-get($breakpoints, xs)) {
-    .container { padding-inline: 12px; }
-    .logo { height: 36px; }
-    .nav-list { gap: 10px; font-size: 14px; }
-    .hero { padding: 40px 12px; }
-    
-    a.btn, .btn, .btn-verde {
+    .container {
+        padding-inline: 12px;
+    }
+
+    .logo {
+        height: 36px;
+    }
+
+    .nav-list {
+        gap: 10px;
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 40px 12px;
+    }
+
+    a.btn,
+    .btn,
+    .btn-verde {
         padding: 10px 14px;
         font-size: .95rem;
     }
@@ -22,18 +34,18 @@
 /* Comportamiento del Menú (Mobile-First de-facto) */
 /* Todo lo que sea MENOR que LG (1024px) usa el menú hamburguesa */
 @media (max-width: calc(#{map-get($breakpoints, lg)} - 1px)) {
-    .header-inner { 
-        flex-wrap: wrap; 
-        position: relative; 
+    .header-inner {
+        flex-wrap: wrap;
+        position: relative;
         justify-content: space-between;
-        padding-block: 8px; 
-        min-height: 58px; // Evita que el logo absoluto colisione con el borde inferior
+        padding-block: 8px;
+        min-height: 58px;
     }
 
     .logo-link {
         position: absolute;
         left: 50%;
-        top: 28px; 
+        top: 28px;
         transform: translate(-50%, -50%);
         z-index: 10;
         margin-top: 0;
@@ -56,23 +68,22 @@
         background: $c-bg;
         border-top: 1px solid #eee;
         transition: max-height .5s ease;
-        margin-top: 0; // Removido el margen excesivo
+        margin-top: 0;
 
-        // Ocultamos el buscador y carrito originales dentro del menú desplegable en mobile
         .search-form,
         .nav-actions {
             display: none !important;
         }
     }
 
-  /* MOBILE SEARCH BAR (Dropdown que empuja contenido) */
-.mobile-search-bar {
-    display: none; // Oculto por defecto
-    width: 100%;
-    margin-top: 0; // Aseguramos que esté pegado
+    /* MOBILE SEARCH BAR */
+    .mobile-search-bar {
+        display: none;
+        width: 100%;
+        margin-top: 0;
     }
 
-    .nav-toggle:checked ~ .site-nav {
+    .nav-toggle:checked~.site-nav {
         max-height: 500px;
         animation: slideDown .3s ease-out;
     }
@@ -89,21 +100,23 @@
         padding: 20px 0;
     }
 
-    .nav-toggle-btn { display: inline-flex; }
-    
+    .nav-toggle-btn {
+        display: inline-flex;
+    }
+
     .nav-toggle-btn::before {
         content: "≡";
         transition: transform .3s ease;
     }
 
-    .nav-toggle:checked + .nav-toggle-btn::before {
+    .nav-toggle:checked+.nav-toggle-btn::before {
         content: "✕";
         transform: rotate(180deg);
     }
 }
 
 /* ==========================================================================
-   BREAKPOINTS ESTANDARIZADOS (respond mixin)
+   BREAKPOINTS ESTANDARIZADOS
    ========================================================================== */
 
 /* ≥ SM (480px) */
@@ -115,9 +128,12 @@
 
 /* ≥ MD (768px) */
 @include respond(md) {
-    .grid-3, .cards {
+
+    .grid-3,
+    .cards {
         grid-template-columns: repeat(3, 1fr);
     }
+
     .grid-4 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -130,7 +146,9 @@
         gap: $space-5;
     }
 
-    .nav-toggle-btn { display: none; }
+    .nav-toggle-btn {
+        display: none;
+    }
 
     .site-nav {
         display: flex;
@@ -153,5 +171,7 @@
 
 /* ≥ XL (1200px) */
 @include respond(xl) {
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }

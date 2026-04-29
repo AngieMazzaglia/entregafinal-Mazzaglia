@@ -1,18 +1,18 @@
 @use "../abstracts/variables" as *;
-@use "../abstracts/maps" as *; // Ensure all maps/variables are available
+@use "../abstracts/maps" as *;
 
 .bg-bosque-contacto {
     background: url("../img/bosque_contact_new.webp") center/cover no-repeat;
     position: relative;
-    padding-top: $space-7; // Igualamos al estándar de .bloque
-    padding-bottom: var(--space-9); // Mantenemos el aire inferior para el formulario
+    padding-top: $space-7;
+    padding-bottom: var(--space-9);
 
     // Overlay oscuro
     &::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.6); // Oscurecer al 60%
+        background: rgba(0, 0, 0, 0.6);
         z-index: 1;
     }
 
@@ -20,14 +20,14 @@
         position: relative;
         z-index: 2;
 
-        // Título principal h1 - selector más específico
+        // Título principal h1 
         h1 {
             color: $c-bg;
             margin-bottom: $space-5;
         }
     }
 
-    // Textos de intro de cada columna ("Solicitá tu presupuesto", etc)
+    // Textos de intro de cada columna
     .contact-text {
         color: $c-bg;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -39,10 +39,10 @@
         }
     }
 
-    // ESTILOS DE TABS (Nav Pills Override)
+    // ESTILOS DE TABS 
     .nav-pills {
         .nav-link {
-            color: $c-brand-dark; // Color texto inactivo
+            color: $c-brand-dark;
             font-weight: 600;
             background-color: transparent;
             transition: all .3s ease;
@@ -53,7 +53,7 @@
 
             // Selector más específico para estado activo
             &.active {
-                background-color: $c-brand; // Fondo verde activo
+                background-color: $c-brand;
                 color: $c-bg;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
@@ -64,15 +64,13 @@
     .contact-form-container {
         border-radius: $radius;
         color: $c-text;
-        /* Restaurar color de texto oscuro */
+
 
         .contact-intro-text {
-            padding-bottom: $space-2; // Aire sutil debajo del texto, antes del formulario
+            padding-bottom: $space-2;
 
-            // Ajustar el texto descriptivo dentro del formulario (que ahora está sobre fondo blanco)
-            // Selectores más específicos para sobrescribir estilos globales
             h2 {
-                color: $c-brand; // Volver a verde porque ahora está sobre fondo blanco
+                color: $c-brand;
                 text-shadow: none;
                 font-size: 1.5rem;
                 margin-bottom: 0.5rem;

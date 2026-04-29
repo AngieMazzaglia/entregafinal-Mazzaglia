@@ -1,24 +1,13 @@
-// Lógica del Checkout 3.0 (Versión Clean Code) 🛒✨
-
-/**
- * CONFIGURACIÓN Y VALIDACIONES
- * Centralizamos las reglas para facilitar el mantenimiento.
- */
+/* CONFIGURACIÓN Y VALIDACIONES */
 const REGLAS_VALIDACION = {
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     numbers: /^[0-9\s+-]+$/,
     expiry: /^(0[1-9]|1[0-2])\/[0-9]{2}$/,
     letters: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
-    cardNumber: /^[0-9]{16}$/   // se valida contra dígitos sin espacios
+    cardNumber: /^[0-9]{16}$/
 };
 
-/**
- * Crea (o recupera si ya existe) el elemento de hint de error
- * para un campo determinado, siguiendo el patrón del validador global.
- * @param {HTMLElement|null} input - El input de referencia
- * @param {string} texto - Mensaje a mostrar al usuario
- * @returns {HTMLElement|null}
- */
+/* Crea (o recupera si ya existe) el elemento de hint de error para un campo determinado, siguiendo el patrón del validador global. */
 function crearHintInput(input, texto) {
     const parent = input?.closest('.form-group');
     if (!parent) return null;
@@ -33,10 +22,8 @@ function crearHintInput(input, texto) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar vista
     renderizarResumenCheckout();
-    
-    // Configurar cada sección del checkout
+
     setupPaso1();
     setupPaso2();
     setupPaso3();
@@ -44,26 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSummaryToggleMovil();
 });
 
-/**
- * Lógica para el acordeón del resumen en dispositivos móviles
- */
+/* Lógica para el acordeón del resumen en dispositivos móviles */
 function setupSummaryToggleMovil() {
     const toggle = document.getElementById('summary-toggle');
     const summarySide = document.querySelector('.checkout-summary-side');
-    
+
     if (toggle && summarySide) {
         toggle.addEventListener('click', () => {
             const isExpanded = summarySide.classList.toggle('is-expanded');
             toggle.classList.toggle('is-active');
-            
+
             // Cambiar texto de ayuda según estado
             const textEl = toggle.querySelector('.toggle-text');
             if (textEl) {
                 const chevron = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>';
                 const iconCart = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-cart-toggle"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>';
-                
-                textEl.innerHTML = isExpanded 
-                    ? `${iconCart} Ocultar detalle de pedido ${chevron}` 
+
+                textEl.innerHTML = isExpanded
+                    ? `${iconCart} Ocultar detalle de pedido ${chevron}`
                     : `${iconCart} Ver detalle de pedido ${chevron}`;
             }
         });
@@ -72,9 +57,7 @@ function setupSummaryToggleMovil() {
 
 // --- CONFIGURACIÓN DE PASOS ---
 
-/**
- * Paso 1: Datos Personales
- */
+/* Paso 1: Datos Personales */
 function setupPaso1() {
     const btnNext = document.getElementById('btn-step-1');
     if (!btnNext) return;
@@ -105,9 +88,7 @@ function setupPaso1() {
     });
 }
 
-/**
- * Paso 2: Datos de Envío
- */
+/* Paso 2: Datos de Envío */
 function setupPaso2() {
     const btnNext = document.getElementById('btn-step-2');
     if (!btnNext) return;
@@ -116,7 +97,7 @@ function setupPaso2() {
     const shippingForm = document.getElementById('shipping-address-form');
     const shippingInputs = ['address', 'num', 'zip', 'prov', 'city'];
     const zipInput = document.getElementById('zip');
-    
+
     // Recuperar estado previo
     const savedCP = localStorage.getItem('userCP');
     const shippingPreference = localStorage.getItem('shippingMethodPreference');
@@ -142,7 +123,7 @@ function setupPaso2() {
             const esEnvio = radio.value === 'shipping';
             if (esEnvio) shippingForm.classList.remove('d-none');
             else shippingForm.classList.add('d-none');
-            
+
             localStorage.setItem('shippingMethodPreference', radio.value);
             renderizarResumenCheckout();
             btnNext.disabled = esEnvio ? !verificarInputsCompletos(shippingInputs) : false;
@@ -165,9 +146,7 @@ function setupPaso2() {
     btnNext.addEventListener('click', () => irAlPaso(2, 3));
 }
 
-/**
- * Paso 3: Medio de Pago
- */
+/* Paso 3: Medio de Pago */
 function setupPaso3() {
     const btnFinalizar = document.getElementById('btn-step-3');
     if (!btnFinalizar) return;
@@ -183,7 +162,7 @@ function setupPaso3() {
             const esTarjeta = radio.value === 'card';
             if (esTarjeta) cardFields.classList.remove('d-none');
             else cardFields.classList.add('d-none');
-            
+
             btnFinalizar.disabled = esTarjeta ? !verificarInputsCompletos(cardInputs) : false;
         });
     });
@@ -194,7 +173,7 @@ function setupPaso3() {
 
     // Crear hints para campos con formateadores propios (excluidos del validador global)
     const cardNumberHint = crearHintInput(cardNumberInput, 'Solo se permiten números');
-    const expiryHint     = crearHintInput(expiryInput,     'Solo se permiten números');
+    const expiryHint = crearHintInput(expiryInput, 'Solo se permiten números');
 
     cardNumberInput?.addEventListener('input', () => {
         // Detectar caracteres inválidos ANTES de que el formateador los elimine
@@ -204,7 +183,7 @@ function setupPaso3() {
         if (cardNumberHint) {
             hadInvalidChars ? cardNumberHint.classList.add('visible') : cardNumberHint.classList.remove('visible');
         }
-        
+
         // Solo quitar el rojo si el numero llega a ser válido (16 dígitos sin espacios)
         const pureDigits = cardNumberInput.value.replace(/\s/g, '');
         if (pureDigits.length === 16) {
@@ -221,14 +200,14 @@ function setupPaso3() {
     });
 
     expiryInput?.addEventListener('input', (e) => {
-        // Detectar letras ANTES de que el formateador las elimine
+        // Detectar letras antes de que el formateador las elimine
         const hadLetters = /[a-zA-Z]/.test(expiryInput.value);
         formatearVencimiento(expiryInput, e);
         btnFinalizar.disabled = !verificarInputsCompletos(cardInputs);
         if (expiryHint) {
             hadLetters ? expiryHint.classList.add('visible') : expiryHint.classList.remove('visible');
         }
-        // Solo marcar rojo cuando el campo está completo (MM/AA = 5 chars)
+        // Solo marcar rojo cuando el campo está completo 
         if (expiryInput.value.length === 5) {
             validarInputs(['expiry']);
         } else {
@@ -254,40 +233,35 @@ function setupPaso3() {
 
 // --- UTILIDADES CORE ---
 
-/**
- * Verifica si una lista de inputs tiene valores válidos
- */
+/* Verifica si una lista de inputs tiene valores válidos */
 function verificarInputsCompletos(ids) {
     return ids.every(id => {
         const input = document.getElementById(id);
         if (!input || input.value.trim() === '') return false;
-        
+
         const tipoValidacion = input.type === 'email' ? 'email' : input.dataset.valid;
         return tipoValidacion ? validarFormato(input.value, tipoValidacion) : true;
     });
 }
 
-/**
- * Valida un valor contra una regla específica.
- * Para cardNumber, se eliminan los espacios antes de validar.
- */
+/* Valida un valor contra una regla específica. */
 function validarFormato(valor, tipo) {
     const regex = REGLAS_VALIDACION[tipo];
     if (!regex) return true;
     const valorAValidar = tipo === 'cardNumber' ? valor.replace(/\s/g, '') : valor;
-    
+
     const esFormatoValido = regex.test(valorAValidar);
     if (!esFormatoValido) return false;
 
-    // Validación extra para fecha de vencimiento (no estar en el pasado)
+    // Validación extra para fecha de vencimiento
     if (tipo === 'expiry') {
         const [mStr, yStr] = valorAValidar.split('/');
         const mes = parseInt(mStr, 10);
-        const anio = parseInt('20' + yStr, 10); // Asumimos siglo 21
-        
+        const anio = parseInt('20' + yStr, 10);
+
         const hoy = new Date();
         const anioActual = hoy.getFullYear();
-        const mesActual = hoy.getMonth() + 1; // 1-12
+        const mesActual = hoy.getMonth() + 1;
 
         if (anio < anioActual) return false;
         if (anio === anioActual && mes < mesActual) return false;
@@ -298,22 +272,14 @@ function validarFormato(valor, tipo) {
 
 // --- FORMATEADORES DE TARJETA ---
 
-/**
- * Formatea el número de tarjeta con un espacio cada 4 dígitos.
- * Permite solo dígitos, máximo 16.
- */
 function formatearNumeroTarjeta(input) {
     const soloDigitos = input.value.replace(/\D/g, '').slice(0, 16);
     input.value = soloDigitos.replace(/(\d{4})(?=\d)/g, '$1 ');
 }
 
-/**
- * Inserta automáticamente el '/' tras los primeros 2 dígitos del vencimiento.
- * Es inteligente: agrega la barra al escribir, pero permite borrarla.
- */
 function formatearVencimiento(input, event) {
     let val = input.value.replace(/\D/g, '');
-    
+
     // Si el usuario está borrando y termina en 2 dígitos, no forzamos la barra
     if (event && event.inputType === 'deleteContentBackward') {
         if (val.length === 2 && input.value.length === 2) return;
@@ -326,9 +292,7 @@ function formatearVencimiento(input, event) {
     }
 }
 
-/**
- * Valida visualmente los campos (marcando errores con CSS)
- */
+/* Valida visualmente los campos */
 function validarInputs(ids) {
     let todosValidos = true;
     ids.forEach(id => {
@@ -349,10 +313,7 @@ function validarInputs(ids) {
     return todosValidos;
 }
 
-/**
- * Permite que los encabezados de pasos completados sean clickeables
- * para que el usuario pueda volver atrás y editar.
- */
+/* Permite que los encabezados de pasos completados sean clickeables para que el usuario pueda volver atrás y editar. */
 function setupNavegacionPasos() {
     const headers = document.querySelectorAll('.step-header');
     headers.forEach(header => {
@@ -373,9 +334,7 @@ function setupNavegacionPasos() {
     });
 }
 
-/**
- * Lógica para retroceder a un paso anterior
- */
+/* Lógica para retroceder a un paso anterior */
 function volverAlPaso(actual, anterior) {
     const sectionActual = document.getElementById(`step-${actual}`);
     const sectionAnterior = document.getElementById(`step-${anterior}`);
@@ -384,11 +343,11 @@ function volverAlPaso(actual, anterior) {
         sectionActual.classList.remove('active');
         // No removemos 'completed' si el usuario solo vuelve a mirar, 
         // se removerá si realmente cambia algo o lo volvemos activo
-        
+
         sectionAnterior.classList.remove('completed', 'disabled');
         sectionAnterior.classList.add('active');
         sectionAnterior.setAttribute('aria-expanded', 'true');
-        
+
         sectionAnterior.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
@@ -401,7 +360,7 @@ function irAlPaso(actual, siguiente) {
         sectionActual.classList.remove('active');
         sectionActual.classList.add('completed');
         sectionActual.setAttribute('aria-expanded', 'false');
-        
+
         sectionSiguiente.classList.remove('disabled');
         sectionSiguiente.classList.add('active');
         sectionSiguiente.setAttribute('aria-expanded', 'true');
@@ -453,19 +412,18 @@ function renderizarResumenCheckout() {
 
     // 2. Envío
     const radioEnvio = document.querySelector('input[name="deliveryMethod"]:checked');
-    const metodo = radioEnvio ? radioEnvio.value : null; // null = sin selección aún
-    
+    const metodo = radioEnvio ? radioEnvio.value : null;
+
     // Prioridad: Input > Local Storage
     const zipInput = document.getElementById('zip');
     const cp = zipInput ? zipInput.value.trim() : (localStorage.getItem('userCP') || '');
-    
+
     let costoEnvio = 0;
     let textoEnvio = 'A calcular';
 
     if (metodo === 'pickup') {
         textoEnvio = 'Gratis';
     } else if (metodo === null) {
-        // Sin método seleccionado: mostrar "Gratis" si ya aplica por monto total
         if (subtotal >= window.MIN_ENVIO_GRATIS) {
             textoEnvio = 'Gratis';
         } else {
@@ -498,7 +456,7 @@ function renderizarResumenCheckout() {
     if (mobileTotalEl) {
         mobileTotalEl.innerText = totalFormateado;
     }
-    
+
     const toggle = document.getElementById('mobile-summary-toggle');
     if (toggle) {
         toggle.addEventListener('click', () => {

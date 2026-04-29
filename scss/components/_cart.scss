@@ -166,7 +166,7 @@
 }
 
 
-/* --- Barras de Progreso Universales (Clean Code) --- */
+/* --- Barras de Progreso Universales --- */
 .cart-progress-container {
     margin-top: $space-4;
     margin-bottom: $space-4;
@@ -175,12 +175,12 @@
         display: block;
         font-size: 0.9rem;
         margin-bottom: $space-2;
-        color: $c-brand; // Verde por defecto (Beneficio)
+        color: $c-brand;
         font-weight: 600;
         text-align: center;
 
         &.is-warning {
-            color: $c-warning; // Naranja para advertencias
+            color: $c-warning;
         }
 
         &.reached {
@@ -200,14 +200,14 @@
     }
 
     .progress-fill {
-        background-color: $c-brand; // Verde por defecto
+        background-color: $c-brand;
         height: 100%;
         width: 0%;
         transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         border-radius: 10px;
 
         &.is-warning {
-            background-color: $c-warning; // Naranja para advertencias
+            background-color: $c-warning;
         }
 
         &.reached {
@@ -227,7 +227,7 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease, opacity 0.2s ease;
-    
+
     &:hover {
         transform: scale(1.15);
         opacity: 0.8;
@@ -242,12 +242,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px; 
+    gap: 6px;
     color: $c-warning;
     background: $c-warning-soft;
-    padding: $space-2; 
+    padding: $space-2;
     border-radius: $radius-sm;
-    font-size: 0.85rem; 
+    font-size: 0.85rem;
     font-weight: 600;
     margin-top: $space-4;
     margin-bottom: $space-4;
