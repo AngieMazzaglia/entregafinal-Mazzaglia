@@ -47,6 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('is-scrolled');
         }
     });
+
+    // 9. Animaciones al hacer scroll (Fade in)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Opcional: dejar de observar una vez que aparece
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Seleccionamos elementos que queremos animar (bloques, tarjetas, marcas)
+    const elementosAnimables = document.querySelectorAll('.bloque, .card, .franja-marcas, .features .feature, .cta-box');
+    elementosAnimables.forEach(el => {
+        // Ignoramos el hero y los cart-modal-content porque tienen sus propias animaciones
+        if (!el.closest('.hero') && !el.closest('.cart-modal')) {
+            el.classList.add('fade-in-on-scroll');
+            observer.observe(el);
+        }
+    });
 });
 
 function inyectarModalCarrito() {

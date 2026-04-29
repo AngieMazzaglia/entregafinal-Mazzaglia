@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /* ==========================================================================
-   SASS VARIABLES (Standardized Naming)
+   SASS VARIABLES
    ========================================================================== */
 /* ==========================================================================
-   DESIGN TOKENS (CSS Variables - Driven by SASS Variables)
+   DESIGN TOKENS
    ========================================================================== */
 :root {
   --c-brand: #19753A;
@@ -26,12 +26,9 @@
   --space-9: 80px;
 }
 
-/* ==========================================================================
-   ENLACE DE VARIABLES (Compatibility Aliases - Removidos tras Refactor)
-   ========================================================================== */
-/* MAPA DE BREAKPOINTS (Optimizado) */
+/* MAPA DE BREAKPOINTS */
 /* MIXINS */
-/* Mixin para Alertas tipo "Píldora" (Venta Mayorista, etc) */
+/* Mixin para Alertas tipo "Píldora"  */
 /* Placeholder: panel genérico */
 .card {
   background: #ffffff;
@@ -39,9 +36,7 @@
   border-radius: 12px;
 }
 
-/* ==========================================================================
-   ELEMENTOS BASE & RESETS
-   ========================================================================== */
+/*   ELEMENTOS BASE & RESETS */
 * {
   box-sizing: border-box;
 }
@@ -58,7 +53,7 @@ body {
   min-height: 100vh;
   font-family: "Outfit", sans-serif;
   font-size: 1rem;
-  line-height: 1.6; /* Mejorando la legibilidad de bloques de texto */
+  line-height: 1.6;
   color: #2e2e2e;
   background: var(--c-bg);
 }
@@ -67,43 +62,52 @@ main {
   flex: 1;
 }
 
-/* ==========================================================================
-   TIPOGRAFÍA (Headers con Nomenclatura Estándar)
-   ========================================================================== */
-h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+/*    TIPOGRAFÍA  */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
   margin: 0;
 }
 
-h1, .h1 {
+h1,
+.h1 {
   font-size: 2rem;
   line-height: 1.2;
   font-weight: 600;
   color: #19753A;
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: 1.75rem;
   line-height: 1.3;
   color: #19753A;
   font-weight: 600;
-  margin-bottom: 12px; /* Pequeño espacio base inferior */
+  margin-bottom: 12px;
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: 1.5rem;
   line-height: 1.4;
   color: #19753A;
   font-weight: 600;
 }
 
-h4, .h4 {
+h4,
+.h4 {
   font-size: 1.1rem;
   line-height: 1.4;
   color: #19753A;
   font-weight: 600;
 }
 
-/* Override para Hero (Texto blanco sobre fondo oscuro) */
+/* Override para Hero */
 .hero h1 {
   color: #ffffff;
 }
@@ -133,9 +137,7 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-/* ==========================================================================
-   LAYOUT Y CONTENEDORES (Unificados)
-   ========================================================================== */
+/*    LAYOUT Y CONTENEDORES  */
 .container {
   max-width: var(--maxw);
   margin-inline: auto;
@@ -145,7 +147,7 @@ select:focus-visible {
 
 /* Secciones Genéricas (Bloques) */
 .bloque {
-  padding-top: 48px; /* Consistente con el sistema de espaciado */
+  padding-top: 48px;
   padding-bottom: var(--space-7);
   background: #ffffff;
   text-align: center;
@@ -159,7 +161,8 @@ select:focus-visible {
 }
 
 /* Grillas Reutilizables */
-.grid-3, .grid-4 {
+.grid-3,
+.grid-4 {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
@@ -223,9 +226,7 @@ select:focus-visible {
   }
 }
 
-/* ==========================================================================
-   COMPONENTES GENÉRICOS (Cards y Otros)
-   ========================================================================== */
+/*    COMPONENTES GENÉRICOS (Cards y Otros) */
 /* Stretched Link: Contenedor Clickable */
 .stretched-link::after {
   position: absolute;
@@ -272,7 +273,7 @@ select:focus-visible {
   clip: auto;
 }
 
-/* --- Corrección para Autocompletado (Evitar fondo azul) --- */
+/* --- Corrección para Autocompletado --- */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -365,6 +366,18 @@ input:-webkit-autofill:active {
     transform: translateY(0);
   }
 }
+/* Clase para elementos que aparecen con scroll */
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fade-in-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Respeto por preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -620,6 +633,13 @@ input:-webkit-autofill:active {
 .site-header {
   background: #ffffff;
   border-bottom: 1px solid #dddddd;
+  transition: all 0.3s ease;
+}
+.site-header.is-scrolled {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .header-inner {
@@ -716,7 +736,6 @@ nav a[aria-current=page] {
   text-decoration: none;
   -webkit-appearance: none;
   appearance: none;
-  /* Reset para móviles */
   color: var(--c-brand);
 }
 .btn-cart:hover {
@@ -726,7 +745,7 @@ nav a[aria-current=page] {
   transition: transform 0.2s ease;
 }
 .btn-cart {
-  /* Mantener focus visible para accesibilidad pero personalizado si se desea */
+  /* Mantener focus visible para accesibilidad */
 }
 .btn-cart:focus-visible {
   outline: 2px solid var(--c-brand);
@@ -789,7 +808,7 @@ nav a[aria-current=page] {
   height: 22px;
 }
 
-/* Dropdown Menu (Desktop Hover Only) */
+/* Dropdown Menu */
 .nav-list li {
   position: relative;
 }
@@ -842,24 +861,19 @@ nav a[aria-current=page] {
 }
 
 /* SEARCH BAR */
-/* SEARCH BAR */
 .search-form {
   display: flex;
   align-items: center;
   background: #fff;
-  /* Fondo blanco */
   border-radius: 99px;
   padding: 0 0 0 8px;
-  /* Ajuste padding */
   border: 1px solid var(--c-brand);
-  /* Borde fino color principal */
   transition: all 0.3s ease;
   margin-block: 10px;
 }
 .search-form:focus-within {
   background: #fff;
   border-color: var(--c-brand-dark);
-  /* Borde más oscuro al foco */
   box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
 }
 .search-form input[type=search] {
@@ -877,7 +891,6 @@ nav a[aria-current=page] {
 }
 .search-form input[type=search]::placeholder {
   color: #666;
-  /* Oscurecido para mejor contraste */
 }
 .search-form button {
   background: transparent;
@@ -902,11 +915,10 @@ nav a[aria-current=page] {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Centrado en mobile */
   gap: 8px;
 }
 
-/* Ajustes Desktop para Search y Actions se hacen en _queries.scss o via media query aqui */
+/* Ajustes Desktop para Search y Actions */
 @media (min-width: 1024px) {
   .search-form {
     margin-block: 0;
@@ -916,7 +928,7 @@ nav a[aria-current=page] {
     width: 180px;
   }
 }
-/* MOBILE SEARCH BAR (Dropdown que empuja contenido) */
+/* MOBILE SEARCH BAR */
 .mobile-search-bar {
   display: none;
   width: 100%;
@@ -1008,11 +1020,12 @@ footer .copy {
   text-align: center;
 }
 
-/* ==========================================================================
-   BOTONES (Sistema Unificado)
-   ========================================================================== */
-/* Base de Botones (Bootstrap Compat + Custom) */
-a.btn, .btn, .btn-verde, .btn-outline {
+/* BOTONES */
+/* Base de Botones */
+a.btn,
+.btn,
+.btn-verde,
+.btn-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1028,39 +1041,47 @@ a.btn, .btn, .btn-verde, .btn-outline {
   font-size: 1rem;
 }
 
-/* Variante: Primario (Verde Verde Verde) */
-a.btn-verde, .btn-verde, .btn-success {
+/* Variante: Primario */
+a.btn-verde,
+.btn-verde,
+.btn-success {
   background-color: #19753A;
   color: #ffffff;
   border: 1px solid #19753A;
 }
-a.btn-verde:hover, .btn-verde:hover, .btn-success:hover {
+a.btn-verde:hover,
+.btn-verde:hover,
+.btn-success:hover {
   background-color: #1b5e20;
   border-color: #1b5e20;
   color: #ffffff;
   text-decoration: none;
 }
 
-/* Variante: Secundario (Delineado) */
-a.btn-outline, .btn-outline {
+/* Variante: Secundario */
+a.btn-outline,
+.btn-outline {
   background-color: transparent;
   color: #19753A;
   border: 1px solid #19753A;
 }
-a.btn-outline:hover, .btn-outline:hover {
+a.btn-outline:hover,
+.btn-outline:hover {
   background-color: #1b5e20;
   border-color: #1b5e20;
   color: #ffffff;
   text-decoration: none;
 }
 
-/* Variante: Blanco (Fondo Blanco, Letra Verde) */
-a.btn-blanco, .btn-blanco {
+/* Variante: Blanco */
+a.btn-blanco,
+.btn-blanco {
   background-color: #ffffff;
   color: #19753A;
   border: 1px solid #19753A;
 }
-a.btn-blanco:hover, .btn-blanco:hover {
+a.btn-blanco:hover,
+.btn-blanco:hover {
   background-color: #1b5e20;
   color: #ffffff;
   border-color: #1b5e20;
@@ -1088,9 +1109,7 @@ a.btn-blanco:hover, .btn-blanco:hover {
   outline-offset: 2px;
 }
 
-/* ==========================================================================
-   ESTADOS Y COMPORTAMIENTOS
-   ========================================================================== */
+/* ESTADOS Y COMPORTAMIENTOS */
 /* Accesibilidad: Focus rings unificados */
 .btn:focus-visible,
 a.btn:focus-visible,
@@ -1099,15 +1118,17 @@ a.btn:focus-visible,
   outline-offset: 2px;
 }
 
-/* Botón Ancho Completo (Flex Centered) */
+/* Botón Ancho Completo */
 .btn-block {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-/* Estados Deshabilitados (Clean & Predictable) */
-.btn-disabled, .btn:disabled, button:disabled {
+/* Estados Deshabilitados  */
+.btn-disabled,
+.btn:disabled,
+button:disabled {
   background-color: #e0e0e0;
   border-color: #e0e0e0;
   color: #777;
@@ -1118,7 +1139,7 @@ a.btn:focus-visible,
 }
 
 /* ==========================================================================
-   UI ELEMENTS (Shared Components)
+   UI ELEMENTS
    ========================================================================== */
 /* Breadcrumbs Globales */
 .breadcrumb,
@@ -1157,7 +1178,8 @@ a.btn:focus-visible,
   color: #ccc;
   font-size: 0.8rem;
 }
-.breadcrumb .current, .breadcrumb .active,
+.breadcrumb .current,
+.breadcrumb .active,
 .breadcrumb-nav .current,
 .breadcrumb-nav .active {
   font-weight: 600;
@@ -1168,7 +1190,8 @@ a.btn:focus-visible,
   /* Ocultar el último paso SOLO en el detalle de producto profundo */
 }
 @media (max-width: 768px) {
-  .breadcrumb.hide-last-on-mobile .current, .breadcrumb.hide-last-on-mobile .active,
+  .breadcrumb.hide-last-on-mobile .current,
+  .breadcrumb.hide-last-on-mobile .active,
   .breadcrumb.hide-last-on-mobile .separator:last-of-type,
   .breadcrumb-nav.hide-last-on-mobile .current,
   .breadcrumb-nav.hide-last-on-mobile .active,
@@ -1178,7 +1201,7 @@ a.btn:focus-visible,
 }
 .breadcrumb,
 .breadcrumb-nav {
-  /* Home Link Icon Logic */
+  /* Home Link  */
 }
 .breadcrumb .home-link,
 .breadcrumb-nav .home-link {
@@ -1237,7 +1260,8 @@ a.btn:focus-visible,
 .breadcrumb-nav.breadcrumb-white .separator {
   color: rgba(255, 255, 255, 0.6);
 }
-.breadcrumb.breadcrumb-white .current, .breadcrumb.breadcrumb-white .active,
+.breadcrumb.breadcrumb-white .current,
+.breadcrumb.breadcrumb-white .active,
 .breadcrumb-nav.breadcrumb-white .current,
 .breadcrumb-nav.breadcrumb-white .active {
   color: #fff;
@@ -1266,7 +1290,7 @@ a.btn:focus-visible,
   animation: fadeIn 0.3s ease;
 }
 
-/* --- OVERLAY: Procesando (Glassmorphism) --- */
+/* --- OVERLAY: Procesando --- */
 .processing-overlay {
   position: fixed;
   top: 0;
@@ -1371,7 +1395,7 @@ a.btn:focus-visible,
 /* ==========================================================================
    LOGIC COMPONENTS
    ========================================================================== */
-/* Controles de Cantidad (Capsule Design) */
+/* Controles de Cantidad */
 .quantity-controls {
   display: inline-flex;
   align-items: center;
@@ -1658,7 +1682,7 @@ a.btn:focus-visible,
   text-align: center;
 }
 
-/* --- Barras de Progreso Universales (Clean Code) --- */
+/* --- Barras de Progreso Universales --- */
 .cart-progress-container {
   margin-top: 16px;
   margin-bottom: 16px;
@@ -1779,7 +1803,7 @@ a.btn:focus-visible,
 .cards {
   display: grid;
   gap: 24px;
-  margin-top: 16px; /* Reducido para equilibrar con el margin del h2 */
+  margin-top: 16px;
   grid-template-columns: 1fr;
 }
 
@@ -1840,7 +1864,7 @@ a.btn:focus-visible,
   width: 100%;
 }
 
-/* Acciones de la Card (Nuevo Sistema Minimalista) */
+/* Acciones de la Card  */
 .card-actions {
   margin-top: auto;
   padding-top: 16px;
@@ -1926,11 +1950,9 @@ a.btn:focus-visible,
   overflow: hidden;
   border-radius: 8px;
   margin-bottom: 8px;
-  /* Maintain original image spacing */
 }
 .img-zoom-wrapper img {
   margin-bottom: 0;
-  /* Remove margin from img as wrapper handles it */
 }
 
 /* Specific zoom for product image */
@@ -2060,7 +2082,7 @@ a.btn:focus-visible,
   transform: scale(1.05);
 }
 
-/* Contacto – Resetear estilos de Bootstrap que pueda afectar */
+/* Contacto  */
 .contact-text h3 {
   font-size: 1rem;
   font-weight: 700;
@@ -2071,8 +2093,7 @@ a.btn:focus-visible,
   margin-bottom: 12px;
 }
 
-/* Contacto */
-/* Contacto – formularios (Clean Architecture)  */
+/* Contacto – formularios  */
 form.needs-validation {
   background: #ffffff;
   border: 1px solid #dddddd;
@@ -2099,7 +2120,7 @@ form.needs-validation {
   box-shadow: 0 0 0 0.25rem rgba(25, 117, 58, 0.15);
 }
 
-/* Acordeón (Sync with Brand) */
+/* Acordeón */
 .accordion-button {
   color: var(--c-brand);
   font-weight: 600;
@@ -2160,7 +2181,6 @@ form.needs-validation {
 .bg-bosque-contacto .contact-form-container {
   border-radius: 12px;
   color: #2e2e2e;
-  /* Restaurar color de texto oscuro */
 }
 .bg-bosque-contacto .contact-form-container .contact-intro-text {
   padding-bottom: 8px;
@@ -2487,7 +2507,7 @@ form.needs-validation {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* CTA Box (Versión recuadro blanco para páginas institucionales) */
+/* CTA Box */
 .cta-box {
   background: #ffffff;
   padding: 48px;
@@ -2512,24 +2532,20 @@ form.needs-validation {
 
 .tienda-header {
   text-align: left;
-  /* Alineado a la izquierda */
   padding: 32px 0 8px;
-  /* Sacamos padding lateral porque lo da el container */
 }
 .tienda-header h1 {
   margin-bottom: 8px;
   color: #19753A;
   margin-top: 8px;
   text-align: center;
-  /* Título centrado */
 }
 .tienda-header {
-  /* Subtítulo (el párrafo que no es la alerta) */
+  /* Subtítulo */
 }
 .tienda-header p:not(.min-purchase-alert) {
   text-align: center;
   color: #666;
-  /* Un gris suave para el subtítulo queda bien */
 }
 .tienda-header {
   /* Navegación de filtros */
@@ -2649,7 +2665,6 @@ form.needs-validation {
   font-size: 0.8rem;
   color: #666;
   margin-bottom: 8px;
-  /* Limitar a 2 líneas en mobile para no estirar la card */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2700,7 +2715,7 @@ form.needs-validation {
   margin-bottom: 0;
 }
 
-/* Hover Universal: Zoom Proporcional +0.1 */
+/* Hover Universal */
 .card:hover .card-img-container img {
   transform: scale(calc(var(--base-scale) + 0.1));
 }
@@ -2712,7 +2727,7 @@ form.needs-validation {
   margin: 4px 0 0 0;
 }
 
-/* Subtítulo compacto para tarjetas (Pack x50, etc) */
+/* Subtítulo compacto para tarjetas  */
 .card-subtitle {
   display: block;
   font-size: 0.8rem;
@@ -2721,14 +2736,13 @@ form.needs-validation {
   margin-bottom: 8px;
 }
 
-/* COMPRA RÁPIDA: Refined Layout */
+/* COMPRA RÁPIDA */
 .quick-buy-wrapper {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 8px;
   height: 38px;
   z-index: 5;
-  /* En mobile horizontal lo posicionamos abajo a la derecha */
   position: absolute;
   bottom: 12px;
   right: 12px;
@@ -2828,29 +2842,25 @@ form.needs-validation {
   }
 }
 
-.page-checkout {
-  /* Fieldset as natural container (Legend sits on top border) */
-}
 .page-checkout fieldset.checkout-step {
-  border: 1px solid #dddddd; /* Borde gris base */
+  border: 1px solid #dddddd;
   margin: 0 0 24px;
-  padding: 0 0 12px; /* Agregamos aire en la base para que no quede pegado al estar cerrado */
+  padding: 0 0 12px;
   border-radius: 12px;
   transition: all 0.3s ease;
   min-width: 0;
-  /* NOTA: NO usar overflow: hidden o el legend no 'cortará' la línea */
 }
 .page-checkout {
-  /* Legend tradicional (Sobre la línea) */
+  /* Legend tradicional */
 }
 .page-checkout legend.step-header {
-  width: auto; /* Ancho automático para que ocupe solo el texto */
-  padding: 0 10px; /* Crea el espacio en la línea */
-  margin-left: 20px; /* Separación desde la izquierda */
+  width: auto;
+  padding: 0 10px;
+  margin-left: 20px;
   font-weight: 700;
   font-size: 1.1rem;
-  background-color: #ffffff; /* Asegura que el fondo sea blanco y tape la línea */
-  color: #ccc; /* Gris para estado inactivo */
+  background-color: #ffffff;
+  color: #ccc;
   display: block;
   float: none;
   border-bottom: none;
@@ -2917,7 +2927,7 @@ form.needs-validation {
 }
 .page-checkout .checkout-form-container .radio-label .payment-icon {
   margin-left: 0;
-  margin-right: 4px; /* Espacio con el texto */
+  margin-right: 4px;
   color: #2e2e2e;
   opacity: 0.8;
   display: flex;
@@ -3001,7 +3011,7 @@ form.needs-validation {
   }
 }
 
-/* --- Layout de la Página (Grid) --- */
+/* --- Layout de la Página --- */
 .checkout-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -3050,7 +3060,7 @@ form.needs-validation {
   }
 }
 
-/* Toggle de Resumen Móvil (Estilo Floating Capsule Unificada) */
+/* Toggle de Resumen Móvil */
 .checkout-mobile-toggle {
   display: none;
   position: relative;
@@ -3091,7 +3101,8 @@ form.needs-validation {
   font-weight: 600;
   font-size: 1rem;
 }
-.checkout-mobile-toggle .toggle-text .icon-cart-toggle, .checkout-mobile-toggle .toggle-text .icon-chevron {
+.checkout-mobile-toggle .toggle-text .icon-cart-toggle,
+.checkout-mobile-toggle .toggle-text .icon-chevron {
   color: #19753A;
 }
 .checkout-mobile-toggle .toggle-text .icon-chevron {
@@ -3174,7 +3185,7 @@ form.needs-validation {
   color: #19753A;
 }
 
-/* --- Página de Compra Exitosa (Clean Architecture) --- */
+/* --- Página de Compra Exitosa  --- */
 .page-confirmation {
   text-align: center;
   padding: 80px 0;
@@ -3318,7 +3329,7 @@ form.needs-validation {
   font-size: 1rem;
 }
 .page-carrito {
-  /* --- COMPONENTE: Item de Carrito (Active) --- */
+  /* --- COMPONENTE: Item de Carrito --- */
 }
 .page-carrito .cart-page-item {
   display: flex;
@@ -3675,7 +3686,7 @@ form.needs-validation {
   transform: translateY(-4px);
 }
 
-/* LOADING & SPINNER (Centralized Logic) */
+/* LOADING & SPINNER  */
 .loading-state {
   grid-column: 1/-1;
   text-align: center;
@@ -3732,9 +3743,7 @@ form.needs-validation {
   flex-wrap: wrap;
 }
 
-/* ==========================================================================
-   SISTEMA DE RESPONSIVIDAD (Media Queries Centralizadas)
-   ========================================================================== */
+/*    SISTEMA DE RESPONSIVIDAD  */
 /* Móviles Pequeños (Hasta XS: 360px) */
 @media (max-width: 360px) {
   .container {
@@ -3750,7 +3759,9 @@ form.needs-validation {
   .hero {
     padding: 40px 12px;
   }
-  a.btn, .btn, .btn-verde {
+  a.btn,
+  .btn,
+  .btn-verde {
     padding: 10px 14px;
     font-size: 0.95rem;
   }
@@ -3794,7 +3805,7 @@ form.needs-validation {
   .site-nav .nav-actions {
     display: none !important;
   }
-  /* MOBILE SEARCH BAR (Dropdown que empuja contenido) */
+  /* MOBILE SEARCH BAR */
   .mobile-search-bar {
     display: none;
     width: 100%;
@@ -3827,7 +3838,7 @@ form.needs-validation {
   }
 }
 /* ==========================================================================
-   BREAKPOINTS ESTANDARIZADOS (respond mixin)
+   BREAKPOINTS ESTANDARIZADOS
    ========================================================================== */
 /* ≥ SM (480px) */
 @media (min-width: 480px) {
@@ -3837,7 +3848,8 @@ form.needs-validation {
 }
 /* ≥ MD (768px) */
 @media (min-width: 768px) {
-  .grid-3, .cards {
+  .grid-3,
+  .cards {
     grid-template-columns: repeat(3, 1fr);
   }
   .grid-4 {
