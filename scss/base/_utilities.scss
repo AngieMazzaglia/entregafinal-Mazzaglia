@@ -1,92 +1,247 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-/* Utilidades de Espaciado (Basadas en variables del sistema) */
+/* Utilidades de Espaciado */
 
 /* Margen Superior */
-.mt-1 { margin-top: $space-1 !important; }
-.mt-2 { margin-top: $space-2 !important; }
-.mt-3 { margin-top: $space-3 !important; }
-.mt-4 { margin-top: $space-4 !important; }
-.mt-5 { margin-top: $space-5 !important; }
-.mt-6 { margin-top: $space-6 !important; }
-.mt-auto { margin-top: auto !important; }
+.mt-1 {
+    margin-top: $space-1 !important;
+}
+
+.mt-2 {
+    margin-top: $space-2 !important;
+}
+
+.mt-3 {
+    margin-top: $space-3 !important;
+}
+
+.mt-4 {
+    margin-top: $space-4 !important;
+}
+
+.mt-5 {
+    margin-top: $space-5 !important;
+}
+
+.mt-6 {
+    margin-top: $space-6 !important;
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
 
 /* Margen Inferior */
-.mb-1 { margin-bottom: $space-1 !important; }
-.mb-2 { margin-bottom: $space-2 !important; }
-.mb-3 { margin-bottom: $space-3 !important; }
-.mb-4 { margin-bottom: $space-4 !important; }
-.mb-5 { margin-bottom: $space-5 !important; }
-.mb-6 { margin-bottom: $space-6 !important; }
+.mb-1 {
+    margin-bottom: $space-1 !important;
+}
+
+.mb-2 {
+    margin-bottom: $space-2 !important;
+}
+
+.mb-3 {
+    margin-bottom: $space-3 !important;
+}
+
+.mb-4 {
+    margin-bottom: $space-4 !important;
+}
+
+.mb-5 {
+    margin-bottom: $space-5 !important;
+}
+
+.mb-6 {
+    margin-bottom: $space-6 !important;
+}
 
 /* Padding General */
-.p-1 { padding: $space-1 !important; }
-.p-2 { padding: $space-2 !important; }
-.p-3 { padding: $space-3 !important; }
-.p-4 { padding: $space-4 !important; }
-.p-5 { padding: $space-5 !important; }
-.p-6 { padding: $space-6 !important; }
+.p-1 {
+    padding: $space-1 !important;
+}
+
+.p-2 {
+    padding: $space-2 !important;
+}
+
+.p-3 {
+    padding: $space-3 !important;
+}
+
+.p-4 {
+    padding: $space-4 !important;
+}
+
+.p-5 {
+    padding: $space-5 !important;
+}
+
+.p-6 {
+    padding: $space-6 !important;
+}
 
 /* Utilidades de Padding específicas */
-.pt-0 { padding-top: 0 !important; }
-.pb-0 { padding-bottom: 0 !important; }
-.pt-small { padding-top: $space-4 !important; }
-.pb-small { padding-bottom: $space-4 !important; }
+.pt-0 {
+    padding-top: 0 !important;
+}
+
+.pb-0 {
+    padding-bottom: 0 !important;
+}
+
+.pt-small {
+    padding-top: $space-4 !important;
+}
+
+.pb-small {
+    padding-bottom: $space-4 !important;
+}
 
 /* Utilidades de Texto */
-.text-center { text-align: center !important; }
-.text-right { text-align: right !important; }
-.text-left { text-align: left !important; }
-.text-muted { color: #888 !important; }
-.text-brand { color: $c-brand !important; }
-.text-brand-dark { color: $c-brand-dark !important; }
-.text-white { color: #fff !important; }
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-muted {
+    color: #888 !important;
+}
+
+.text-brand {
+    color: $c-brand !important;
+}
+
+.text-brand-dark {
+    color: $c-brand-dark !important;
+}
+
+.text-white {
+    color: #fff !important;
+}
 
 /* Utilidades de Tipografía */
-.small { font-size: $font-size-sm !important; }
-.fw-700 { font-weight: 700 !important; }
-.fw-400 { font-weight: 400 !important; }
-.lh-base { line-height: 1.6 !important; }
+.small {
+    font-size: $font-size-sm !important;
+}
+
+.fw-700 {
+    font-weight: 700 !important;
+}
+
+.fw-400 {
+    font-weight: 400 !important;
+}
+
+.lh-base {
+    line-height: 1.6 !important;
+}
 
 /* Utilidades de Fondo */
-.bg-white { background-color: #fff !important; }
-.bg-brand { background-color: $c-brand !important; }
-.bg-brand-dark { background-color: $c-brand-dark !important; }
-.bg-soft { background-color: $c-bg-soft !important; }
-.bg-beige { background-color: $c-bg-beige !important; }
+.bg-white {
+    background-color: #fff !important;
+}
+
+.bg-brand {
+    background-color: $c-brand !important;
+}
+
+.bg-brand-dark {
+    background-color: $c-brand-dark !important;
+}
+
+.bg-soft {
+    background-color: $c-bg-soft !important;
+}
+
+.bg-beige {
+    background-color: $c-bg-beige !important;
+}
 
 /* Utilidades de Flexbox */
-.d-flex { display: flex !important; }
-.flex-column { flex-direction: column !important; }
-.flex-1 { flex: 1 !important; }
-.justify-center { justify-content: center !important; }
-.align-center { align-items: center !important; }
+.d-flex {
+    display: flex !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-1 {
+    flex: 1 !important;
+}
+
+.justify-center {
+    justify-content: center !important;
+}
+
+.align-center {
+    align-items: center !important;
+}
+
 .flex-center {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100%;
 }
-.gap-1 { gap: $space-1 !important; }
-.gap-2 { gap: $space-2 !important; }
-.gap-3 { gap: $space-3 !important; }
+
+.gap-1 {
+    gap: $space-1 !important;
+}
+
+.gap-2 {
+    gap: $space-2 !important;
+}
+
+.gap-3 {
+    gap: $space-3 !important;
+}
 
 /* Otros */
-.flow > * + * {
+.flow>*+* {
     margin-top: var(--space-3);
 }
 
-.w-100 { width: 100% !important; }
-.d-block { display: block !important; }
-.rounded { border-radius: $radius !important; }
-.shadow-subtle { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; }
+.w-100 {
+    width: 100% !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.rounded {
+    border-radius: $radius !important;
+}
+
+.shadow-subtle {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
 
 /* Utilidades de Visibilidad */
-.d-none { display: none !important; }
+.d-none {
+    display: none !important;
+}
 
 @include respond(lg) {
-    .d-lg-none { display: none !important; }
-    .d-lg-block { display: block !important; }
-    .d-lg-flex { display: flex !important; }
+    .d-lg-none {
+        display: none !important;
+    }
+
+    .d-lg-block {
+        display: block !important;
+    }
+
+    .d-lg-flex {
+        display: flex !important;
+    }
 }
